@@ -8,7 +8,7 @@ use InvalidArgumentException;
 /**
  * @implements ArrayAccess<string, mixed>
  */
-class ArrayAccessPerson implements ArrayAccess
+final class ArrayAccessPerson implements ArrayAccess
 {
     public string $fullName;
 

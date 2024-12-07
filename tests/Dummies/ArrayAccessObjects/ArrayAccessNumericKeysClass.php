@@ -8,7 +8,7 @@ use InvalidArgumentException;
 /**
  * @implements ArrayAccess<int, mixed>
  */
-class ArrayAccessNumericKeysClass implements ArrayAccess
+final class ArrayAccessNumericKeysClass implements ArrayAccess
 {
     public function __construct(
         public string $firstProperty,
@@ -37,6 +37,10 @@ class ArrayAccessNumericKeysClass implements ArrayAccess
 
     public function offsetSet(mixed $offset, mixed $value): void
     {
+        if (!is_string($value)) {
+            throw new InvalidArgumentException('Value must be a string');
+        }
+
         $propertyName = match($offset) {
             1 => 'firstProperty',
             2 => 'sendProperty',

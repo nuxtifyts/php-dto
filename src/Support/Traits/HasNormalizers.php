@@ -30,17 +30,17 @@ trait HasNormalizers
     }
 
     /**
-     * @return list<class-string<Normalizer>>
+     * @return non-empty-array<int<0, max>, class-string<Normalizer>>
      */
     final protected static function allNormalizer(): array
     {
-        return [
-            ...self::normalizers(),
+        return array_unique([
+            ...static::normalizers(),
             JsonStringNormalizer::class,
             StdClassNormalizer::class,
             ArrayAccessNormalizer::class,
             ArrayNormalizer::class,
-        ];
+        ]);
     }
 
     /**
