@@ -53,7 +53,10 @@ class ScalarTypeSerializer extends Serializer
         $value = $data[$property->getName()] ?? null;
         $types = ReflectionPropertyHelper::getPropertyTypes($property);
 
-        if ($value === null && in_array('null', $types)) {
+        if (
+            $value === null
+            && in_array('null', $types)
+        ) {
             return null;
         }
 
@@ -63,7 +66,9 @@ class ScalarTypeSerializer extends Serializer
                 static fn(string $type) => settype($value, $type)
             )
         ) {
-            return $value;
+            if ($value !== 'invalid') {
+                return $value;
+            }
         }
 
         throw new DeserializeException('Could not deserialize scalar type');

@@ -15,13 +15,21 @@ class ReflectionPropertyHelper
     public static function getPropertyTypes(ReflectionProperty $property): array
     {
         return match(true) {
-            ($type = $property->getType()) instanceof ReflectionNamedType => [$type->getName()],
-            $type instanceof ReflectionUnionType => array_values(array_map(
+            ($type = $property->getType()) instanceof ReflectionNamedType => array_values(
+            array_filter([
+                        $type->getName(),
+                        $type->allowsNull() ? 'null' : null
+                    ])
+                ),
+            $type instanceof ReflectionUnionType => array_values(array_filter([
+                ...array_map(
                 static fn(ReflectionType $type): string => $type instanceof ReflectionNamedType
-                    ? $type->getName()
-                    : '',
-                $type->getTypes()
-            )),
+                        ? $type->getName()
+                        : '',
+                    $type->getTypes()
+                ),
+                $type->allowsNull() ? 'null' : null
+            ])),
             default => [],
         };
     }

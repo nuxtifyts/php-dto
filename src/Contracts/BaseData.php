@@ -19,7 +19,4 @@ interface BaseData extends JsonSerializable
      * @throws DeserializeException
      */
     public static function from(mixed $value): static;
-
-    // public static function collect(mixed $value): array;
-    // public static function pipeline(): DataPipeline;
 }
