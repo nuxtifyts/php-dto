@@ -55,7 +55,7 @@ class ScalarTypeSerializer extends Serializer
 
         if (
             $value === null
-            && in_array('null', $types)
+            && ReflectionPropertyHelper::isPropertyNullable($property)
         ) {
             return null;
         }
