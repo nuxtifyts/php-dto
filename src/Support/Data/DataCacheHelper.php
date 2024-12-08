@@ -8,7 +8,7 @@ use Nuxtifyts\PhpDto\Serializers\Serializer;
 class DataCacheHelper
 {
     /**
-     * @var array<class-string<Data>, array<string, Serializer>>
+     * @var array<class-string<Data>, array<string, list<Serializer>>>
      *
      * Array of cached serializers for each class
      */
@@ -17,7 +17,7 @@ class DataCacheHelper
     /**
      * @param class-string<Data> $key
      *
-     * @return array<string, Serializer>
+     * @return array<string, list<Serializer>>
      */
     public static function get(string $key): array
     {
@@ -27,7 +27,7 @@ class DataCacheHelper
     /**
      * @param class-string<Data> $key
      *
-     * @param array<string, Serializer> $value
+     * @param array<string, list<Serializer>> $value
      */
     public static function append(string $key, array $value): void
     {

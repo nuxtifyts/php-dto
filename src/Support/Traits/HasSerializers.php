@@ -11,18 +11,23 @@ trait HasSerializers
 {
     /**
      * @throws UnknownPropertyException
+     *
+     * @return list<Serializer>
      */
-    protected function resolveSerializer(
+    protected function resolveSerializers(
         ReflectionProperty $property,
         object $object
-    ): Serializer {
-        foreach (self::serializers() as $serializer) {
-            if ($serializer::isSupported($property, $object)) {
-                return new $serializer;
-            }
-        }
+    ): array {
+        $serializers = array_values(array_filter(array_map(
+                /** @param class-string<Serializer> $serializer */
+            static fn (string $serializer): ?Serializer =>
+                $serializer::isSupported($property, $object)
+                    ? new $serializer
+                    : null,
+            self::serializers()
+        )));
 
-        throw UnknownPropertyException::from(
+        return $serializers ?:  throw UnknownPropertyException::from(
             $property->getName(),
             $object
         );

@@ -4,6 +4,7 @@ namespace Nuxtifyts\PhpDto\Serializers;
 
 use ArrayAccess;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
+use Nuxtifyts\PhpDto\Exceptions\SerializeException;
 use ReflectionProperty;
 
 abstract class Serializer
@@ -17,6 +18,8 @@ abstract class Serializer
 
     /**
      * @return array<string, mixed>
+     *
+     * @throws SerializeException
      */
     abstract public function serialize(
         ReflectionProperty $property,

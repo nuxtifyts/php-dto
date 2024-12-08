@@ -35,19 +35,34 @@ trait BaseData
             $cachedSerializers = DataCacheHelper::get(static::class);
 
             foreach ($reflection->getProperties() as $property) {
-                $serializer = $cachedSerializers[$property->getName()] ?? null;
+                $serializers = $cachedSerializers[$property->getName()] ?? null;
 
-                if (!$serializer) {
-                    $serializer = $instance->resolveSerializer($property, $instance);
+                if (!$serializers) {
+                    $serializers = $instance->resolveSerializers($property, $instance);
 
                     DataCacheHelper::append(
                         static::class,
-                        [$property->getName() => $serializer]
+                        [$property->getName() => $serializers]
                     );
                 }
 
-                $propertyValue = $serializer->deserialize($property, $value);
-                $instance->{$property->getName()} = $propertyValue;
+                $propertyDeserialized = false;
+
+                foreach ($serializers as $serializer) {
+                    try {
+                        $propertyValue = $serializer->deserialize($property, $value);
+
+                        $instance->{$property->getName()} = $propertyValue;
+
+                        $propertyDeserialized = true;
+
+                        break;
+                    } catch (DeserializeException) {}
+                }
+
+                if (!$propertyDeserialized) {
+                    throw new DeserializeException('Could not deserialize value for property: ' . $property->getName());
+                }
             }
 
             return $instance;
@@ -70,19 +85,32 @@ trait BaseData
             $serializableArray = [];
 
             foreach ($reflection->getProperties() as $property) {
-                $serializer = $cachedSerializers[$property->getName()] ?? null;
+                $serializers = $cachedSerializers[$property->getName()] ?? null;
 
-                if (!$serializer) {
-                    $serializer = $this->resolveSerializer($property, $this);
+                if (!$serializers) {
+                    $serializers = $this->resolveSerializers($property, $this);
 
                     DataCacheHelper::append(
                         static::class,
-                        [$property->getName() => $serializer]
+                        [$property->getName() => $serializers]
                     );
                 }
 
-                foreach ($serializer->serialize($property, $this) as $key => $value) {
-                    $serializableArray[$key] = $value;
+                $propertySerialized = false;
+                foreach ($serializers as $serializer) {
+                    try {
+                        $propertyValue = $serializer->serialize($property, $this);
+
+                        $serializableArray[$property->getName()] = $propertyValue[$property->getName()];
+
+                        $propertySerialized = true;
+
+                        break;
+                    } catch (SerializeException) {}
+                }
+
+                if (!$propertySerialized) {
+                    throw new SerializeException('Could not serialize property: ' . $property->getName());
                 }
             }
 

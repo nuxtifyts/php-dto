@@ -26,7 +26,7 @@ final class HasSerializersTest extends UnitCase
 
         $hasSerializersDummy = new HasSerializersDummy();
 
-        $hasSerializersDummy->testResolveSerializer(
+        $hasSerializersDummy->testResolveSerializers(
             new ReflectionProperty(PersonData::class, 'firstName'),
             $person
         );

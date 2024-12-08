@@ -13,12 +13,14 @@ final class HasSerializersDummy
 
     /**
      * @throws UnknownPropertyException
+     *
+     * @return list<Serializer>
      */
-    public function testResolveSerializer(
+    public function testResolveSerializers(
         ReflectionProperty $property,
         object $object
-    ): Serializer {
-        return $this->resolveSerializer($property, $object);
+    ): array {
+        return $this->resolveSerializers($property, $object);
     }
 
     /**
