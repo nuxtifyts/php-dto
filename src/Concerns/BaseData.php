@@ -2,17 +2,15 @@
 
 namespace Nuxtifyts\PhpDto\Concerns;
 
+use Nuxtifyts\PhpDto\Contexts\ClassContext;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
 use Nuxtifyts\PhpDto\Support\Traits\HasNormalizers;
-use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
-use Nuxtifyts\PhpDto\Support\Data\DataCacheHelper;
 use ReflectionClass;
 use Throwable;
 
 trait BaseData
 {
-    use HasSerializers;
     use HasNormalizers;
 
     /**
@@ -29,30 +27,26 @@ trait BaseData
                 );
             }
 
-            $reflection = new ReflectionClass(static::class);
-            $instance = $reflection->newInstanceWithoutConstructor();
+            /** @var ClassContext<static> $context */
+            $context = ClassContext::getInstance(new ReflectionClass(static::class));
+            $instance = $context->newInstanceWithoutConstructor();
 
-            $cachedSerializers = DataCacheHelper::get(static::class);
-
-            foreach ($reflection->getProperties() as $property) {
-                $serializers = $cachedSerializers[$property->getName()] ?? null;
+            foreach ($context->properties as $propertyContext) {
+                $serializers = $propertyContext->serializers();
 
                 if (!$serializers) {
-                    $serializers = $instance->resolveSerializers($property, $instance);
-
-                    DataCacheHelper::append(
-                        static::class,
-                        [$property->getName() => $serializers]
+                    throw new DeserializeException(
+                        code: DeserializeException::NO_SERIALIZERS_ERROR_CODE
                     );
                 }
 
+                $propertyName = $propertyContext->propertyName;
                 $propertyDeserialized = false;
-
                 foreach ($serializers as $serializer) {
                     try {
-                        $propertyValue = $serializer->deserialize($property, $value);
+                        $propertyValue = $serializer->deserialize($propertyContext, $value);
 
-                        $instance->{$property->getName()} = $propertyValue;
+                        $instance->{$propertyName} = $propertyValue;
 
                         $propertyDeserialized = true;
 
@@ -61,7 +55,7 @@ trait BaseData
                 }
 
                 if (!$propertyDeserialized) {
-                    throw new DeserializeException('Could not deserialize value for property: ' . $property->getName());
+                    throw new DeserializeException("Could not deserialize value for property: $propertyName");
                 }
             }
 
@@ -79,29 +73,26 @@ trait BaseData
     final public function jsonSerialize(): array
     {
         try {
-            $reflection = new ReflectionClass($this);
-            $cachedSerializers = DataCacheHelper::get(static::class);
+            $context = ClassContext::getInstance(new ReflectionClass($this));
 
             $serializableArray = [];
 
-            foreach ($reflection->getProperties() as $property) {
-                $serializers = $cachedSerializers[$property->getName()] ?? null;
+            foreach ($context->properties as $propertyContext) {
+                $serializers = $propertyContext->serializers();
 
                 if (!$serializers) {
-                    $serializers = $this->resolveSerializers($property, $this);
-
-                    DataCacheHelper::append(
-                        static::class,
-                        [$property->getName() => $serializers]
+                    throw new SerializeException(
+                        code: SerializeException::NO_SERIALIZERS_ERROR_CODE
                     );
                 }
 
+                $propertyName = $propertyContext->propertyName;
                 $propertySerialized = false;
                 foreach ($serializers as $serializer) {
                     try {
-                        $propertyValue = $serializer->serialize($property, $this);
+                        $propertyValue = $serializer->serialize($propertyContext, $this);
 
-                        $serializableArray[$property->getName()] = $propertyValue[$property->getName()];
+                        $serializableArray[$propertyName] = $propertyValue[$propertyName];
 
                         $propertySerialized = true;
 
@@ -110,7 +101,9 @@ trait BaseData
                 }
 
                 if (!$propertySerialized) {
-                    throw new SerializeException('Could not serialize property: ' . $property->getName());
+                    throw new SerializeException(
+                        "Could not serialize property: $propertyName",
+                    );
                 }
             }
 

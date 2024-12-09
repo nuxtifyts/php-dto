@@ -2,44 +2,35 @@
 
 namespace Nuxtifyts\PhpDto\Serializers;
 
+use Nuxtifyts\PhpDto\Contexts\PropertyContext;
+use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
-use Nuxtifyts\PhpDto\Helper\ReflectionPropertyHelper;
-use ReflectionProperty;
 use ArrayAccess;
 
 class ScalarTypeSerializer extends Serializer
 {
-    /** @var array<string> */
-    protected const array TYPES = [
-        'double',
-        'float',
-        'int',
-        'integer',
-        'string',
-        'bool',
-        'boolean',
-        'null'
-    ];
-
-    public static function isSupported(
-        ReflectionProperty $property,
-        object $object
-    ): bool {
-        return count(array_intersect(
-            ReflectionPropertyHelper::getPropertyTypes($property),
-            self::TYPES
-        )) > 0;
+    /**
+     * @inheritDoc
+     */
+    public static function supportedTypes(): array
+    {
+        return [
+            Type::BOOLEAN,
+            Type::FLOAT,
+            Type::INT,
+            Type::STRING
+        ];
     }
 
     /**
      * @inheritDoc
      */
     public function serialize(
-        ReflectionProperty $property,
+        PropertyContext $property,
         object $object
     ): array {
         return [
-            $property->getName() => $property->getValue($object)
+            $property->propertyName => $property->getValue($object)
         ];
     }
 
@@ -47,27 +38,21 @@ class ScalarTypeSerializer extends Serializer
      * @inheritDoc
      */
     public function deserialize(
-        ReflectionProperty $property,
+        PropertyContext $property,
         ArrayAccess|array $data
     ): mixed {
-        $value = $data[$property->getName()] ?? null;
-        $types = ReflectionPropertyHelper::getPropertyTypes($property);
-
-        if (
-            $value === null
-            && ReflectionPropertyHelper::isPropertyNullable($property)
-        ) {
-            return null;
-        }
+        $value = $data[$property->propertyName] ?? null;
 
         if (
             array_any(
-                $types,
+                array_column($property->types, 'value'),
                 static fn(string $type) => settype($value, $type)
             )
         ) {
-            if ($value !== 'invalid') {
+            if ($value !== null) {
                 return $value;
+            } elseif ($property->isNullable) {
+                return null;
             }
         }
 

@@ -3,18 +3,19 @@
 namespace Nuxtifyts\PhpDto\Serializers;
 
 use ArrayAccess;
+use Nuxtifyts\PhpDto\Contexts\PropertyContext;
+use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
-use ReflectionProperty;
 
 abstract class Serializer
 {
     final public function __construct() {}
 
-    abstract public static function isSupported(
-        ReflectionProperty $property,
-        object $object,
-    ): bool;
+    /**
+     * @return list<Type>
+     */
+    abstract public static function supportedTypes(): array;
 
     /**
      * @return array<string, mixed>
@@ -22,7 +23,7 @@ abstract class Serializer
      * @throws SerializeException
      */
     abstract public function serialize(
-        ReflectionProperty $property,
+        PropertyContext $property,
         object $object
     ): array;
 
@@ -32,7 +33,7 @@ abstract class Serializer
      * @throws DeserializeException
      */
     abstract public function deserialize(
-        ReflectionProperty $property,
+        PropertyContext $property,
         array|ArrayAccess $data
     ): mixed;
 }

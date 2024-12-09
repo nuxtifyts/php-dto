@@ -13,11 +13,11 @@ class UnknownPropertyException extends Exception
 
     public static function from(
         string $propertyName,
-        object $object,
+        string $className,
         int $code = 0
     ): self {
         return new self(
-            "Unknown property '{$propertyName}' in object of type " . get_class($object),
+            "Unknown property '{$propertyName}' in object of type $className",
             $code
         );
     }

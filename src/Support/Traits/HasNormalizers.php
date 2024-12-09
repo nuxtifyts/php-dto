@@ -34,13 +34,13 @@ trait HasNormalizers
      */
     final protected static function allNormalizer(): array
     {
-        return array_unique([
+        return array_values(array_unique([
             ...static::normalizers(),
             JsonStringNormalizer::class,
             StdClassNormalizer::class,
             ArrayAccessNormalizer::class,
             ArrayNormalizer::class,
-        ]);
+        ]));
     }
 
     /**

@@ -2,6 +2,9 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Unit\Serializers;
 
+use Nuxtifyts\PhpDto\Contexts\PropertyContext;
+use Nuxtifyts\PhpDto\Data;
+use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Tests\Dummies\CoordinatesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
@@ -10,9 +13,8 @@ use Nuxtifyts\PhpDto\Serializers\Serializer;
 use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
 use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use Nuxtifyts\PhpDto\Support\Data\DataCacheHelper;
-use Nuxtifyts\PhpDto\Helper\ReflectionPropertyHelper;
 use PHPUnit\Framework\Attributes\UsesClass;
 use ReflectionClass;
 use Throwable;
@@ -20,42 +22,57 @@ use Throwable;
 #[CoversClass(ScalarTypeSerializer::class)]
 #[CoversClass(Serializer::class)]
 #[CoversClass(HasSerializers::class)]
-#[CoversClass(DataCacheHelper::class)]
-#[CoversClass(ReflectionPropertyHelper::class)]
 #[CoversClass(DeserializeException::class)]
 #[UsesClass(PersonData::class)]
 #[UsesClass(CoordinatesData::class)]
 final class ScalarTypeSerializerTest extends UnitCase
 {
+    #[Test]
+    public function supports_scalar_types(): void
+    {
+        self::assertEquals(
+            [
+                Type::BOOLEAN,
+                Type::FLOAT,
+                Type::INT,
+                Type::STRING
+            ],
+            ScalarTypeSerializer::supportedTypes()
+        );
+    }
+
     /**
+     * @param array<string, mixed> $expectedSerializedValue
+     *
      * @throws Throwable
      */
     #[Test]
-    public function will_perform_serialize_on_person_data_with_only_scalar_type_properties(): void
-    {
-        $person = new PersonData('John', 'Doe');
-        $reflectionClass = new ReflectionClass($person);
-
-        self::assertTrue(
-            ScalarTypeSerializer::isSupported(
-                $reflectionClass->getProperty('firstName'),
-                $person
-            )
-        );
+    #[DataProvider('will_perform_data_serialization_on_scalar_types_data_provider')]
+    public function will_perform_data_serialization_on_scalar_types_data(
+        object $object,
+        array $expectedSerializedValue,
+        string $propertyName,
+        mixed $expectedDeserializedValue
+    ): void {
+        $reflectionClass = new ReflectionClass($object);
+        $property = $reflectionClass->getProperty($propertyName);
 
         $scalarTypeSerializer = new ScalarTypeSerializer();
 
         self::assertEquals(
-            ['firstName' => 'John'],
+            $expectedSerializedValue,
             $scalarTypeSerializer->serialize(
-                $reflectionClass->getProperty('firstName'),
-                $person
+                PropertyContext::getInstance($property),
+                $object
             )
         );
 
         self::assertEquals(
-            ['firstName' => 'John', 'lastName' => 'Doe', 'fullName' => 'John Doe'],
-            $person->jsonSerialize()
+            $expectedDeserializedValue,
+            $scalarTypeSerializer->deserialize(
+                PropertyContext::getInstance($property),
+                $expectedSerializedValue
+            )
         );
     }
 
@@ -63,90 +80,117 @@ final class ScalarTypeSerializerTest extends UnitCase
      * @throws Throwable
      */
     #[Test]
-    public function will_perform_deserialize_on_array_data_for_person_data_with_only_scalar_types(): void
+    public function will_throw_an_exception_if_it_fails_deserialize_value(): void
     {
-        $personArrayData = [
-            'firstName' => 'John',
-            'lastName' => 'Doe',
-            'fullName' => 'John Doe'
-        ];
+        $object = new readonly class ('Hello') extends Data {
+            public function __construct(
+                public string $value
+            ) {
+            }
+        };
 
-        $reflectionClass = new ReflectionClass(PersonData::class);
+        $reflectionClass = new ReflectionClass($object);
+        $property = $reflectionClass->getProperty('value');
 
         $scalarTypeSerializer = new ScalarTypeSerializer();
-
-        self::assertEquals(
-            'John',
-            $scalarTypeSerializer->deserialize(
-                $reflectionClass->getProperty('firstName'),
-                $personArrayData
-            )
-        );
-
-        self::assertEquals(
-            ['firstName' => 'John', 'lastName' => 'Doe', 'fullName' => 'John Doe'],
-            PersonData::from($personArrayData)->jsonSerialize()
-        );
-    }
-
-    /**
-     * @throws Throwable
-     */
-    #[Test]
-    public function will_return_null_for_nullable_properties(): void
-    {
-        $coordinatesArrayData = [
-            'latitude' => 1.0,
-            'longitude' => 2.0,
-            'radius' => null
-        ];
-
-        $reflectionClass = new ReflectionClass(CoordinatesData::class);
-        $scalarTypeSerializer = new ScalarTypeSerializer();
-
-        self::assertNull(
-            $scalarTypeSerializer->deserialize(
-                $reflectionClass->getProperty('radius'),
-                $coordinatesArrayData
-            )
-        );
-
-        unset($coordinatesArrayData['radius']);
-
-        self::assertNull(
-            $scalarTypeSerializer->deserialize(
-                $reflectionClass->getProperty('radius'),
-                $coordinatesArrayData
-            )
-        );
-
-        self::assertEquals(
-            ['latitude' => 1.0, 'longitude' => 2.0, 'radius' => null],
-            CoordinatesData::from($coordinatesArrayData)->jsonSerialize()
-        );
-    }
-
-    /**
-     * @throws Throwable
-     */
-    #[Test]
-    public function will_throw_an_exception_if_it_fails_to_deserialize(): void
-    {
-        $coordinatesArrayData = [
-            'latitude' => 1.0,
-            'longitude' => 2.0,
-            'radius' => 'invalid'
-        ];
-
-        $reflectionClass = new ReflectionClass(CoordinatesData::class);
 
         self::expectException(DeserializeException::class);
 
+        $scalarTypeSerializer->deserialize(
+            PropertyContext::getInstance($property),
+            ['value' => null]
+        );
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[Test]
+    public function will_support_nullable_properties(): void
+    {
+        $object = new readonly class (null) extends Data {
+            public function __construct(
+                public ?string $value
+            ) {
+            }
+        };
+
+        $reflectionClass = new ReflectionClass($object);
+        $property = $reflectionClass->getProperty('value');
+
         $scalarTypeSerializer = new ScalarTypeSerializer();
 
-        $scalarTypeSerializer->deserialize(
-            $reflectionClass->getProperty('radius'),
-            $coordinatesArrayData
+        self::assertEquals(
+            ['value' => null],
+            $scalarTypeSerializer->serialize(
+                PropertyContext::getInstance($property),
+                $object
+            )
         );
+
+        self::assertEquals(
+            null,
+            $scalarTypeSerializer->deserialize(
+                PropertyContext::getInstance($property),
+                ['value' => null]
+            )
+        );
+    }
+
+    /**
+     * @return array<string, array{
+     *     object: mixed,
+     *     expectedSerializedValue: array<string, mixed>,
+     *     propertyName: string
+     * }>
+     */
+    public static function will_perform_data_serialization_on_scalar_types_data_provider(): array
+    {
+        return [
+            'Integer types' => [
+                'object' => new readonly class (42) extends Data {
+                    public function __construct(
+                        public int $number
+                    ) {
+                    }
+                },
+                'expectedSerializedValue' => ['number' => 42],
+                'propertyName' => 'number',
+                'expectedDeserializedValue' => 42
+            ],
+            'Float types' => [
+                'object' => new readonly class (3.14) extends Data {
+                    public function __construct(
+                        public float $number
+                    ) {
+                    }
+                },
+                'expectedSerializedValue' => ['number' => 3.14],
+                'propertyName' => 'number',
+                'expectedDeserializedValue' => 3.14
+            ],
+            'Boolean types' => [
+                'object' => new readonly class (true) extends Data {
+                    public function __construct(
+                        public bool $value
+                    ) {
+                    }
+                },
+                'expectedSerializedValue' => ['value' => true],
+                'propertyName' => 'value',
+                'expectedDeserializedValue' => true
+            ],
+            'String types' => [
+                'object' => new readonly class ('Hello, World!') extends Data {
+                    public function __construct(
+                        public string $message
+                    ) {
+                    }
+                },
+                'expectedSerializedValue' => ['message' => 'Hello, World!'],
+                'propertyName' => 'message',
+                'expectedDeserializedValue' => 'Hello, World!'
+            ]
+        ];
     }
 }
