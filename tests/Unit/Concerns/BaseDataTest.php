@@ -3,10 +3,15 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\Concerns;
 
 use Nuxtifyts\PhpDto\Concerns\BaseData;
+use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
 use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
 use Nuxtifyts\PhpDto\Tests\Dummies\CoordinatesData;
+use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
+use Nuxtifyts\PhpDto\Tests\Dummies\InvitationData;
+use Nuxtifyts\PhpDto\Tests\Dummies\UnionMultipleTypeData;
+use Nuxtifyts\PhpDto\Tests\Dummies\YesOrNoData;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
 use Nuxtifyts\PhpDto\Tests\Dummies\UnionTypedData;
@@ -58,36 +63,6 @@ final class BaseDataTest extends UnitCase
      * @throws Throwable
      */
     #[Test]
-    public function will_throw_an_exception_if_it_fails_to_resolve_a_serializer(): void
-    {
-        self::markTestIncomplete('This test is not yet implemented');
-        // A class with date time property and no serializer for that property
-//        $object = new readonly class (new DateTimeImmutable()) extends Data {
-//            public function __construct(
-//                public DateTimeInterface $time
-//            ) {
-//            }
-//
-//            /**
-//             * @inheritDoc
-//             */
-//            protected static function serializers(): array
-//            {
-//                return [
-//                    ScalarTypeSerializer::class
-//                ];
-//            }
-//        };
-//
-//        self::expectException(SerializeException::class);
-//
-//        $object->jsonSerialize();
-    }
-
-    /**
-     * @throws Throwable
-     */
-    #[Test]
     public function will_throw_an_exception_if_an_invalid_value_is_passed_to_from_function(): void
     {
         self::expectException(DeserializeException::class);
@@ -128,6 +103,127 @@ final class BaseDataTest extends UnitCase
             'Integer type' => [42, 42],
             'String type' => ['string value', 'string value'],
             'Null type' => [null, null]
+        ];
+    }
+
+    /**
+     * @param class-string<Data> $dtoClass
+     * @param array<string, mixed> $data
+     * @param array<string, mixed> $expectedProperties
+     * @param array<string, mixed> $expectedSerializedData
+     *
+     * @throws Throwable
+     */
+    #[Test]
+    #[DataProvider('will_perform_serialization_and_deserialization_data_provider')]
+    public function will_perform_serialization_and_deserialization_data(
+        string $dtoClass,
+        array $data,
+        array $expectedProperties,
+        array $expectedSerializedData,
+    ): void {
+        $dtoObject = $dtoClass::from($data);
+
+        foreach ($expectedProperties as $property => $value) {
+            self::assertEquals($value, $dtoObject->{$property});
+        }
+
+        self::assertEquals(
+            $expectedSerializedData,
+            $dtoObject->jsonSerialize()
+        );
+    }
+
+    /**
+     * @return array<string, array{
+     *     dtoClass: class-string<Data>,
+     *     data: array<string, mixed>,
+     *     expectedProperties: array<string, mixed>,
+     *     expectedSerializedData: array<string, mixed>
+     * }>
+     */
+    public static function will_perform_serialization_and_deserialization_data_provider(): array
+    {
+        // @phpstan-ignore-next-line
+        return [
+            'Person data' => [
+                'dtoClass' => PersonData::class,
+                'data' => $data = [
+                    'firstName' => 'John',
+                    'lastName' => 'Doe',
+                    'fullName' => 'John Doe'
+                ],
+                'expectedProperties' => [
+                    'firstName' => 'John',
+                    'lastName' => 'Doe',
+                    'fullName' => 'John Doe'
+                ],
+                'expectedSerializedData' => $data
+            ],
+            'Coordinates' => [
+                'dtoClass' => CoordinatesData::class,
+                'data' => $data = [
+                    'latitude' => 42.42,
+                    'longitude' => 24.24
+                ],
+                'expectedProperties' => [
+                    'latitude' => 42.42,
+                    'longitude' => 24.24,
+                    'radius' => null
+                ],
+                'expectedSerializedData' => [
+                    ...$data,
+                    'radius' => null
+                ]
+            ],
+            'YesNo data' => [
+                'dtoClass' => YesOrNoData::class,
+                'data' => $data = [
+                    'yesNo' => YesNoBackedEnum::YES->value
+                ],
+                'expectedProperties' => [
+                    'yesNo' => YesNoBackedEnum::YES
+                ],
+                'expectedSerializedData' => $data
+            ],
+            'Invitation data' => [
+                'dtoClass' => InvitationData::class,
+                'data' => $data = [
+                    'firstName' => 'John',
+                    'lastName' => 'Doe',
+                    'isComing' => YesNoBackedEnum::YES->value
+                ],
+                'expectedProperties' => [
+                    'firstName' => 'John',
+                    'lastName' => 'Doe',
+                    'isComing' => YesNoBackedEnum::YES
+                ],
+                'expectedSerializedData' => $data
+            ],
+            'Union typed data' => [
+                'dtoClass' => UnionMultipleTypeData::class,
+                'data' => $data = [
+                    'value' => 123,
+                    'yesOrNo' => YesNoBackedEnum::YES->value
+                ],
+                'expectedProperties' => [
+                    'value' => 123,
+                    'yesOrNo' => YesNoBackedEnum::YES
+                ],
+                'expectedSerializedData' => $data
+            ],
+            'Union typed data 2' => [
+                'dtoClass' => UnionMultipleTypeData::class,
+                'data' => $value = [
+                    'value' => 'string value',
+                    'yesOrNo' => false
+                ],
+                'expectedProperties' => [
+                    'value' => 'string value',
+                    'yesOrNo' => false
+                ],
+                'expectedSerializedData' => $value
+            ]
         ];
     }
 }

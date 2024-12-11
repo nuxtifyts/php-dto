@@ -35,8 +35,8 @@ trait HasSerializers
     protected static function serializersList(): array
     {
         return [
-            ScalarTypeSerializer::class,
             BackedEnumSerializer::class,
+            ScalarTypeSerializer::class,
         ];
     }
 }

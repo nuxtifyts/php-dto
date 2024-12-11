@@ -45,7 +45,7 @@ class ScalarTypeSerializer extends Serializer
 
         if (
             array_any(
-                array_column($property->types, 'value'),
+                array_column(self::getScalarTypeFromProperty($property), 'value'),
                 static fn(string $type) => settype($value, $type)
             )
         ) {
@@ -57,5 +57,22 @@ class ScalarTypeSerializer extends Serializer
         }
 
         throw new DeserializeException('Could not deserialize scalar type');
+    }
+
+    /**
+     * @return list<Type>
+     */
+    private static function getScalarTypeFromProperty(
+        PropertyContext $property
+    ): array {
+        $types = [];
+
+        foreach ($property->types as $propertyType) {
+            if (in_array($propertyType, self::supportedTypes(), true)) {
+                $types[] = $propertyType;
+            }
+        }
+
+        return $types;
     }
 }
