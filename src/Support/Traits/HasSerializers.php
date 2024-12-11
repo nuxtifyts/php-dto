@@ -3,11 +3,10 @@
 namespace Nuxtifyts\PhpDto\Support\Traits;
 
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
-use Nuxtifyts\PhpDto\Exceptions\UnknownPropertyException;
 use Nuxtifyts\PhpDto\Exceptions\UnknownTypeException;
+use Nuxtifyts\PhpDto\Serializers\BackedEnumSerializer;
 use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
-use ReflectionProperty;
 
 trait HasSerializers
 {
@@ -36,7 +35,8 @@ trait HasSerializers
     protected static function serializersList(): array
     {
         return [
-            ScalarTypeSerializer::class
+            ScalarTypeSerializer::class,
+            BackedEnumSerializer::class,
         ];
     }
 }
