@@ -40,6 +40,11 @@ trait HasTypes
         get => self::$_enumReflections;
     }
 
+    /** @var array<string, ReflectionClass<DateTimeInterface>> */
+    public array $dateTimeReflections {
+        get => self::$_dateTimeReflections;
+    }
+
     /**
      * @return list<string>
      *
