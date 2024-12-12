@@ -3,23 +3,15 @@
 namespace Nuxtifyts\PhpDto\Support\Traits;
 
 use Nuxtifyts\PhpDto\Enums\Property\Type;
-use ReflectionEnum;
 use ReflectionNamedType;
 use ReflectionProperty;
 use ReflectionType;
 use ReflectionUnionType;
-use ReflectionClass;
-use DateTimeInterface;
-use BackedEnum;
-use Exception;
 
 trait HasTypes
 {
-    /** @var array<string, ReflectionEnum<BackedEnum>> */
-    private static array $_enumReflections = [];
-
-    /** @var array<string, ReflectionClass<DateTimeInterface>> */
-    private static array $_dateTimeReflections = [];
+    use HasTypes\HasEnumType;
+    use HasTypes\HasDateTimeType;
 
     /** @var list<Type> */
     protected(set) array $_types = [];
@@ -33,16 +25,6 @@ trait HasTypes
     /** @var list<Type> */
     public array $types {
         get => $this->_types;
-    }
-
-    /** @var array<string, ReflectionEnum<BackedEnum>> */
-    public array $enumReflections {
-        get => self::$_enumReflections;
-    }
-
-    /** @var array<string, ReflectionClass<DateTimeInterface>> */
-    public array $dateTimeReflections {
-        get => self::$_dateTimeReflections;
     }
 
     /**
@@ -107,40 +89,5 @@ trait HasTypes
         }
 
         $this->_types = $types;
-    }
-
-    private static function isBackedEnum(string $type): bool
-    {
-        if (enum_exists($type)) {
-            $reflection = self::$_enumReflections[$type] ?? new ReflectionEnum($type);
-
-            if ($reflection->isBacked()) {
-                self::$_enumReflections[$type] = $reflection;
-
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private static function isDateTime(string $type): bool
-    {
-        try {
-            if (class_exists($type) || interface_exists($type)) {
-                /** @var ReflectionClass<DateTimeInterface> $reflection */
-                $reflection = self::$_dateTimeReflections[$type] ?? new ReflectionClass($type);
-
-                if ($reflection->implementsInterface(DateTimeInterface::class)) {
-                    self::$_dateTimeReflections[$type] = $reflection;
-
-                    return true;
-                }
-            }
-            // @codeCoverageIgnoreStart
-        } catch (Exception) {}
-        // @codeCoverageIgnoreEnd
-
-        return false;
     }
 }
