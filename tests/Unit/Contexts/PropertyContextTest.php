@@ -16,6 +16,9 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
+use DateTime;
+use DateTimeInterface;
+use DateTimeImmutable;
 use ReflectionProperty;
 use Throwable;
 
@@ -205,6 +208,36 @@ final class PropertyContextTest extends UnitCase
                 'propertyName' => 'value',
                 'expectedType' => Type::BACKED_ENUM
             ],
+            'Resolves datetime from date time' => [
+                'object' => new readonly class(new DateTime()) extends Data {
+                    public function __construct(
+                        public DateTime $value
+                    ) {
+                    }
+                },
+                'propertyName' => 'value',
+                'expectedType' => Type::DATETIME
+            ],
+            'Resolves datetime from date time immutable' => [
+                'object' => new readonly class(new DateTimeImmutable()) extends Data {
+                    public function __construct(
+                        public DateTimeImmutable $value
+                    ) {
+                    }
+                },
+                'propertyName' => 'value',
+                'expectedType' => Type::DATETIME
+            ],
+            'Resolves datetime from date time interface' => [
+                'object' => new readonly class(new DateTimeImmutable()) extends Data {
+                    public function __construct(
+                        public DateTimeInterface $value
+                    ) {
+                    }
+                },
+                'propertyName' => 'value',
+                'expectedType' => Type::DATETIME
+            ]
         ];
     }
 }

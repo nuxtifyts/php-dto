@@ -8,12 +8,18 @@ use ReflectionNamedType;
 use ReflectionProperty;
 use ReflectionType;
 use ReflectionUnionType;
+use ReflectionClass;
+use DateTimeInterface;
 use BackedEnum;
+use Exception;
 
 trait HasTypes
 {
     /** @var array<string, ReflectionEnum<BackedEnum>> */
     private static array $_enumReflections = [];
+
+    /** @var array<string, ReflectionClass<DateTimeInterface>> */
+    private static array $_dateTimeReflections = [];
 
     /** @var list<Type> */
     protected(set) array $_types = [];
@@ -67,25 +73,28 @@ trait HasTypes
         $reflectionTypes = self::getPropertyStringTypes($property);
         $types = [];
 
-        foreach ($reflectionTypes as $reflectionType) {
+        foreach ($reflectionTypes as $type) {
             switch(true) {
-                case in_array($reflectionType, ['double', 'float']):
+                case in_array($type, ['double', 'float']):
                     $types[] = Type::FLOAT;
                     break;
-                case in_array($reflectionType, ['int', 'integer']):
+                case in_array($type, ['int', 'integer']):
                     $types[] = Type::INT;
                     break;
-                case in_array($reflectionType, ['bool', 'boolean']):
+                case in_array($type, ['bool', 'boolean']):
                     $types[] = Type::BOOLEAN;
                     break;
-                case $reflectionType === 'string':
+                case $type === 'string':
                     $types[] = Type::STRING;
                     break;
-                case $reflectionType === 'null':
+                case $type === 'null':
                     $this->_allowsNull = true;
                     break;
-                case self::isBackedEnum($reflectionType):
+                case self::isBackedEnum($type):
                     $types[] = Type::BACKED_ENUM;
+                    break;
+                case self::isDateTime($type):
+                    $types[] = Type::DATETIME;
                     break;
                 default:
                     $types[] = Type::MIXED;
@@ -106,6 +115,25 @@ trait HasTypes
                 return true;
             }
         }
+
+        return false;
+    }
+
+    private static function isDateTime(string $type): bool
+    {
+        try {
+            if (class_exists($type) || interface_exists($type)) {
+                $reflection = self::$_dateTimeReflections[$type] ?? new ReflectionClass($type);
+
+                if ($reflection->implementsInterface(DateTimeInterface::class)) {
+                    self::$_dateTimeReflections[$type] = $reflection;
+
+                    return true;
+                }
+            }
+            // @codeCoverageIgnoreStart
+        } catch (Exception) {}
+        // @codeCoverageIgnoreEnd
 
         return false;
     }
