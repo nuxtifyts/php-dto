@@ -17,7 +17,7 @@ class PropertyContext
      * @var array<string, static>
      *
      * Instances of the PropertyContext class.
-     * Associated by the class name + :: + property name
+     * Associated by the class name + @ + property name
      */
     private static array $_instances = [];
 
@@ -48,7 +48,7 @@ class PropertyContext
 
     private static function getKey(ReflectionProperty $property): string
     {
-        return $property->getDeclaringClass()->getName() . '::' . $property->getName();
+        return $property->getDeclaringClass()->getName() . '@' . $property->getName();
     }
 
     /**

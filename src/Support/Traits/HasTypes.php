@@ -30,7 +30,7 @@ trait HasTypes
     /**
      * @return list<string>
      *
-     * Should be called once for each unique property (class::property)
+     * Should be called once for each unique property.
      * If called many times, return should be cached
      */
     private static function getPropertyStringTypes(ReflectionProperty $property): array
