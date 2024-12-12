@@ -2,10 +2,16 @@
 
 namespace Nuxtifyts\PhpDto\Support\Traits\HasTypes;
 
+use Nuxtifyts\PhpDto\Contexts\PropertyContext;
+use Nuxtifyts\PhpDto\Support\Traits\HasTypes;
 use ReflectionClass;
 use DateTimeInterface;
 use Exception;
 
+/**
+ * @mixin HasTypes
+ * @mixin PropertyContext
+ */
 trait HasDateTimeType
 {
     /** @var array<string, ReflectionClass<DateTimeInterface>> */

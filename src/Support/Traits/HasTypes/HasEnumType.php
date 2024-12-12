@@ -2,9 +2,15 @@
 
 namespace Nuxtifyts\PhpDto\Support\Traits\HasTypes;
 
+use Nuxtifyts\PhpDto\Contexts\PropertyContext;
+use Nuxtifyts\PhpDto\Support\Traits\HasTypes;
 use ReflectionEnum;
 use BackedEnum;
 
+/**
+ * @mixin HasTypes
+ * @mixin PropertyContext
+ */
 trait HasEnumType
 {
     /** @var array<string, ReflectionEnum<BackedEnum>> */
