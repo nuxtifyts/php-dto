@@ -128,6 +128,7 @@ trait HasTypes
     {
         try {
             if (class_exists($type) || interface_exists($type)) {
+                /** @var ReflectionClass<DateTimeInterface> $reflection */
                 $reflection = self::$_dateTimeReflections[$type] ?? new ReflectionClass($type);
 
                 if ($reflection->implementsInterface(DateTimeInterface::class)) {
