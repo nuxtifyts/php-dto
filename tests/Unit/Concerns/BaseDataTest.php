@@ -2,6 +2,7 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Unit\Concerns;
 
+use DateTimeImmutable;
 use Nuxtifyts\PhpDto\Concerns\BaseData;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
@@ -10,6 +11,7 @@ use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
 use Nuxtifyts\PhpDto\Tests\Dummies\CoordinatesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
 use Nuxtifyts\PhpDto\Tests\Dummies\InvitationData;
+use Nuxtifyts\PhpDto\Tests\Dummies\RefundableItemData;
 use Nuxtifyts\PhpDto\Tests\Dummies\UnionMultipleTypeData;
 use Nuxtifyts\PhpDto\Tests\Dummies\YesOrNoData;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
@@ -214,7 +216,7 @@ final class BaseDataTest extends UnitCase
             ],
             'Union typed data 2' => [
                 'dtoClass' => UnionMultipleTypeData::class,
-                'data' => $value = [
+                'data' => $data = [
                     'value' => 'string value',
                     'yesOrNo' => false
                 ],
@@ -222,7 +224,35 @@ final class BaseDataTest extends UnitCase
                     'value' => 'string value',
                     'yesOrNo' => false
                 ],
-                'expectedSerializedData' => $value
+                'expectedSerializedData' => $data
+            ],
+            'Refundable item data' => [
+                'dtoClass' => RefundableItemData::class,
+                'data' => $data = [
+                    'id' => 'id',
+                    'refundable' => YesNoBackedEnum::YES->value,
+                    'refundableUntil' => '2021-01-01T00:00:00+00:00'
+                ],
+                'expectedProperties' => [
+                    'id' => 'id',
+                    'refundable' => YesNoBackedEnum::YES,
+                    'refundableUntil' => new DateTimeImmutable('2021-01-01T00:00:00+00:00')
+                ],
+                'expectedSerializedData' => $data
+            ],
+            'Refundable item data 2' => [
+                'dtoClass' => RefundableItemData::class,
+                'data' => $data = [
+                    'id' => 'id2',
+                    'refundable' => YesNoBackedEnum::NO->value,
+                    'refundableUntil' => null
+                ],
+                'expectedProperties' => [
+                    'id' => 'id2',
+                    'refundable' => YesNoBackedEnum::NO,
+                    'refundableUntil' => null
+                ],
+                'expectedSerializedData' => $data
             ]
         ];
     }
