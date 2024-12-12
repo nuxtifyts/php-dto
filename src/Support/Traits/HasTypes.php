@@ -12,6 +12,7 @@ trait HasTypes
 {
     use HasTypes\HasEnumType;
     use HasTypes\HasDateTimeType;
+    use HasTypes\HasDataType;
 
     /** @var list<Type> */
     protected(set) array $_types = [];
@@ -77,11 +78,14 @@ trait HasTypes
                 case $type === 'null':
                     $this->_allowsNull = true;
                     break;
-                case self::isBackedEnum($type):
+                case self::isBackedEnumType($type):
                     $types[] = Type::BACKED_ENUM;
                     break;
-                case self::isDateTime($type):
+                case self::isDateTimeType($type):
                     $types[] = Type::DATETIME;
+                    break;
+                case self::isDataType($type):
+                    $types[] = Type::DATA;
                     break;
                 default:
                     $types[] = Type::MIXED;

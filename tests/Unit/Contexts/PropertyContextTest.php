@@ -29,6 +29,7 @@ use Throwable;
 #[UsesClass(Data::class)]
 #[UsesClass(CoordinatesData::class)]
 #[UsesClass(UnionMultipleTypeData::class)]
+#[UsesClass(PersonData::class)]
 final class PropertyContextTest extends UnitCase
 {
     /**
@@ -237,6 +238,16 @@ final class PropertyContextTest extends UnitCase
                 },
                 'propertyName' => 'value',
                 'expectedType' => Type::DATETIME
+            ],
+            'Resolves data type' => [
+                'object' => new readonly class(new PersonData(firstName: 'John', lastName: 'Doe')) extends Data {
+                    public function __construct(
+                        public PersonData $person
+                    ) {
+                    }
+                },
+                'propertyName' => 'person',
+                'expectedType' => Type::DATA
             ]
         ];
     }
