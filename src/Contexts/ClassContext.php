@@ -43,7 +43,7 @@ class ClassContext
     final public static function getInstance(ReflectionClass $reflectionClass): static
     {
         return self::$_instances[self::getKey($reflectionClass)]
-            ?? new static($reflectionClass);
+            ??= new static($reflectionClass);
     }
 
     /**

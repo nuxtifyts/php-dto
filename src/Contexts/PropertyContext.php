@@ -43,7 +43,7 @@ class PropertyContext
     final public static function getInstance(ReflectionProperty $property): static
     {
         return self::$_instances[self::getKey($property)]
-            ?? new static($property);
+            ??= new static($property);
     }
 
     private static function getKey(ReflectionProperty $property): string
