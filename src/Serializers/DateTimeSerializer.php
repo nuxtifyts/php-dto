@@ -53,7 +53,13 @@ class DateTimeSerializer extends Serializer
                     if ($dateTimeReflection->isInterface()) {
                         return new DateTimeImmutable($value);
                     } else {
-                        return $dateTimeReflection->newInstance($value);
+                        $value = $dateTimeReflection->newInstance($value);
+
+                        if (!$value instanceof DateTimeInterface) {
+                            throw new Exception('Not an instance of DateTimeInterface');
+                        }
+
+                        return $value;
                     }
                 }
             // @codeCoverageIgnoreStart
