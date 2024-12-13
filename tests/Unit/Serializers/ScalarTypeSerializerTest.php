@@ -23,6 +23,7 @@ use Throwable;
 #[CoversClass(Serializer::class)]
 #[CoversClass(HasSerializers::class)]
 #[CoversClass(DeserializeException::class)]
+#[UsesClass(PropertyContext::class)]
 #[UsesClass(PersonData::class)]
 #[UsesClass(CoordinatesData::class)]
 final class ScalarTypeSerializerTest extends UnitCase

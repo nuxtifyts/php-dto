@@ -20,6 +20,7 @@ use Throwable;
 
 #[CoversClass(Serializer::class)]
 #[CoversClass(DateTimeSerializer::class)]
+#[UsesClass(PropertyContext::class)]
 #[UsesClass(YesNoBackedEnum::class)]
 #[UsesClass(UserBirthdateData::class)]
 final class DateTimeSerializerTest extends UnitCase
@@ -124,11 +125,10 @@ final class DateTimeSerializerTest extends UnitCase
 
         $reflectionClass = new ReflectionClass(UserBirthdateData::class);
         $property = $reflectionClass->getProperty('birthdate');
-        $dateTimeSerializer = new DateTimeSerializer();
 
         self::assertEquals(
             new DateTimeImmutable('2021-01-01T00:00:00+00:00'),
-            $dateTimeSerializer->deserialize(PropertyContext::getInstance($property), $userBirthdateArr)
+            new DateTimeSerializer()->deserialize(PropertyContext::getInstance($property), $userBirthdateArr)
         );
     }
 }
