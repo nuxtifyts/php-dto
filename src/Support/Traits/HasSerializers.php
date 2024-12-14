@@ -5,6 +5,7 @@ namespace Nuxtifyts\PhpDto\Support\Traits;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Exceptions\UnknownTypeException;
 use Nuxtifyts\PhpDto\Serializers\BackedEnumSerializer;
+use Nuxtifyts\PhpDto\Serializers\DataSerializer;
 use Nuxtifyts\PhpDto\Serializers\DateTimeSerializer;
 use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
@@ -36,6 +37,7 @@ trait HasSerializers
     protected static function serializersList(): array
     {
         return [
+            DataSerializer::class,
             DateTimeSerializer::class,
             BackedEnumSerializer::class,
             ScalarTypeSerializer::class,

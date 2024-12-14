@@ -8,7 +8,9 @@ use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
 use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
+use Nuxtifyts\PhpDto\Tests\Dummies\AddressData;
 use Nuxtifyts\PhpDto\Tests\Dummies\CoordinatesData;
+use Nuxtifyts\PhpDto\Tests\Dummies\CountryData;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
 use Nuxtifyts\PhpDto\Tests\Dummies\InvitationData;
 use Nuxtifyts\PhpDto\Tests\Dummies\RefundableItemData;
@@ -29,6 +31,13 @@ use Throwable;
 #[CoversClass(HasSerializers::class)]
 #[UsesClass(PersonData::class)]
 #[UsesClass(UnionTypedData::class)]
+#[UsesClass(YesOrNoData::class)]
+#[UsesClass(InvitationData::class)]
+#[UsesClass(CoordinatesData::class)]
+#[UsesClass(RefundableItemData::class)]
+#[UsesClass(UnionMultipleTypeData::class)]
+#[UsesClass(AddressData::class)]
+#[UsesClass(CountryData::class)]
 final class BaseDataTest extends UnitCase
 {
     /**
@@ -253,6 +262,39 @@ final class BaseDataTest extends UnitCase
                     'refundableUntil' => null
                 ],
                 'expectedSerializedData' => $data
+            ],
+            'Address data 1' => [
+                'dtoClass' => AddressData::class,
+                'data' => $data = [
+                    'street' => 'street',
+                    'city' => 'city',
+                    'state' => 'state',
+                    'zip' => 'zip',
+                    'country' => [
+                        'name' => 'country name',
+                        'code' => 'country code'
+                    ],
+                    'coordinates' => [
+                        'latitude' => 42.42,
+                        'longitude' => 24.24
+                    ]
+                ],
+                'expectedProperties' => [
+                    'street' => 'street',
+                    'city' => 'city',
+                    'state' => 'state',
+                    'zip' => 'zip',
+                    'country' => new CountryData('country name', 'country code'),
+                    'coordinates' => new CoordinatesData(42.42, 24.24)
+                ],
+                'expectedSerializedData' => [
+                    ...$data,
+                    'coordinates' => [
+                        'latitude' => 42.42,
+                        'longitude' => 24.24,
+                        'radius' => null
+                    ]
+                ]
             ]
         ];
     }
