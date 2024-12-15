@@ -3,6 +3,7 @@
 namespace Nuxtifyts\PhpDto\Serializers;
 
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
+use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use ArrayAccess;
@@ -65,14 +66,9 @@ class ScalarTypeSerializer extends Serializer
     private static function getScalarTypeFromProperty(
         PropertyContext $property
     ): array {
-        $types = [];
-
-        foreach ($property->types as $propertyType) {
-            if (in_array($propertyType, self::supportedTypes(), true)) {
-                $types[] = $propertyType;
-            }
-        }
-
-        return $types;
+        return array_map(
+            static fn (TypeContext $typeContext) => $typeContext->type,
+            $property->getFilteredTypeContexts(...self::supportedTypes())
+        );
     }
 }
