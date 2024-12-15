@@ -47,15 +47,22 @@ class DataSerializer extends Serializer
 
         if (is_array($value)) {
             try {
-                foreach ($property->dataReflections as $dataReflection) {
-                    // @phpstan-ignore-next-line
-                    $value = call_user_func( [$dataReflection->getName(), 'from'], $value);
+                foreach ($property->getFilteredTypeContexts(...self::supportedTypes()) as $typeContext) {
+                    if (!$typeContext->reflection?->implementsInterface(BaseDataContract::class)) {
+                        continue;
+                    }
 
-                    if (!$value instanceof BaseDataContract) {
+                    $deserializedValue = call_user_func(
+                    // @phpstan-ignore-next-line
+                        [$typeContext->reflection->getName(), 'from'],
+                        $value
+                    );
+
+                    if (!$deserializedValue instanceof BaseDataContract) {
                         throw new Exception('Not an instance of BaseDataContract');
                     }
 
-                    return $value;
+                    return $deserializedValue;
                 }
             // @codeCoverageIgnoreStart
             } catch (Exception) {}

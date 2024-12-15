@@ -49,18 +49,22 @@ class DateTimeSerializer extends Serializer
 
         if (is_string($value)) {
             try {
-                foreach ($property->dateTimeReflections as $dateTimeReflection) {
-                    if ($dateTimeReflection->isInterface()) {
-                        return new DateTimeImmutable($value);
-                    } else {
-                        $value = $dateTimeReflection->newInstance($value);
-
-                        if (!$value instanceof DateTimeInterface) {
-                            throw new Exception('Not an instance of DateTimeInterface');
-                        }
-
-                        return $value;
+                foreach ($property->getFilteredTypeContexts(...self::supportedTypes()) as $typeContext) {
+                    if (!$typeContext->reflection?->implementsInterface(DateTimeInterface::class)) {
+                        continue;
                     }
+
+                    if ($typeContext->reflection->isInterface()) {
+                        return new DateTimeImmutable($value);
+                    }
+
+                    $deserializedValue = $typeContext->reflection->newInstance($value);
+
+                    if (!$deserializedValue instanceof DateTimeInterface) {
+                        throw new Exception('Not an instance of DateTimeInterface');
+                    }
+
+                    return $deserializedValue;
                 }
             // @codeCoverageIgnoreStart
             } catch (Exception) {}

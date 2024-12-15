@@ -3,10 +3,12 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\Contexts;
 
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
+use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
 use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
+use Nuxtifyts\PhpDto\Support\Traits\HasTypes;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
 use Nuxtifyts\PhpDto\Tests\Dummies\UnionMultipleTypeData;
 use Nuxtifyts\PhpDto\Tests\Dummies\CoordinatesData;
@@ -24,6 +26,8 @@ use Throwable;
 
 #[CoversClass(PropertyContext::class)]
 #[CoversClass(HasSerializers::class)]
+#[CoversClass(HasTypes::class)]
+#[CoversClass(TypeContext::class)]
 #[UsesClass(ScalarTypeSerializer::class)]
 #[UsesClass(PersonData::class)]
 #[UsesClass(Data::class)]

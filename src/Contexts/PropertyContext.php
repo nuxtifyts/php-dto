@@ -2,6 +2,7 @@
 
 namespace Nuxtifyts\PhpDto\Contexts;
 
+use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\UnknownTypeException;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
 use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
@@ -64,5 +65,19 @@ class PropertyContext
     public function getValue(object $object): mixed
     {
         return $this->_reflectionProperty->getValue($object);
+    }
+
+    /**
+     * @return list<TypeContext<Type>>
+     */
+    public function getFilteredTypeContexts(Type $type, Type ...$additionalTypes): array
+    {
+        return array_values(
+            array_filter(
+                $this->typeContexts,
+                static fn (TypeContext $typeContext) =>
+                    in_array($typeContext->type, [$type, ...$additionalTypes], true)
+            )
+        );
     }
 }

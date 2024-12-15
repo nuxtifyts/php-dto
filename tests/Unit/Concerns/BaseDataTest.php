@@ -284,7 +284,7 @@ final class BaseDataTest extends UnitCase
                     'city' => 'city',
                     'state' => 'state',
                     'zip' => 'zip',
-                    'country' => new CountryData('country name', 'country code'),
+                    'country' => new CountryData('country code', 'country name'),
                     'coordinates' => new CoordinatesData(42.42, 24.24)
                 ],
                 'expectedSerializedData' => [

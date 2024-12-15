@@ -49,11 +49,16 @@ class BackedEnumSerializer extends Serializer
         }
 
         if ($value !== null) {
-            foreach ($property->enumReflections as $enumReflection) {
-                /** @var class-string<BackedEnum> $enumClass */
-                $enumClass = $enumReflection->getName();
+            foreach ($property->getFilteredTypeContexts(...self::supportedTypes()) as $typeContext) {
+                if (!$typeContext->reflection?->implementsInterface(BackedEnum::class)) {
+                    continue;
+                }
 
-                $enumValue = $enumClass::tryFrom($value);
+                $enumValue = call_user_func(
+                // @phpstan-ignore-next-line
+                    [$typeContext->reflection->getName(), 'tryFrom'],
+                    $value
+                );
 
                 if ($enumValue instanceof BackedEnum) {
                     return $enumValue;
