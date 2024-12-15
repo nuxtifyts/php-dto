@@ -16,6 +16,7 @@ use Nuxtifyts\PhpDto\Tests\Dummies\InvitationData;
 use Nuxtifyts\PhpDto\Tests\Dummies\RefundableItemData;
 use Nuxtifyts\PhpDto\Tests\Dummies\UnionMultipleComplexData;
 use Nuxtifyts\PhpDto\Tests\Dummies\UnionMultipleTypeData;
+use Nuxtifyts\PhpDto\Tests\Dummies\UserLocationData;
 use Nuxtifyts\PhpDto\Tests\Dummies\YesOrNoData;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
@@ -40,6 +41,7 @@ use Throwable;
 #[UsesClass(AddressData::class)]
 #[UsesClass(CountryData::class)]
 #[UsesClass(UnionMultipleComplexData::class)]
+#[UsesClass(UserLocationData::class)]
 final class BaseDataTest extends UnitCase
 {
     /**
@@ -377,6 +379,50 @@ final class BaseDataTest extends UnitCase
                             'name' => 'country name 3',
                             'code' => 'country code 3'
                         ],
+                        'coordinates' => [
+                            'latitude' => 42.42,
+                            'longitude' => 24.24,
+                            'radius' => null
+                        ]
+                    ]
+                ],
+            ],
+            'User location data' => [
+                'dtoClass' => UserLocationData::class,
+                'data' => $data = [
+                    'firstName' => 'John',
+                    'lastName' => 'Doe',
+                    'address' => [
+                        'street' => 'street 4',
+                        'city' => 'city 4',
+                        'state' => 'state 4',
+                        'zip' => 'zip 4',
+                        'country' => [
+                            'name' => 'country name 4',
+                            'code' => 'country code 4'
+                        ],
+                        'coordinates' => [
+                            'latitude' => 42.42,
+                            'longitude' => 24.24
+                        ]
+                    ]
+                ],
+                'expectedProperties' => [
+                    'firstName' => 'John',
+                    'lastName' => 'Doe',
+                    'address' => new AddressData(
+                        'street 4',
+                        'city 4',
+                        'state 4',
+                        'zip 4',
+                        new CountryData('country code 4', 'country name 4'),
+                        new CoordinatesData(42.42, 24.24)
+                    )
+                ],
+                'expectedSerializedData' => [
+                    ...$data,
+                    'address' => [
+                        ...$data['address'],
                         'coordinates' => [
                             'latitude' => 42.42,
                             'longitude' => 24.24,
