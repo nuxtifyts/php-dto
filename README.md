@@ -14,7 +14,7 @@ Then you can define the properties of the class and their types.
 ```php
 use Nuxtifyts\PhpDto\Data;
 
-final readonly class User extends Data
+final readonly class UserData extends Data
 {
     public string $fullName;
 
