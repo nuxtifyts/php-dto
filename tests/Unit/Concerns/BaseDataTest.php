@@ -295,6 +295,29 @@ final class BaseDataTest extends UnitCase
                         'radius' => null
                     ]
                 ]
+            ],
+            'Address data 2' => [
+                'dtoClass' => AddressData::class,
+                'data' => $data = [
+                    'street' => 'street 2',
+                    'city' => 'city 2',
+                    'state' => 'state 2',
+                    'zip' => 'zip 2',
+                    'country' => [
+                        'name' => 'country name 2',
+                        'code' => 'country code 2'
+                    ],
+                    'coordinates' => null
+                ],
+                'expectedProperties' => [
+                    'street' => 'street 2',
+                    'city' => 'city 2',
+                    'state' => 'state 2',
+                    'zip' => 'zip 2',
+                    'country' => new CountryData('country code 2', 'country name 2'),
+                    'coordinates' => null
+                ],
+                'expectedSerializedData' => $data
             ]
         ];
     }
