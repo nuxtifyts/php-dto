@@ -8,6 +8,7 @@ use Nuxtifyts\PhpDto\Enums\Property\Type;
 use BackedEnum;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
+use Exception;
 
 class BackedEnumSerializer extends Serializer
 {
@@ -29,7 +30,7 @@ class BackedEnumSerializer extends Serializer
         $value = $property->getValue($object);
 
         return [
-            $property->propertyName => match(true) {
+            $property->propertyName => match (true) {
                 $value instanceof BackedEnum => $value->value,
                 $value === null && $property->isNullable => null,
                 default => throw new SerializeException('Value is not a BackedEnum')
@@ -50,19 +51,25 @@ class BackedEnumSerializer extends Serializer
 
         if ($value !== null) {
             foreach ($property->getFilteredTypeContexts(...self::supportedTypes()) as $typeContext) {
-                if (!$typeContext->reflection?->implementsInterface(BackedEnum::class)) {
+                try {
+                    if (!$typeContext->reflection?->implementsInterface(BackedEnum::class)) {
+                        continue;
+                    }
+
+                    $enumValue = call_user_func(
+                    // @phpstan-ignore-next-line
+                        [$typeContext->reflection->getName(), 'tryFrom'],
+                        $value
+                    );
+
+                    if ($enumValue instanceof BackedEnum) {
+                        return $enumValue;
+                    }
+                    // @codeCoverageIgnoreStart
+                } catch (Exception) {
                     continue;
                 }
-
-                $enumValue = call_user_func(
-                // @phpstan-ignore-next-line
-                    [$typeContext->reflection->getName(), 'tryFrom'],
-                    $value
-                );
-
-                if ($enumValue instanceof BackedEnum) {
-                    return $enumValue;
-                }
+                // @codeCoverageIgnoreEnd
             }
         }
 

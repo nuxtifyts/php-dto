@@ -14,6 +14,7 @@ use Nuxtifyts\PhpDto\Tests\Dummies\CountryData;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
 use Nuxtifyts\PhpDto\Tests\Dummies\InvitationData;
 use Nuxtifyts\PhpDto\Tests\Dummies\RefundableItemData;
+use Nuxtifyts\PhpDto\Tests\Dummies\UnionMultipleComplexData;
 use Nuxtifyts\PhpDto\Tests\Dummies\UnionMultipleTypeData;
 use Nuxtifyts\PhpDto\Tests\Dummies\YesOrNoData;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
@@ -38,6 +39,7 @@ use Throwable;
 #[UsesClass(UnionMultipleTypeData::class)]
 #[UsesClass(AddressData::class)]
 #[UsesClass(CountryData::class)]
+#[UsesClass(UnionMultipleComplexData::class)]
 final class BaseDataTest extends UnitCase
 {
     /**
@@ -318,6 +320,70 @@ final class BaseDataTest extends UnitCase
                     'coordinates' => null
                 ],
                 'expectedSerializedData' => $data
+            ],
+            'Union multiple type data' => [
+                'dtoClass' => UnionMultipleComplexData::class,
+                'data' => $data = [
+                    'yesOrNo' => YesNoBackedEnum::YES->value,
+                    'location' => [
+                        'code' => 'country code 3',
+                        'name' => 'country name 3'
+                    ]
+                ],
+                'expectedProperties' => [
+                    'yesOrNo' => YesNoBackedEnum::YES,
+                    'location' => new CountryData('country code 3', 'country name 3')
+                ],
+                'expectedSerializedData' => $data
+            ],
+            'Union multiple type data 2' => [
+                'dtoClass' => UnionMultipleComplexData::class,
+                'data' => $data = [
+                    'yesOrNo' => false,
+                    'location' => [
+                        'street' => 'street 3',
+                        'city' => 'city 3',
+                        'state' => 'state 3',
+                        'zip' => 'zip 3',
+                        'country' => [
+                            'name' => 'country name 3',
+                            'code' => 'country code 3'
+                        ],
+                        'coordinates' => [
+                            'latitude' => 42.42,
+                            'longitude' => 24.24
+                        ]
+                    ]
+                ],
+                'expectedProperties' => [
+                    'yesOrNo' => false,
+                    'location' => new AddressData(
+                        'street 3',
+                        'city 3',
+                        'state 3',
+                        'zip 3',
+                        new CountryData('country code 3', 'country name 3'),
+                        new CoordinatesData(42.42, 24.24)
+                    )
+                ],
+                'expectedSerializedData' => [
+                    ...$data,
+                    'location' => [
+                        'street' => 'street 3',
+                        'city' => 'city 3',
+                        'state' => 'state 3',
+                        'zip' => 'zip 3',
+                        'country' => [
+                            'name' => 'country name 3',
+                            'code' => 'country code 3'
+                        ],
+                        'coordinates' => [
+                            'latitude' => 42.42,
+                            'longitude' => 24.24,
+                            'radius' => null
+                        ]
+                    ]
+                ]
             ]
         ];
     }

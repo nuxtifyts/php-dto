@@ -32,7 +32,7 @@ class DateTimeSerializer extends Serializer
 
         // TODO: move nullable value outside because it's repetitive
         return [
-            $property->propertyName => match(true) {
+            $property->propertyName => match (true) {
                 $value instanceof DateTimeInterface => $value->format(DateTimeInterface::ATOM),
                 $value === null && $property->isNullable => null,
                 default => throw new SerializeException('Value is not an instance of DateTimeInterface')
@@ -48,8 +48,8 @@ class DateTimeSerializer extends Serializer
         $value = $data[$property->propertyName] ?? null;
 
         if (is_string($value)) {
-            try {
-                foreach ($property->getFilteredTypeContexts(...self::supportedTypes()) as $typeContext) {
+            foreach ($property->getFilteredTypeContexts(...self::supportedTypes()) as $typeContext) {
+                try {
                     if (!$typeContext->reflection?->implementsInterface(DateTimeInterface::class)) {
                         continue;
                     }
@@ -65,10 +65,12 @@ class DateTimeSerializer extends Serializer
                     }
 
                     return $deserializedValue;
+                    // @codeCoverageIgnoreStart
+                } catch (Exception) {
+                    continue;
                 }
-            // @codeCoverageIgnoreStart
-            } catch (Exception) {}
-            // @codeCoverageIgnoreEnd
+                // @codeCoverageIgnoreEnd
+            }
         }
 
         return is_null($value) && $property->isNullable

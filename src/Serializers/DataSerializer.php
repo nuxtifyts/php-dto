@@ -30,7 +30,7 @@ class DataSerializer extends Serializer
         $value = $property->getValue($object);
 
         return [
-            $property->propertyName => match(true) {
+            $property->propertyName => match (true) {
                 $value instanceof BaseDataContract => $value->jsonSerialize(),
                 $value === null && $property->isNullable => null,
                 default => throw new SerializeException('Value is not an instance of BaseDataContract')
@@ -46,8 +46,8 @@ class DataSerializer extends Serializer
         $value = $data[$property->propertyName] ?? null;
 
         if (is_array($value)) {
-            try {
-                foreach ($property->getFilteredTypeContexts(...self::supportedTypes()) as $typeContext) {
+            foreach ($property->getFilteredTypeContexts(...self::supportedTypes()) as $typeContext) {
+                try {
                     if (!$typeContext->reflection?->implementsInterface(BaseDataContract::class)) {
                         continue;
                     }
@@ -63,10 +63,12 @@ class DataSerializer extends Serializer
                     }
 
                     return $deserializedValue;
+                    // @codeCoverageIgnoreStart
+                } catch (Exception) {
+                    continue;
                 }
-            // @codeCoverageIgnoreStart
-            } catch (Exception) {}
-            // @codeCoverageIgnoreEnd
+                // @codeCoverageIgnoreEnd
+            }
         }
 
         return is_null($value) && $property->isNullable
