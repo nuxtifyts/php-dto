@@ -4,6 +4,7 @@ namespace Nuxtifyts\PhpDto\Contexts;
 
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\UnknownTypeException;
+use Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
 use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
 use Nuxtifyts\PhpDto\Support\Traits\HasTypes;
@@ -27,6 +28,9 @@ class PropertyContext
      */
     private ?array $_serializers = null;
 
+    /**
+     * @throws UnsupportedTypeException
+     */
     final private function __construct(
         protected readonly ReflectionProperty $_reflectionProperty
     ) {
@@ -41,6 +45,9 @@ class PropertyContext
         get => $this->_reflectionProperty->getDeclaringClass()->getName();
     }
 
+    /**
+     * @throws UnsupportedTypeException
+     */
     final public static function getInstance(ReflectionProperty $property): static
     {
         return self::$_instances[self::getKey($property)]

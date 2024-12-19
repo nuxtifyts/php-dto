@@ -11,5 +11,13 @@ enum Type: string
     case BACKED_ENUM = 'backed_enum';
     case DATETIME = 'datetime';
     case DATA = 'data';
-    case MIXED = 'mixed';
+    case ARRAY = 'array';
+
+    /** @var list<Type> */
+    public const array SCALAR_TYPES = [
+        self::FLOAT,
+        self::INT,
+        self::BOOLEAN,
+        self::STRING,
+    ];
 }

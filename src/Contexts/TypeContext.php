@@ -5,6 +5,7 @@ namespace Nuxtifyts\PhpDto\Contexts;
 use DateTimeInterface;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
+use Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException;
 use ReflectionClass;
 use ReflectionNamedType;
 use ReflectionProperty;
@@ -22,6 +23,8 @@ use Nuxtifyts\PhpDto\Contracts\BaseData as BaseDataContract;
  */
 class TypeContext
 {
+    use TypeContext\ResolvesArraySubContexts;
+
     /** @var array<string, ReflectionEnum<BackedEnum>> */
     private static array $_enumReflections = [];
 
@@ -31,17 +34,29 @@ class TypeContext
     /** @var array<string, ReflectionClass<Data>> */
     private static array $_dataReflections = [];
 
+    /** @var list<Type> $arrayElementTypes */
+    public array $arrayElementTypes {
+        get => array_map(
+            static fn (TypeContext $context) => $context->type,
+            $this->subTypeContexts ?? []
+        );
+    }
+
     /**
      * @param ?ReflectionClass<object> $reflection
+     * @param ?list<static<T>> $subTypeContexts
      */
-    final private function __construct(
+    final protected function __construct(
         public readonly Type $type,
         public readonly ?ReflectionClass $reflection = null,
+        public readonly ?array $subTypeContexts = null
     ) {
     }
 
     /**
      * @return list<static<T>>
+     *
+     * @throws UnsupportedTypeException
      */
     public static function getInstances(ReflectionProperty $property): array
     {
@@ -65,16 +80,31 @@ class TypeContext
                 case $type === 'null':
                     break;
                 case ($reflectionEnum = self::resolvesReflectionEnum($type)):
-                    $instances[] = new static(Type::BACKED_ENUM, $reflectionEnum);
+                    $instances[] = new static(
+                        Type::BACKED_ENUM,
+                        reflection: $reflectionEnum
+                    );
                     break;
                 case ($reflectionDateTime = self::resolvesDateTime($type)):
-                    $instances[] = new static(Type::DATETIME, $reflectionDateTime);
+                    $instances[] = new static(
+                        Type::DATETIME,
+                        reflection: $reflectionDateTime
+                    );
                     break;
                 case ($reflectionData = self::resolvesData($type)):
-                    $instances[] = new static(Type::DATA, $reflectionData);
+                    $instances[] = new static(
+                        Type::DATA,
+                        reflection: $reflectionData
+                    );
+                    break;
+                case $type === 'array':
+                    $instances[] = new static(
+                        Type::ARRAY,
+                        subTypeContexts: self::resolveSubContextsForArray($property)
+                    );
                     break;
                 default:
-                    $instances[] = new static(Type::MIXED);
+                    throw UnsupportedTypeException::from($type);
             }
         }
 

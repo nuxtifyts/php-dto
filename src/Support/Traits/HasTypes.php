@@ -4,6 +4,7 @@ namespace Nuxtifyts\PhpDto\Support\Traits;
 
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
+use Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException;
 use ReflectionProperty;
 
 trait HasTypes
@@ -21,6 +22,9 @@ trait HasTypes
         );
     }
 
+    /**
+     * @throws UnsupportedTypeException
+     */
     protected function syncTypesFromReflectionProperty(ReflectionProperty $property): void
     {
         $this->isNullable = $property->getType()?->allowsNull() ?? false;

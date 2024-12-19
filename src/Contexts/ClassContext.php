@@ -2,6 +2,7 @@
 
 namespace Nuxtifyts\PhpDto\Contexts;
 
+use Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException;
 use ReflectionClass;
 use ReflectionException;
 
@@ -25,6 +26,8 @@ class ClassContext
 
     /**
      * @param ReflectionClass<T> $_reflectionClass
+     *
+     * @throws UnsupportedTypeException
      */
     final private function __construct(
         protected readonly ReflectionClass $_reflectionClass
@@ -39,6 +42,8 @@ class ClassContext
 
     /**
      * @param ReflectionClass<T> $reflectionClass
+     *
+     * @throws UnsupportedTypeException
      */
     final public static function getInstance(ReflectionClass $reflectionClass): static
     {
@@ -58,6 +63,8 @@ class ClassContext
      * @param ReflectionClass<T> $reflectionClass
      *
      * @return array<string, PropertyContext>
+     *
+     * @throws UnsupportedTypeException
      */
     private static function getPropertyContexts(ReflectionClass $reflectionClass): array
     {

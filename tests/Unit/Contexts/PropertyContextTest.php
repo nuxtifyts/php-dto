@@ -193,16 +193,6 @@ final class PropertyContextTest extends UnitCase
                 'propertyName' => 'value',
                 'expectedType' => Type::FLOAT
             ],
-            'Resolves mixed' => [
-                'object' => new readonly class (null) extends Data {
-                    public function __construct(
-                        public mixed $value
-                    ) {
-                    }
-                },
-                'propertyName' => 'value',
-                'expectedType' => Type::MIXED
-            ],
             'Resolves backed enum' => [
                 'object' => new readonly class(YesNoBackedEnum::YES) extends Data {
                     public function __construct(

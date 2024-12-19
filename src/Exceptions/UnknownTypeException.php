@@ -7,7 +7,7 @@ use Nuxtifyts\PhpDto\Enums\Property\Type;
 
 class UnknownTypeException extends Exception
 {
-    private function __construct(string $message = "")
+    final protected function __construct(string $message = "")
     {
         parent::__construct($message);
     }
@@ -15,10 +15,10 @@ class UnknownTypeException extends Exception
     public static function from(
         Type $type,
         Type ...$additionalTypes
-    ): self {
+    ): static {
         $types = implode(', ', array_column([$type, ...$additionalTypes], 'value'));
 
-        return new self(
+        return new static(
             "Unknown type '{$types}'"
         );
     }
