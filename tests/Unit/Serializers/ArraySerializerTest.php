@@ -3,9 +3,12 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\Serializers;
 
 use DateTimeImmutable;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfScalarTypes;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
+use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
+use Nuxtifyts\PhpDto\Exceptions\SerializeException;
 use Nuxtifyts\PhpDto\Serializers\ArraySerializer;
 use Nuxtifyts\PhpDto\Tests\Dummies\ArrayOfMixedAttributesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
@@ -34,6 +37,39 @@ final class ArraySerializerTest extends UnitCase
                 Type::ARRAY
             ],
             ArraySerializer::supportedTypes()
+        );
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[Test]
+    public function is_able_to_handle_null_if_property_is_nullable(): void
+    {
+        $object = new readonly class (null) extends Data {
+            /**
+             * @param ?list<int> $arrayOfIntegers
+             */
+            public function __construct(
+                #[ArrayOfScalarTypes(Type::INT)]
+                public ?array $arrayOfIntegers
+            ) {
+            }
+        };
+
+        $reflectionClass = new ReflectionClass($object);
+        $property = $reflectionClass->getProperty('arrayOfIntegers');
+
+        $arraySerializer = new ArraySerializer();
+
+        self::assertEquals(
+            ['arrayOfIntegers' => null],
+            $arraySerializer->serialize(PropertyContext::getInstance($property), $object)
+        );
+
+        self::assertEquals(
+            null,
+            $arraySerializer->deserialize(PropertyContext::getInstance($property), ['arrayOfIntegers' => null])
         );
     }
 
