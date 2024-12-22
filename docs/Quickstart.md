@@ -3,7 +3,7 @@ Quickstart
 
 In this quickstart guide, you will learn the most basic usage of this package.
 
-First, you should [install](#) the package using composer:
+First, you should [install](https://github.com/nuxtifyts/php-dto?tab=readme-ov-file#installation) the package using composer:
 
 We will create a Todo application, where we need to manage a list of TODOs. so we can start
 with creating a `Todo` data class.
@@ -76,6 +76,6 @@ Conclusion
 This is the most basic usage of this package, more details on how to use the package 
 can be found here:
 
-- [Supported Types](#)
-- [Normalizers](#)
+- [Supported Types](https://github.com/nuxtifyts/php-dto/blob/main/src/Docs/SupportedTypes.md)
+- [Normalizers](https://github.com/nuxtifyts/php-dto/blob/main/src/Docs/Normalizers.md)
 - [Property Attributes (TBD)](#)

@@ -69,3 +69,9 @@ and if you are using Laravel, I highly recommend using the original package. ins
 - That's it!
 
 ### Installation
+
+You can install the package via composer:
+
+```bash
+composer require nuxtifyts/php-dto
+```
