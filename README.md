@@ -27,6 +27,32 @@ final readonly class UserData extends Data
 }
 ```
 
+You can then create an instance of the class from a mixed value. The DTO will then attempt to hydrate the object with the given data.
+
+```php
+$data = [
+    'firstName' => 'John',
+    'lastName' => 'Doe',
+    'fullName' => 'John Doe'
+];
+
+$user = UserData::from($data);
+```
+
+DTOs can also be serialized to an array:
+
+```php
+
+$user = new UserData('John', 'Doe');
+
+$userData = $user->toArray();
+
+// Or you can use the json_encode function, as the DTO implements the JsonSerializable interface
+
+$userData = json_encode($user);
+
+```
+
 ### Note
 
 This package was inspired from the [spatie/data-transfer-object](https://github.com/spatie/laravel-data) package.
@@ -41,5 +67,3 @@ and if you are using Laravel, I highly recommend using the original package. ins
 
 - PHP 8.4 or higher
 - That's it!
-
-

@@ -157,6 +157,25 @@ final class ArraySerializerTest extends UnitCase
                 ],
                 'propertyName' => 'arrayOfIntegersOrBackedEnums',
                 'expectedDeserializedValue' => [YesNoBackedEnum::YES, YesNoBackedEnum::NO]
+            ],
+            'Associated array of data' => [
+                'object' => new ArrayOfAttributesData(
+                    arrayOfPersonData: [
+                        'john-doe' => new PersonData('John', 'Doe'),
+                        'jane-doe' => new PersonData('Jane', 'Doe'),
+                    ]
+                ),
+                'expectedSerializedValue' => [
+                    'arrayOfPersonData' => [
+                        'john-doe' => ['firstName' => 'John', 'lastName' => 'Doe', 'fullName' => 'John Doe'],
+                        'jane-doe' => ['firstName' => 'Jane', 'lastName' => 'Doe', 'fullName' => 'Jane Doe'],
+                    ]
+                ],
+                'propertyName' => 'arrayOfPersonData',
+                'expectedDeserializedValue' => [
+                    'john-doe' => new PersonData('John', 'Doe'),
+                    'jane-doe' => new PersonData('Jane', 'Doe'),
+                ]
             ]
         ];
     }

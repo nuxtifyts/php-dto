@@ -112,4 +112,14 @@ trait BaseData
             throw new SerializeException($e->getMessage(), $e->getCode(), $e);
         }
     }
+
+    /**
+     * @return array<string, mixed>
+     *
+     * @throws SerializeException
+     */
+    final public function toArray(): array
+    {
+        return $this->jsonSerialize();
+    }
 }

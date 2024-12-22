@@ -10,6 +10,9 @@ use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
 
 final readonly class ArrayOfMixedAttributesData extends Data
 {
+    /**
+     * @param ?array<array-key, int|YesNoBackedEnum>  $arrayOfIntegersOrBackedEnums
+     */
     public function __construct(
         #[ArrayOfScalarTypes(Type::INT)]
         #[ArrayOfBackedEnums(YesNoBackedEnum::class)]
