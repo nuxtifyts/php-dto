@@ -42,7 +42,7 @@ jobs:
       run: ls -la
 
     - name: Run PHPUnit
-      run: composer run-script test
+      run: composer run-script ci-test
 
     - name: Upload coverage report
       uses: actions/upload-artifact@v3
