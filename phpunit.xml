@@ -18,6 +18,10 @@
         <testsuite name="unit">
             <directory suffix="Test.php">tests/Unit</directory>
         </testsuite>
+
+        <testsuite name="ci">
+            <directory suffix="Test.php">tests/Unit</directory>
+        </testsuite>
     </testsuites>
 
     <source>
@@ -31,7 +35,6 @@
 
     <coverage>
         <report>
-            <clover outputFile="coverage.xml"/>
             <html outputDirectory="coverage-html"/>
         </report>
     </coverage>

@@ -10,9 +10,9 @@ use ReflectionProperty;
 trait HasTypes
 {
     /** @var list<TypeContext<Type>> */
-    protected(set) array $typeContexts = [];
+    protected(set) public array $typeContexts = [];
 
-    protected(set) bool $isNullable = false;
+    protected(set) public bool $isNullable = false;
 
     /** @var list<Type> */
     public array $types {

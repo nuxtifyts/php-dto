@@ -17,10 +17,10 @@ class ArrayOfDateTimes
     private static array $_dateTimeReflections = [];
 
     /** @var list<class-string<DateTime|DateTimeImmutable>> */
-    private(set) array $dateTimes;
+    private(set) public array $dateTimes;
 
     /** @var array<string, ReflectionClass<DateTime|DateTimeImmutable>> */
-    private(set) array $resolvedDateTimeReflections = [];
+    private(set) public array $resolvedDateTimeReflections = [];
 
     /**
      * @param class-string<DateTime|DateTimeImmutable>|list<class-string<DateTime|DateTimeImmutable>> $dateTimes
@@ -59,7 +59,7 @@ class ArrayOfDateTimes
             }
 
             $this->dateTimes = is_array($dateTimes) ? $dateTimes : [$dateTimes];
-        } catch(Exception) {
+        } catch (Exception) {
             throw new InvalidArgumentException(
                 'Invalid DateTime or DateTimeImmutable passed to ArrayOfDateTimes'
             );

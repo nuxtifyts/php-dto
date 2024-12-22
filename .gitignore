@@ -3,3 +3,4 @@ vendor/
 coverage.xml
 coverage-html/
 .phpunit/
+/.php-cs-fixer.cache

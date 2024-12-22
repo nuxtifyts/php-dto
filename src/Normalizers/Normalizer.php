@@ -12,7 +12,8 @@ abstract readonly class Normalizer
     final public function __construct(
         protected mixed $value,
         protected string $class,
-    ) {}
+    ) {
+    }
 
     /**
      * @return array<string, mixed>|false

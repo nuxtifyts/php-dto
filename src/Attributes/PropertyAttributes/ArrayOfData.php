@@ -16,10 +16,10 @@ class ArrayOfData
     private static array $_dataReflections = [];
 
     /** @var list<class-string<Data>> */
-    private(set) array $dataClasses;
+    private(set) public array $dataClasses;
 
     /** @var array<string, ReflectionClass<Data>> */
-    private(set) array $resolvedDataReflections = [];
+    private(set) public array $resolvedDataReflections = [];
 
     /**
      * @param class-string<Data>|list<class-string<Data>> $dataClasses

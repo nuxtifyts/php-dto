@@ -66,7 +66,7 @@ class ScalarTypeSerializer extends Serializer implements SerializesArrayOfItemsC
 
             array_any(
                 array_column(self::getScalarTypeFromProperty($property), 'value'),
-                static fn(string $type) => settype($item, $type)
+                static fn (string $type) => settype($item, $type)
             ) => $item,
 
             default => throw new DeserializeException('Could not deserialize scalar type item')

@@ -39,9 +39,11 @@ class ArraySerializer extends Serializer
                                     return $serializedValue[$property->propertyName];
                                 }
                             }
-                        } catch (Exception) {}
+                        } catch (Exception) {
+                        }
                     }
-                } catch (Exception) {}
+                } catch (Exception) {
+                }
             }
         }
 
@@ -62,9 +64,11 @@ class ArraySerializer extends Serializer
                                 // @phpstan-ignore-next-line
                                 return $serializer->deserializeArrayOfItems($property, $item);
                             }
-                        } catch (Exception) {}
+                        } catch (Exception) {
+                        }
                     }
-                } catch (Exception) {}
+                } catch (Exception) {
+                }
             }
         }
 

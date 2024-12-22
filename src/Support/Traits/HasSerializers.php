@@ -34,7 +34,7 @@ trait HasSerializers
                 !empty(array_intersect(
                     array_column($propertyContext->types, 'value'),
                     array_column($serializer::supportedTypes(), 'value')
-                )) ? new $serializer : null,
+                )) ? new $serializer() : null,
             self::serializersList()
         ))) ?: throw UnknownTypeException::from(...$propertyContext->types);
     }
@@ -53,7 +53,7 @@ trait HasSerializers
                 !empty(array_intersect(
                     array_column($typeContext->arrayElementTypes, 'value'),
                     array_column($serializer::supportedTypes(), 'value')
-                )) ? new $serializer : null,
+                )) ? new $serializer() : null,
             self::serializersList()
         )));
     }

@@ -51,7 +51,8 @@ trait BaseData
                         $propertyDeserialized = true;
 
                         break;
-                    } catch (DeserializeException) {}
+                    } catch (DeserializeException) {
+                    }
                 }
 
                 if (!$propertyDeserialized) {
@@ -97,7 +98,8 @@ trait BaseData
                         $propertySerialized = true;
 
                         break;
-                    } catch (SerializeException) {}
+                    } catch (SerializeException) {
+                    }
                 }
 
                 if (!$propertySerialized) {

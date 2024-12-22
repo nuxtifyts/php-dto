@@ -70,7 +70,7 @@ class TypeContext
         $instances = [];
 
         foreach ($reflectionTypes as $type) {
-            switch(true) {
+            switch (true) {
                 case in_array($type, ['double', 'float']):
                     $instances[] = new static(Type::FLOAT);
                     break;
@@ -159,7 +159,8 @@ class TypeContext
                 }
             }
             // @codeCoverageIgnoreStart
-        } catch (Exception) {}
+        } catch (Exception) {
+        }
         // @codeCoverageIgnoreEnd
 
         return null;
@@ -182,7 +183,8 @@ class TypeContext
                     return $reflection;
                 }
             }
-        } catch (Exception) {}
+        } catch (Exception) {
+        }
 
         return null;
     }
@@ -200,7 +202,7 @@ class TypeContext
                 $type->getName(),
             ],
             $type instanceof ReflectionUnionType => array_values(array_map(
-                static fn(ReflectionType $type): string => $type instanceof ReflectionNamedType
+                static fn (ReflectionType $type): string => $type instanceof ReflectionNamedType
                     ? $type->getName()
                     : '',
                 $type->getTypes()

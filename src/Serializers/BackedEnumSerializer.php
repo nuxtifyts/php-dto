@@ -59,7 +59,7 @@ class BackedEnumSerializer extends Serializer implements SerializesArrayOfItemsC
                 }
 
                 $enumValue = call_user_func(
-                // @phpstan-ignore-next-line
+                    // @phpstan-ignore-next-line
                     [$typeContext->reflection->getName(), 'tryFrom'],
                     $item
                 );

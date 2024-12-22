@@ -28,7 +28,7 @@ trait SerializesArrayOfItems
                 is_null($value) && $property->isNullable => null,
 
                 is_array($value) => array_map(
-                    fn(mixed $item) => $this->serializeItem($item, $property, $object),
+                    fn (mixed $item) => $this->serializeItem($item, $property, $object),
                     $value
                 ),
 
@@ -49,7 +49,7 @@ trait SerializesArrayOfItems
         array $data
     ): ?array {
         return array_map(
-            fn(mixed $item) => $this->deserializeItem($item, $property),
+            fn (mixed $item) => $this->deserializeItem($item, $property),
             $data
         );
     }

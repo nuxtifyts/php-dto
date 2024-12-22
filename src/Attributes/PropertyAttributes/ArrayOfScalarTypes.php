@@ -10,7 +10,7 @@ use InvalidArgumentException;
 class ArrayOfScalarTypes
 {
     /** @var list<Type> $types */
-    private(set) array $types;
+    private(set) public array $types;
 
     /**
      * @param Type|list<Type> $types

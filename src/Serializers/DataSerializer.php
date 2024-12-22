@@ -54,7 +54,7 @@ class DataSerializer extends Serializer implements SerializesArrayOfItemsContrac
                     }
 
                     $deserializedValue = call_user_func(
-                    // @phpstan-ignore-next-line
+                        // @phpstan-ignore-next-line
                         [$typeContext->reflection->getName(), 'from'],
                         $item
                     );

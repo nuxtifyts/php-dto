@@ -14,10 +14,10 @@ class ArrayOfBackedEnums
     private static array $_enumReflections = [];
 
     /** @var list<class-string<BackedEnum>> $enums */
-    private(set) array $enums;
+    private(set) public array $enums;
 
     /** @var array<string, ReflectionEnum<BackedEnum>> */
-    private(set) array $resolvedBackedEnumReflections = [];
+    private(set) public array $resolvedBackedEnumReflections = [];
 
     /**
      * @param class-string<BackedEnum>|list<class-string<BackedEnum>> $enums

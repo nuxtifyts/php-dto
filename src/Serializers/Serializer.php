@@ -10,7 +10,9 @@ use Nuxtifyts\PhpDto\Exceptions\SerializeException;
 
 abstract class Serializer
 {
-    final public function __construct() {}
+    final public function __construct()
+    {
+    }
 
     /**
      * @return list<Type>
