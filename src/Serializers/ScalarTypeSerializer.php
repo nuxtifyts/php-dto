@@ -17,10 +17,10 @@ class ScalarTypeSerializer extends Serializer implements SerializesArrayOfItemsC
     public static function supportedTypes(): array
     {
         return [
-            Type::BOOLEAN,
-            Type::FLOAT,
             Type::INT,
-            Type::STRING
+            Type::FLOAT,
+            Type::STRING,
+            Type::BOOLEAN,
         ];
     }
 

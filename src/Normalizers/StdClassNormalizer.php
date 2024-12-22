@@ -6,9 +6,6 @@ use StdClass;
 
 final readonly class StdClassNormalizer extends Normalizer
 {
-    /**
-     * @inheritDoc
-     */
     public function normalize(): array|false
     {
         if (!$this->value instanceof StdClass) {

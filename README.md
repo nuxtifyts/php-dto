@@ -67,3 +67,5 @@ and if you are using Laravel, I highly recommend using the original package. ins
 
 - PHP 8.4 or higher
 - That's it!
+
+### Installation

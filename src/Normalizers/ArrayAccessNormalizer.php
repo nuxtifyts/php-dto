@@ -8,9 +8,6 @@ use Throwable;
 
 final readonly class ArrayAccessNormalizer extends Normalizer
 {
-    /**
-     * @inheritDoc
-     */
     public function normalize(): array|false
     {
         return $this->normalizeIterable()

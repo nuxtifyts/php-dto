@@ -4,9 +4,6 @@ namespace Nuxtifyts\PhpDto\Normalizers;
 
 final readonly class JsonStringNormalizer extends Normalizer
 {
-    /**
-     * @inheritDoc
-     */
     public function normalize(): array|false
     {
         if (!is_string($this->value)) {

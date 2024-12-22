@@ -32,10 +32,10 @@ final class ScalarTypeSerializerTest extends UnitCase
     {
         self::assertEquals(
             [
-                Type::BOOLEAN,
-                Type::FLOAT,
                 Type::INT,
-                Type::STRING
+                Type::FLOAT,
+                Type::STRING,
+                Type::BOOLEAN,
             ],
             ScalarTypeSerializer::supportedTypes()
         );
