@@ -76,6 +76,6 @@ Conclusion
 This is the most basic usage of this package, more details on how to use the package 
 can be found here:
 
-- [Supported Types](https://github.com/nuxtifyts/php-dto/blob/main/src/Docs/SupportedTypes.md)
-- [Normalizers](https://github.com/nuxtifyts/php-dto/blob/main/src/Docs/Normalizers.md)
+- [Supported Types](https://github.com/nuxtifyts/php-dto/blob/main/docs/SupportedTypes.md)
+- [Normalizers](https://github.com/nuxtifyts/php-dto/blob/main/docs/Normalizers.md)
 - [Property Attributes (TBD)](#)
