@@ -37,7 +37,10 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
-      
+
+    - name: Get directory
+      run: ls -la
+
     - name: Run PHPUnit
       run: composer run-script test
 
