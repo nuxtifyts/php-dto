@@ -5,7 +5,10 @@ namespace Nuxtifyts\PhpDto\Contexts;
 use DateTimeInterface;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
+use Nuxtifyts\PhpDto\Exceptions\UnknownTypeException;
 use Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException;
+use Nuxtifyts\PhpDto\Serializers\Serializer;
+use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
 use ReflectionClass;
 use ReflectionNamedType;
 use ReflectionProperty;
@@ -24,6 +27,9 @@ use Nuxtifyts\PhpDto\Contracts\BaseData as BaseDataContract;
 class TypeContext
 {
     use TypeContext\ResolvesArraySubContexts;
+    use HasSerializers {
+        serializers as subTypeSerializers;
+    }
 
     /** @var array<string, ReflectionEnum<BackedEnum>> */
     private static array $_enumReflections = [];
@@ -201,5 +207,13 @@ class TypeContext
             )),
             default => [],
         };
+    }
+
+    /**
+     * @return list<Serializer>
+     */
+    protected function resolveSerializers(): array
+    {
+        return $this->getSerializersFromTypeContext($this);
     }
 }

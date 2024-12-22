@@ -22,18 +22,34 @@ abstract class Serializer
      *
      * @throws SerializeException
      */
-    abstract public function serialize(
-        PropertyContext $property,
-        object $object
-    ): array;
+    public function serialize(PropertyContext $property, object $object): array
+    {
+        $value = $property->getValue($object);
+
+        return [
+            $property->propertyName => $this->serializeItem($value, $property, $object)
+        ];
+    }
 
     /**
      * @param array<string, mixed>|ArrayAccess<string, mixed> $data
      *
      * @throws DeserializeException
      */
-    abstract public function deserialize(
-        PropertyContext $property,
-        array|ArrayAccess $data
-    ): mixed;
+    public function deserialize(PropertyContext $property, array|ArrayAccess $data): mixed
+    {
+        $value = $data[$property->propertyName] ?? null;
+
+        return $this->deserializeItem($value, $property);
+    }
+
+    /**
+     * @throws SerializeException
+     */
+    abstract protected function serializeItem(mixed $item, PropertyContext $property, object $object): mixed;
+
+    /**
+     * @throws DeserializeException
+     */
+    abstract protected function deserializeItem(mixed $item, PropertyContext $property): mixed;
 }

@@ -2,19 +2,19 @@
 
 namespace Nuxtifyts\PhpDto\Serializers;
 
-use ArrayAccess;
+use Exception;
+use Nuxtifyts\PhpDto\Concerns\SerializesArrayOfItems;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
-use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Contracts\BaseData as BaseDataContract;
+use Nuxtifyts\PhpDto\Contracts\SerializesArrayOfItems as SerializesArrayOfItemsContract;
+use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
-use Exception;
 
-class DataSerializer extends Serializer
+class DataSerializer extends Serializer implements SerializesArrayOfItemsContract
 {
-    /**
-     * @inheritDoc
-     */
+    use SerializesArrayOfItems;
+
     public static function supportedTypes(): array
     {
         return [
@@ -23,30 +23,31 @@ class DataSerializer extends Serializer
     }
 
     /**
-     * @inheritDoc
+     * @return ?array<string, mixed>
+     *
+     * @throws SerializeException
      */
-    public function serialize(PropertyContext $property, object $object): array
+    protected function serializeItem(mixed $item, PropertyContext $property, object $object): ?array
     {
-        $value = $property->getValue($object);
+        return match (true) {
+            $item === null && $property->isNullable => null,
 
-        return [
-            $property->propertyName => match (true) {
-                $value instanceof BaseDataContract => $value->jsonSerialize(),
-                $value === null && $property->isNullable => null,
-                default => throw new SerializeException('Value is not an instance of BaseDataContract')
-            }
-        ];
+            $item instanceof BaseDataContract => $item->jsonSerialize(),
+
+            default => throw new SerializeException('Could not serialize array of BaseDataContract items')
+        };
     }
 
     /**
-     * @inheritDoc
+     * @throws DeserializeException
      */
-    public function deserialize(PropertyContext $property, ArrayAccess|array $data): ?BaseDataContract
+    protected function deserializeItem(mixed $item, PropertyContext $property): ?BaseDataContract
     {
-        $value = $data[$property->propertyName] ?? null;
+        if (is_array($item)) {
+            $typeContexts = $property->getFilteredTypeContexts(...self::supportedTypes())
+                ?: $property->getFilteredSubTypeContexts(...self::supportedTypes());
 
-        if (is_array($value)) {
-            foreach ($property->getFilteredTypeContexts(...self::supportedTypes()) as $typeContext) {
+            foreach ($typeContexts as $typeContext) {
                 try {
                     if (!$typeContext->reflection?->implementsInterface(BaseDataContract::class)) {
                         continue;
@@ -55,7 +56,7 @@ class DataSerializer extends Serializer
                     $deserializedValue = call_user_func(
                     // @phpstan-ignore-next-line
                         [$typeContext->reflection->getName(), 'from'],
-                        $value
+                        $item
                     );
 
                     if (!$deserializedValue instanceof BaseDataContract) {
@@ -71,8 +72,8 @@ class DataSerializer extends Serializer
             }
         }
 
-        return is_null($value) && $property->isNullable
+        return is_null($item) && $property->isNullable
             ? null
-            : throw new DeserializeException('Value is not an instance of BaseDataContract');
+            : throw new DeserializeException('Could not deserialize BaseDataContract');
     }
 }

@@ -16,6 +16,8 @@ use Nuxtifyts\PhpDto\Tests\Dummies\InvitationData;
 use Nuxtifyts\PhpDto\Tests\Dummies\RefundableItemData;
 use Nuxtifyts\PhpDto\Tests\Dummies\UnionMultipleComplexData;
 use Nuxtifyts\PhpDto\Tests\Dummies\UnionMultipleTypeData;
+use Nuxtifyts\PhpDto\Tests\Dummies\UserData;
+use Nuxtifyts\PhpDto\Tests\Dummies\UserGroupData;
 use Nuxtifyts\PhpDto\Tests\Dummies\UserLocationData;
 use Nuxtifyts\PhpDto\Tests\Dummies\YesOrNoData;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
@@ -42,6 +44,7 @@ use Throwable;
 #[UsesClass(CountryData::class)]
 #[UsesClass(UnionMultipleComplexData::class)]
 #[UsesClass(UserLocationData::class)]
+#[UsesClass(UserGroupData::class)]
 final class BaseDataTest extends UnitCase
 {
     /**
@@ -430,6 +433,40 @@ final class BaseDataTest extends UnitCase
                         ]
                     ]
                 ]
+            ],
+            'User group data' => [
+                'dtoClass' => UserGroupData::class,
+                'data' => $data = [
+                    'name' => 'Group name',
+                    'users' => [
+                        [
+                            'firstName' => 'John',
+                            'lastName' => 'Doe',
+                        ]
+                    ]
+                ],
+                'expectedProperties' => [
+                    'name' => 'Group name',
+                    'users' => [
+                        new UserData('John', 'Doe')
+                    ]
+                ],
+                'expectedSerializedData' => $data
+            ],
+            'User group data 2' => [
+                'dtoClass' => UserGroupData::class,
+                'data' => $data = [
+                    'name' => 'Group name 2',
+                    'users' => [
+                        1,
+                        2
+                    ]
+                ],
+                'expectedProperties' => [
+                    'name' => 'Group name 2',
+                    'users' => [1, 2]
+                ],
+                'expectedSerializedData' => $data
             ]
         ];
     }

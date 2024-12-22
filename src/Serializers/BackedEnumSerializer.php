@@ -2,19 +2,19 @@
 
 namespace Nuxtifyts\PhpDto\Serializers;
 
-use ArrayAccess;
-use Nuxtifyts\PhpDto\Contexts\PropertyContext;
-use Nuxtifyts\PhpDto\Enums\Property\Type;
 use BackedEnum;
+use Exception;
+use Nuxtifyts\PhpDto\Contexts\PropertyContext;
+use Nuxtifyts\PhpDto\Contracts\SerializesArrayOfItems as SerializesArrayOfItemsContract;
+use Nuxtifyts\PhpDto\Concerns\SerializesArrayOfItems;
+use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
-use Exception;
 
-class BackedEnumSerializer extends Serializer
+class BackedEnumSerializer extends Serializer implements SerializesArrayOfItemsContract
 {
-    /**
-     * @inheritDoc
-     */
+    use SerializesArrayOfItems;
+
     public static function supportedTypes(): array
     {
         return [
@@ -23,58 +23,57 @@ class BackedEnumSerializer extends Serializer
     }
 
     /**
-     * @inheritDoc
+     * @throws SerializeException
      */
-    public function serialize(PropertyContext $property, object $object): array
+    protected function serializeItem(mixed $item, PropertyContext $property, object $object): string|int|null
     {
-        $value = $property->getValue($object);
-
-        return [
-            $property->propertyName => match (true) {
-                $value instanceof BackedEnum => $value->value,
-                $value === null && $property->isNullable => null,
-                default => throw new SerializeException('Value is not a BackedEnum')
-            }
-        ];
+        return match(true) {
+            is_null($item) && $property->isNullable => null,
+            $item instanceof BackedEnum => $item->value,
+            default => throw new SerializeException('Could not serialize array of BackedEnum items')
+        };
     }
 
     /**
-     * @inheritDoc
+     * @throws DeserializeException
      */
-    public function deserialize(PropertyContext $property, ArrayAccess|array $data): ?BackedEnum
+    protected function deserializeItem(mixed $item, PropertyContext $property): ?BackedEnum
     {
-        $value = $data[$property->propertyName] ?? null;
+        if (is_null($item)) {
+            return $property->isNullable
+                ? null
+                : throw new DeserializeException('Property is not nullable');
+        }
 
-        if (!is_string($value) && !is_integer($value) && !is_null($value)) {
+        if (!is_string($item) && !is_integer($item)) {
             throw new DeserializeException('Value is not a string or integer');
         }
 
-        if ($value !== null) {
-            foreach ($property->getFilteredTypeContexts(...self::supportedTypes()) as $typeContext) {
-                try {
-                    if (!$typeContext->reflection?->implementsInterface(BackedEnum::class)) {
-                        continue;
-                    }
+        $typeContexts = $property->getFilteredTypeContexts(...self::supportedTypes())
+            ?: $property->getFilteredSubTypeContexts(...self::supportedTypes());
 
-                    $enumValue = call_user_func(
-                    // @phpstan-ignore-next-line
-                        [$typeContext->reflection->getName(), 'tryFrom'],
-                        $value
-                    );
-
-                    if ($enumValue instanceof BackedEnum) {
-                        return $enumValue;
-                    }
-                    // @codeCoverageIgnoreStart
-                } catch (Exception) {
+        foreach ($typeContexts as $typeContext) {
+            try {
+                if (!$typeContext->reflection?->implementsInterface(BackedEnum::class)) {
                     continue;
                 }
-                // @codeCoverageIgnoreEnd
+
+                $enumValue = call_user_func(
+                // @phpstan-ignore-next-line
+                    [$typeContext->reflection->getName(), 'tryFrom'],
+                    $item
+                );
+
+                if ($enumValue instanceof BackedEnum) {
+                    return $enumValue;
+                }
+                // @codeCoverageIgnoreStart
+            } catch (Exception) {
+                continue;
             }
+            // @codeCoverageIgnoreEnd
         }
 
-        return $property->isNullable
-            ? null
-            : throw new DeserializeException('Could not deserialize BackedEnum');
+        throw new DeserializeException('Could not deserialize BackedEnum');
     }
 }

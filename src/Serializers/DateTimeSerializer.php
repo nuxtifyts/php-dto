@@ -3,19 +3,20 @@
 namespace Nuxtifyts\PhpDto\Serializers;
 
 use ArrayAccess;
-use Nuxtifyts\PhpDto\Contexts\PropertyContext;
-use Nuxtifyts\PhpDto\Enums\Property\Type;
+use DateTimeImmutable;
 use DateTimeInterface;
+use Exception;
+use Nuxtifyts\PhpDto\Contexts\PropertyContext;
+use Nuxtifyts\PhpDto\Contracts\SerializesArrayOfItems as SerializesArrayOfItemsContract;
+use Nuxtifyts\PhpDto\Concerns\SerializesArrayOfItems;
+use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
-use Exception;
-use DateTimeImmutable;
 
-class DateTimeSerializer extends Serializer
+class DateTimeSerializer extends Serializer implements SerializesArrayOfItemsContract
 {
-    /**
-     * @inheritDoc
-     */
+    use SerializesArrayOfItems;
+
     public static function supportedTypes(): array
     {
         return [
@@ -24,41 +25,39 @@ class DateTimeSerializer extends Serializer
     }
 
     /**
-     * @inheritDoc
+     * @throws SerializeException
      */
-    public function serialize(PropertyContext $property, object $object): array
+    protected function serializeItem(mixed $item, PropertyContext $property, object $object): ?string
     {
-        $value = $property->getValue($object);
+        return match (true) {
+            $item === null && $property->isNullable => null,
 
-        // TODO: move nullable value outside because it's repetitive
-        return [
-            $property->propertyName => match (true) {
-                $value instanceof DateTimeInterface => $value->format(DateTimeInterface::ATOM),
-                $value === null && $property->isNullable => null,
-                default => throw new SerializeException('Value is not an instance of DateTimeInterface')
-            }
-        ];
+            $item instanceof DateTimeInterface => $item->format(DateTimeInterface::ATOM),
+
+            default => throw new SerializeException('Value is not an instance of DateTimeInterface')
+        };
     }
 
     /**
-     * @inheritDoc
+     * @throws DeserializeException
      */
-    public function deserialize(PropertyContext $property, ArrayAccess|array $data): ?DateTimeInterface
+    protected function deserializeItem(mixed $item, PropertyContext $property): ?DateTimeInterface
     {
-        $value = $data[$property->propertyName] ?? null;
+        if (is_string($item)) {
+            $typeContexts = $property->getFilteredTypeContexts(...self::supportedTypes())
+                ?: $property->getFilteredSubTypeContexts(...self::supportedTypes());
 
-        if (is_string($value)) {
-            foreach ($property->getFilteredTypeContexts(...self::supportedTypes()) as $typeContext) {
+            foreach ($typeContexts as $typeContext) {
                 try {
                     if (!$typeContext->reflection?->implementsInterface(DateTimeInterface::class)) {
                         continue;
                     }
 
                     if ($typeContext->reflection->isInterface()) {
-                        return new DateTimeImmutable($value);
+                        return new DateTimeImmutable($item);
                     }
 
-                    $deserializedValue = $typeContext->reflection->newInstance($value);
+                    $deserializedValue = $typeContext->reflection->newInstance($item);
 
                     if (!$deserializedValue instanceof DateTimeInterface) {
                         throw new Exception('Not an instance of DateTimeInterface');
@@ -73,7 +72,7 @@ class DateTimeSerializer extends Serializer
             }
         }
 
-        return is_null($value) && $property->isNullable
+        return is_null($item) && $property->isNullable
             ? null
             : throw new DeserializeException('Could not deserialize DateTimeInterface');
     }
