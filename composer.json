@@ -25,5 +25,8 @@
         "psr-4": {
             "Nuxtifyts\\PhpDto\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "XDEBUG_MODE=coverage vendor/bin/phpunit --configuration phpunit.xml"
     }
 }

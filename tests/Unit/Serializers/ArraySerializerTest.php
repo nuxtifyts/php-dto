@@ -3,12 +3,10 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\Serializers;
 
 use DateTimeImmutable;
-use Nuxtifyts\PhpDto\Concerns\SerializesArrayOfItems;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Serializers\ArraySerializer;
-use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
 use Nuxtifyts\PhpDto\Tests\Dummies\ArrayOfMixedAttributesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
 use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
@@ -22,8 +20,7 @@ use ReflectionClass;
 use Throwable;
 
 #[CoversClass(ArraySerializer::class)]
-#[CoversClass(SerializesArrayOfItems::class)]
-#[CoversClass(HasSerializers::class)]
+#[CoversClass(PropertyContext::class)]
 #[CoversClass(TypeContext::class)]
 #[UsesClass(ArrayOfAttributesData::class)]
 #[UsesClass(ArrayOfMixedAttributesData::class)]

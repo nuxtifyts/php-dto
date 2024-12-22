@@ -3,11 +3,9 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\Concerns;
 
 use DateTimeImmutable;
-use Nuxtifyts\PhpDto\Concerns\BaseData;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
-use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
 use Nuxtifyts\PhpDto\Tests\Dummies\AddressData;
 use Nuxtifyts\PhpDto\Tests\Dummies\CoordinatesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\CountryData;
@@ -29,10 +27,9 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
 use Throwable;
 
-#[CoversClass(BaseData::class)]
+#[CoversClass(Data::class)]
 #[CoversClass(DeserializeException::class)]
 #[CoversClass(SerializeException::class)]
-#[CoversClass(HasSerializers::class)]
 #[UsesClass(PersonData::class)]
 #[UsesClass(UnionTypedData::class)]
 #[UsesClass(YesOrNoData::class)]

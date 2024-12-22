@@ -1,3 +1,5 @@
 vendor/
 .idea/
-Main.php
+coverage.xml
+coverage-html/
+.phpunit/

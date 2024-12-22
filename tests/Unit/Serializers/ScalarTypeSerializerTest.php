@@ -11,7 +11,6 @@ use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
 use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
-use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -21,7 +20,6 @@ use Throwable;
 
 #[CoversClass(ScalarTypeSerializer::class)]
 #[CoversClass(Serializer::class)]
-#[CoversClass(HasSerializers::class)]
 #[UsesClass(PropertyContext::class)]
 #[UsesClass(PersonData::class)]
 #[UsesClass(CoordinatesData::class)]
