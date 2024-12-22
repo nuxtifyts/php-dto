@@ -22,7 +22,7 @@ final class ReadmeExampleTest extends UnitCase
      * @throws Throwable
      */
     #[Test]
-    #[DataProvider('data_provider')]
+    #[DataProvider('basic_examples_data_provider')]
     public function will_perform_serialize_and_deserialize_on_data_transfer_objects_from_docs(
         string $dtoClass,
         array $data,
