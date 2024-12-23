@@ -145,9 +145,7 @@ Array of scalar type
 To declare an array of scalar type, you can use the `ArrayOfScalarType` attribute:
 
 ```php
-use Nuxtifyts\PhpDto\Data
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfScalarTypes;
-use Nuxtifyts\PhpDto\Enums\Property\Type;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfScalarTypes;use Nuxtifyts\PhpDto\Data;use Nuxtifyts\PhpDto\Enums\Property\Type;
 
 final readonly class Person extends Data
 {
@@ -216,8 +214,7 @@ Array of backed enums
 Using `ArrayOfBackedEnum` attribute, you can declare an array of `BackedEnum` type:
 
 ```php
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfBackedEnums;
-use Nuxtifyts\PhpDto\Data;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfBackedEnums;use Nuxtifyts\PhpDto\Data;
 
 final readonly class User extends Data
 {
@@ -238,8 +235,7 @@ Array of DateTime
 To declare an array of `DateTime` type, you can use the `ArrayOfDateTimes` attribute:
 
 ```php
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfDateTimes;
-use DateTimeImmutable;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfDateTimes;
 
 final readonly class User extends Data
 {
@@ -260,8 +256,7 @@ Array of Data
 To declare an array of `Data` type, you can use the `ArrayOfData` attribute:
 
 ```php
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfData;
-use Nuxtifyts\PhpDto\Data;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfData;use Nuxtifyts\PhpDto\Data;
 
 final readonly class UserGroup extends Data
 {
@@ -277,9 +272,9 @@ final readonly class UserGroup extends Data
 ```
 
 It is possible to use multiple types of data objects in the array:
+
 ```php
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfData;
-use Nuxtifyts\PhpDto\Data;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfData;use Nuxtifyts\PhpDto\Data;
 
 final readonly class UserGroup extends Data
 {
@@ -318,8 +313,7 @@ Array keys
 Array keys are kept where hydrating the data object, or when serializing:
 
 ```php
-use Nuxtifyts\PhpDto\Data;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfData;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfData;use Nuxtifyts\PhpDto\Data;
 
 final readonly class UserGroup extends Data
 {
@@ -404,10 +398,7 @@ final readonly class Person extends Data
 The exact same rules apply for array as well:
 
 ```php
-use Nuxtifyts\PhpDto\Data;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfScalarTypes;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfData;
-use Nuxtifyts\PhpDto\Enums\Property\Type;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfData;use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfScalarTypes;use Nuxtifyts\PhpDto\Data;use Nuxtifyts\PhpDto\Enums\Property\Type;
 
 final readonly class UserGroup extends Data
 {

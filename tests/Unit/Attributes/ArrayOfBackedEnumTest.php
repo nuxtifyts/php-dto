@@ -2,13 +2,13 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Unit\Attributes;
 
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfBackedEnums;
+use InvalidArgumentException;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfBackedEnums;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoEnum;
 use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
-use InvalidArgumentException;
 
 #[CoversClass(ArrayOfBackedEnums::class)]
 final class ArrayOfBackedEnumTest extends UnitCase

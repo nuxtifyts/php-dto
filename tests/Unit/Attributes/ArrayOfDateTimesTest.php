@@ -2,12 +2,12 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Unit\Attributes;
 
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfDateTimes;
+use InvalidArgumentException;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfDateTimes;
 use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
-use InvalidArgumentException;
 
 #[CoversClass(ArrayOfDateTimes::class)]
 final class ArrayOfDateTimesTest extends UnitCase

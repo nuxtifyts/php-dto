@@ -2,15 +2,18 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Unit\Contexts;
 
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfBackedEnums;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfData;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfDateTimes;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfScalarTypes;
+use DateTime;
+use DateTimeImmutable;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfBackedEnums;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfData;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfDateTimes;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfScalarTypes;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Tests\Dummies\ArrayOfAttributesData;
+use Nuxtifyts\PhpDto\Tests\Dummies\Enums\ColorsBackedEnum;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
 use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
 use Nuxtifyts\PhpDto\Tests\Dummies\UserData;
@@ -19,11 +22,8 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
-use Nuxtifyts\PhpDto\Tests\Dummies\Enums\ColorsBackedEnum;
-use DateTime;
-use DateTimeImmutable;
-use ReflectionProperty;
 use ReflectionClass;
+use ReflectionProperty;
 use Throwable;
 
 #[CoversClass(PropertyContext::class)]

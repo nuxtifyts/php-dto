@@ -2,8 +2,8 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Dummies;
 
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfBackedEnums;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfScalarTypes;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfBackedEnums;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfScalarTypes;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;

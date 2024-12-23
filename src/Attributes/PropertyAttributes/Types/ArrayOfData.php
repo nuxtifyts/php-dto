@@ -1,24 +1,24 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Attributes\PropertyAttributes;
+namespace Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types;
 
 use Attribute;
-use ReflectionClass;
-use Nuxtifyts\PhpDto\Data;
-use InvalidArgumentException;
 use Exception;
+use InvalidArgumentException;
 use Nuxtifyts\PhpDto\Contracts\BaseData as BaseDataContract;
+use Nuxtifyts\PhpDto\Data;
+use ReflectionClass;
 
 #[Attribute(Attribute::TARGET_PROPERTY | Attribute::IS_REPEATABLE)]
 class ArrayOfData
 {
-    /** @var array<string, ReflectionClass<Data>> */
+    /** @var ReflectionClass */
     private static array $_dataReflections = [];
 
     /** @var list<class-string<Data>> */
     private(set) public array $dataClasses;
 
-    /** @var array<string, ReflectionClass<Data>> */
+    /** @var ReflectionClass */
     private(set) public array $resolvedDataReflections = [];
 
     /**

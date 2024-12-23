@@ -1,6 +1,6 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Attributes\PropertyAttributes;
+namespace Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types;
 
 use Attribute;
 use BackedEnum;
@@ -10,13 +10,13 @@ use ReflectionEnum;
 #[Attribute(Attribute::TARGET_PROPERTY | Attribute::IS_REPEATABLE)]
 class ArrayOfBackedEnums
 {
-    /** @var array<string, ReflectionEnum<BackedEnum>> */
+    /** @var ReflectionEnum */
     private static array $_enumReflections = [];
 
     /** @var list<class-string<BackedEnum>> $enums */
     private(set) public array $enums;
 
-    /** @var array<string, ReflectionEnum<BackedEnum>> */
+    /** @var ReflectionEnum */
     private(set) public array $resolvedBackedEnumReflections = [];
 
     /**

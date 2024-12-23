@@ -3,7 +3,7 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\Serializers;
 
 use DateTimeImmutable;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfScalarTypes;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfScalarTypes;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Data;
@@ -14,6 +14,7 @@ use Nuxtifyts\PhpDto\Serializers\DataSerializer;
 use Nuxtifyts\PhpDto\Serializers\DateTimeSerializer;
 use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
+use Nuxtifyts\PhpDto\Tests\Dummies\ArrayOfAttributesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\ArrayOfMixedAttributesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
 use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
@@ -21,7 +22,6 @@ use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use Nuxtifyts\PhpDto\Tests\Dummies\ArrayOfAttributesData;
 use PHPUnit\Framework\Attributes\UsesClass;
 use ReflectionClass;
 use Throwable;

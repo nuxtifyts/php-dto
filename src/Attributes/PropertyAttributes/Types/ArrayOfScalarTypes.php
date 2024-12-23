@@ -1,10 +1,10 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Attributes\PropertyAttributes;
+namespace Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types;
 
 use Attribute;
-use Nuxtifyts\PhpDto\Enums\Property\Type;
 use InvalidArgumentException;
+use Nuxtifyts\PhpDto\Enums\Property\Type;
 
 #[Attribute(Attribute::TARGET_PROPERTY | Attribute::IS_REPEATABLE)]
 class ArrayOfScalarTypes

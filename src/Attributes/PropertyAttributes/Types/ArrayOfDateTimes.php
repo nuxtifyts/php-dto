@@ -1,25 +1,25 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Attributes\PropertyAttributes;
+namespace Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types;
 
 use Attribute;
 use DateTime;
 use DateTimeImmutable;
-use ReflectionClass;
-use InvalidArgumentException;
 use DateTimeInterface;
 use Exception;
+use InvalidArgumentException;
+use ReflectionClass;
 
 #[Attribute(Attribute::TARGET_PROPERTY | Attribute::IS_REPEATABLE)]
 class ArrayOfDateTimes
 {
-    /** @var array<string, ReflectionClass<DateTime|DateTimeImmutable>> */
+    /** @var ReflectionClass */
     private static array $_dateTimeReflections = [];
 
     /** @var list<class-string<DateTime|DateTimeImmutable>> */
     private(set) public array $dateTimes;
 
-    /** @var array<string, ReflectionClass<DateTime|DateTimeImmutable>> */
+    /** @var ReflectionClass */
     private(set) public array $resolvedDateTimeReflections = [];
 
     /**

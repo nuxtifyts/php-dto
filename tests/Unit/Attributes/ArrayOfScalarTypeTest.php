@@ -2,12 +2,12 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Unit\Attributes;
 
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfScalarTypes;
+use InvalidArgumentException;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfScalarTypes;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
-use InvalidArgumentException;
 
 #[CoversClass(ArrayOfScalarTypes::class)]
 final class ArrayOfScalarTypeTest extends UnitCase

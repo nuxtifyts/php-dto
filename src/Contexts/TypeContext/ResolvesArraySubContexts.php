@@ -3,12 +3,12 @@
 namespace Nuxtifyts\PhpDto\Contexts\TypeContext;
 
 use InvalidArgumentException;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfBackedEnums;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfData;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfDateTimes;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfBackedEnums;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfData;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfDateTimes;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfScalarTypes;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\ArrayOfScalarTypes;
 use ReflectionProperty;
 
 /**
