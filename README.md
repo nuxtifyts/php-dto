@@ -53,15 +53,17 @@ $userData = json_encode($user);
 
 ```
 
+Check out the [Quick start](https://github.com/nuxtifyts/php-dto/blob/main/docs/Quickstart.md) guide for more information.
+
 ### Note
 
 This package was inspired from the [spatie/data-transfer-object](https://github.com/spatie/laravel-data) package.
 The main thing that I tried to focus on when creating this package is to make it outside of Laravel ecosystem, 
 meaning: no dependency on [illuminate/support](https://github.com/illuminate/support).
 
-**In no way** I am trying to take compare this package with the original one,
+**In no way** I am trying to compare this package with the original one,
 Clearly, the original package is more advanced and has more features than this one,
-and if you are using Laravel, I highly recommend using the original package. instead of this one.
+and if you are using Laravel, I highly recommend using the original package instead of this one.
 
 ### Requirements
 
