@@ -47,9 +47,9 @@ $user = new UserData('John', 'Doe');
 
 $userData = $user->toArray();
 
-// Or you can use the json_encode function, as the DTO implements the JsonSerializable interface
+// Or transform to a JSON string
 
-$userData = json_encode($user);
+$userData = $user->toJson();
 
 ```
 
