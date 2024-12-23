@@ -8,8 +8,12 @@ use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
-use Nuxtifyts\PhpDto\Exceptions\SerializeException;
 use Nuxtifyts\PhpDto\Serializers\ArraySerializer;
+use Nuxtifyts\PhpDto\Serializers\BackedEnumSerializer;
+use Nuxtifyts\PhpDto\Serializers\DataSerializer;
+use Nuxtifyts\PhpDto\Serializers\DateTimeSerializer;
+use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
+use Nuxtifyts\PhpDto\Serializers\Serializer;
 use Nuxtifyts\PhpDto\Tests\Dummies\ArrayOfMixedAttributesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
 use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
@@ -23,6 +27,11 @@ use ReflectionClass;
 use Throwable;
 
 #[CoversClass(ArraySerializer::class)]
+#[CoversClass(ScalarTypeSerializer::class)]
+#[CoversClass(BackedEnumSerializer::class)]
+#[CoversClass(DateTimeSerializer::class)]
+#[CoversClass(DataSerializer::class)]
+#[CoversClass(Serializer::class)]
 #[CoversClass(PropertyContext::class)]
 #[CoversClass(TypeContext::class)]
 #[UsesClass(ArrayOfAttributesData::class)]
