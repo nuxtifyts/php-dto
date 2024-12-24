@@ -25,7 +25,7 @@ final class ArrayOfDataTest extends UnitCase
     {
         self::expectException(InvalidArgumentException::class);
 
-        // @phpstan-ignore-next-line INTENTIONALLY PASSING A STRING TO TEST EXCEPTION
+        // @phpstan-ignore-next-line
         new ArrayOfData('NonExistentClass');
     }
 
@@ -34,6 +34,7 @@ final class ArrayOfDataTest extends UnitCase
     {
         self::expectException(InvalidArgumentException::class);
 
+        // @phpstan-ignore-next-line
         new ArrayOfData([YesNoEnum::class]);
     }
 }

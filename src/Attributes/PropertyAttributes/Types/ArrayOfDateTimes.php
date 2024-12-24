@@ -13,14 +13,14 @@ use ReflectionClass;
 #[Attribute(Attribute::TARGET_PROPERTY | Attribute::IS_REPEATABLE)]
 class ArrayOfDateTimes
 {
-    /** @var ReflectionClass */
+    /** @var array<string, ReflectionClass<DateTime|DateTimeImmutable>> */
     private static array $_dateTimeReflections = [];
 
     /** @var list<class-string<DateTime|DateTimeImmutable>> */
-    private(set) public array $dateTimes;
+    private(set) array $dateTimes;
 
-    /** @var ReflectionClass */
-    private(set) public array $resolvedDateTimeReflections = [];
+    /** @var array<string, ReflectionClass<DateTime|DateTimeImmutable>> */
+    private(set) array $resolvedDateTimeReflections = [];
 
     /**
      * @param class-string<DateTime|DateTimeImmutable>|list<class-string<DateTime|DateTimeImmutable>> $dateTimes

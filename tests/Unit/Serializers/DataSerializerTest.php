@@ -19,6 +19,7 @@ use Throwable;
 
 #[CoversClass(Serializer::class)]
 #[CoversClass(DataSerializer::class)]
+#[CoversClass(PropertyContext::class)]
 #[UsesClass(PropertyContext::class)]
 #[UsesClass(AddressData::class)]
 #[UsesClass(CountryData::class)]

@@ -20,6 +20,7 @@ use Throwable;
 
 #[CoversClass(ScalarTypeSerializer::class)]
 #[CoversClass(Serializer::class)]
+#[CoversClass(PropertyContext::class)]
 #[UsesClass(PropertyContext::class)]
 #[UsesClass(PersonData::class)]
 #[UsesClass(CoordinatesData::class)]

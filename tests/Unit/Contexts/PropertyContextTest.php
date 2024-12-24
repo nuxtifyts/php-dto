@@ -2,11 +2,14 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Unit\Contexts;
 
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Computed;
+use Nuxtifyts\PhpDto\Contexts\ClassContext;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
+use Nuxtifyts\PhpDto\Tests\Dummies\ComputedPropertiesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
 use Nuxtifyts\PhpDto\Tests\Dummies\UnionMultipleTypeData;
 use Nuxtifyts\PhpDto\Tests\Dummies\CoordinatesData;
@@ -24,6 +27,8 @@ use Throwable;
 
 #[CoversClass(PropertyContext::class)]
 #[CoversClass(TypeContext::class)]
+#[CoversClass(Computed::class)]
+#[UsesClass(ComputedPropertiesData::class)]
 #[UsesClass(ScalarTypeSerializer::class)]
 #[UsesClass(PersonData::class)]
 #[UsesClass(Data::class)]
@@ -115,6 +120,24 @@ final class PropertyContextTest extends UnitCase
             ],
             $propertyContext->types
         );
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[Test]
+    public function resolves_computed_properties(): void
+    {
+        $computedData = new ComputedPropertiesData(a: 'a', b: 'b');
+
+        $aReflectionProperty = new ReflectionProperty(ComputedPropertiesData::class, 'a');
+        $cReflectionProperty = new ReflectionProperty(ComputedPropertiesData::class, 'c');
+
+        $aPropertyContext = PropertyContext::getInstance($aReflectionProperty);
+        $cPropertyContext = PropertyContext::getInstance($cReflectionProperty);
+
+        self::assertTrue($cPropertyContext->isComputed);
+        self::assertFalse($aPropertyContext->isComputed);
     }
 
     /**
