@@ -2,7 +2,7 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Unit\Contexts;
 
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Computed;
+use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 use Nuxtifyts\PhpDto\Contexts\ClassContext;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;

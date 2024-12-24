@@ -2,7 +2,7 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Unit\Documentation;
 
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Computed;
+use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use PHPUnit\Framework\Attributes\Test;

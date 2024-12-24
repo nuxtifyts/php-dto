@@ -2,7 +2,7 @@
 
 namespace Nuxtifyts\PhpDto\Contexts;
 
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Computed;
+use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;

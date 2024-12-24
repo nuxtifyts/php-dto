@@ -3,7 +3,7 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\Attributes;
 
 use InvalidArgumentException;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfDateTimes;
+use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfDateTimes;
 use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use PHPUnit\Framework\Attributes\CoversClass;

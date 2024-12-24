@@ -2,7 +2,7 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Dummies;
 
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Computed;
+use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 use Nuxtifyts\PhpDto\Data;
 
 final readonly class ComputedPropertiesData extends Data

@@ -3,7 +3,7 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\Attributes;
 
 use InvalidArgumentException;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfScalarTypes;
+use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfScalarTypes;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use PHPUnit\Framework\Attributes\CoversClass;

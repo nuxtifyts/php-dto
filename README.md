@@ -13,7 +13,7 @@ Then you can define the properties of the class and their types.
 
 ```php
 use Nuxtifyts\PhpDto\Data;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Computed;
+use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 
 final readonly class UserData extends Data
 {

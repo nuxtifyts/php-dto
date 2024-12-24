@@ -1,6 +1,6 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types;
+namespace Nuxtifyts\PhpDto\Attributes\Property\Types;
 
 use Attribute;
 use Exception;

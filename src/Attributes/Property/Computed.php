@@ -1,6 +1,6 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Attributes\PropertyAttributes;
+namespace Nuxtifyts\PhpDto\Attributes\Property;
 
 use Attribute;
 

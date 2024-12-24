@@ -2,8 +2,8 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Dummies;
 
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfData;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfScalarTypes;
+use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfData;
+use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfScalarTypes;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 

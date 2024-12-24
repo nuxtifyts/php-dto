@@ -4,10 +4,10 @@ namespace Nuxtifyts\PhpDto\Tests\Unit\Contexts;
 
 use DateTime;
 use DateTimeImmutable;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfBackedEnums;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfData;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfDateTimes;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfScalarTypes;
+use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfBackedEnums;
+use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfData;
+use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfDateTimes;
+use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfScalarTypes;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Data;

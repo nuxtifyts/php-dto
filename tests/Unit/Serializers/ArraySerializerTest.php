@@ -3,7 +3,7 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\Serializers;
 
 use DateTimeImmutable;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfScalarTypes;
+use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfScalarTypes;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Data;

@@ -12,7 +12,7 @@ This can be done using the `Computed` attribute.
 
 ```php
 use Nuxtifyts\PhpDto\Data;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Computed;
+use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 
 final readonly class Person extends Data
 {

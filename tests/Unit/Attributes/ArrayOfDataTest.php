@@ -3,7 +3,7 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\Attributes;
 
 use InvalidArgumentException;
-use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Types\ArrayOfData;
+use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfData;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoEnum;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use PHPUnit\Framework\Attributes\CoversClass;
