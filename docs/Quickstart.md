@@ -78,4 +78,4 @@ can be found here:
 
 - [Supported Types](https://github.com/nuxtifyts/php-dto/blob/main/docs/SupportedTypes.md)
 - [Normalizers](https://github.com/nuxtifyts/php-dto/blob/main/docs/Normalizers.md)
-- [Property Attributes (TBD)](#)
+- [Property Attributes](https://github.com/nuxtifyts/php-dto/blob/main/docs/PropertyAttributes.md)
