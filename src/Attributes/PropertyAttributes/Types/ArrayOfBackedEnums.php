@@ -10,14 +10,14 @@ use ReflectionEnum;
 #[Attribute(Attribute::TARGET_PROPERTY | Attribute::IS_REPEATABLE)]
 class ArrayOfBackedEnums
 {
-    /** @var ReflectionEnum */
+    /** @var array<string, ReflectionEnum<BackedEnum>> */
     private static array $_enumReflections = [];
 
     /** @var list<class-string<BackedEnum>> $enums */
-    private(set) public array $enums;
+    private(set) array $enums;
 
-    /** @var ReflectionEnum */
-    private(set) public array $resolvedBackedEnumReflections = [];
+    /** @var array<string, ReflectionEnum<BackedEnum>> */
+    private(set) array $resolvedBackedEnumReflections = [];
 
     /**
      * @param class-string<BackedEnum>|list<class-string<BackedEnum>> $enums

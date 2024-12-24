@@ -12,14 +12,14 @@ use ReflectionClass;
 #[Attribute(Attribute::TARGET_PROPERTY | Attribute::IS_REPEATABLE)]
 class ArrayOfData
 {
-    /** @var ReflectionClass */
+    /** @var array<string, ReflectionClass<Data>> */
     private static array $_dataReflections = [];
 
     /** @var list<class-string<Data>> */
-    private(set) public array $dataClasses;
+    private(set) array $dataClasses;
 
-    /** @var ReflectionClass */
-    private(set) public array $resolvedDataReflections = [];
+    /** @var array<string, ReflectionClass<Data>> */
+    private(set) array $resolvedDataReflections = [];
 
     /**
      * @param class-string<Data>|list<class-string<Data>> $dataClasses

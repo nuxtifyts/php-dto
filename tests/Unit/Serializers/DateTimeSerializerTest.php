@@ -20,6 +20,7 @@ use Throwable;
 
 #[CoversClass(Serializer::class)]
 #[CoversClass(DateTimeSerializer::class)]
+#[CoversClass(PropertyContext::class)]
 #[UsesClass(PropertyContext::class)]
 #[UsesClass(YesNoBackedEnum::class)]
 #[UsesClass(UserBirthdateData::class)]

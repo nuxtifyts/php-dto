@@ -1,4 +1,4 @@
-name: PHP Composer CI Tests
+name: PHP Composer PHPStan Tests
 
 on:
   push:
@@ -11,7 +11,6 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -21,10 +20,6 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: 8.4
-        coverage: xdebug
-
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
 
     - name: Cache Composer packages
       id: composer-cache
@@ -38,11 +33,5 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-    - name: Run PHPUnit
-      run: composer run-script ci-test
-
-    - name: Upload coverage report
-      uses: actions/upload-artifact@v3
-      with:
-        name: coverage-report
-        path: coverage.xml
+    - name: Run PHPStan
+      run: composer run-script phpstan

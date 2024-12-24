@@ -10,7 +10,7 @@ use Nuxtifyts\PhpDto\Enums\Property\Type;
 class ArrayOfScalarTypes
 {
     /** @var list<Type> $types */
-    private(set) public array $types;
+    private(set) array $types;
 
     /**
      * @param Type|list<Type> $types

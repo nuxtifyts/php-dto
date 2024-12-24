@@ -20,6 +20,7 @@ use Throwable;
 
 #[CoversClass(Serializer::class)]
 #[CoversClass(BackedEnumSerializer::class)]
+#[CoversClass(PropertyContext::class)]
 #[UsesClass(PropertyContext::class)]
 #[UsesClass(YesOrNoData::class)]
 #[UsesClass(YesNoBackedEnum::class)]

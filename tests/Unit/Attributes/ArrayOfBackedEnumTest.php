@@ -26,7 +26,7 @@ final class ArrayOfBackedEnumTest extends UnitCase
     {
         self::expectException(InvalidArgumentException::class);
 
-        // @phpstan-ignore-next-line INTENTIONALLY PASSING A STRING TO TEST EXCEPTION
+        // @phpstan-ignore-next-line
         new ArrayOfBackedEnums(PersonData::class);
     }
 
@@ -35,7 +35,7 @@ final class ArrayOfBackedEnumTest extends UnitCase
     {
         self::expectException(InvalidArgumentException::class);
 
-        // @phpstan-ignore-next-line INTENTIONALLY PASSING A STRING TO TEST EXCEPTION
+        // @phpstan-ignore-next-line
         new ArrayOfBackedEnums('NonExistentClass');
     }
 
@@ -44,6 +44,7 @@ final class ArrayOfBackedEnumTest extends UnitCase
     {
         self::expectException(InvalidArgumentException::class);
 
+        // @phpstan-ignore-next-line
         new ArrayOfBackedEnums([YesNoEnum::class]);
     }
 }

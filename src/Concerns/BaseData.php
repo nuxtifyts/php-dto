@@ -29,41 +29,64 @@ trait BaseData
 
             /** @var ClassContext<static> $context */
             $context = ClassContext::getInstance(new ReflectionClass(static::class));
-            $instance = $context->newInstanceWithoutConstructor();
 
-            foreach ($context->properties as $propertyContext) {
-                $serializers = $propertyContext->serializers();
-
-                if (!$serializers) {
-                    throw new DeserializeException(
-                        code: DeserializeException::NO_SERIALIZERS_ERROR_CODE
-                    );
-                }
-
-                $propertyName = $propertyContext->propertyName;
-                $propertyDeserialized = false;
-                foreach ($serializers as $serializer) {
-                    try {
-                        $propertyValue = $serializer->deserialize($propertyContext, $value);
-
-                        $instance->{$propertyName} = $propertyValue;
-
-                        $propertyDeserialized = true;
-
-                        break;
-                    } catch (DeserializeException) {
-                    }
-                }
-
-                if (!$propertyDeserialized) {
-                    throw new DeserializeException("Could not deserialize value for property: $propertyName");
-                }
-            }
-
-            return $instance;
+            return $context->hasComputedProperties
+                ? static::instanceWithConstructorCallFrom($context, $value)
+                : static::instanceWithoutConstructorFrom($context, $value);
         } catch (Throwable $e) {
             throw new DeserializeException($e->getMessage(), $e->getCode(), $e);
         }
+    }
+
+    /**
+     * @param ClassContext<static> $context
+     * @param array<string, mixed> $value
+     *
+     * @throws Throwable
+     */
+    protected static function instanceWithoutConstructorFrom(ClassContext $context, array $value): static
+    {
+        $instance = $context->newInstanceWithoutConstructor();
+
+        foreach ($context->properties as $propertyContext) {
+            $propertyName = $propertyContext->propertyName;
+
+            $instance->{$propertyName} = $propertyContext->deserializeFrom($value);
+        }
+
+        return $instance;
+    }
+
+    /**
+     * @param ClassContext<static> $context
+     * @param array<string, mixed> $value
+     *
+     * @throws Throwable
+     */
+    protected static function instanceWithConstructorCallFrom(ClassContext $context, array $value): static
+    {
+        /** @var array<string, mixed> $args */
+        $args = [];
+
+        foreach ($context->constructorParams as $paramName) {
+            $propertyContext = $context->properties[$paramName] ?? null;
+
+            if (!$propertyContext) {
+                throw new DeserializeException(
+                    "Could not find property context for constructor param: $paramName"
+                );
+            }
+
+            $args[$paramName] = $propertyContext->deserializeFrom($value);
+        }
+
+        $instance = $context->newInstanceWithConstructorCall(...$args);
+
+        if (!$instance instanceof static) {
+            throw new DeserializeException('Could not create instance of ' . static::class);
+        }
+
+        return $instance;
     }
 
     /**
@@ -77,36 +100,14 @@ trait BaseData
             $context = ClassContext::getInstance(new ReflectionClass($this));
 
             $serializableArray = [];
-
             foreach ($context->properties as $propertyContext) {
-                $serializers = $propertyContext->serializers();
-
-                if (!$serializers) {
-                    throw new SerializeException(
-                        code: SerializeException::NO_SERIALIZERS_ERROR_CODE
-                    );
+                if ($propertyContext->isComputed) {
+                    continue;
                 }
 
                 $propertyName = $propertyContext->propertyName;
-                $propertySerialized = false;
-                foreach ($serializers as $serializer) {
-                    try {
-                        $propertyValue = $serializer->serialize($propertyContext, $this);
 
-                        $serializableArray[$propertyName] = $propertyValue[$propertyName];
-
-                        $propertySerialized = true;
-
-                        break;
-                    } catch (SerializeException) {
-                    }
-                }
-
-                if (!$propertySerialized) {
-                    throw new SerializeException(
-                        "Could not serialize property: $propertyName",
-                    );
-                }
+                $serializableArray[$propertyName] = $propertyContext->serializeFrom($this)[$propertyName];
             }
 
             return $serializableArray;

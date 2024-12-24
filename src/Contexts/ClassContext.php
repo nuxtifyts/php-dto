@@ -5,6 +5,7 @@ namespace Nuxtifyts\PhpDto\Contexts;
 use Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException;
 use ReflectionClass;
 use ReflectionException;
+use ReflectionParameter;
 
 /**
  * @template T of object
@@ -22,7 +23,10 @@ class ClassContext
     /**
      * @var array<string, PropertyContext>
      */
-    protected readonly array $_properties;
+    protected(set) readonly array $properties;
+
+    /** @var list<string> List of param names  */
+    public readonly array $constructorParams;
 
     /**
      * @param ReflectionClass<T> $_reflectionClass
@@ -32,12 +36,20 @@ class ClassContext
     final private function __construct(
         protected readonly ReflectionClass $_reflectionClass
     ) {
-        $this->_properties = self::getPropertyContexts($this->_reflectionClass);
+        $this->properties = self::getPropertyContexts($this->_reflectionClass);
+        $this->constructorParams = array_map(
+            static fn (ReflectionParameter $param) => $param->getName(),
+            $this->_reflectionClass->getConstructor()?->getParameters() ?? [],
+        );
     }
 
-    /** @var array<string, PropertyContext> */
-    public array $properties {
-        get => $this->_properties;
+    public bool $hasComputedProperties {
+        get => count(
+            array_filter(
+                $this->properties,
+                static fn (PropertyContext $property) => $property->isComputed
+            )
+        ) > 0;
     }
 
     /**
@@ -85,5 +97,13 @@ class ClassContext
     public function newInstanceWithoutConstructor(): mixed
     {
         return $this->_reflectionClass->newInstanceWithoutConstructor();
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function newInstanceWithConstructorCall(mixed ...$args): mixed
+    {
+        return $this->_reflectionClass->newInstance(...$args);
     }
 }
