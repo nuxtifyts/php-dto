@@ -13,9 +13,11 @@ Then you can define the properties of the class and their types.
 
 ```php
 use Nuxtifyts\PhpDto\Data;
+use Nuxtifyts\PhpDto\Attributes\PropertyAttributes\Computed;
 
 final readonly class UserData extends Data
 {
+    #[Computed]
     public string $fullName;
 
     public function __construct(
@@ -33,7 +35,6 @@ You can then create an instance of the class from a mixed value. The DTO will th
 $data = [
     'firstName' => 'John',
     'lastName' => 'Doe',
-    'fullName' => 'John Doe'
 ];
 
 $user = UserData::from($data);
