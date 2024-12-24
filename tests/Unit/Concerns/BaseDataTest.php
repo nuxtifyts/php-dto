@@ -7,6 +7,7 @@ use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
 use Nuxtifyts\PhpDto\Tests\Dummies\AddressData;
+use Nuxtifyts\PhpDto\Tests\Dummies\ComputedPropertiesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\CoordinatesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\CountryData;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
@@ -42,6 +43,7 @@ use Throwable;
 #[UsesClass(UnionMultipleComplexData::class)]
 #[UsesClass(UserLocationData::class)]
 #[UsesClass(UserGroupData::class)]
+#[UsesClass(ComputedPropertiesData::class)]
 final class BaseDataTest extends UnitCase
 {
     /**
@@ -462,6 +464,19 @@ final class BaseDataTest extends UnitCase
                 'expectedProperties' => [
                     'name' => 'Group name 2',
                     'users' => [1, 2]
+                ],
+                'expectedSerializedData' => $data
+            ],
+            'Computed properties data' => [
+                'dtoClass' => ComputedPropertiesData::class,
+                'data' => $data = [
+                    'a' => 'a',
+                    'b' => 'b'
+                ],
+                'expectedProperties' => [
+                    'a' => 'a',
+                    'b' => 'b',
+                    'c' => 'ab'
                 ],
                 'expectedSerializedData' => $data
             ]
