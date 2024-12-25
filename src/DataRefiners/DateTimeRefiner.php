@@ -24,7 +24,14 @@ class DateTimeRefiner implements DataRefiner
         string|array|null $formats = null
     ) {
         if (!is_null($formats)) {
-            $this->formats = is_string($formats) ? [$formats] : $formats;
+            if (is_string($formats)) {
+                $this->formats[] = $formats;
+            } else {
+                $this->formats = array_values(array_unique([
+                    ...$this->formats,
+                    ...$formats
+                ]));
+            }
         }
     }
 

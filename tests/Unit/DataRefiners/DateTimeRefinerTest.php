@@ -3,7 +3,6 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\DataRefiners;
 
 use Nuxtifyts\PhpDto\Attributes\Property\WithRefiner;
-use Nuxtifyts\PhpDto\Contexts\ClassContext;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\DataRefiners\DateTimeRefiner;
@@ -15,7 +14,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
-use ReflectionClass;
 use ReflectionProperty;
 use DateTimeInterface;
 use DateTimeImmutable;
@@ -75,7 +73,7 @@ final class DateTimeRefinerTest extends UnitCase
         );
 
         self::expectException(InvalidRefiner::class);
-        $refinedValue = new DateTimeRefiner()->refine('2025-06-17', $propertyContext);
+        new DateTimeRefiner()->refine('2025-06-17', $propertyContext);
     }
 
     /**
