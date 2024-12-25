@@ -131,8 +131,8 @@ final class DateTimeRefinerTest extends UnitCase
                 'object' => $object,
                 'propertyName' => 'date',
                 'formats' => [DateTimeInterface::ATOM],
-                'value' => $now->format('Y-m-d'),
-                'expectedRefinedValue' => $now->format('Y-m-d')
+                'value' => $now->format('Y/m-d'),
+                'expectedRefinedValue' => $now->format('Y/m-d')
             ]
         ];
     }
