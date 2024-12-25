@@ -174,7 +174,7 @@ final class ArraySerializerTest extends UnitCase
                 'object' => new ArrayOfAttributesData(arrayOfPersonData: [new PersonData('John', 'Doe')]),
                 'expectedSerializedValue' => [
                     'arrayOfPersonData' => [
-                        ['firstName' => 'John', 'lastName' => 'Doe', 'fullName' => 'John Doe']
+                        ['firstName' => 'John', 'lastName' => 'Doe']
                     ]
                 ],
                 'propertyName' => 'arrayOfPersonData',
@@ -209,8 +209,8 @@ final class ArraySerializerTest extends UnitCase
                 ),
                 'expectedSerializedValue' => [
                     'arrayOfPersonData' => [
-                        'john-doe' => ['firstName' => 'John', 'lastName' => 'Doe', 'fullName' => 'John Doe'],
-                        'jane-doe' => ['firstName' => 'Jane', 'lastName' => 'Doe', 'fullName' => 'Jane Doe'],
+                        'john-doe' => ['firstName' => 'John', 'lastName' => 'Doe'],
+                        'jane-doe' => ['firstName' => 'Jane', 'lastName' => 'Doe'],
                     ]
                 ],
                 'propertyName' => 'arrayOfPersonData',

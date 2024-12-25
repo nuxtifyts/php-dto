@@ -13,6 +13,7 @@ Then you can define the properties of the class and their types.
 
 ```php
 use Nuxtifyts\PhpDto\Data;
+use Nuxtifyts\PhpDto\Attributes\Property\Aliases;
 use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 
 final readonly class UserData extends Data
@@ -22,6 +23,7 @@ final readonly class UserData extends Data
 
     public function __construct(
         public string $firstName,
+        #[Aliases('familyName')]
         public stirng $lastName
     ) {
         $this->fullName = "$this->firstName $this->lastName";
