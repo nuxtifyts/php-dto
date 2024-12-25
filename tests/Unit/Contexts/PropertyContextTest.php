@@ -3,10 +3,12 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\Contexts;
 
 use Nuxtifyts\PhpDto\Attributes\Property\Computed;
+use Nuxtifyts\PhpDto\Attributes\Property\WithRefiner;
 use Nuxtifyts\PhpDto\Contexts\ClassContext;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Data;
+use Nuxtifyts\PhpDto\DataRefiners\DateTimeRefiner;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
 use Nuxtifyts\PhpDto\Tests\Dummies\ComputedPropertiesData;
@@ -28,6 +30,7 @@ use Throwable;
 #[CoversClass(PropertyContext::class)]
 #[CoversClass(TypeContext::class)]
 #[CoversClass(Computed::class)]
+#[CoversClass(WithRefiner::class)]
 #[UsesClass(ComputedPropertiesData::class)]
 #[UsesClass(ScalarTypeSerializer::class)]
 #[UsesClass(PersonData::class)]
@@ -138,6 +141,28 @@ final class PropertyContextTest extends UnitCase
 
         self::assertTrue($cPropertyContext->isComputed);
         self::assertFalse($aPropertyContext->isComputed);
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[Test]
+    public function resolves_data_refiners(): void
+    {
+        $object = new readonly class (new DateTimeImmutable()) extends Data {
+            public function __construct(
+                #[WithRefiner(DateTimeRefiner::class, formats: ['Y-m-d'])]
+                public DateTimeImmutable $value
+            ) {
+            }
+        };
+
+        $reflectionProperty = new ReflectionProperty($object::class, 'value');
+
+        $propertyContext = PropertyContext::getInstance($reflectionProperty);
+
+        self::assertCount(1, $propertyContext->dataRefiners);
+        self::assertInstanceOf(DateTimeRefiner::class, $propertyContext->dataRefiners[0]);
     }
 
     /**

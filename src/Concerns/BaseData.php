@@ -3,8 +3,12 @@
 namespace Nuxtifyts\PhpDto\Concerns;
 
 use Nuxtifyts\PhpDto\Contexts\ClassContext;
+use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipelinePassable;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\RefineDataPipe;
+use Nuxtifyts\PhpDto\Support\Pipeline;
 use Nuxtifyts\PhpDto\Support\Traits\HasNormalizers;
 use ReflectionClass;
 use Throwable;
@@ -30,9 +34,17 @@ trait BaseData
             /** @var ClassContext<static> $context */
             $context = ClassContext::getInstance(new ReflectionClass(static::class));
 
+            $data = new Pipeline(DeserializePipelinePassable::class)
+                ->through(RefineDataPipe::class)
+                ->sendThenReturn(new DeserializePipelinePassable(
+                    classContext: $context,
+                    data: $value
+                ))
+                ->data;
+
             return $context->hasComputedProperties
-                ? static::instanceWithConstructorCallFrom($context, $value)
-                : static::instanceWithoutConstructorFrom($context, $value);
+                ? static::instanceWithConstructorCallFrom($context, $data)
+                : static::instanceWithoutConstructorFrom($context, $data);
         } catch (Throwable $e) {
             throw new DeserializeException($e->getMessage(), $e->getCode(), $e);
         }

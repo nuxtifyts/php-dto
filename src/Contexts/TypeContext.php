@@ -5,7 +5,6 @@ namespace Nuxtifyts\PhpDto\Contexts;
 use DateTimeInterface;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
-use Nuxtifyts\PhpDto\Exceptions\UnknownTypeException;
 use Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
 use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
@@ -64,9 +63,9 @@ class TypeContext
      *
      * @throws UnsupportedTypeException
      */
-    public static function getInstances(ReflectionProperty $property): array
+    public static function getInstances(PropertyContext $property): array
     {
-        $reflectionTypes = self::getPropertyStringTypes($property);
+        $reflectionTypes = self::getPropertyStringTypes($property->reflection);
         $instances = [];
 
         foreach ($reflectionTypes as $type) {
@@ -106,7 +105,7 @@ class TypeContext
                 case $type === 'array':
                     $instances[] = new static(
                         Type::ARRAY,
-                        subTypeContexts: self::resolveSubContextsForArray($property)
+                        subTypeContexts: self::resolveSubContextsForArray($property->reflection)
                     );
                     break;
                 default:

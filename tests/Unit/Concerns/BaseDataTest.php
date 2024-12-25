@@ -6,6 +6,11 @@ use DateTimeImmutable;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipelinePassable;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\RefineDataPipe;
+use Nuxtifyts\PhpDto\Support\Passable;
+use Nuxtifyts\PhpDto\Support\Pipe;
+use Nuxtifyts\PhpDto\Support\Pipeline;
 use Nuxtifyts\PhpDto\Tests\Dummies\AddressData;
 use Nuxtifyts\PhpDto\Tests\Dummies\ComputedPropertiesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\CoordinatesData;
@@ -31,6 +36,11 @@ use Throwable;
 #[CoversClass(Data::class)]
 #[CoversClass(DeserializeException::class)]
 #[CoversClass(SerializeException::class)]
+#[CoversClass(Pipeline::class)]
+#[CoversClass(Pipe::class)]
+#[CoversClass(DeserializePipelinePassable::class)]
+#[CoversClass(RefineDataPipe::class)]
+#[CoversClass(Passable::class)]
 #[UsesClass(PersonData::class)]
 #[UsesClass(UnionTypedData::class)]
 #[UsesClass(YesOrNoData::class)]
@@ -152,16 +162,10 @@ final class BaseDataTest extends UnitCase
     }
 
     /**
-     * @return array<string, array{
-     *     dtoClass: class-string<Data>,
-     *     data: array<string, mixed>,
-     *     expectedProperties: array<string, mixed>,
-     *     expectedSerializedData: array<string, mixed>
-     * }>
+     * @return array<string, mixed>
      */
     public static function will_perform_serialization_and_deserialization_data_provider(): array
     {
-        // @phpstan-ignore-next-line
         return [
             'Person data' => [
                 'dtoClass' => PersonData::class,
