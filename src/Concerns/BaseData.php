@@ -3,11 +3,11 @@
 namespace Nuxtifyts\PhpDto\Concerns;
 
 use Nuxtifyts\PhpDto\Contexts\ClassContext;
-use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipelinePassable;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\RefineDataPipe;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\ResolveValuesFromAliasesPipe;
 use Nuxtifyts\PhpDto\Support\Pipeline;
 use Nuxtifyts\PhpDto\Support\Traits\HasNormalizers;
 use ReflectionClass;
@@ -35,6 +35,7 @@ trait BaseData
             $context = ClassContext::getInstance(new ReflectionClass(static::class));
 
             $data = new Pipeline(DeserializePipelinePassable::class)
+                ->through(ResolveValuesFromAliasesPipe::class)
                 ->through(RefineDataPipe::class)
                 ->sendThenReturn(new DeserializePipelinePassable(
                     classContext: $context,

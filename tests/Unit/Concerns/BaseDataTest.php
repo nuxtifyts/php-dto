@@ -67,8 +67,7 @@ final class BaseDataTest extends UnitCase
         self::assertEquals(
             [
                 'firstName' => 'John',
-                'lastName' => 'Doe',
-                'fullName' => 'John Doe'
+                'lastName' => 'Doe'
             ],
             $personData = $person->jsonSerialize()
         );
@@ -171,8 +170,7 @@ final class BaseDataTest extends UnitCase
                 'dtoClass' => PersonData::class,
                 'data' => $data = [
                     'firstName' => 'John',
-                    'lastName' => 'Doe',
-                    'fullName' => 'John Doe'
+                    'lastName' => 'Doe'
                 ],
                 'expectedProperties' => [
                     'firstName' => 'John',

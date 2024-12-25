@@ -2,6 +2,7 @@
 
 namespace Nuxtifyts\PhpDto\Contexts;
 
+use Nuxtifyts\PhpDto\Attributes\Property\Aliases;
 use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 use Nuxtifyts\PhpDto\Attributes\Property\WithRefiner;
 use Nuxtifyts\PhpDto\DataRefiners\DataRefiner;
@@ -28,6 +29,11 @@ class PropertyContext
      * Associated by the class name + @ + property name
      */
     private static array $_instances = [];
+
+    /**
+     * @var list<string>
+     */
+    private(set) array $aliases = [];
 
     private(set) bool $isComputed = false;
 
@@ -84,6 +90,11 @@ class PropertyContext
         foreach ($this->reflection->getAttributes(WithRefiner::class) as $withRefinerAttribute) {
             /** @var ReflectionAttribute<WithRefiner> $withRefinerAttribute */
             $this->dataRefiners[] = $withRefinerAttribute->newInstance()->getRefiner();
+        }
+
+        if ($aliasesAttribute = $this->reflection->getAttributes(Aliases::class)[0] ?? null) {
+            /** @var ReflectionAttribute<Aliases> $aliasesAttribute */
+            $this->aliases = $aliasesAttribute->newInstance()->aliases;
         }
     }
 

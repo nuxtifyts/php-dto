@@ -4,12 +4,11 @@ namespace Nuxtifyts\PhpDto\Pipelines\DeserializePipeline;
 
 use Nuxtifyts\PhpDto\Support\Passable;
 use Nuxtifyts\PhpDto\Support\Pipe;
-use Exception;
 
 /**
  * @extends Pipe<DeserializePipelinePassable>
  */
-readonly class RefineDataPipe extends Pipe
+readonly class ResolveValuesFromAliasesPipe extends Pipe
 {
     public function handle(Passable $passable): DeserializePipelinePassable
     {
@@ -18,17 +17,17 @@ readonly class RefineDataPipe extends Pipe
         foreach ($passable->classContext->properties as $propertyContext) {
             $propertyName = $propertyContext->propertyName;
 
-            if (!array_key_exists($propertyName, $data)) {
+            if (array_key_exists($propertyName, $data)) {
                 continue;
             }
 
-            foreach ($propertyContext->dataRefiners as $dataRefiner) {
-                try {
-                    $data[$propertyName] = $dataRefiner->refine(
-                        value: $data[$propertyName],
-                        property: $propertyContext
-                    );
-                } catch (Exception) {}
+            $aliases = $propertyContext->aliases;
+
+            foreach ($aliases as $alias) {
+                if (array_key_exists($alias, $data)) {
+                    $data[$propertyName] = $data[$alias];
+                    break;
+                }
             }
         }
 
