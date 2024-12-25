@@ -70,6 +70,8 @@ class DateTimeSerializer extends Serializer implements SerializesArrayOfItemsCon
                 }
                 // @codeCoverageIgnoreEnd
             }
+        } elseif ($item instanceof DateTimeInterface) {
+            return $item;
         }
 
         return is_null($item) && $property->isNullable

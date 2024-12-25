@@ -106,4 +106,25 @@ final class BackedEnumSerializerTest extends UnitCase
             $backedEnumSerializer->deserialize(PropertyContext::getInstance($property), $serializedData)
         );
     }
+
+    /**
+     * @throws Throwable
+     */
+    #[Test]
+    public function will_resolve_backed_enum_from_backed_enum(): void
+    {
+        $yesNoNullableData = new YesOrNoNullableData(null);
+
+        $reflectionClass = new ReflectionClass($yesNoNullableData);
+        $property = $reflectionClass->getProperty('yesNo');
+
+        $backedEnumSerializer = new BackedEnumSerializer();
+
+        $serializedData = ['yesNo' => YesNoBackedEnum::YES];
+
+        self::assertEquals(
+            YesNoBackedEnum::YES,
+            $backedEnumSerializer->deserialize(PropertyContext::getInstance($property), $serializedData)
+        );
+    }
 }

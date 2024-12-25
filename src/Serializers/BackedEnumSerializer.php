@@ -45,7 +45,11 @@ class BackedEnumSerializer extends Serializer implements SerializesArrayOfItemsC
                 : throw new DeserializeException('Property is not nullable');
         }
 
-        if (!is_string($item) && !is_integer($item)) {
+        if (
+            !is_string($item)
+            && !is_integer($item)
+            && !$item instanceof BackedEnum
+        ) {
             throw new DeserializeException('Value is not a string or integer');
         }
 
@@ -56,6 +60,14 @@ class BackedEnumSerializer extends Serializer implements SerializesArrayOfItemsC
             try {
                 if (!$typeContext->reflection?->implementsInterface(BackedEnum::class)) {
                     continue;
+                }
+
+                if ($item instanceof BackedEnum) {
+                    if ($item instanceof ($typeContext->reflection->getName())) {
+                        return $item;
+                    } else {
+                        continue;
+                    }
                 }
 
                 $enumValue = call_user_func(

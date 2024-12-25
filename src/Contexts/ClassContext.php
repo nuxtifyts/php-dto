@@ -29,17 +29,17 @@ class ClassContext
     public readonly array $constructorParams;
 
     /**
-     * @param ReflectionClass<T> $_reflectionClass
+     * @param ReflectionClass<T> $reflection
      *
      * @throws UnsupportedTypeException
      */
     final private function __construct(
-        protected readonly ReflectionClass $_reflectionClass
+        protected readonly ReflectionClass $reflection
     ) {
-        $this->properties = self::getPropertyContexts($this->_reflectionClass);
+        $this->properties = self::getPropertyContexts($this->reflection);
         $this->constructorParams = array_map(
             static fn (ReflectionParameter $param) => $param->getName(),
-            $this->_reflectionClass->getConstructor()?->getParameters() ?? [],
+            $this->reflection->getConstructor()?->getParameters() ?? [],
         );
     }
 
@@ -96,7 +96,7 @@ class ClassContext
      */
     public function newInstanceWithoutConstructor(): mixed
     {
-        return $this->_reflectionClass->newInstanceWithoutConstructor();
+        return $this->reflection->newInstanceWithoutConstructor();
     }
 
     /**
@@ -104,6 +104,6 @@ class ClassContext
      */
     public function newInstanceWithConstructorCall(mixed ...$args): mixed
     {
-        return $this->_reflectionClass->newInstance(...$args);
+        return $this->reflection->newInstance(...$args);
     }
 }

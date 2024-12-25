@@ -3,6 +3,8 @@
 namespace Nuxtifyts\PhpDto\Contexts;
 
 use Nuxtifyts\PhpDto\Attributes\Property\Computed;
+use Nuxtifyts\PhpDto\Attributes\Property\WithRefiner;
+use Nuxtifyts\PhpDto\DataRefiners\DataRefiner;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
@@ -12,6 +14,7 @@ use Nuxtifyts\PhpDto\Serializers\Serializer;
 use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
 use Nuxtifyts\PhpDto\Support\Traits\HasTypes;
 use ReflectionProperty;
+use ReflectionAttribute;
 
 class PropertyContext
 {
@@ -28,22 +31,25 @@ class PropertyContext
 
     private(set) bool $isComputed = false;
 
+    /** @var list<DataRefiner> */
+    private(set) array $dataRefiners = [];
+
     /**
      * @throws UnsupportedTypeException
      */
     final private function __construct(
-        protected readonly ReflectionProperty $_reflectionProperty
+        protected(set) readonly ReflectionProperty $reflection
     ) {
-        $this->syncTypesFromReflectionProperty($this->_reflectionProperty);
+        $this->syncTypesFromReflectionProperty($this->reflection);
         $this->syncPropertyAttributes();
     }
 
     public string $propertyName {
-        get => $this->_reflectionProperty->getName();
+        get => $this->reflection->getName();
     }
 
     public string $className {
-        get => $this->_reflectionProperty->getDeclaringClass()->getName();
+        get => $this->reflection->getDeclaringClass()->getName();
     }
 
     /** @var list<TypeContext<Type>> $arrayTypeContexts */
@@ -73,12 +79,17 @@ class PropertyContext
 
     private function syncPropertyAttributes(): void
     {
-        $this->isComputed = !empty($this->_reflectionProperty->getAttributes(Computed::class));
+        $this->isComputed = !empty($this->reflection->getAttributes(Computed::class));
+
+        foreach ($this->reflection->getAttributes(WithRefiner::class) as $withRefinerAttribute) {
+            /** @var ReflectionAttribute<WithRefiner> $withRefinerAttribute */
+            $this->dataRefiners[] = $withRefinerAttribute->newInstance()->getRefiner();
+        }
     }
 
     public function getValue(object $object): mixed
     {
-        return $this->_reflectionProperty->getValue($object);
+        return $this->reflection->getValue($object);
     }
 
     /**

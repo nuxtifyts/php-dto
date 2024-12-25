@@ -28,6 +28,6 @@ trait HasTypes
     protected function syncTypesFromReflectionProperty(ReflectionProperty $property): void
     {
         $this->isNullable = $property->getType()?->allowsNull() ?? false;
-        $this->typeContexts = TypeContext::getInstances($property);
+        $this->typeContexts = TypeContext::getInstances($this);
     }
 }
