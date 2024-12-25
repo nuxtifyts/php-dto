@@ -49,7 +49,7 @@ final class DateTimeRefinerTest extends UnitCase
         self::assertEquals(
             $expectedRefinedValue,
             $refinedValue instanceof DateTimeImmutable
-                ? $refinedValue->format(DateTimeInterface::ATOM)
+                ? $refinedValue->format('Y-m-d H:i')
                 : $refinedValue
         );
     }
@@ -97,21 +97,21 @@ final class DateTimeRefinerTest extends UnitCase
                 'propertyName' => 'date',
                 'formats' => null,
                 'value' => $now->format('Y-m-d'),
-                'expectedRefinedValue' => $now->format(DateTimeInterface::ATOM)
+                'expectedRefinedValue' => $now->format('Y-m-d H:i')
             ],
             'Default formats Y-m-d H:i:s' => [
                 'object' => $object,
                 'propertyName' => 'date',
                 'formats' => null,
                 'value' => $now->format('Y-m-d H:i:s'),
-                'expectedRefinedValue' => $now->format(DateTimeInterface::ATOM)
+                'expectedRefinedValue' => $now->format('Y-m-d H:i')
             ],
             'Default formats ATOM' => [
                 'object' => $object,
                 'propertyName' => 'date',
                 'formats' => null,
                 'value' => $now->format(DateTimeInterface::ATOM),
-                'expectedRefinedValue' => $now->format(DateTimeInterface::ATOM)
+                'expectedRefinedValue' => $now->format('Y-m-d H:i')
             ],
             'Ignores null' => [
                 'object' => $object,
