@@ -398,7 +398,10 @@ final readonly class Person extends Data
 The exact same rules apply for array as well:
 
 ```php
-use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfData;use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfScalarTypes;use Nuxtifyts\PhpDto\Data;use Nuxtifyts\PhpDto\Enums\Property\Type;
+use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfData;
+use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfScalarTypes;
+use Nuxtifyts\PhpDto\Data;
+use Nuxtifyts\PhpDto\Enums\Property\Type;
 
 final readonly class UserGroup extends Data
 {
