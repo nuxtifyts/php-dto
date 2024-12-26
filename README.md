@@ -1,8 +1,6 @@
 # PHP Pure Data objects
 
-[//]: # ([![Latest Version on Packagist]&#40;https://img.shields.io/packagist/v/spatie/data-transfer-object.svg?style=flat-square&#41;]&#40;https://packagist.org/packages/spatie/data-transfer-object&#41;)
-
-[//]: # (![GitHub Tests Action Status]&#40;https://img.shields.io/github/workflow/status/spatie/data-transfer-object/run-tests?label=tests&#41;)
+![Packagist Version](https://img.shields.io/packagist/v/nuxtifyts/php-dto)
 
 This package enabled the creation of data objects which can be used in various ways. 
 Using modern PHP syntax, it allows you to hydrate data from arrays, objects, and other data sources.
