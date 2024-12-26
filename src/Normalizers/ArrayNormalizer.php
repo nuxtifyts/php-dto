@@ -8,7 +8,10 @@ final readonly class ArrayNormalizer extends Normalizer
     {
         if (
             !is_array($this->value)
-            || array_is_list($this->value)
+            || (
+                array_is_list($this->value)
+                && !empty($this->value)
+            )
         ) {
             return false;
         }

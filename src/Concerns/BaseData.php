@@ -8,6 +8,7 @@ use Nuxtifyts\PhpDto\Exceptions\SerializeException;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DecipherDataPipe;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipelinePassable;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\RefineDataPipe;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\ResolveDefaultDataPipe;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\ResolveValuesFromAliasesPipe;
 use Nuxtifyts\PhpDto\Support\Pipeline;
 use Nuxtifyts\PhpDto\Support\Traits\HasNormalizers;
@@ -26,7 +27,7 @@ trait BaseData
         try {
             $value = static::normalizeValue($value, static::class);
 
-            if (empty($value)) {
+            if ($value === false) {
                 throw new DeserializeException(
                     code: DeserializeException::INVALID_VALUE_ERROR_CODE
                 );
@@ -39,6 +40,7 @@ trait BaseData
                 ->through(ResolveValuesFromAliasesPipe::class)
                 ->through(RefineDataPipe::class)
                 ->through(DecipherDataPipe::class)
+                ->through(ResolveDefaultDataPipe::class)
                 ->sendThenReturn(new DeserializePipelinePassable(
                     classContext: $context,
                     data: $value

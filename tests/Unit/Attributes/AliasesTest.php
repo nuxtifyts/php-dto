@@ -16,7 +16,7 @@ use Throwable;
 #[CoversClass(ResolveValuesFromAliasesPipe::class)]
 #[CoversClass(Aliases::class)]
 #[UsesClass(PersonData::class)]
-final class AliasesAttributeTest extends UnitCase
+final class AliasesTest extends UnitCase
 {
     /**
      * @throws Throwable
