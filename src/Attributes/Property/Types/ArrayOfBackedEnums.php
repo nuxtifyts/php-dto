@@ -11,13 +11,13 @@ use ReflectionEnum;
 class ArrayOfBackedEnums
 {
     /** @var array<string, ReflectionEnum<BackedEnum>> */
-    private static array $_enumReflections = [];
+    protected static array $_enumReflections = [];
 
     /** @var list<class-string<BackedEnum>> $enums */
-    private(set) array $enums;
+    protected(set) array $enums;
 
     /** @var array<string, ReflectionEnum<BackedEnum>> */
-    private(set) array $resolvedBackedEnumReflections = [];
+    protected(set) array $resolvedBackedEnumReflections = [];
 
     /**
      * @param class-string<BackedEnum>|list<class-string<BackedEnum>> $enums

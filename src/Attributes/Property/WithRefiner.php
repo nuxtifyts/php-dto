@@ -9,13 +9,13 @@ use Nuxtifyts\PhpDto\DataRefiners\DataRefiner;
 class WithRefiner
 {
     /** @var array<array-key, mixed> */
-    private array $refinerArgs;
+    protected array $refinerArgs;
 
     /**
      * @param class-string<DataRefiner> $refinerClass
      */
     public function __construct(
-        private readonly string $refinerClass,
+        protected readonly string $refinerClass,
         mixed ...$refinerArgs
     ) {
         $this->refinerArgs = $refinerArgs;

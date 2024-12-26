@@ -2,6 +2,8 @@
 
 namespace Nuxtifyts\PhpDto\Support;
 
+use Exception;
+
 /**
  * @template T of Passable
  */
@@ -13,6 +15,8 @@ abstract readonly class Pipe
      * @param T $passable
      *
      * @return T
+     *
+     * @throws Exception
      */
     abstract public function handle(Passable $passable): mixed;
 }

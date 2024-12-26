@@ -3,8 +3,10 @@
 namespace Nuxtifyts\PhpDto\Contexts;
 
 use Nuxtifyts\PhpDto\Attributes\Property\Aliases;
+use Nuxtifyts\PhpDto\Attributes\Property\CipherTarget;
 use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 use Nuxtifyts\PhpDto\Attributes\Property\WithRefiner;
+use Nuxtifyts\PhpDto\DataCiphers\CipherConfig;
 use Nuxtifyts\PhpDto\DataRefiners\DataRefiner;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
@@ -16,6 +18,7 @@ use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
 use Nuxtifyts\PhpDto\Support\Traits\HasTypes;
 use ReflectionProperty;
 use ReflectionAttribute;
+use Exception;
 
 class PropertyContext
 {
@@ -36,6 +39,8 @@ class PropertyContext
     private(set) array $aliases = [];
 
     private(set) bool $isComputed = false;
+
+    private(set) ?CipherConfig $cipherConfig = null;
 
     /** @var list<DataRefiner> */
     private(set) array $dataRefiners = [];
@@ -95,6 +100,17 @@ class PropertyContext
         if ($aliasesAttribute = $this->reflection->getAttributes(Aliases::class)[0] ?? null) {
             /** @var ReflectionAttribute<Aliases> $aliasesAttribute */
             $this->aliases = $aliasesAttribute->newInstance()->aliases;
+        }
+
+        if ($cipherTargetAttribute = $this->reflection->getAttributes(CipherTarget::class)[0] ?? null) {
+            /** @var ReflectionAttribute<CipherTarget> $cipherTargetAttribute */
+            $instance = $cipherTargetAttribute->newInstance();
+
+            $this->cipherConfig = new CipherConfig(
+                dataCipherClass: $instance->dataCipherClass,
+                secret: $instance->secret ?: $this->reflection->getName(),
+                encoded: $instance->encoded
+            );
         }
     }
 
@@ -169,11 +185,30 @@ class PropertyContext
     {
         foreach ($this->serializers() as $serializer) {
             try {
-                return $serializer->serialize($this, $object);
+                $serializedData = $serializer->serialize($this, $object);
             } catch (SerializeException) {
             }
         }
 
-        throw new SerializeException('Could not serialize value for property: ' . $this->propertyName);
+        if (empty($serializedData)) {
+            throw new SerializeException('Could not serialize value for property: ' . $this->propertyName);
+        }
+
+        try {
+            if ($this->cipherConfig) {
+                return array_map(
+                    fn (mixed $value) => $this->cipherConfig->dataCipherClass::cipher(
+                        data: $value,
+                        secret: $this->cipherConfig->secret,
+                        encode: $this->cipherConfig->encoded
+                    ),
+                    $serializedData
+                );
+            }
+
+            return $serializedData;
+        } catch (Exception) {
+            throw new SerializeException('Could not serialize value for property: ' . $this->propertyName);
+        }
     }
 }

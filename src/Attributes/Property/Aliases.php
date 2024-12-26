@@ -8,7 +8,7 @@ use Attribute;
 class Aliases
 {
     /** @var list<string> */
-    private(set) array $aliases;
+    protected(set) array $aliases;
 
     public function __construct(
         string $alias,

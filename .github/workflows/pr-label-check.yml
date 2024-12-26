@@ -12,18 +12,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const labels = context.payload.pull_request.labels;
+            const labels = context.payload.pull_request?.labels || [];
             if (labels.length === 0) {
               throw new Error('This pull request must have at least one label.');
             }
-      - name: Comment on missing labels
-        if: failure()
-        uses: actions/github-script@v6
-        with:
-            script: |
-              github.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: 'This pull request must have at least one label.'
-              })
