@@ -3,9 +3,6 @@ name: Enforce PR Label
 on:
   pull_request:
     types: [opened, edited, unlabeled]
-  push:
-    branches:
-      - '**'
 
 jobs:
   check-label:
@@ -15,10 +12,6 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            if (context.eventName === 'push') {
-              console.log('Skipping label check for push event.');
-              return;
-            }
             const labels = context.payload.pull_request?.labels || [];
             if (labels.length === 0) {
               throw new Error('This pull request must have at least one label.');
