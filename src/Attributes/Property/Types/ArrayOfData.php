@@ -13,13 +13,13 @@ use ReflectionClass;
 class ArrayOfData
 {
     /** @var array<string, ReflectionClass<Data>> */
-    private static array $_dataReflections = [];
+    protected static array $_dataReflections = [];
 
     /** @var list<class-string<Data>> */
-    private(set) array $dataClasses;
+    protected(set) array $dataClasses;
 
     /** @var array<string, ReflectionClass<Data>> */
-    private(set) array $resolvedDataReflections = [];
+    protected(set) array $resolvedDataReflections = [];
 
     /**
      * @param class-string<Data>|list<class-string<Data>> $dataClasses

@@ -23,7 +23,7 @@ readonly class DeserializePipelinePassable extends Passable
     /**
      * @param array<string, mixed> $data
      */
-    public function with(array $data): DeserializePipelinePassable
+    public function with(array $data): self
     {
         return new self($this->classContext, $data);
     }

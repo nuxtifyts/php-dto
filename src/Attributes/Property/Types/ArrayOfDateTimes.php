@@ -14,13 +14,13 @@ use ReflectionClass;
 class ArrayOfDateTimes
 {
     /** @var array<string, ReflectionClass<DateTime|DateTimeImmutable>> */
-    private static array $_dateTimeReflections = [];
+    protected static array $_dateTimeReflections = [];
 
     /** @var list<class-string<DateTime|DateTimeImmutable>> */
-    private(set) array $dateTimes;
+    protected(set) array $dateTimes;
 
     /** @var array<string, ReflectionClass<DateTime|DateTimeImmutable>> */
-    private(set) array $resolvedDateTimeReflections = [];
+    protected(set) array $resolvedDateTimeReflections = [];
 
     /**
      * @param class-string<DateTime|DateTimeImmutable>|list<class-string<DateTime|DateTimeImmutable>> $dateTimes

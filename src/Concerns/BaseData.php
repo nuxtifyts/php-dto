@@ -5,6 +5,7 @@ namespace Nuxtifyts\PhpDto\Concerns;
 use Nuxtifyts\PhpDto\Contexts\ClassContext;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DecipherDataPipe;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipelinePassable;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\RefineDataPipe;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\ResolveValuesFromAliasesPipe;
@@ -37,6 +38,7 @@ trait BaseData
             $data = new Pipeline(DeserializePipelinePassable::class)
                 ->through(ResolveValuesFromAliasesPipe::class)
                 ->through(RefineDataPipe::class)
+                ->through(DecipherDataPipe::class)
                 ->sendThenReturn(new DeserializePipelinePassable(
                     classContext: $context,
                     data: $value
@@ -112,7 +114,7 @@ trait BaseData
         try {
             $context = ClassContext::getInstance(new ReflectionClass($this));
 
-            $serializableArray = [];
+            $serializedData = [];
             foreach ($context->properties as $propertyContext) {
                 if ($propertyContext->isComputed) {
                     continue;
@@ -120,10 +122,10 @@ trait BaseData
 
                 $propertyName = $propertyContext->propertyName;
 
-                $serializableArray[$propertyName] = $propertyContext->serializeFrom($this)[$propertyName];
+                $serializedData[$propertyName] = $propertyContext->serializeFrom($this)[$propertyName];
             }
 
-            return $serializableArray;
+            return $serializedData;
         } catch (Throwable $e) {
             throw new SerializeException($e->getMessage(), $e->getCode(), $e);
         }
