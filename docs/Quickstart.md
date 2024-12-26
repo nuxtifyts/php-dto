@@ -54,7 +54,7 @@ The package allows you to hydrate these data objects from other types, for examp
 $todo = Todo::from([
     'title' => 'Learn PHP DTO',
     'content' => 'Learn how to use PHP DTO',
-    'status' => 'ready',
+    'status' => 'ready', // Or Status::READY
     'dueDate' => '2025-01-01T00:00:00+00:00'
 ]);
 ```

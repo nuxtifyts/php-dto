@@ -2,11 +2,11 @@
 
 namespace Nuxtifyts\PhpDto\Serializers;
 
-use ArrayAccess;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Exception;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
+use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Contracts\SerializesArrayOfItems as SerializesArrayOfItemsContract;
 use Nuxtifyts\PhpDto\Concerns\SerializesArrayOfItems;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
@@ -43,10 +43,10 @@ class DateTimeSerializer extends Serializer implements SerializesArrayOfItemsCon
      */
     protected function deserializeItem(mixed $item, PropertyContext $property): ?DateTimeInterface
     {
-        if (is_string($item)) {
-            $typeContexts = $property->getFilteredTypeContexts(...self::supportedTypes())
-                ?: $property->getFilteredSubTypeContexts(...self::supportedTypes());
+        $typeContexts = $property->getFilteredTypeContexts(...self::supportedTypes())
+            ?: $property->getFilteredSubTypeContexts(...self::supportedTypes());
 
+        if (is_string($item)) {
             foreach ($typeContexts as $typeContext) {
                 try {
                     if (!$typeContext->reflection?->implementsInterface(DateTimeInterface::class)) {
@@ -71,7 +71,12 @@ class DateTimeSerializer extends Serializer implements SerializesArrayOfItemsCon
                 // @codeCoverageIgnoreEnd
             }
         } elseif ($item instanceof DateTimeInterface) {
-            return $item;
+            if (array_any(
+                $typeContexts,
+                static fn(TypeContext $typeContext) => (bool) $typeContext->reflection?->isInstance($item)
+            )) {
+                return $item;
+            }
         }
 
         return is_null($item) && $property->isNullable

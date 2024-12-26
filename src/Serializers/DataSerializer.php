@@ -5,8 +5,10 @@ namespace Nuxtifyts\PhpDto\Serializers;
 use Exception;
 use Nuxtifyts\PhpDto\Concerns\SerializesArrayOfItems;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
+use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Contracts\BaseData as BaseDataContract;
 use Nuxtifyts\PhpDto\Contracts\SerializesArrayOfItems as SerializesArrayOfItemsContract;
+use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
@@ -43,10 +45,10 @@ class DataSerializer extends Serializer implements SerializesArrayOfItemsContrac
      */
     protected function deserializeItem(mixed $item, PropertyContext $property): ?BaseDataContract
     {
-        if (is_array($item)) {
-            $typeContexts = $property->getFilteredTypeContexts(...self::supportedTypes())
-                ?: $property->getFilteredSubTypeContexts(...self::supportedTypes());
+        $typeContexts = $property->getFilteredTypeContexts(...self::supportedTypes())
+            ?: $property->getFilteredSubTypeContexts(...self::supportedTypes());
 
+        if (is_array($item)) {
             foreach ($typeContexts as $typeContext) {
                 try {
                     if (!$typeContext->reflection?->implementsInterface(BaseDataContract::class)) {
@@ -69,6 +71,15 @@ class DataSerializer extends Serializer implements SerializesArrayOfItemsContrac
                     continue;
                 }
                 // @codeCoverageIgnoreEnd
+            }
+        } elseif ($item instanceof Data) {
+            if (
+                array_any(
+                    $typeContexts,
+                    static fn (TypeContext $type) => (bool) $type->reflection?->isInstance($item)
+                )
+            ) {
+                return $item;
             }
         }
 

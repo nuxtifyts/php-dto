@@ -8,6 +8,9 @@ use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipelinePassable;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\RefineDataPipe;
+use Nuxtifyts\PhpDto\Serializers\BackedEnumSerializer;
+use Nuxtifyts\PhpDto\Serializers\DataSerializer;
+use Nuxtifyts\PhpDto\Serializers\DateTimeSerializer;
 use Nuxtifyts\PhpDto\Support\Passable;
 use Nuxtifyts\PhpDto\Support\Pipe;
 use Nuxtifyts\PhpDto\Support\Pipeline;
@@ -32,6 +35,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
 use Throwable;
+use DateTimeInterface;
 
 #[CoversClass(Data::class)]
 #[CoversClass(DeserializeException::class)]
@@ -41,6 +45,9 @@ use Throwable;
 #[CoversClass(DeserializePipelinePassable::class)]
 #[CoversClass(RefineDataPipe::class)]
 #[CoversClass(Passable::class)]
+#[CoversClass(DateTimeSerializer::class)]
+#[CoversClass(DataSerializer::class)]
+#[CoversClass(BackedEnumSerializer::class)]
 #[UsesClass(PersonData::class)]
 #[UsesClass(UnionTypedData::class)]
 #[UsesClass(YesOrNoData::class)]
@@ -271,6 +278,41 @@ final class BaseDataTest extends UnitCase
                 ],
                 'expectedSerializedData' => $data
             ],
+            'Refundable item data 3' => [
+                'dtoClass' => RefundableItemData::class,
+                'data' => $data = [
+                    'id' => 'id2',
+                    'refundable' => YesNoBackedEnum::NO,
+                    'refundableUntil' => null
+                ],
+                'expectedProperties' => [
+                    'id' => 'id2',
+                    'refundable' => YesNoBackedEnum::NO,
+                    'refundableUntil' => null
+                ],
+                'expectedSerializedData' => [
+                    ...$data,
+                    'refundable' => YesNoBackedEnum::NO->value
+                ]
+            ],
+            'Refundable item data 4' => [
+                'dtoClass' => RefundableItemData::class,
+                'data' => $data = [
+                    'id' => 'id',
+                    'refundable' => YesNoBackedEnum::YES->value,
+                    'refundableUntil' => new DateTimeImmutable('2021-01-01T00:00:00+00:00')
+                ],
+                'expectedProperties' => [
+                    'id' => 'id',
+                    'refundable' => YesNoBackedEnum::YES,
+                    'refundableUntil' => new DateTimeImmutable('2021-01-01T00:00:00+00:00')
+                ],
+                'expectedSerializedData' => [
+                    ...$data,
+                    'refundableUntil' => new DateTimeImmutable('2021-01-01T00:00:00+00:00')
+                        ->format(DateTimeInterface::ATOM)
+                ]
+            ],
             'Address data 1' => [
                 'dtoClass' => AddressData::class,
                 'data' => $data = [
@@ -468,6 +510,36 @@ final class BaseDataTest extends UnitCase
                     'users' => [1, 2]
                 ],
                 'expectedSerializedData' => $data
+            ],
+            'User group data 3' => [
+                'dtoClass' => UserGroupData::class,
+                'data' => $data = [
+                    'name' => 'Group name 2',
+                    'users' => [
+                        new UserData('John', 'Doe'),
+                        new UserData('Jane', 'Doe')
+                    ]
+                ],
+                'expectedProperties' => [
+                    'name' => 'Group name 2',
+                    'users' => [
+                        new UserData('John', 'Doe'),
+                        new UserData('Jane', 'Doe')
+                    ]
+                ],
+                'expectedSerializedData' => [
+                    ...$data,
+                    'users' => [
+                        [
+                            'firstName' => 'John',
+                            'lastName' => 'Doe'
+                        ],
+                        [
+                            'firstName' => 'Jane',
+                            'lastName' => 'Doe'
+                        ]
+                    ]
+                ]
             ],
             'Computed properties data' => [
                 'dtoClass' => ComputedPropertiesData::class,
