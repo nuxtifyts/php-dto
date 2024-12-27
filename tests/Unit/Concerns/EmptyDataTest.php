@@ -8,6 +8,7 @@ use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contracts\EmptyData as EmptyDataContract;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
+use Nuxtifyts\PhpDto\Exceptions\DataCreationException;
 use Nuxtifyts\PhpDto\Tests\Dummies\AddressData;
 use Nuxtifyts\PhpDto\Tests\Dummies\CountryData;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
@@ -27,6 +28,7 @@ use Throwable;
 #[CoversClass(Data::class)]
 #[CoversClass(PropertyContext::class)]
 #[CoversClass(ClassContext::class)]
+#[CoversClass(DataCreationException::class)]
 #[UsesClass(ArrayOfScalarTypes::class)]
 #[UsesClass(PointGroupData::class)]
 #[UsesClass(PointData::class)]
@@ -166,5 +168,25 @@ final class EmptyDataTest extends UnitCase
                 ]
             ],
         ];
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[Test]
+    public function will_throw_exception_when_parameter_is_not_linked_to_a_property(): void
+    {
+        $object = new readonly class('') extends Data {
+            public string $otherPropertyName;
+
+            public function __construct(
+                string $parameterName
+            ) {
+                $this->otherPropertyName = $parameterName;
+            }
+        };
+
+        self::expectException(DataCreationException::class);
+        $object::empty();
     }
 }
