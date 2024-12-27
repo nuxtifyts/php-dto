@@ -21,7 +21,7 @@ trait HasNormalizers
         foreach (static::allNormalizer() as $normalizer) {
             $normalized = new $normalizer($value, $class)->normalize();
 
-            if (!empty($normalized)) {
+            if ($normalized !== false) {
                 return $normalized;
             }
         }

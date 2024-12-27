@@ -3,13 +3,11 @@
 namespace Nuxtifyts\PhpDto\Concerns;
 
 use Nuxtifyts\PhpDto\Contexts\ClassContext;
+use Nuxtifyts\PhpDto\Exceptions\DataCreationException;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
-use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DecipherDataPipe;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipeline;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipelinePassable;
-use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\RefineDataPipe;
-use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\ResolveValuesFromAliasesPipe;
-use Nuxtifyts\PhpDto\Support\Pipeline;
 use Nuxtifyts\PhpDto\Support\Traits\HasNormalizers;
 use ReflectionClass;
 use Throwable;
@@ -17,6 +15,40 @@ use Throwable;
 trait BaseData
 {
     use HasNormalizers;
+
+    final public static function create(mixed ...$args): static
+    {
+        if (array_any(
+            array_keys($args),
+            static fn (string|int $arg) => is_numeric($arg)
+        )) {
+            throw DataCreationException::invalidProperty();
+        }
+
+        try {
+            $value = static::normalizeValue($args, static::class);
+
+            if ($value === false) {
+                throw new DeserializeException(
+                    code: DeserializeException::INVALID_VALUE_ERROR_CODE
+                );
+            }
+
+            /** @var ClassContext<static> $context */
+            $context = ClassContext::getInstance(new ReflectionClass(static::class));
+
+            $data = DeserializePipeline::createFromArray()
+                ->sendThenReturn(new DeserializePipelinePassable(
+                    classContext: $context,
+                    data: $value
+                ))
+                ->data;
+
+            return static::instanceWithConstructorCallFrom($context, $data);
+        } catch (Throwable $e) {
+            throw DataCreationException::unableToCreateInstance(static::class, $e);
+        }
+    }
 
     /**
      * @throws DeserializeException
@@ -26,7 +58,7 @@ trait BaseData
         try {
             $value = static::normalizeValue($value, static::class);
 
-            if (empty($value)) {
+            if ($value === false) {
                 throw new DeserializeException(
                     code: DeserializeException::INVALID_VALUE_ERROR_CODE
                 );
@@ -35,10 +67,7 @@ trait BaseData
             /** @var ClassContext<static> $context */
             $context = ClassContext::getInstance(new ReflectionClass(static::class));
 
-            $data = new Pipeline(DeserializePipelinePassable::class)
-                ->through(ResolveValuesFromAliasesPipe::class)
-                ->through(RefineDataPipe::class)
-                ->through(DecipherDataPipe::class)
+            $data = DeserializePipeline::hydrateFromArray()
                 ->sendThenReturn(new DeserializePipelinePassable(
                     classContext: $context,
                     data: $value

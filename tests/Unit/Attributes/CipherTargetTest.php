@@ -11,7 +11,7 @@ use Nuxtifyts\PhpDto\DataCiphers\CipherConfig;
 use Nuxtifyts\PhpDto\DataCiphers\DefaultDataCipher;
 use Nuxtifyts\PhpDto\Exceptions\DataCipherException;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
-use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DecipherDataPipe;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes\DecipherDataPipe;
 use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use PHPUnit\Framework\Attributes\CoversClass;

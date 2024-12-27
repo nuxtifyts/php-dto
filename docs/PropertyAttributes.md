@@ -4,6 +4,7 @@ Property Attributes
 In order to provide more functionality to your DTOs, you can use the following attributes:
 - [Computed](#Computed) - To define a property that is computed from other properties.
 - [Aliases](#Aliases) - To define aliases for a property.
+- [DefaultsTo](#DefaultsTo) - To define a default value for a property using a fallback resolver.
 - [CipherTarget](#CipherTarget) - To define a property that should be encrypted/decrypted.
 
 Computed
@@ -109,3 +110,52 @@ public function __construct(
 ) {}
 ```
 
+DefaultsTo
+-
+
+Sometimes, we may need to specify that a property has a default value, 
+we can achieve that using plain PHP for some property types but not all of them.
+
+```php
+use Nuxtifyts\PhpDto\Data;
+
+final readonly class User extends Data
+{
+    public function __construct(
+        public string $firstName,
+        public string $lastName,
+        public string $email,
+        public UserType $type = UserType::DEFAULT,
+        public UserConfigData $config,
+    ) {}
+}
+```
+
+On the other hand, if we want to specify, for example, a default value for UserType depending 
+on the provided email address, or if you want to provide a default value for complex data such as
+`UserConfigData` which is another DTO, there is no way to do it using plain PHP, 
+that's where `DefaultsTo` attribute comes in.
+
+```php
+use Nuxtifyts\PhpDto\Data;
+use Nuxtifyts\PhpDto\Attributes\Property\DefaultsTo;
+
+final readonly class User extends Data
+{
+    public function __construct(
+        public string $firstName,
+        public string $lastName,
+        public string $email,
+        #[DefaultsTo(UserType::DEFAULT)]
+        public UserType $type,
+        #[DefaultsTo(UserConfigDataFallbackResolver::class)]
+        public UserConfigData $config,
+    ) {}
+}
+```
+
+The `DefaultsTo` attribute provides the ability to specify default values for complex types, 
+such as DateTimes and DTOs.
+
+For more details checkout the [DefaultValues](https://github.com/nuxtifyts/php-dto/blob/main/docs/DefaultValues.md) 
+guide.

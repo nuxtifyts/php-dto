@@ -5,6 +5,7 @@ namespace Nuxtifyts\PhpDto\Contexts;
 use Nuxtifyts\PhpDto\Attributes\Property\Aliases;
 use Nuxtifyts\PhpDto\Attributes\Property\CipherTarget;
 use Nuxtifyts\PhpDto\Attributes\Property\Computed;
+use Nuxtifyts\PhpDto\Attributes\Property\DefaultsTo;
 use Nuxtifyts\PhpDto\Attributes\Property\WithRefiner;
 use Nuxtifyts\PhpDto\DataCiphers\CipherConfig;
 use Nuxtifyts\PhpDto\DataRefiners\DataRefiner;
@@ -13,6 +14,7 @@ use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
 use Nuxtifyts\PhpDto\Exceptions\UnknownTypeException;
 use Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException;
+use Nuxtifyts\PhpDto\FallbackResolver\FallbackConfig;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
 use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
 use Nuxtifyts\PhpDto\Support\Traits\HasTypes;
@@ -41,6 +43,8 @@ class PropertyContext
     private(set) bool $isComputed = false;
 
     private(set) ?CipherConfig $cipherConfig = null;
+
+    private(set) ?FallbackConfig $fallbackConfig = null;
 
     /** @var list<DataRefiner> */
     private(set) array $dataRefiners = [];
@@ -110,6 +114,16 @@ class PropertyContext
                 dataCipherClass: $instance->dataCipherClass,
                 secret: $instance->secret ?: $this->reflection->getName(),
                 encoded: $instance->encoded
+            );
+        }
+
+        if ($defaultsToAttribute = $this->reflection->getAttributes(DefaultsTo::class)[0] ?? null) {
+            /** @var ReflectionAttribute<DefaultsTo> $defaultsToAttribute */
+            $instance = $defaultsToAttribute->newInstance();
+
+            $this->fallbackConfig = new FallbackConfig(
+                value: $instance->value,
+                resolverClass: $instance->fallbackResolverClass
             );
         }
     }

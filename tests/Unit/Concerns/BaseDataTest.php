@@ -3,11 +3,13 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\Concerns;
 
 use DateTimeImmutable;
+use DateTimeInterface;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipeline;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipelinePassable;
-use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\RefineDataPipe;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes\RefineDataPipe;
 use Nuxtifyts\PhpDto\Serializers\BackedEnumSerializer;
 use Nuxtifyts\PhpDto\Serializers\DataSerializer;
 use Nuxtifyts\PhpDto\Serializers\DateTimeSerializer;
@@ -19,23 +21,25 @@ use Nuxtifyts\PhpDto\Tests\Dummies\ComputedPropertiesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\CoordinatesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\CountryData;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
+use Nuxtifyts\PhpDto\Tests\Dummies\FallbackResolvers\DummyPointsFallbackResolver;
 use Nuxtifyts\PhpDto\Tests\Dummies\InvitationData;
+use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
+use Nuxtifyts\PhpDto\Tests\Dummies\PointData;
+use Nuxtifyts\PhpDto\Tests\Dummies\PointGroupData;
 use Nuxtifyts\PhpDto\Tests\Dummies\RefundableItemData;
 use Nuxtifyts\PhpDto\Tests\Dummies\UnionMultipleComplexData;
 use Nuxtifyts\PhpDto\Tests\Dummies\UnionMultipleTypeData;
+use Nuxtifyts\PhpDto\Tests\Dummies\UnionTypedData;
 use Nuxtifyts\PhpDto\Tests\Dummies\UserData;
 use Nuxtifyts\PhpDto\Tests\Dummies\UserGroupData;
 use Nuxtifyts\PhpDto\Tests\Dummies\UserLocationData;
 use Nuxtifyts\PhpDto\Tests\Dummies\YesOrNoData;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
-use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
-use Nuxtifyts\PhpDto\Tests\Dummies\UnionTypedData;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
 use Throwable;
-use DateTimeInterface;
 
 #[CoversClass(Data::class)]
 #[CoversClass(DeserializeException::class)]
@@ -43,6 +47,7 @@ use DateTimeInterface;
 #[CoversClass(Pipeline::class)]
 #[CoversClass(Pipe::class)]
 #[CoversClass(DeserializePipelinePassable::class)]
+#[CoversClass(DeserializePipeline::class)]
 #[CoversClass(RefineDataPipe::class)]
 #[CoversClass(Passable::class)]
 #[CoversClass(DateTimeSerializer::class)]
@@ -61,6 +66,9 @@ use DateTimeInterface;
 #[UsesClass(UserLocationData::class)]
 #[UsesClass(UserGroupData::class)]
 #[UsesClass(ComputedPropertiesData::class)]
+#[UsesClass(PointGroupData::class)]
+#[UsesClass(PointData::class)]
+#[UsesClass(DummyPointsFallbackResolver::class)]
 final class BaseDataTest extends UnitCase
 {
     /**
@@ -555,5 +563,34 @@ final class BaseDataTest extends UnitCase
                 'expectedSerializedData' => $data
             ]
         ];
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[Test]
+    public function will_be_able_to_create_an_instance_using_create(): void
+    {
+        $point = PointData::create(
+            x: 1,
+            y: 2
+        );
+
+        self::assertInstanceOf(PointData::class, $point);
+        self::assertEquals(1, $point->x);
+        self::assertEquals(2, $point->y);
+
+        // Make sure we skip deciphering the key
+        $pointGroup = PointGroupData::create(
+            key: 'random-key'
+        );
+
+        self::assertInstanceOf(PointGroupData::class, $pointGroup);
+        self::assertEquals('random-key', $pointGroup->key);
+        self::assertEquals([
+            new PointData(1, 2),
+            new PointData(3, 4),
+            new PointData(5, 6)
+        ], $pointGroup->points);
     }
 }
