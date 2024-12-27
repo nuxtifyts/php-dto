@@ -8,7 +8,7 @@ and by default `Data` classes have the ability to create an `"empty"` instance:
 use Nuxtifyts\PhpDto\Data;
 use DateTimeImmutable;
 
-final reaconly class Todo extends Data
+final readonly class Todo extends Data
 {
     public function __construct(
         public string $title,
