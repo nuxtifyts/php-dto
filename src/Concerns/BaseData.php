@@ -156,4 +156,17 @@ trait BaseData
             throw new SerializeException($e->getMessage(), $e->getCode(), $e);
         }
     }
+
+    /**
+     * @throws SerializeException
+     */
+    final public function toArray(): array
+    {
+        return $this->jsonSerialize();
+    }
+
+    final public function toJson(): false|string
+    {
+        return json_encode($this);
+    }
 }
