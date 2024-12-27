@@ -9,7 +9,7 @@ use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\FallbackResolverException;
 use Nuxtifyts\PhpDto\FallbackResolver\FallbackConfig;
-use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\ResolveDefaultDataPipe;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes\ResolveDefaultDataPipe;
 use Nuxtifyts\PhpDto\Tests\Dummies\FallbackResolvers\DummyUserFallbackResolver;
 use Nuxtifyts\PhpDto\Tests\Dummies\UserData;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;

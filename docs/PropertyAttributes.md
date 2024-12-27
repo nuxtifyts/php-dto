@@ -157,27 +157,5 @@ final readonly class User extends Data
 The `DefaultsTo` attribute provides the ability to specify default values for complex types, 
 such as DateTimes and DTOs.
 
-In this example, the `UserConfigDataFallbackResolver` would look like this:
-
-```php
-use Nuxtifyts\PhpDto\Contexts\PropertyContext;
-use Nuxtifyts\PhpDto\FallbackResolver\FallbackResolver;
-
-class UserConfigDataFallbackResolver implements FallbackResolver
-{
-    /** 
-     * @param array<string, mixed> $rawData 
-     */
-    public static function resolve(array $rawData, PropertyContext $property) : mixed{
-        $email = $rawData['email'] ?? null;
-        
-        return match(true) {
-            str_contains($email, 'example.com') => new UserConfigData(/** Admin configs */),
-            default => new UserConfigData(/** User configs */)
-        }
-    }
-}
-```
-
->! When using `DefaultsTo` attribute, priority is given to the attribute instead of the parameter's default value.
-
+For more details checkout the [DefaultValues](https://github.com/nuxtifyts/php-dto/blob/main/docs/DefaultValues.md) 
+guide.

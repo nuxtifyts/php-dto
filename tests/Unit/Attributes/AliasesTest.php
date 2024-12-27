@@ -4,7 +4,7 @@ namespace Nuxtifyts\PhpDto\Tests\Unit\Attributes;
 
 use Nuxtifyts\PhpDto\Attributes\Property\Aliases;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
-use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\ResolveValuesFromAliasesPipe;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes\ResolveValuesFromAliasesPipe;
 use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use PHPUnit\Framework\Attributes\CoversClass;

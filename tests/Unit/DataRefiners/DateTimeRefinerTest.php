@@ -2,13 +2,15 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Unit\DataRefiners;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use Nuxtifyts\PhpDto\Attributes\Property\WithRefiner;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\DataRefiners\DateTimeRefiner;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\InvalidRefiner;
-use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\RefineDataPipe;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes\RefineDataPipe;
 use Nuxtifyts\PhpDto\Serializers\DateTimeSerializer;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -16,8 +18,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
 use ReflectionProperty;
-use DateTimeInterface;
-use DateTimeImmutable;
 use Throwable;
 
 #[CoversClass(DateTimeRefiner::class)]

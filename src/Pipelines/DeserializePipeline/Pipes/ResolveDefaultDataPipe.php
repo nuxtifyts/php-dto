@@ -1,7 +1,8 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Pipelines\DeserializePipeline;
+namespace Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes;
 
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipelinePassable;
 use Nuxtifyts\PhpDto\Support\Passable;
 use Nuxtifyts\PhpDto\Support\Pipe;
 use ReflectionParameter;
