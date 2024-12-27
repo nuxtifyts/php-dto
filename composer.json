@@ -29,6 +29,6 @@
     },
     "scripts": {
         "ci-test": "XDEBUG_MODE=coverage vendor/bin/phpunit --testsuite=ci --configuration phpunit.xml",
-        "phpstan": "vendor/bin/phpstan analyse --configuration phpstan.neon"
+        "phpstan": "vendor/bin/phpstan analyse --configuration phpstan.neon --memory-limit=256M"
     }
 }

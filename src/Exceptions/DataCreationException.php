@@ -9,6 +9,7 @@ class DataCreationException extends Exception
 {
     protected const int UNABLE_TO_CREATE_INSTANCE = 0;
     protected const int INVALID_PROPERTY = 1;
+    protected const int UNABLE_TO_CREATE_EMPTY_INSTANCE = 2;
 
     public static function unableToCreateInstance(
         string $class,
@@ -26,6 +27,17 @@ class DataCreationException extends Exception
         return new self(
             message: 'Invalid property passed to create method',
             code: self::INVALID_PROPERTY
+        );
+    }
+
+    public static function unableToCreateEmptyInstance(
+        string $class,
+        ?Throwable $previous = null
+    ): self {
+        return new self(
+            message: "Unable to create empty instance of class {$class}",
+            code: self::UNABLE_TO_CREATE_EMPTY_INSTANCE,
+            previous: $previous
         );
     }
 }

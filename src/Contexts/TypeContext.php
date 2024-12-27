@@ -109,7 +109,7 @@ class TypeContext
                     );
                     break;
                 default:
-                    throw UnsupportedTypeException::from($type);
+                    throw UnsupportedTypeException::unknownType($type);
             }
         }
 
