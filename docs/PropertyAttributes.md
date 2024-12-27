@@ -4,7 +4,7 @@ Property Attributes
 In order to provide more functionality to your DTOs, you can use the following attributes:
 - [Computed](#Computed) - To define a property that is computed from other properties.
 - [Aliases](#Aliases) - To define aliases for a property.
-- [DefaultsUsing](#DefaultsUsing) - To define a default value for a property using a fallback resolver.
+- [DefaultsTo](#DefaultsTo) - To define a default value for a property using a fallback resolver.
 - [CipherTarget](#CipherTarget) - To define a property that should be encrypted/decrypted.
 
 Computed
@@ -110,7 +110,7 @@ public function __construct(
 ) {}
 ```
 
-DefaultsUsing
+DefaultsTo
 -
 
 Sometimes, we may need to specify that a property has a default value, 
@@ -134,11 +134,11 @@ final readonly class User extends Data
 On the other hand, if we want to specify, for example, a default value for UserType depending 
 on the provided email address, or if you want to provide a default value for complex data such as
 `UserConfigData` which is another DTO, there is no way to do it using plain PHP, 
-that's where `DefaultsUsing` attribute comes in.
+that's where `DefaultsTo` attribute comes in.
 
 ```php
 use Nuxtifyts\PhpDto\Data;
-use Nuxtifyts\PhpDto\Attributes\Property\DefaultsUsing;
+use Nuxtifyts\PhpDto\Attributes\Property\DefaultsTo;
 
 final readonly class User extends Data
 {
@@ -146,12 +146,38 @@ final readonly class User extends Data
         public string $firstName,
         public string $lastName,
         public string $email,
-        #[DefaultsUsing(UserTypeFallbackResolver::class)]
+        #[DefaultsTo(UserType::DEFAULT)]
         public UserType $type,
-        #[DefaultsUsing(UserConfigDataFallbackResolver::class)]
+        #[DefaultsTo(UserConfigDataFallbackResolver::class)]
         public UserConfigData $config,
     ) {}
 }
 ```
 
-TODO - Add example of fall back resolver code
+The `DefaultsTo` attribute provides the ability to specify default values for complex types, 
+such as DateTimes and DTOs.
+
+In this example, the `UserConfigDataFallbackResolver` would look like this:
+
+```php
+use Nuxtifyts\PhpDto\Contexts\PropertyContext;
+use Nuxtifyts\PhpDto\FallbackResolver\FallbackResolver;
+
+class UserConfigDataFallbackResolver implements FallbackResolver
+{
+    /** 
+     * @param array<string, mixed> $rawData 
+     */
+    public static function resolve(array $rawData, PropertyContext $property) : mixed{
+        $email = $rawData['email'] ?? null;
+        
+        return match(true) {
+            str_contains($email, 'example.com') => new UserConfigData(/** Admin configs */),
+            default => new UserConfigData(/** User configs */)
+        }
+    }
+}
+```
+
+>! When using `DefaultsTo` attribute, priority is given to the attribute instead of the parameter's default value.
+

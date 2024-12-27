@@ -18,10 +18,12 @@ class DefaultsTo
     protected(set) ?string $fallbackResolverClass = null;
 
     /**
+     * @param BackedEnum|array<array-key, mixed>|int|string|float|bool|null $value
+     *
      * @throws FallbackResolverException
      */
     public function __construct(
-        protected(set) BackedEnum|int|string|float|bool|null $value
+        protected(set) BackedEnum|array|int|string|float|bool|null $value
     ) {
         if (is_string($value) && class_exists($value)) {
             /** @var ReflectionClass<object> $reflection */

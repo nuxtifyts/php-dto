@@ -3,21 +3,29 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\Attributes;
 
 use Nuxtifyts\PhpDto\Attributes\Property\DefaultsTo;
+use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfScalarTypes;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Data;
+use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\FallbackResolverException;
 use Nuxtifyts\PhpDto\FallbackResolver\FallbackConfig;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\ResolveDefaultDataPipe;
+use Nuxtifyts\PhpDto\Tests\Dummies\FallbackResolvers\DummyUserFallbackResolver;
 use Nuxtifyts\PhpDto\Tests\Dummies\UserData;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\UsesClass;
 use Throwable;
 
 #[CoversClass(DefaultsTo::class)]
 #[CoversClass(FallbackResolverException::class)]
 #[CoversClass(FallbackConfig::class)]
 #[CoversClass(PropertyContext::class)]
+#[CoversClass(ResolveDefaultDataPipe::class)]
+#[UsesClass(DummyUserFallbackResolver::class)]
+#[UsesClass(UserData::class)]
 final class DefaultsToTest extends UnitCase
 {
     /**
@@ -68,7 +76,70 @@ final class DefaultsToTest extends UnitCase
                 'expectedSerializedData' => [
                     'name' => 'John'
                 ]
-            ]
+            ],
+            'Resolves default complex type value' => [
+                'object' => new readonly class (
+                    new UserData('John', 'Doe')
+                ) extends Data {
+                    public function __construct(
+                        #[DefaultsTo(DummyUserFallbackResolver::class)]
+                        public UserData $userData
+                    ) {
+                    }
+                },
+                'arrayData' => [],
+                'expectedSerializedData' => [
+                    'userData' => [
+                        'firstName' => 'John',
+                        'lastName' => 'Doe'
+                    ]
+                ]
+            ],
+            'Resolves array of scalar type values' => [
+                'object' => new readonly class([]) extends Data {
+                    /**
+                     * @param list<string> $names
+                     */
+                    public function __construct(
+                        #[ArrayOfScalarTypes(Type::STRING)]
+                        #[DefaultsTo(['John', 'Jane'])]
+                        public array $names
+                    ) {
+                    }
+                },
+                'arrayData' => [],
+                'expectedSerializedData' => [
+                    'names' => ['John', 'Jane']
+                ]
+            ],
+            'Allows pure php way of defaulting 1' => [
+                'object' => new readonly class ('') extends Data {
+                    public function __construct(
+                        public string $name = 'John'
+                    ) {
+                    }
+                },
+                'arrayData' => [],
+                'expectedSerializedData' => [
+                    'name' => 'John'
+                ]
+            ],
+            'Allows pure php way of defaulting 2' => [
+                'object' => new readonly class([]) extends Data {
+                    /**
+                     * @param list<string> $names
+                     */
+                    public function __construct(
+                        #[ArrayOfScalarTypes(Type::STRING)]
+                        public array $names = ['John', 'Jane']
+                    ) {
+                    }
+                },
+                'arrayData' => [],
+                'expectedSerializedData' => [
+                    'names' => ['John', 'Jane']
+                ]
+            ],
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace Nuxtifyts\PhpDto\Pipelines\DeserializePipeline;
 
 use Nuxtifyts\PhpDto\Support\Passable;
 use Nuxtifyts\PhpDto\Support\Pipe;
+use ReflectionParameter;
 
 /**
  * @extends Pipe<DeserializePipelinePassable>
@@ -25,8 +26,21 @@ readonly class ResolveDefaultDataPipe extends Pipe
                     : $propertyContext->fallbackConfig->value;
             }
 
-            if ($propertyContext->reflection->hasDefaultValue()) {
-                $data[$propertyContext->propertyName] = $propertyContext->reflection->getDefaultValue();
+            $constructorParameters = $propertyContext->reflection
+                ->getDeclaringClass()
+                ->getConstructor()
+                ?->getParameters();
+
+            if (
+                $propertyParameter = array_find(
+                    $constructorParameters ?? [],
+                    fn (ReflectionParameter $parameter) => $parameter->getName() === $propertyContext->propertyName
+                )
+            ) {
+                /** @var ReflectionParameter $propertyParameter */
+                if ($propertyParameter->isDefaultValueAvailable()) {
+                    $data[$propertyContext->propertyName] = $propertyParameter->getDefaultValue();
+                }
             }
         }
 
