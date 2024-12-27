@@ -5,7 +5,6 @@ namespace Nuxtifyts\PhpDto\Tests\Unit\Concerns;
 use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfScalarTypes;
 use Nuxtifyts\PhpDto\Contexts\ClassContext;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
-use Nuxtifyts\PhpDto\Concerns\EmptyData;
 use Nuxtifyts\PhpDto\Contracts\EmptyData as EmptyDataContract;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
@@ -26,7 +25,6 @@ use DateTimeInterface;
 use Throwable;
 
 #[CoversClass(Data::class)]
-#[CoversClass(EmptyData::class)]
 #[CoversClass(PropertyContext::class)]
 #[CoversClass(ClassContext::class)]
 #[UsesClass(ArrayOfScalarTypes::class)]
@@ -57,8 +55,8 @@ final class EmptyDataTest extends UnitCase
             if ($value instanceof DateTimeInterface) {
                 self::assertInstanceOf($value::class, $emptyData->{$property});
                 self::assertEquals(
-                    $value->format(DateTimeInterface::ATOM),
-                    $emptyData->{$property}->format(DateTimeInterface::ATOM)
+                    $value->format('Y-m-d H:i'),
+                    $emptyData->{$property}->format('Y-m-d H:i')
                 );
             } else {
                 self::assertEquals($value, $emptyData->{$property});
