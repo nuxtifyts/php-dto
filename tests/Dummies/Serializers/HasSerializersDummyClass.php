@@ -4,6 +4,7 @@ namespace Nuxtifyts\PhpDto\Tests\Dummies\Serializers;
 
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Exceptions\UnknownTypeException;
+use Nuxtifyts\PhpDto\Serializers\DateTimeSerializer;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
 use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
 
@@ -22,11 +23,13 @@ class HasSerializersDummyClass
     }
 
     /**
-     * @return list<Serializer>
+     * @return list<class-string<Serializer>>
      */
     protected static function serializersList(): array
     {
-        return [];
+        return [
+            DateTimeSerializer::class
+        ];
     }
 
     /**

@@ -82,5 +82,8 @@ trait HasSerializers
         return $this->_serializers ??= $this->resolveSerializers();
     }
 
+    /**
+     * @return list<Serializer>
+     */
     abstract protected function resolveSerializers(): array;
 }
