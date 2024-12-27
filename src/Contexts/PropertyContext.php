@@ -2,11 +2,15 @@
 
 namespace Nuxtifyts\PhpDto\Contexts;
 
+use BackedEnum;
+use Nuxtifyts\PhpDto\Exceptions\DataCreationException;
+use UnitEnum;
 use Nuxtifyts\PhpDto\Attributes\Property\Aliases;
 use Nuxtifyts\PhpDto\Attributes\Property\CipherTarget;
 use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 use Nuxtifyts\PhpDto\Attributes\Property\DefaultsTo;
 use Nuxtifyts\PhpDto\Attributes\Property\WithRefiner;
+use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\DataCiphers\CipherConfig;
 use Nuxtifyts\PhpDto\DataRefiners\DataRefiner;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
@@ -18,8 +22,12 @@ use Nuxtifyts\PhpDto\FallbackResolver\FallbackConfig;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
 use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
 use Nuxtifyts\PhpDto\Support\Traits\HasTypes;
+use DateTimeInterface;
+use ReflectionEnum;
+use ReflectionException;
 use ReflectionProperty;
 use ReflectionAttribute;
+use ReflectionClass;
 use Exception;
 
 class PropertyContext
@@ -223,6 +231,63 @@ class PropertyContext
             return $serializedData;
         } catch (Exception) {
             throw new SerializeException('Could not serialize value for property: ' . $this->propertyName);
+        }
+    }
+
+    /**
+     * @throws UnsupportedTypeException
+     * @throws ReflectionException
+     * @throws DataCreationException
+     */
+    public function emptyValue(): mixed
+    {
+        if ($this->isNullable) {
+            return null;
+        }
+
+        if (! $typeContext = $this->typeContexts[0] ?? null) {
+            throw UnsupportedTypeException::emptyType();
+        }
+
+        switch (true) {
+            case $typeContext->type === Type::STRING:
+                return '';
+
+            case $typeContext->type === Type::INT:
+                return 0;
+
+            case $typeContext->type === Type::FLOAT:
+                return 0.0;
+
+            case $typeContext->type === Type::BOOLEAN:
+                return false;
+
+            case $typeContext->type === Type::ARRAY:
+                return [];
+
+            case $typeContext->type === Type::DATA:
+                /** @var null|ReflectionClass<Data> $reflection */
+                $reflection = $typeContext->reflection;
+
+                return !$reflection
+                    ? throw UnsupportedTypeException::invalidReflection()
+                    : ClassContext::getInstance($reflection)->emptyValue();
+
+            case $typeContext->type === Type::BACKED_ENUM:
+                /** @var null|ReflectionEnum<UnitEnum|BackedEnum> $reflection */
+                $reflection = $typeContext->reflection;
+
+                return $reflection instanceof ReflectionEnum && $reflection->isBacked()
+                    ? $reflection->getCases()[0]->getValue()
+                    : throw UnsupportedTypeException::invalidReflection();
+
+            default:
+                /** @var null|DateTimeInterface $dateTime */
+                $dateTime = $typeContext->reflection?->newInstance();
+
+                return $dateTime instanceof DateTimeInterface
+                    ? $dateTime
+                    : throw UnsupportedTypeException::invalidReflection();
         }
     }
 }

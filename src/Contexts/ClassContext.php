@@ -2,13 +2,15 @@
 
 namespace Nuxtifyts\PhpDto\Contexts;
 
+use Nuxtifyts\PhpDto\Data;
+use Nuxtifyts\PhpDto\Exceptions\DataCreationException;
 use Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException;
-use ReflectionClass;
 use ReflectionException;
 use ReflectionParameter;
+use ReflectionClass;
 
 /**
- * @template T of object
+ * @template T of Data
  */
 class ClassContext
 {
@@ -101,9 +103,36 @@ class ClassContext
 
     /**
      * @throws ReflectionException
+     *
+     * @return T
      */
     public function newInstanceWithConstructorCall(mixed ...$args): mixed
     {
         return $this->reflection->newInstance(...$args);
+    }
+
+    /**
+     * @return T
+     *
+     * @throws ReflectionException
+     * @throws UnsupportedTypeException
+     * @throws DataCreationException
+     */
+    public function emptyValue(): mixed
+    {
+        /** @var array<string, mixed> $args */
+        $args = [];
+
+        foreach ($this->constructorParams as $paramName) {
+            $propertyContext = $this->properties[$paramName] ?? null;
+
+            if (!$propertyContext) {
+                throw DataCreationException::invalidProperty();
+            }
+
+            $args[$paramName] = $propertyContext->emptyValue();
+        }
+
+        return $this->newInstanceWithConstructorCall(...$args);
     }
 }

@@ -22,6 +22,20 @@ interface BaseData extends JsonSerializable
     public function jsonSerialize(): array;
 
     /**
+     * @return array<string, mixed>
+     *
+     * @throws SerializeException
+     */
+    public function toArray(): array;
+
+    /**
+     * @return false|string
+     *
+     * @throws SerializeException
+     */
+    public function toJson(): false|string;
+
+    /**
      * @throws DeserializeException
      */
     public static function from(mixed $value): static;

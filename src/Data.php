@@ -3,25 +3,14 @@
 namespace Nuxtifyts\PhpDto;
 
 use Nuxtifyts\PhpDto\Contracts\BaseData as BaseDataContract;
+use Nuxtifyts\PhpDto\Contracts\EmptyData as EmptyDataContract;
 use Nuxtifyts\PhpDto\Concerns\BaseData;
-use Nuxtifyts\PhpDto\Exceptions\SerializeException;
+use Nuxtifyts\PhpDto\Concerns\EmptyData;
 
-abstract readonly class Data implements BaseDataContract
+abstract readonly class Data implements
+    BaseDataContract,
+    EmptyDataContract
 {
     use BaseData;
-
-    /**
-     * @return array<string, mixed>
-     *
-     * @throws SerializeException
-     */
-    final public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    final public function toJson(): false|string
-    {
-        return json_encode($this);
-    }
+    use EmptyData;
 }

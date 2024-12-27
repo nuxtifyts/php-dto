@@ -36,7 +36,7 @@ trait HasSerializers
                     array_column($serializer::supportedTypes(), 'value')
                 )) ? new $serializer() : null,
             self::serializersList()
-        ))) ?: throw UnknownTypeException::from(...$propertyContext->types);
+        ))) ?: throw UnknownTypeException::unknownType(...$propertyContext->types);
     }
 
     /**
@@ -82,5 +82,8 @@ trait HasSerializers
         return $this->_serializers ??= $this->resolveSerializers();
     }
 
+    /**
+     * @return list<Serializer>
+     */
     abstract protected function resolveSerializers(): array;
 }

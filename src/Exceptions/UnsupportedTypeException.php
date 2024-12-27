@@ -6,15 +6,36 @@ use Exception;
 
 class UnsupportedTypeException extends Exception
 {
-    final protected function __construct(string $message)
+    protected const int UNKNOWN_TYPE = 0;
+    protected const int EMPTY_TYPE = 1;
+    protected const int INVALID_REFLECTION = 2;
+    protected const int INVALID_TYPE = 3;
+
+    public static function unknownType(?string $type = null): self
     {
-        parent::__construct($message);
+        return new self(
+            'Unknown type' . ($type ? " '{$type}'" : ''),
+        );
     }
 
-    public static function from(string $type): static
+    public static function emptyType(): self
     {
-        return new static(
-            "Unknown type '{$type}'"
+        return new self(
+            'Got empty type',
+        );
+    }
+
+    public static function invalidReflection(): self
+    {
+        return new self(
+            'Invalid reflection for type',
+        );
+    }
+
+    public static function invalidType(): self
+    {
+        return new self(
+            'Invalid type',
         );
     }
 }

@@ -80,3 +80,4 @@ can be found here:
 - [Normalizers](https://github.com/nuxtifyts/php-dto/blob/main/docs/Normalizers.md)
 - [Property Attributes](https://github.com/nuxtifyts/php-dto/blob/main/docs/PropertyAttributes.md)
 - [Data Refiners](https://github.com/nuxtifyts/php-dto/blob/main/docs/DataRefiners.md)
+- [Empty Data](https://github.com/nuxtifyts/php-dto/blob/main/docs/EmptyData.md)

@@ -16,6 +16,9 @@ trait BaseData
 {
     use HasNormalizers;
 
+    /**
+     * @throws DataCreationException
+     */
     final public static function create(mixed ...$args): static
     {
         if (array_any(
@@ -124,13 +127,7 @@ trait BaseData
             $args[$paramName] = $propertyContext->deserializeFrom($value);
         }
 
-        $instance = $context->newInstanceWithConstructorCall(...$args);
-
-        if (!$instance instanceof static) {
-            throw new DeserializeException('Could not create instance of ' . static::class);
-        }
-
-        return $instance;
+        return $context->newInstanceWithConstructorCall(...$args);
     }
 
     /**
@@ -158,5 +155,18 @@ trait BaseData
         } catch (Throwable $e) {
             throw new SerializeException($e->getMessage(), $e->getCode(), $e);
         }
+    }
+
+    /**
+     * @throws SerializeException
+     */
+    final public function toArray(): array
+    {
+        return $this->jsonSerialize();
+    }
+
+    final public function toJson(): false|string
+    {
+        return json_encode($this);
     }
 }
