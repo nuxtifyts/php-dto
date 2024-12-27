@@ -4,6 +4,7 @@ namespace Nuxtifyts\PhpDto\Tests\Unit\Concerns;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
@@ -110,6 +111,31 @@ final class BaseDataTest extends UnitCase
         self::expectExceptionCode(DeserializeException::INVALID_VALUE_ERROR_CODE);
 
         PersonData::from(false);
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[Test]
+    public function will_throw_deserialization_exception_when_invalid_parameter_is_used_with_computed_properties(): void
+    {
+        $object = new readonly class ('a', 'b') extends Data {
+            #[Computed]
+            public string $c;
+
+            public function __construct(
+                public string $a,
+                string $b
+            ) {
+                $this->c = $a . $b;
+            }
+        };
+
+        self::expectException(DeserializeException::class);
+        $object::from([
+            'a' => 'a',
+            'b' => 'b'
+        ]);
     }
 
     /**

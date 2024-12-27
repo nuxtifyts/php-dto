@@ -2,6 +2,7 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Unit\Contexts;
 
+use Nuxtifyts\PhpDto\Tests\Dummies\Serializers\HasSerializersDummyClass;
 use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 use Nuxtifyts\PhpDto\Attributes\Property\WithRefiner;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
@@ -9,6 +10,7 @@ use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\DataRefiners\DateTimeRefiner;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
+use Nuxtifyts\PhpDto\Exceptions\UnknownTypeException;
 use Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException;
 use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
 use Nuxtifyts\PhpDto\Tests\Dummies\ComputedPropertiesData;
@@ -32,6 +34,7 @@ use Throwable;
 #[CoversClass(Computed::class)]
 #[CoversClass(WithRefiner::class)]
 #[CoversClass(UnsupportedTypeException::class)]
+#[CoversClass(UnknownTypeException::class)]
 #[UsesClass(ComputedPropertiesData::class)]
 #[UsesClass(ScalarTypeSerializer::class)]
 #[UsesClass(PersonData::class)]
@@ -39,6 +42,7 @@ use Throwable;
 #[UsesClass(CoordinatesData::class)]
 #[UsesClass(UnionMultipleTypeData::class)]
 #[UsesClass(PersonData::class)]
+#[UsesClass(HasSerializersDummyClass::class)]
 final class PropertyContextTest extends UnitCase
 {
     /**
@@ -97,6 +101,26 @@ final class PropertyContextTest extends UnitCase
         $reflectionProperty = new ReflectionProperty($object::class, 'value');
         self::expectException(UnsupportedTypeException::class);
         PropertyContext::getInstance($reflectionProperty);
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[Test]
+    public function will_throw_and_exception_if_it_fails_to_resolve_a_serializer(): void
+    {
+        $object = new readonly class (1) extends Data {
+            public function __construct(
+                public int $value
+            ) {
+            }
+        };
+
+        $reflectionProperty = new ReflectionProperty($object::class, 'value');
+        $propertyContext = PropertyContext::getInstance($reflectionProperty);
+
+        self::expectException(UnknownTypeException::class);
+        HasSerializersDummyClass::testGetSerializersFromPropertyContext($propertyContext);
     }
 
     /**
