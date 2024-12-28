@@ -5,7 +5,7 @@
 ![PhpStan Level](https://img.shields.io/badge/PHPStan-level%2010-brightgreen.svg)
 [![PHPStan Checks](https://github.com/nuxtifyts/php-dto/actions/workflows/phpstan-tests.yml/badge.svg)](https://github.com/nuxtifyts/php-dto/actions/workflows/phpstan-tests.yml)
 [![CI Tests](https://github.com/nuxtifyts/php-dto/actions/workflows/php-tests.yml/badge.svg)](https://github.com/nuxtifyts/php-dto/actions/workflows/php-tests.yml)
-[![Test Coverage](https://raw.githubusercontent.com/nuxtifyts/php-dto/main/badge-coverage.svg)](https://packagist.org/packages/nuxtifyts/phpdto)
+[![Test Coverage](https://raw.githubusercontent.com/nuxtifyts/php-dto/main/assets/badge-coverage.svg)](https://packagist.org/packages/nuxtifyts/phpdto)
 
 This package enabled the creation of data objects which can be used in various ways. 
 Using modern PHP syntax, it allows you to hydrate data from arrays, objects, and other data sources.

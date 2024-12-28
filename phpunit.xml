@@ -36,6 +36,7 @@
     <coverage>
         <report>
             <html outputDirectory="coverage-html"/>
+
             <clover outputFile="clover.xml" />
         </report>
     </coverage>
