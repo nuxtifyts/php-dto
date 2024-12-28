@@ -19,7 +19,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        token: ${{ secrets.NUXTIFYTS_BOT_API_KEY }}
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.NUXTIFYTS_BOT_API_KEY }}
 
       - name: Setup Git
         run: |
