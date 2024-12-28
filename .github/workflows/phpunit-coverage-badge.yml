@@ -18,7 +18,13 @@ jobs:
     name: P${{ matrix.php-versions }} - L${{ matrix.laravel }} - ${{ matrix.operating-system}}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+        token: ${{ secrets.NUXTIFYTS_BOT_API_KEY }}
+
+      - name: Setup Git
+        run: |
+          git config --global user.name "nuxtifyts-bot"
+          git config --global user.email "nuxtifyts@gmail.com"
 
       - name: Install PHP versions
         uses: shivammathur/setup-php@v2
