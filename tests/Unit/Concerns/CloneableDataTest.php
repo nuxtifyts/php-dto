@@ -44,6 +44,19 @@ final class CloneableDataTest extends UnitCase
      * @throws Throwable
      */
     #[Test]
+    public function will_throw_an_exception_if_invalid_arguments_are_passed_using_with_function(): void
+    {
+        $person = new PersonData(firstName: 'John', lastName: 'Doe');
+
+        self::expectException(DataCreationException::class);
+
+        $person->with('{firstName: "Jane"');
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[Test]
     public function will_throw_an_exception_if_dto_declaration_is_invalid(): void
     {
         $object = new readonly class ('firstName', 'lastName') extends Data {

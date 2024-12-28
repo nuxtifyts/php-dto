@@ -8,7 +8,7 @@ use Nuxtifyts\PhpDto\Normalizers\Normalizer;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\Todo\Status;
 use Nuxtifyts\PhpDto\Tests\Dummies\Normalizers\GoalTodoNormalizer;
 
-final readonly class Todo extends Data
+final readonly class TodoData extends Data
 {
     public function __construct(
         public string $title,

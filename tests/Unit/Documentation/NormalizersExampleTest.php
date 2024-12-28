@@ -6,13 +6,13 @@ use Nuxtifyts\PhpDto\Tests\Dummies\Enums\Todo\Status;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
-use Nuxtifyts\PhpDto\Tests\Dummies\DocsDummies\Todo;
+use Nuxtifyts\PhpDto\Tests\Dummies\DocsDummies\TodoData;
 use Nuxtifyts\PhpDto\Tests\Dummies\DocsDummies\NonData\Goal;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Throwable;
 
-#[UsesClass(Todo::class)]
+#[UsesClass(TodoData::class)]
 #[UsesClass(Goal::class)]
 final class NormalizersExampleTest extends UnitCase
 {
@@ -30,7 +30,7 @@ final class NormalizersExampleTest extends UnitCase
             dueDate: $now
         );
 
-        $todo = Todo::from($goal);
+        $todo = TodoData::from($goal);
 
         self::assertEquals(
             [

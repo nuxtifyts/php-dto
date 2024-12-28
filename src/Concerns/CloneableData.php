@@ -20,6 +20,10 @@ trait CloneableData
         try {
             $value = static::normalizeValue($args, static::class);
 
+            if ($value === false) {
+                throw DataCreationException::invalidParamsPassed(static::class);
+            }
+
             /** @var ClassContext<static> $context */
             $context = ClassContext::getInstance(new ReflectionClass(static::class));
 
@@ -46,7 +50,7 @@ trait CloneableData
             $propertyContext = $context->properties[$paramName] ?? null;
 
             if (!$propertyContext) {
-                DataCreationException::invalidProperty();
+                throw DataCreationException::invalidProperty();
             }
 
             $args[$paramName] = array_key_exists($propertyContext->propertyName, $value)
