@@ -36,6 +36,8 @@ By calling the `empty()` method, we can create a new instance of the `Todo` clas
 $emptyTodo = Todo::empty();
 ```
 
+> This is really useful with [Cloneable Data](https://github.com/nuxtifyts/php-dto/blob/main/docs/CloneableData.md)
+
 The `$emptyTodo` variable will contain the following data:
 
 ```
