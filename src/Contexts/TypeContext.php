@@ -109,7 +109,7 @@ class TypeContext
                     );
                     break;
                 default:
-                    throw UnsupportedTypeException::unknownType($type);
+                    $instances[] = new static(Type::MIXED);
             }
         }
 

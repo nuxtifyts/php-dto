@@ -12,6 +12,7 @@ enum Type: string
     case DATETIME = 'datetime';
     case DATA = 'data';
     case ARRAY = 'array';
+    case MIXED = 'mixed';
 
     /** @var list<Type> */
     public const array SCALAR_TYPES = [

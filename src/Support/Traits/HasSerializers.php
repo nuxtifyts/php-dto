@@ -12,6 +12,7 @@ use Nuxtifyts\PhpDto\Serializers\DataSerializer;
 use Nuxtifyts\PhpDto\Serializers\DateTimeSerializer;
 use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
+use Nuxtifyts\PhpDto\Serializers\MixedDataSerializer;
 
 trait HasSerializers
 {
@@ -69,6 +70,7 @@ trait HasSerializers
             DateTimeSerializer::class,
             BackedEnumSerializer::class,
             ScalarTypeSerializer::class,
+            MixedDataSerializer::class
         ];
     }
 

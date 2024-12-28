@@ -32,7 +32,7 @@ class DataSerializer extends Serializer implements SerializesArrayOfItemsContrac
     protected function serializeItem(mixed $item, PropertyContext $property, object $object): ?array
     {
         return match (true) {
-            $item === null && $property->isNullable => null,
+            is_null($item) && $property->isNullable => null,
 
             $item instanceof BaseDataContract => $item->jsonSerialize(),
 
