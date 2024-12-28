@@ -4,8 +4,10 @@ namespace Nuxtifyts\PhpDto\Tests\Unit\Concerns;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Nuxtifyts\PhpDto\Attributes\Property\CipherTarget;
 use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 use Nuxtifyts\PhpDto\Data;
+use Nuxtifyts\PhpDto\Exceptions\DataCreationException;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipeline;
@@ -21,6 +23,7 @@ use Nuxtifyts\PhpDto\Tests\Dummies\AddressData;
 use Nuxtifyts\PhpDto\Tests\Dummies\ComputedPropertiesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\CoordinatesData;
 use Nuxtifyts\PhpDto\Tests\Dummies\CountryData;
+use Nuxtifyts\PhpDto\Tests\Dummies\DataCiphers\UselessDataCipher;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
 use Nuxtifyts\PhpDto\Tests\Dummies\FallbackResolvers\DummyPointsFallbackResolver;
 use Nuxtifyts\PhpDto\Tests\Dummies\InvitationData;
@@ -54,6 +57,7 @@ use Throwable;
 #[CoversClass(DateTimeSerializer::class)]
 #[CoversClass(DataSerializer::class)]
 #[CoversClass(BackedEnumSerializer::class)]
+#[CoversClass(DataCreationException::class)]
 #[UsesClass(PersonData::class)]
 #[UsesClass(UnionTypedData::class)]
 #[UsesClass(YesOrNoData::class)]
@@ -70,6 +74,7 @@ use Throwable;
 #[UsesClass(PointGroupData::class)]
 #[UsesClass(PointData::class)]
 #[UsesClass(DummyPointsFallbackResolver::class)]
+#[UsesClass(UselessDataCipher::class)]
 final class BaseDataTest extends UnitCase
 {
     /**
@@ -591,6 +596,29 @@ final class BaseDataTest extends UnitCase
         ];
     }
 
+    #[Test]
+    public function will_throw_an_exception_when_property_serialization_fails(): void
+    {
+        $object = new readonly class ('secret') extends Data {
+            public function __construct(
+                #[CipherTarget(UselessDataCipher::class)]
+                public string $secret
+            ) {
+            }
+        };
+
+        self::expectException(SerializeException::class);
+        $object->jsonSerialize();
+    }
+
+    #[Test]
+    public function will_throw_an_exception_when_invalid_data_is_passed_to_create_function(): void
+    {
+        self::expectException(DataCreationException::class);
+
+        PointData::create('{"x: 1, "y": 2}');
+    }
+
     /**
      * @throws Throwable
      */
@@ -605,6 +633,12 @@ final class BaseDataTest extends UnitCase
         self::assertInstanceOf(PointData::class, $point);
         self::assertEquals(1, $point->x);
         self::assertEquals(2, $point->y);
+
+        $point = PointData::create('{"x": 3, "y": 4}');
+
+        self::assertInstanceOf(PointData::class, $point);
+        self::assertEquals(3, $point->x);
+        self::assertEquals(4, $point->y);
 
         // Make sure we skip deciphering the key
         $pointGroup = PointGroupData::create(

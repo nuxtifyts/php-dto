@@ -21,20 +21,12 @@ trait BaseData
      */
     final public static function create(mixed ...$args): static
     {
-        if (array_any(
-            array_keys($args),
-            static fn (string|int $arg) => is_numeric($arg)
-        )) {
-            throw DataCreationException::invalidProperty();
-        }
-
         try {
-            $value = static::normalizeValue($args, static::class);
+            $value = static::normalizeValue($args, static::class)
+                ?: static::normalizeValue($args[0] ?? [], static::class);
 
             if ($value === false) {
-                throw new DeserializeException(
-                    code: DeserializeException::INVALID_VALUE_ERROR_CODE
-                );
+                throw DataCreationException::invalidParamsPassed(static::class);
             }
 
             /** @var ClassContext<static> $context */
