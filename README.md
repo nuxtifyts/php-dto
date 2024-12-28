@@ -3,6 +3,7 @@
 ![GitHub License](https://img.shields.io/github/license/nuxtifyts/php-dto?style=for-the-badge)
 ![Packagist Version](https://img.shields.io/packagist/v/nuxtifyts/php-dto?style=for-the-badge)
 ![PhpStan Level](https://img.shields.io/badge/PHPStan-level%2010-brightgreen.svg?style=for-the-badge)
+[![Test Coverage](https://raw.githubusercontent.com/nuxtifyts/php-dto/main/badge-coverage.svg)](https://packagist.org/packages/nuxtifyts/phpdto)
 
 This package enabled the creation of data objects which can be used in various ways. 
 Using modern PHP syntax, it allows you to hydrate data from arrays, objects, and other data sources.
