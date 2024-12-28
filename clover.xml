@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1735395498">
-  <project timestamp="1735395498">
+<coverage generated="1735409029">
+  <project timestamp="1735409029">
     <package name="Nuxtifyts\PhpDto\Attributes\Property">
       <file name="/Users/faroukbraik/Dev/php-dto/src/Attributes/Property/Aliases.php">
         <class name="Nuxtifyts\PhpDto\Attributes\Property\Aliases" namespace="Nuxtifyts\PhpDto\Attributes\Property">

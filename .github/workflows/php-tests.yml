@@ -22,6 +22,7 @@ jobs:
       with:
         php-version: 8.4
         coverage: xdebug
+        extensions: dom, json, libxml, mbstring, xml, xmlwriter, openssl
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
