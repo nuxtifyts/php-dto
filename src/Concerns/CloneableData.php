@@ -18,7 +18,12 @@ trait CloneableData
     public function with(mixed ...$args): static
     {
         try {
-            $value = static::normalizeValue($args, static::class);
+            if (empty($args)) {
+                throw DataCreationException::invalidParamsPassed(static::class);
+            }
+
+            $value = static::normalizeValue($args, static::class)
+                ?: static::normalizeValue($args[0], static::class);
 
             if ($value === false) {
                 throw DataCreationException::invalidParamsPassed(static::class);

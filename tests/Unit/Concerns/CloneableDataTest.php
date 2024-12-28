@@ -78,6 +78,19 @@ final class CloneableDataTest extends UnitCase
     }
 
     /**
+     * @throws Throwable
+     */
+    #[Test]
+    public function will_throw_an_exception_if_no_param_is_passed(): void
+    {
+        $person = new PersonData(firstName: 'John', lastName: 'Doe');
+
+        self::expectException(DataCreationException::class);
+
+        $person->with();
+    }
+
+    /**
      * @param array<string, mixed> $args
      * @param array<string, mixed> $expectedProperties
      *

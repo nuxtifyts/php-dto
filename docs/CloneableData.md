@@ -89,3 +89,31 @@ $janeDoe = $johnDoe->with(firstName: 'Jane');
 
 $janeDoe->fullName; // 'Jane Doe'
 ```
+
+Normalizers
+-
+
+When cloning a `Data` object, normalizers that are typically used when hydrating a `Data` object
+using `from` method are also used.
+
+This will allow the ability to pass `json` data, `ArrayAccess` or `stdClass` objects for example to the `with` method.
+If a custom normalizer is implemented for the `Data` class, it can be used as well.
+
+```php
+$johnDoe = new PersonDaa('John', 'Doe');
+
+$janeDoe = $johnDoe->with('{"firstName": "Jane"}');
+
+$janeDoe->fullName; // 'Jane Doe'
+```
+
+Using an `stdClass` object:
+
+```php
+$object = new stdClass();
+$object->firstName = 'Jake';
+
+$jakeDoe = $janeDoe->with($object);
+
+$jakeDoe->fullName; // 'Jake Doe'
+```

@@ -8,6 +8,7 @@ use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\Attributes\Test;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\Todo\Status;
+use stdClass;
 use DateTimeImmutable;
 use Throwable;
 
@@ -19,7 +20,7 @@ final class CloneableDataExampleTest extends UnitCase
      * @throws Throwable
      */
     #[Test]
-    public function test_it_can_clone_data_as_example_in_documentation(): void
+    public function it_can_clone_data_as_example_in_documentation(): void
     {
         $emptyTodo = TodoData::empty();
 
@@ -56,13 +57,42 @@ final class CloneableDataExampleTest extends UnitCase
      * @throws Throwable
      */
     #[Test]
-    public function test_is_can_clone_dts_with_computed_properties(): void
+    public function it_can_clone_data_instances_with_computed_properties(): void
     {
         $person = new PersonData(firstName: 'John', lastName: 'Doe');
 
         self::assertEquals('John Doe', $person->fullName);
 
         $personWithFirstName = $person->with(firstName: 'Jane');
+
+        self::assertEquals('Jane Doe', $personWithFirstName->fullName);
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[Test]
+    public function it_can_clone_data_instances_by_passing_json(): void
+    {
+        $person = new PersonData(firstName: 'John', lastName: 'Doe');
+
+        $personWithFirstName = $person->with('{"firstName": "Jane"}');
+
+        self::assertEquals('Jane Doe', $personWithFirstName->fullName);
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[Test]
+    public function it_can_clone_data_instances_by_passing_std_object(): void
+    {
+        $person = new PersonData(firstName: 'John', lastName: 'Doe');
+
+        $object = new stdClass();
+        $object->firstName = 'Jane';
+
+        $personWithFirstName = $person->with($object);
 
         self::assertEquals('Jane Doe', $personWithFirstName->fullName);
     }
