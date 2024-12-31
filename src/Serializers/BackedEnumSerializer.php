@@ -5,11 +5,11 @@ namespace Nuxtifyts\PhpDto\Serializers;
 use BackedEnum;
 use Exception;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
-use Nuxtifyts\PhpDto\Contracts\SerializesArrayOfItems as SerializesArrayOfItemsContract;
-use Nuxtifyts\PhpDto\Concerns\SerializesArrayOfItems;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
+use Nuxtifyts\PhpDto\Serializers\Concerns\SerializesArrayOfItems;
+use Nuxtifyts\PhpDto\Serializers\Contracts\SerializesArrayOfItems as SerializesArrayOfItemsContract;
 
 class BackedEnumSerializer extends Serializer implements SerializesArrayOfItemsContract
 {
@@ -30,7 +30,7 @@ class BackedEnumSerializer extends Serializer implements SerializesArrayOfItemsC
         return match(true) {
             is_null($item) && $property->isNullable => null,
             $item instanceof BackedEnum => $item->value,
-            default => throw new SerializeException('Could not serialize array of BackedEnum items')
+            default => throw SerializeException::unableToSerializeScalarTypeItem()
         };
     }
 
@@ -42,7 +42,7 @@ class BackedEnumSerializer extends Serializer implements SerializesArrayOfItemsC
         if (is_null($item)) {
             return $property->isNullable
                 ? null
-                : throw new DeserializeException('Property is not nullable');
+                : throw DeserializeException::propertyIsNotNullable();
         }
 
         if (
@@ -50,7 +50,7 @@ class BackedEnumSerializer extends Serializer implements SerializesArrayOfItemsC
             && !is_integer($item)
             && !$item instanceof BackedEnum
         ) {
-            throw new DeserializeException('Value is not a string or integer');
+            throw DeserializeException::invalidValue();
         }
 
         $typeContexts = $property->getFilteredTypeContexts(...self::supportedTypes())
@@ -86,6 +86,6 @@ class BackedEnumSerializer extends Serializer implements SerializesArrayOfItemsC
             // @codeCoverageIgnoreEnd
         }
 
-        throw new DeserializeException('Could not deserialize BackedEnum');
+        throw DeserializeException::unableToDeserializeBackedEnumItem();
     }
 }

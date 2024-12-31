@@ -6,11 +6,11 @@ use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\UnknownTypeException;
-use Nuxtifyts\PhpDto\Serializers\ArraySerializer;
 use Nuxtifyts\PhpDto\Serializers\BackedEnumSerializer;
 use Nuxtifyts\PhpDto\Serializers\DataSerializer;
 use Nuxtifyts\PhpDto\Serializers\DateTimeSerializer;
 use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
+use Nuxtifyts\PhpDto\Serializers\ArraySerializer;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
 
 trait HasSerializers

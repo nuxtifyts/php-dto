@@ -4,11 +4,11 @@ namespace Nuxtifyts\PhpDto\Serializers;
 
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
-use Nuxtifyts\PhpDto\Contracts\SerializesArrayOfItems as SerializesArrayOfItemsContract;
-use Nuxtifyts\PhpDto\Concerns\SerializesArrayOfItems;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
+use Nuxtifyts\PhpDto\Serializers\Contracts\SerializesArrayOfItems as SerializesArrayOfItemsContract;
+use Nuxtifyts\PhpDto\Serializers\Concerns\SerializesArrayOfItems;
 
 class ScalarTypeSerializer extends Serializer implements SerializesArrayOfItemsContract
 {
@@ -50,7 +50,7 @@ class ScalarTypeSerializer extends Serializer implements SerializesArrayOfItemsC
             is_int($item),
             is_string($item) => $item,
 
-            default => throw new SerializeException('Could not serialize scalar type item')
+            default => throw SerializeException::unableToSerializeBackedEnumItem()
         };
     }
 
@@ -62,14 +62,14 @@ class ScalarTypeSerializer extends Serializer implements SerializesArrayOfItemsC
         return match(true) {
             is_null($item) => $property->isNullable
                 ? null
-                : throw new DeserializeException('Could not deserialize scalar type item'),
+                : throw DeserializeException::propertyIsNotNullable(),
 
             array_any(
                 array_column(self::getScalarTypeFromProperty($property), 'value'),
                 static fn (string $type) => settype($item, $type)
             ) => $item,
 
-            default => throw new DeserializeException('Could not deserialize scalar type item')
+            default => throw DeserializeException::unableToDeserializeScalarTypeItem()
         };
     }
 }

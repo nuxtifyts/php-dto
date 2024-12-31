@@ -1,6 +1,6 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Concerns;
+namespace Nuxtifyts\PhpDto\Serializers\Concerns;
 
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
@@ -32,7 +32,7 @@ trait SerializesArrayOfItems
                     $value
                 ),
 
-                default => throw new SerializeException('Could not serialize array of items')
+                default => throw SerializeException::unableToSerializeArrayItem()
             }
         ];
     }
