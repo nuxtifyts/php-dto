@@ -9,6 +9,7 @@ use Nuxtifyts\PhpDto\Serializers\DataSerializer;
 use Nuxtifyts\PhpDto\Serializers\DateTimeSerializer;
 use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
+use Nuxtifyts\PhpDto\Support\Arr;
 
 class SerializersConfiguration implements Configuration
 {
@@ -51,12 +52,7 @@ class SerializersConfiguration implements Configuration
 
         if (
             !is_array($baseSerializers)
-            || array_any(
-                $baseSerializers,
-               static fn (mixed $baseSerializer): bool =>
-                     !is_string($baseSerializer)
-                     || !is_subclass_of($baseSerializer, Serializer::class)
-            )
+            || !Arr::isArrayOfClassStrings($baseSerializers, Serializer::class)
         ) {
             throw DataConfigurationException::invalidBaseSerializers();
         }

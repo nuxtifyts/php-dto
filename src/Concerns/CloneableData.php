@@ -36,7 +36,7 @@ trait CloneableData
                 ? $this->cloneInstanceWithConstructorCall($context, $value)
                 : $this->cloneInstanceWithoutConstructorCall($context, $value);
         } catch (Throwable $t) {
-            throw DataCreationException::unableToCloneInstanceWithNewData($t);
+            throw DataCreationException::unableToCloneInstanceWithNewData(static::class, $t);
         }
     }
 

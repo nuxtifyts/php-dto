@@ -2,12 +2,10 @@
 
 namespace Nuxtifyts\PhpDto\Normalizers\Concerns;
 
+use Nuxtifyts\PhpDto\Configuration\DataConfiguration;
 use Nuxtifyts\PhpDto\Data;
-use Nuxtifyts\PhpDto\Normalizers\ArrayAccessNormalizer;
-use Nuxtifyts\PhpDto\Normalizers\ArrayNormalizer;
-use Nuxtifyts\PhpDto\Normalizers\JsonStringNormalizer;
+use Nuxtifyts\PhpDto\Exceptions\DataConfigurationException;
 use Nuxtifyts\PhpDto\Normalizers\Normalizer;
-use Nuxtifyts\PhpDto\Normalizers\StdClassNormalizer;
 
 trait HasNormalizers
 {
@@ -15,6 +13,8 @@ trait HasNormalizers
      * @param class-string<Data> $class
      *
      * @return array<string, mixed>|false
+     *
+     * @throws DataConfigurationException
      */
     protected static function normalizeValue(mixed $value, string $class): array|false
     {
@@ -30,16 +30,15 @@ trait HasNormalizers
     }
 
     /**
-     * @return non-empty-array<int<0, max>, class-string<Normalizer>>
+     * @return list<class-string<Normalizer>>
+     *
+     * @throws DataConfigurationException
      */
     final protected static function allNormalizer(): array
     {
         return array_values(array_unique([
             ...static::normalizers(),
-            JsonStringNormalizer::class,
-            StdClassNormalizer::class,
-            ArrayAccessNormalizer::class,
-            ArrayNormalizer::class,
+            ...DataConfiguration::getInstance()->normalizers->baseNormalizers,
         ]));
     }
 
