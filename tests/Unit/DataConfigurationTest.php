@@ -26,6 +26,12 @@ final class DataConfigurationTest extends UnitCase
         $config = DataConfiguration::getInstance();
         self::assertInstanceOf(DataConfiguration::class, $config);
 
+        $normalizersConfig = NormalizersConfiguration::getInstance();
+        self::assertSame($config->normalizers, $normalizersConfig);
+
+        $serializersConfig = SerializersConfiguration::getInstance();
+        self::assertSame($config->serializers, $serializersConfig);
+
         $sameConfig = DataConfiguration::getInstance();
         self::assertSame($config, $sameConfig);
 
