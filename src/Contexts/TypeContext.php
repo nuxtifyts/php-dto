@@ -2,23 +2,23 @@
 
 namespace Nuxtifyts\PhpDto\Contexts;
 
+use BackedEnum;
+use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
+use Exception;
+use Nuxtifyts\PhpDto\Contracts\BaseData as BaseDataContract;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException;
+use Nuxtifyts\PhpDto\Serializers\Concerns\HasSerializers;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
-use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
 use ReflectionClass;
+use ReflectionEnum;
 use ReflectionNamedType;
 use ReflectionProperty;
 use ReflectionType;
 use ReflectionUnionType;
-use ReflectionEnum;
-use BackedEnum;
-use Exception;
-use DateTime;
-use DateTimeImmutable;
-use Nuxtifyts\PhpDto\Contracts\BaseData as BaseDataContract;
 
 /**
  * @template T of Type

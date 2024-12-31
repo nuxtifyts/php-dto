@@ -4,7 +4,7 @@ namespace Nuxtifyts\PhpDto\Concerns;
 
 use Nuxtifyts\PhpDto\Contexts\ClassContext;
 use Nuxtifyts\PhpDto\Exceptions\DataCreationException;
-use Nuxtifyts\PhpDto\Support\Traits\HasNormalizers;
+use Nuxtifyts\PhpDto\Normalizers\Concerns\HasNormalizers;
 use ReflectionClass;
 use Throwable;
 

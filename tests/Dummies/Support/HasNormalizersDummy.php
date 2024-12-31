@@ -3,8 +3,8 @@
 namespace Nuxtifyts\PhpDto\Tests\Dummies\Support;
 
 use Nuxtifyts\PhpDto\Data;
+use Nuxtifyts\PhpDto\Normalizers\Concerns\HasNormalizers;
 use Nuxtifyts\PhpDto\Normalizers\Normalizer;
-use Nuxtifyts\PhpDto\Support\Traits\HasNormalizers;
 use Nuxtifyts\PhpDto\Tests\Dummies\Normalizers\DummyNormalizer;
 
 final class HasNormalizersDummy

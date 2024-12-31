@@ -6,9 +6,9 @@ use Nuxtifyts\PhpDto\Contexts\ClassContext;
 use Nuxtifyts\PhpDto\Exceptions\DataCreationException;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
+use Nuxtifyts\PhpDto\Normalizers\Concerns\HasNormalizers;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipeline;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipelinePassable;
-use Nuxtifyts\PhpDto\Support\Traits\HasNormalizers;
 use ReflectionClass;
 use Throwable;
 

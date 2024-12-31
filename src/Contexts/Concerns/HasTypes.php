@@ -1,6 +1,6 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Support\Traits;
+namespace Nuxtifyts\PhpDto\Contexts\Concerns;
 
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Enums\Property\Type;

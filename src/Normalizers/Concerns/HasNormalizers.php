@@ -1,6 +1,6 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Support\Traits;
+namespace Nuxtifyts\PhpDto\Normalizers\Concerns;
 
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Normalizers\ArrayAccessNormalizer;

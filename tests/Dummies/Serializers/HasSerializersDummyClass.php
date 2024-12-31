@@ -4,9 +4,9 @@ namespace Nuxtifyts\PhpDto\Tests\Dummies\Serializers;
 
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Exceptions\UnknownTypeException;
+use Nuxtifyts\PhpDto\Serializers\Concerns\HasSerializers;
 use Nuxtifyts\PhpDto\Serializers\DateTimeSerializer;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
-use Nuxtifyts\PhpDto\Support\Traits\HasSerializers;
 
 class HasSerializersDummyClass
 {
