@@ -8,7 +8,7 @@ and by default `Data` classes have the ability to create an `"empty"` instance:
 use Nuxtifyts\PhpDto\Data;
 use DateTimeImmutable;
 
-final readonly class Todo extends Data
+final readonly class TodoData extends Data
 {
     public function __construct(
         public string $title,
@@ -30,10 +30,10 @@ enum Status: string
 }
 ```
 
-By calling the `empty()` method, we can create a new instance of the `Todo` class with all properties set to `null`:
+By calling the `empty()` method, we can create a new instance of the `TodoData` class with all properties set to `null`:
 
 ```php
-$emptyTodo = Todo::empty();
+$emptyTodo = TodoData::empty();
 ```
 
 > This is really useful with [Cloneable Data](https://github.com/nuxtifyts/php-dto/blob/main/docs/CloneableData.md)

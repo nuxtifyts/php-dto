@@ -6,12 +6,12 @@ In this quickstart guide, you will learn the most basic usage of this package.
 First, you should [install](https://github.com/nuxtifyts/php-dto?tab=readme-ov-file#installation) the package using composer:
 
 We will create a Todo application, where we need to manage a list of TODOs. so we can start
-with creating a `Todo` data class.
+with creating a `TodoData` data class.
 
 ```php
 use Nuxtifyts\PhpDto\Data;
 
-final readonly class Todo extends Data
+final readonly class TodoData extends Data
 {
     public function __construct(
         public string $title,
@@ -37,10 +37,10 @@ enum Status: string
 }
 ```
 
-We can now create a new instance of the `Todo`:
+We can now create a new instance of the `TodoData`:
 
 ```php
-$todo = new Todo(
+$todo = new TodoData(
     title: 'Learn PHP DTO',
     content: 'Learn how to use PHP DTO',
     status: Status::READY,
@@ -51,11 +51,11 @@ $todo = new Todo(
 The package allows you to hydrate these data objects from other types, for example an array:
 
 ```php
-$todo = Todo::from([
+$todo = TodoData::from([
     'title' => 'Learn PHP DTO',
     'content' => 'Learn how to use PHP DTO',
     'status' => 'ready', // Or Status::READY
-    'dueDate' => '2025-01-01T00:00:00+00:00'
+    'dueDate' => '2025-01-01'
 ]);
 ```
 
@@ -66,7 +66,6 @@ You can also serialize the data object to an array, or a json string:
 $todo->toArray();
 
 // Serialize to a json string
-json_encode($todo); // or
 $todo->toJson();
 ```
 

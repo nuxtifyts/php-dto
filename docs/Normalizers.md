@@ -31,12 +31,12 @@ class Goal
 }
 ```
 
-And we have our `Todo` data class: 
+And we have our `TodoData` data class: 
 
 ```php
 use Nuxtifyts\PhpDto\Data;
 
-final readonly class Todo extends Data
+final readonly class TodoData extends Data
 {
     public function __construct(
         public string $title,
@@ -56,7 +56,8 @@ use Nuxtifyts\PhpDto\Normalizers\Normalizer;
 
 final readonly class GoalTodoNormalizer extends Normalizer
 {
-    public function normalize() : array|false{
+    public function normalize(): array|false
+    {
         if (!$this->value instanceof Goal) {
             return false;
         }
@@ -76,7 +77,7 @@ Next step is to add this new normalizer to the todo class:
 ```php
 use Nuxtifyts\PhpDto\Data;
 
-final readonly class Todo extends Data
+final readonly class TodoData extends Data
 {
     // ...
     
@@ -87,7 +88,7 @@ final readonly class Todo extends Data
 ```
 
 This will add the `GoalTodoNormalizer` on top of the default normalizers. Now it'll be possible to hydrate
-a `Todo` instance from a `Goal` instance.
+a `TodoData` instance from a `Goal` instance.
 
 ```php
 $goal = new Goal(
@@ -96,5 +97,5 @@ $goal = new Goal(
     dueDate: new DateTimeImmutable()
 );
 
-$todo = Todo::from($goal);
+$todo = TodoData::from($goal);
 ```

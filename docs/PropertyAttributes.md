@@ -17,7 +17,7 @@ This can be done using the `Computed` attribute.
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 
-final readonly class Person extends Data
+final readonly class PersonData extends Data
 {
     #[Computed]
     public string $fullName;
@@ -43,7 +43,7 @@ This can be done using the `Aliases` attribute.
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Attributes\Property\Aliases;
 
-final readonly class Person extends Data
+final readonly class PersonData extends Data
 {
     public function __construct(
         #[Aliases('first_name')]
@@ -69,7 +69,7 @@ use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfData;
 use Nuxtifyts\PhpDto\Attributes\Property\CipherTarget;
 
-final readonly class User extends Data
+final readonly class UserData extends Data
 {
     /** 
      * @param list<UserConfigData> $userConfigs
@@ -119,7 +119,7 @@ we can achieve that using plain PHP for some property types but not all of them.
 ```php
 use Nuxtifyts\PhpDto\Data;
 
-final readonly class User extends Data
+final readonly class UserData extends Data
 {
     public function __construct(
         public string $firstName,
@@ -140,7 +140,7 @@ that's where `DefaultsTo` attribute comes in.
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Attributes\Property\DefaultsTo;
 
-final readonly class User extends Data
+final readonly class UserData extends Data
 {
     public function __construct(
         public string $firstName,

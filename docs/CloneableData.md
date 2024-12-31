@@ -36,7 +36,7 @@ enum Status: string
 Using `with` function, we can easily create new instances of the `TodoData` class with the new data:
 
 ```php
-$emptyTodo = Todo::empty();
+$emptyTodo = TodoData::empty();
 
 // ...
  
@@ -76,7 +76,9 @@ final readonly class PersonData extends Data
     public function __construct(
         public string $firstName,
         public string $lastName
-    ) {}
+    ) {
+        $this->fullName = $this->firstName . ' ' . $this->lastName;
+    }
 }
 ```
 

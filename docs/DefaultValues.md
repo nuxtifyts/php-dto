@@ -7,7 +7,7 @@ we can achieve that using plain PHP for some property types but not all of them.
 ```php
 use Nuxtifyts\PhpDto\Data;
 
-final readonly class User extends Data
+final readonly class UserData extends Data
 {
     public function __construct(
         public string $firstName,
@@ -28,7 +28,7 @@ that's where `DefaultsTo` attribute comes in.
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Attributes\Property\DefaultsTo;
 
-final readonly class User extends Data
+final readonly class UserData extends Data
 {
     public function __construct(
         public string $firstName,
@@ -79,7 +79,7 @@ using the constructor is no longer possible, instead, you can make use of the
 Using the same example above, we can create a new instance of `User` with the default value for `config`:
 
 ```php
-$user = User::create(
+$user = UserData::create(
     firstName: 'John',
     lastName: 'Doe',
     email: 'johndoe@example.com'
