@@ -113,7 +113,7 @@ final class BaseDataTest extends UnitCase
     public function will_throw_an_exception_if_an_invalid_value_is_passed_to_from_function(): void
     {
         self::expectException(DeserializeException::class);
-        self::expectExceptionCode(DeserializeException::INVALID_VALUE_ERROR_CODE);
+        self::expectExceptionCode(0);
 
         PersonData::from(false);
     }

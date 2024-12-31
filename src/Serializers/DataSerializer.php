@@ -3,15 +3,15 @@
 namespace Nuxtifyts\PhpDto\Serializers;
 
 use Exception;
-use Nuxtifyts\PhpDto\Concerns\SerializesArrayOfItems;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Contracts\BaseData as BaseDataContract;
-use Nuxtifyts\PhpDto\Contracts\SerializesArrayOfItems as SerializesArrayOfItemsContract;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
+use Nuxtifyts\PhpDto\Serializers\Contracts\SerializesArrayOfItems as SerializesArrayOfItemsContract;
+use Nuxtifyts\PhpDto\Serializers\Concerns\SerializesArrayOfItems;
 
 class DataSerializer extends Serializer implements SerializesArrayOfItemsContract
 {
@@ -36,7 +36,7 @@ class DataSerializer extends Serializer implements SerializesArrayOfItemsContrac
 
             $item instanceof BaseDataContract => $item->jsonSerialize(),
 
-            default => throw new SerializeException('Could not serialize array of BaseDataContract items')
+            default => throw SerializeException::unableToSerializeDataItem()
         };
     }
 
@@ -85,6 +85,6 @@ class DataSerializer extends Serializer implements SerializesArrayOfItemsContrac
 
         return is_null($item) && $property->isNullable
             ? null
-            : throw new DeserializeException('Could not deserialize BaseDataContract');
+            : throw DeserializeException::unableToDeserializeDataItem();
     }
 }

@@ -7,11 +7,11 @@ use DateTimeInterface;
 use Exception;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
-use Nuxtifyts\PhpDto\Contracts\SerializesArrayOfItems as SerializesArrayOfItemsContract;
-use Nuxtifyts\PhpDto\Concerns\SerializesArrayOfItems;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
+use Nuxtifyts\PhpDto\Serializers\Contracts\SerializesArrayOfItems as SerializesArrayOfItemsContract;
+use Nuxtifyts\PhpDto\Serializers\Concerns\SerializesArrayOfItems;
 
 class DateTimeSerializer extends Serializer implements SerializesArrayOfItemsContract
 {
@@ -34,7 +34,7 @@ class DateTimeSerializer extends Serializer implements SerializesArrayOfItemsCon
 
             $item instanceof DateTimeInterface => $item->format(DateTimeInterface::ATOM),
 
-            default => throw new SerializeException('Value is not an instance of DateTimeInterface')
+            default => throw SerializeException::unableToSerializeDateTimeItem()
         };
     }
 
@@ -81,6 +81,6 @@ class DateTimeSerializer extends Serializer implements SerializesArrayOfItemsCon
 
         return is_null($item) && $property->isNullable
             ? null
-            : throw new DeserializeException('Could not deserialize DateTimeInterface');
+            : throw DeserializeException::unableToDeserializeDateTimeItem();
     }
 }

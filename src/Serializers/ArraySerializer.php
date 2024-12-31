@@ -2,12 +2,12 @@
 
 namespace Nuxtifyts\PhpDto\Serializers;
 
+use Exception;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
-use Nuxtifyts\PhpDto\Contracts\SerializesArrayOfItems as SerializesArrayOfItemsContract;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
-use Exception;
+use Nuxtifyts\PhpDto\Serializers\Contracts\SerializesArrayOfItems;
 
 class ArraySerializer extends Serializer
 {
@@ -20,6 +20,8 @@ class ArraySerializer extends Serializer
 
     /**
      * @return ?array<array-key, mixed>
+     *
+     * @throws SerializeException
      */
     protected function serializeItem(mixed $item, PropertyContext $property, object $object): ?array
     {
@@ -32,7 +34,7 @@ class ArraySerializer extends Serializer
                 try {
                     foreach ($typeContext->subTypeSerializers() as $serializer) {
                         try {
-                            if ($serializer instanceof SerializesArrayOfItemsContract) {
+                            if ($serializer instanceof SerializesArrayOfItems) {
                                 $serializedValue = $serializer->serializeArrayOfItems($property, $object);
 
                                 if (array_key_exists($property->propertyName, $serializedValue)) {
@@ -47,11 +49,13 @@ class ArraySerializer extends Serializer
             }
         }
 
-        throw new SerializeException('Could not serialize array of items');
+        throw SerializeException::unableToSerializeArrayItem();
     }
 
     /**
      * @return ?array<array-key, mixed>
+     *
+     * @throws DeserializeException
      */
     protected function deserializeItem(mixed $item, PropertyContext $property): ?array
     {
@@ -60,7 +64,7 @@ class ArraySerializer extends Serializer
                 try {
                     foreach ($typeContext->subTypeSerializers() as $serializer) {
                         try {
-                            if ($serializer instanceof SerializesArrayOfItemsContract) {
+                            if ($serializer instanceof SerializesArrayOfItems) {
                                 // @phpstan-ignore-next-line
                                 return $serializer->deserializeArrayOfItems($property, $item);
                             }
@@ -74,6 +78,6 @@ class ArraySerializer extends Serializer
 
         return is_null($item) && $property->isNullable
             ? null
-            : throw new DeserializeException('Property is not nullable');
+            : throw DeserializeException::unableToDeserializeArrayItem();
     }
 }

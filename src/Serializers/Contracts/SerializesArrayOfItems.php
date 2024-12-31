@@ -1,6 +1,6 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Contracts;
+namespace Nuxtifyts\PhpDto\Serializers\Contracts;
 
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;

@@ -194,29 +194,28 @@ class PropertyContext
             }
         }
 
-        throw new DeserializeException('Could not  deserialize value for property: ' . $this->propertyName);
+        throw DeserializeException::generic();
     }
 
     /**
      * @return array<string, mixed>
      *
      * @throws SerializeException
-     * @throws UnknownTypeException
      */
     public function serializeFrom(object $object): array
     {
-        foreach ($this->serializers() as $serializer) {
-            try {
-                $serializedData = $serializer->serialize($this, $object);
-            } catch (SerializeException) {
-            }
-        }
-
-        if (empty($serializedData)) {
-            throw new SerializeException('Could not serialize value for property: ' . $this->propertyName);
-        }
-
         try {
+            foreach ($this->serializers() as $serializer) {
+                try {
+                    $serializedData = $serializer->serialize($this, $object);
+                } catch (SerializeException) {
+                }
+            }
+
+            if (empty($serializedData)) {
+                throw new Exception();
+            }
+
             if ($this->cipherConfig) {
                 return array_map(
                     fn (mixed $value) => $this->cipherConfig->dataCipherClass::cipher(
@@ -229,8 +228,8 @@ class PropertyContext
             }
 
             return $serializedData;
-        } catch (Exception) {
-            throw new SerializeException('Could not serialize value for property: ' . $this->propertyName);
+        } catch (Exception $e) {
+            throw SerializeException::generic($e);
         }
     }
 

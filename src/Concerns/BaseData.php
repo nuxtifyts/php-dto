@@ -54,9 +54,7 @@ trait BaseData
             $value = static::normalizeValue($value, static::class);
 
             if ($value === false) {
-                throw new DeserializeException(
-                    code: DeserializeException::INVALID_VALUE_ERROR_CODE
-                );
+                throw DeserializeException::invalidValue();
             }
 
             /** @var ClassContext<static> $context */
@@ -73,7 +71,7 @@ trait BaseData
                 ? static::instanceWithConstructorCallFrom($context, $data)
                 : static::instanceWithoutConstructorFrom($context, $data);
         } catch (Throwable $e) {
-            throw new DeserializeException($e->getMessage(), $e->getCode(), $e);
+            throw DeserializeException::generic($e);
         }
     }
 
@@ -111,9 +109,7 @@ trait BaseData
             $propertyContext = $context->properties[$paramName] ?? null;
 
             if (!$propertyContext) {
-                throw new DeserializeException(
-                    "Could not find property context for constructor param: $paramName"
-                );
+                throw DeserializeException::invalidParamsPassed();
             }
 
             $args[$paramName] = $propertyContext->deserializeFrom($value);
@@ -145,7 +141,7 @@ trait BaseData
 
             return $serializedData;
         } catch (Throwable $e) {
-            throw new SerializeException($e->getMessage(), $e->getCode(), $e);
+            throw SerializeException::generic($e);
         }
     }
 

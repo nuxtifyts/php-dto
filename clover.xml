@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1735416137">
-  <project timestamp="1735416137">
+<coverage generated="1735663255">
+  <project timestamp="1735663255">
     <package name="Nuxtifyts\PhpDto\Attributes\Property">
-      <file name="/home/runner/work/php-dto/php-dto/src/Attributes/Property/Aliases.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Attributes/Property/Aliases.php">
         <class name="Nuxtifyts\PhpDto\Attributes\Property\Aliases" namespace="Nuxtifyts\PhpDto\Attributes\Property">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
@@ -10,7 +10,7 @@
         <line num="17" type="stmt" count="1"/>
         <metrics loc="20" ncloc="19" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Attributes/Property/CipherTarget.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Attributes/Property/CipherTarget.php">
         <class name="Nuxtifyts\PhpDto\Attributes\Property\CipherTarget" namespace="Nuxtifyts\PhpDto\Attributes\Property">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
@@ -18,13 +18,13 @@
         <line num="19" type="stmt" count="4"/>
         <metrics loc="21" ncloc="18" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Attributes/Property/Computed.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Attributes/Property/Computed.php">
         <class name="Nuxtifyts\PhpDto\Attributes\Property\Computed" namespace="Nuxtifyts\PhpDto\Attributes\Property">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Attributes/Property/DefaultsTo.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Attributes/Property/DefaultsTo.php">
         <class name="Nuxtifyts\PhpDto\Attributes\Property\DefaultsTo" namespace="Nuxtifyts\PhpDto\Attributes\Property">
           <metrics complexity="4" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
         </class>
@@ -36,7 +36,7 @@
         <line num="36" type="stmt" count="1"/>
         <metrics loc="41" ncloc="32" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Attributes/Property/WithRefiner.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Attributes/Property/WithRefiner.php">
         <class name="Nuxtifyts\PhpDto\Attributes\Property\WithRefiner" namespace="Nuxtifyts\PhpDto\Attributes\Property">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
         </class>
@@ -48,7 +48,7 @@
       </file>
     </package>
     <package name="Nuxtifyts\PhpDto\Attributes\Property\Types">
-      <file name="/home/runner/work/php-dto/php-dto/src/Attributes/Property/Types/ArrayOfBackedEnums.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Attributes/Property/Types/ArrayOfBackedEnums.php">
         <class name="Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfBackedEnums" namespace="Nuxtifyts\PhpDto\Attributes\Property\Types">
           <metrics complexity="7" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="18" coveredelements="18"/>
         </class>
@@ -72,7 +72,7 @@
         <line num="57" type="stmt" count="3"/>
         <metrics loc="60" ncloc="51" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="18" coveredelements="18"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Attributes/Property/Types/ArrayOfData.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Attributes/Property/Types/ArrayOfData.php">
         <class name="Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfData" namespace="Nuxtifyts\PhpDto\Attributes\Property\Types">
           <metrics complexity="8" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="21" elements="22" coveredelements="22"/>
         </class>
@@ -100,7 +100,7 @@
         <line num="64" type="stmt" count="3"/>
         <metrics loc="68" ncloc="59" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="21" elements="22" coveredelements="22"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Attributes/Property/Types/ArrayOfDateTimes.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Attributes/Property/Types/ArrayOfDateTimes.php">
         <class name="Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfDateTimes" namespace="Nuxtifyts\PhpDto\Attributes\Property\Types">
           <metrics complexity="9" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="21" elements="22" coveredelements="22"/>
         </class>
@@ -128,7 +128,7 @@
         <line num="65" type="stmt" count="3"/>
         <metrics loc="69" ncloc="60" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="21" elements="22" coveredelements="22"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Attributes/Property/Types/ArrayOfScalarTypes.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Attributes/Property/Types/ArrayOfScalarTypes.php">
         <class name="Nuxtifyts\PhpDto\Attributes\Property\Types\ArrayOfScalarTypes" namespace="Nuxtifyts\PhpDto\Attributes\Property\Types">
           <metrics complexity="3" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="10" coveredelements="10"/>
         </class>
@@ -146,9 +146,9 @@
       </file>
     </package>
     <package name="Nuxtifyts\PhpDto\Concerns">
-      <file name="/home/runner/work/php-dto/php-dto/src/Concerns/BaseData.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Concerns/BaseData.php">
         <class name="Nuxtifyts\PhpDto\Concerns\BaseData" namespace="Nuxtifyts\PhpDto\Concerns">
-          <metrics complexity="19" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="57" coveredstatements="57" elements="64" coveredelements="64"/>
+          <metrics complexity="19" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="53" coveredstatements="53" elements="60" coveredelements="60"/>
         </class>
         <line num="22" type="method" name="create" visibility="public" complexity="4" crap="4" count="2"/>
         <line num="25" type="stmt" count="2"/>
@@ -169,54 +169,50 @@
         <line num="54" type="stmt" count="29"/>
         <line num="56" type="stmt" count="29"/>
         <line num="57" type="stmt" count="1"/>
-        <line num="58" type="stmt" count="1"/>
-        <line num="59" type="stmt" count="1"/>
+        <line num="61" type="stmt" count="28"/>
         <line num="63" type="stmt" count="28"/>
+        <line num="64" type="stmt" count="28"/>
         <line num="65" type="stmt" count="28"/>
         <line num="66" type="stmt" count="28"/>
         <line num="67" type="stmt" count="28"/>
         <line num="68" type="stmt" count="28"/>
-        <line num="69" type="stmt" count="28"/>
         <line num="70" type="stmt" count="28"/>
-        <line num="72" type="stmt" count="28"/>
-        <line num="73" type="stmt" count="5"/>
-        <line num="74" type="stmt" count="27"/>
-        <line num="75" type="stmt" count="3"/>
-        <line num="76" type="stmt" count="3"/>
-        <line num="86" type="method" name="instanceWithoutConstructorFrom" visibility="protected" complexity="2" crap="2" count="24"/>
+        <line num="71" type="stmt" count="5"/>
+        <line num="72" type="stmt" count="27"/>
+        <line num="73" type="stmt" count="3"/>
+        <line num="74" type="stmt" count="3"/>
+        <line num="84" type="method" name="instanceWithoutConstructorFrom" visibility="protected" complexity="2" crap="2" count="24"/>
+        <line num="86" type="stmt" count="24"/>
         <line num="88" type="stmt" count="24"/>
-        <line num="90" type="stmt" count="24"/>
+        <line num="89" type="stmt" count="24"/>
         <line num="91" type="stmt" count="24"/>
-        <line num="93" type="stmt" count="24"/>
-        <line num="96" type="stmt" count="24"/>
-        <line num="105" type="method" name="instanceWithConstructorCallFrom" visibility="protected" complexity="3" crap="3" count="6"/>
+        <line num="94" type="stmt" count="24"/>
+        <line num="103" type="method" name="instanceWithConstructorCallFrom" visibility="protected" complexity="3" crap="3" count="6"/>
+        <line num="106" type="stmt" count="6"/>
         <line num="108" type="stmt" count="6"/>
-        <line num="110" type="stmt" count="6"/>
+        <line num="109" type="stmt" count="6"/>
         <line num="111" type="stmt" count="6"/>
-        <line num="113" type="stmt" count="6"/>
-        <line num="114" type="stmt" count="1"/>
-        <line num="115" type="stmt" count="1"/>
-        <line num="116" type="stmt" count="1"/>
-        <line num="119" type="stmt" count="6"/>
-        <line num="122" type="stmt" count="5"/>
-        <line num="130" type="method" name="jsonSerialize" visibility="public" complexity="4" crap="4" count="29"/>
+        <line num="112" type="stmt" count="1"/>
+        <line num="115" type="stmt" count="6"/>
+        <line num="118" type="stmt" count="5"/>
+        <line num="126" type="method" name="jsonSerialize" visibility="public" complexity="4" crap="4" count="29"/>
+        <line num="129" type="stmt" count="29"/>
+        <line num="131" type="stmt" count="29"/>
+        <line num="132" type="stmt" count="29"/>
         <line num="133" type="stmt" count="29"/>
-        <line num="135" type="stmt" count="29"/>
-        <line num="136" type="stmt" count="29"/>
+        <line num="134" type="stmt" count="4"/>
         <line num="137" type="stmt" count="29"/>
-        <line num="138" type="stmt" count="4"/>
-        <line num="141" type="stmt" count="29"/>
-        <line num="143" type="stmt" count="29"/>
-        <line num="146" type="stmt" count="28"/>
-        <line num="147" type="stmt" count="1"/>
-        <line num="148" type="stmt" count="1"/>
-        <line num="155" type="method" name="toArray" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="157" type="stmt" count="4"/>
-        <line num="160" type="method" name="toJson" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="162" type="stmt" count="1"/>
-        <metrics loc="165" ncloc="136" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="57" coveredstatements="57" elements="64" coveredelements="64"/>
+        <line num="139" type="stmt" count="29"/>
+        <line num="142" type="stmt" count="28"/>
+        <line num="143" type="stmt" count="1"/>
+        <line num="144" type="stmt" count="1"/>
+        <line num="151" type="method" name="toArray" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="153" type="stmt" count="4"/>
+        <line num="156" type="method" name="toJson" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="158" type="stmt" count="1"/>
+        <metrics loc="161" ncloc="132" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="53" coveredstatements="53" elements="60" coveredelements="60"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Concerns/CloneableData.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Concerns/CloneableData.php">
         <class name="Nuxtifyts\PhpDto\Concerns\CloneableData" namespace="Nuxtifyts\PhpDto\Concerns">
           <metrics complexity="13" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="28" elements="31" coveredelements="31"/>
         </class>
@@ -253,7 +249,7 @@
         <line num="86" type="stmt" count="2"/>
         <metrics loc="89" ncloc="72" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="28" elements="31" coveredelements="31"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Concerns/EmptyData.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Concerns/EmptyData.php">
         <class name="Nuxtifyts\PhpDto\Concerns\EmptyData" namespace="Nuxtifyts\PhpDto\Concerns">
           <metrics complexity="2" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
         </class>
@@ -264,32 +260,9 @@
         <line num="23" type="stmt" count="1"/>
         <metrics loc="27" ncloc="23" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Concerns/SerializesArrayOfItems.php">
-        <class name="Nuxtifyts\PhpDto\Concerns\SerializesArrayOfItems" namespace="Nuxtifyts\PhpDto\Concerns">
-          <metrics complexity="6" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="17" coveredelements="17"/>
-        </class>
-        <line num="20" type="method" name="serializeArrayOfItems" visibility="public" complexity="5" crap="5" count="13"/>
-        <line num="24" type="stmt" count="13"/>
-        <line num="26" type="stmt" count="13"/>
-        <line num="27" type="stmt" count="13"/>
-        <line num="28" type="stmt" count="13"/>
-        <line num="30" type="stmt" count="13"/>
-        <line num="31" type="stmt" count="13"/>
-        <line num="32" type="stmt" count="13"/>
-        <line num="33" type="stmt" count="13"/>
-        <line num="35" type="stmt" count="13"/>
-        <line num="36" type="stmt" count="13"/>
-        <line num="37" type="stmt" count="13"/>
-        <line num="47" type="method" name="deserializeArrayOfItems" visibility="public" complexity="1" crap="1" count="14"/>
-        <line num="51" type="stmt" count="14"/>
-        <line num="52" type="stmt" count="14"/>
-        <line num="53" type="stmt" count="14"/>
-        <line num="54" type="stmt" count="14"/>
-        <metrics loc="57" ncloc="42" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="17" coveredelements="17"/>
-      </file>
     </package>
     <package name="Nuxtifyts\PhpDto\Contexts">
-      <file name="/home/runner/work/php-dto/php-dto/src/Contexts/ClassContext.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Contexts/ClassContext.php">
         <class name="Nuxtifyts\PhpDto\Contexts\ClassContext" namespace="Nuxtifyts\PhpDto\Contexts">
           <metrics complexity="10" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="21" elements="28" coveredelements="28"/>
         </class>
@@ -323,7 +296,7 @@
         <line num="136" type="stmt" count="9"/>
         <metrics loc="139" ncloc="88" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="21" elements="28" coveredelements="28"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Contexts/PropertyContext.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Contexts/PropertyContext.php">
         <class name="Nuxtifyts\PhpDto\Contexts\PropertyContext" namespace="Nuxtifyts\PhpDto\Contexts">
           <metrics complexity="37" methods="11" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="88" coveredstatements="82" elements="99" coveredelements="91"/>
         </class>
@@ -379,13 +352,14 @@
         <line num="192" type="stmt" count="17"/>
         <line num="193" type="stmt" count="1"/>
         <line num="197" type="stmt" count="1"/>
-        <line num="206" type="method" name="serializeFrom" visibility="public" complexity="6" crap="6.47" count="16"/>
+        <line num="205" type="method" name="serializeFrom" visibility="public" complexity="6" crap="6.47" count="16"/>
         <line num="208" type="stmt" count="16"/>
         <line num="210" type="stmt" count="16"/>
         <line num="211" type="stmt" count="0"/>
         <line num="215" type="stmt" count="16"/>
         <line num="216" type="stmt" count="0"/>
-        <line num="220" type="stmt" count="16"/>
+        <line num="219" type="stmt" count="16"/>
+        <line num="220" type="stmt" count="3"/>
         <line num="221" type="stmt" count="3"/>
         <line num="222" type="stmt" count="3"/>
         <line num="223" type="stmt" count="3"/>
@@ -393,42 +367,41 @@
         <line num="225" type="stmt" count="3"/>
         <line num="226" type="stmt" count="3"/>
         <line num="227" type="stmt" count="3"/>
-        <line num="228" type="stmt" count="3"/>
-        <line num="231" type="stmt" count="14"/>
+        <line num="230" type="stmt" count="14"/>
+        <line num="231" type="stmt" count="0"/>
         <line num="232" type="stmt" count="0"/>
-        <line num="233" type="stmt" count="0"/>
-        <line num="242" type="method" name="emptyValue" visibility="public" complexity="15" crap="15.08" count="9"/>
-        <line num="244" type="stmt" count="9"/>
-        <line num="245" type="stmt" count="5"/>
-        <line num="248" type="stmt" count="8"/>
-        <line num="249" type="stmt" count="0"/>
-        <line num="253" type="stmt" count="8"/>
-        <line num="254" type="stmt" count="4"/>
-        <line num="256" type="stmt" count="8"/>
-        <line num="257" type="stmt" count="1"/>
-        <line num="259" type="stmt" count="8"/>
-        <line num="260" type="stmt" count="1"/>
-        <line num="262" type="stmt" count="8"/>
-        <line num="263" type="stmt" count="1"/>
-        <line num="265" type="stmt" count="7"/>
-        <line num="266" type="stmt" count="2"/>
-        <line num="268" type="stmt" count="5"/>
-        <line num="270" type="stmt" count="1"/>
-        <line num="272" type="stmt" count="1"/>
-        <line num="273" type="stmt" count="0"/>
-        <line num="274" type="stmt" count="1"/>
-        <line num="276" type="stmt" count="4"/>
-        <line num="278" type="stmt" count="2"/>
+        <line num="241" type="method" name="emptyValue" visibility="public" complexity="15" crap="15.08" count="9"/>
+        <line num="243" type="stmt" count="9"/>
+        <line num="244" type="stmt" count="5"/>
+        <line num="247" type="stmt" count="8"/>
+        <line num="248" type="stmt" count="0"/>
+        <line num="252" type="stmt" count="8"/>
+        <line num="253" type="stmt" count="4"/>
+        <line num="255" type="stmt" count="8"/>
+        <line num="256" type="stmt" count="1"/>
+        <line num="258" type="stmt" count="8"/>
+        <line num="259" type="stmt" count="1"/>
+        <line num="261" type="stmt" count="8"/>
+        <line num="262" type="stmt" count="1"/>
+        <line num="264" type="stmt" count="7"/>
+        <line num="265" type="stmt" count="2"/>
+        <line num="267" type="stmt" count="5"/>
+        <line num="269" type="stmt" count="1"/>
+        <line num="271" type="stmt" count="1"/>
+        <line num="272" type="stmt" count="0"/>
+        <line num="273" type="stmt" count="1"/>
+        <line num="275" type="stmt" count="4"/>
+        <line num="277" type="stmt" count="2"/>
+        <line num="279" type="stmt" count="2"/>
         <line num="280" type="stmt" count="2"/>
         <line num="281" type="stmt" count="2"/>
-        <line num="282" type="stmt" count="2"/>
-        <line num="286" type="stmt" count="2"/>
+        <line num="285" type="stmt" count="2"/>
+        <line num="287" type="stmt" count="2"/>
         <line num="288" type="stmt" count="2"/>
         <line num="289" type="stmt" count="2"/>
-        <line num="290" type="stmt" count="2"/>
-        <metrics loc="294" ncloc="242" classes="1" methods="11" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="88" coveredstatements="82" elements="99" coveredelements="91"/>
+        <metrics loc="293" ncloc="242" classes="1" methods="11" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="88" coveredstatements="82" elements="99" coveredelements="91"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Contexts/TypeContext.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Contexts/TypeContext.php">
         <class name="Nuxtifyts\PhpDto\Contexts\TypeContext" namespace="Nuxtifyts\PhpDto\Contexts">
           <metrics complexity="31" methods="7" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="73" coveredstatements="65" elements="80" coveredelements="69"/>
         </class>
@@ -516,7 +489,7 @@
       </file>
     </package>
     <package name="Nuxtifyts\PhpDto\Contexts\TypeContext">
-      <file name="/home/runner/work/php-dto/php-dto/src/Contexts/TypeContext/ResolvesArraySubContexts.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Contexts/TypeContext/ResolvesArraySubContexts.php">
         <class name="Nuxtifyts\PhpDto\Contexts\TypeContext\ResolvesArraySubContexts" namespace="Nuxtifyts\PhpDto\Contexts\TypeContext">
           <metrics complexity="19" methods="6" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="51" coveredstatements="44" elements="57" coveredelements="47"/>
         </class>
@@ -580,20 +553,17 @@
         <metrics loc="132" ncloc="115" classes="1" methods="6" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="51" coveredstatements="44" elements="57" coveredelements="47"/>
       </file>
     </package>
-    <file name="/home/runner/work/php-dto/php-dto/src/Contracts/BaseData.php">
+    <file name="/Users/faroukbraik/Dev/php-dto/src/Contracts/BaseData.php">
       <metrics loc="43" ncloc="22" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <file name="/home/runner/work/php-dto/php-dto/src/Contracts/CloneableData.php">
+    <file name="/Users/faroukbraik/Dev/php-dto/src/Contracts/CloneableData.php">
       <metrics loc="14" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <file name="/home/runner/work/php-dto/php-dto/src/Contracts/EmptyData.php">
+    <file name="/Users/faroukbraik/Dev/php-dto/src/Contracts/EmptyData.php">
       <metrics loc="14" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <file name="/home/runner/work/php-dto/php-dto/src/Contracts/SerializesArrayOfItems.php">
-      <metrics loc="33" ncloc="21" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <package name="Nuxtifyts\PhpDto">
-      <file name="/home/runner/work/php-dto/php-dto/src/Data.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Data.php">
         <class name="Nuxtifyts\PhpDto\Data" namespace="Nuxtifyts\PhpDto">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
@@ -601,7 +571,7 @@
       </file>
     </package>
     <package name="Nuxtifyts\PhpDto\DataCiphers">
-      <file name="/home/runner/work/php-dto/php-dto/src/DataCiphers/CipherConfig.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/DataCiphers/CipherConfig.php">
         <class name="Nuxtifyts\PhpDto\DataCiphers\CipherConfig" namespace="Nuxtifyts\PhpDto\DataCiphers">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
@@ -609,7 +579,7 @@
         <line num="15" type="stmt" count="4"/>
         <metrics loc="17" ncloc="14" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/DataCiphers/DefaultDataCipher.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/DataCiphers/DefaultDataCipher.php">
         <class name="Nuxtifyts\PhpDto\DataCiphers\DefaultDataCipher" namespace="Nuxtifyts\PhpDto\DataCiphers">
           <metrics complexity="13" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="43" coveredstatements="38" elements="46" coveredelements="38"/>
         </class>
@@ -662,14 +632,14 @@
         <metrics loc="103" ncloc="94" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="43" coveredstatements="38" elements="46" coveredelements="38"/>
       </file>
     </package>
-    <file name="/home/runner/work/php-dto/php-dto/src/DataCiphers/DataCipher.php">
+    <file name="/Users/faroukbraik/Dev/php-dto/src/DataCiphers/DataCipher.php">
       <metrics loc="27" ncloc="21" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <file name="/home/runner/work/php-dto/php-dto/src/DataRefiners/DataRefiner.php">
+    <file name="/Users/faroukbraik/Dev/php-dto/src/DataRefiners/DataRefiner.php">
       <metrics loc="16" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <package name="Nuxtifyts\PhpDto\DataRefiners">
-      <file name="/home/runner/work/php-dto/php-dto/src/DataRefiners/DateTimeRefiner.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/DataRefiners/DateTimeRefiner.php">
         <class name="Nuxtifyts\PhpDto\DataRefiners\DateTimeRefiner" namespace="Nuxtifyts\PhpDto\DataRefiners">
           <metrics complexity="8" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="24" coveredelements="24"/>
         </class>
@@ -700,11 +670,11 @@
         <metrics loc="66" ncloc="62" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="24" coveredelements="24"/>
       </file>
     </package>
-    <file name="/home/runner/work/php-dto/php-dto/src/Enums/Property/Type.php">
+    <file name="/Users/faroukbraik/Dev/php-dto/src/Enums/Property/Type.php">
       <metrics loc="24" ncloc="23" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <package name="Nuxtifyts\PhpDto\Exceptions">
-      <file name="/home/runner/work/php-dto/php-dto/src/Exceptions/DataCipherException.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Exceptions/DataCipherException.php">
         <class name="Nuxtifyts\PhpDto\Exceptions\DataCipherException" namespace="Nuxtifyts\PhpDto\Exceptions">
           <metrics complexity="5" methods="5" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="4" elements="25" coveredelements="5"/>
         </class>
@@ -735,7 +705,7 @@
         <line num="52" type="stmt" count="1"/>
         <metrics loc="55" ncloc="55" classes="1" methods="5" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="4" elements="25" coveredelements="5"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Exceptions/DataCreationException.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Exceptions/DataCreationException.php">
         <class name="Nuxtifyts\PhpDto\Exceptions\DataCreationException" namespace="Nuxtifyts\PhpDto\Exceptions">
           <metrics complexity="5" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="29" coveredelements="29"/>
         </class>
@@ -770,15 +740,59 @@
         <line num="65" type="stmt" count="3"/>
         <metrics loc="68" ncloc="68" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="29" coveredelements="29"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Exceptions/DeserializeException.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Exceptions/DeserializeException.php">
         <class name="Nuxtifyts\PhpDto\Exceptions\DeserializeException" namespace="Nuxtifyts\PhpDto\Exceptions">
-          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+          <metrics complexity="9" methods="9" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="37" coveredstatements="21" elements="46" coveredelements="26"/>
         </class>
-        <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="6"/>
-        <line num="19" type="stmt" count="6"/>
-        <metrics loc="22" ncloc="22" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+        <line num="20" type="method" name="generic" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="22" type="stmt" count="3"/>
+        <line num="23" type="stmt" count="3"/>
+        <line num="24" type="stmt" count="3"/>
+        <line num="25" type="stmt" count="3"/>
+        <line num="26" type="stmt" count="3"/>
+        <line num="29" type="method" name="invalidValue" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="31" type="stmt" count="3"/>
+        <line num="32" type="stmt" count="3"/>
+        <line num="33" type="stmt" count="3"/>
+        <line num="34" type="stmt" count="3"/>
+        <line num="37" type="method" name="propertyIsNotNullable" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="39" type="stmt" count="1"/>
+        <line num="40" type="stmt" count="1"/>
+        <line num="41" type="stmt" count="1"/>
+        <line num="42" type="stmt" count="1"/>
+        <line num="45" type="method" name="unableToDeserializeScalarTypeItem" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="53" type="method" name="unableToDeserializeBackedEnumItem" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="61" type="method" name="unableToDeserializeDateTimeItem" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="69" type="method" name="unableToDeserializeDataItem" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="71" type="stmt" count="1"/>
+        <line num="72" type="stmt" count="1"/>
+        <line num="73" type="stmt" count="1"/>
+        <line num="74" type="stmt" count="1"/>
+        <line num="77" type="method" name="unableToDeserializeArrayItem" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="82" type="stmt" count="0"/>
+        <line num="85" type="method" name="invalidParamsPassed" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="87" type="stmt" count="1"/>
+        <line num="88" type="stmt" count="1"/>
+        <line num="89" type="stmt" count="1"/>
+        <line num="90" type="stmt" count="1"/>
+        <metrics loc="93" ncloc="93" classes="1" methods="9" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="37" coveredstatements="21" elements="46" coveredelements="26"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Exceptions/FallbackResolverException.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Exceptions/FallbackResolverException.php">
         <class name="Nuxtifyts\PhpDto\Exceptions\FallbackResolverException" namespace="Nuxtifyts\PhpDto\Exceptions">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
         </class>
@@ -789,29 +803,55 @@
         <line num="16" type="stmt" count="1"/>
         <metrics loc="19" ncloc="19" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Exceptions/InvalidRefiner.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Exceptions/InvalidRefiner.php">
         <class name="Nuxtifyts\PhpDto\Exceptions\InvalidRefiner" namespace="Nuxtifyts\PhpDto\Exceptions">
-          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="8" coveredelements="8"/>
+          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
         </class>
-        <line num="11" type="method" name="from" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="13" type="method" name="emptyTypeContexts" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="15" type="stmt" count="1"/>
         <line num="16" type="stmt" count="1"/>
         <line num="17" type="stmt" count="1"/>
         <line num="18" type="stmt" count="1"/>
-        <line num="19" type="stmt" count="1"/>
+        <metrics loc="21" ncloc="21" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
+      </file>
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Exceptions/SerializeException.php">
+        <class name="Nuxtifyts\PhpDto\Exceptions\SerializeException" namespace="Nuxtifyts\PhpDto\Exceptions">
+          <metrics complexity="6" methods="6" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="17" elements="31" coveredelements="21"/>
+        </class>
+        <line num="18" type="method" name="generic" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="20" type="stmt" count="1"/>
         <line num="21" type="stmt" count="1"/>
-        <metrics loc="24" ncloc="24" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="8" coveredelements="8"/>
+        <line num="22" type="stmt" count="1"/>
+        <line num="23" type="stmt" count="1"/>
+        <line num="24" type="stmt" count="1"/>
+        <line num="27" type="method" name="unableToSerializeScalarTypeItem" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="29" type="stmt" count="2"/>
+        <line num="30" type="stmt" count="2"/>
+        <line num="31" type="stmt" count="2"/>
+        <line num="32" type="stmt" count="2"/>
+        <line num="35" type="method" name="unableToSerializeBackedEnumItem" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="37" type="stmt" count="2"/>
+        <line num="38" type="stmt" count="2"/>
+        <line num="39" type="stmt" count="2"/>
+        <line num="40" type="stmt" count="2"/>
+        <line num="43" type="method" name="unableToSerializeDateTimeItem" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="51" type="method" name="unableToSerializeDataItem" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="53" type="stmt" count="1"/>
+        <line num="54" type="stmt" count="1"/>
+        <line num="55" type="stmt" count="1"/>
+        <line num="56" type="stmt" count="1"/>
+        <line num="59" type="method" name="unableToSerializeArrayItem" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <metrics loc="67" ncloc="67" classes="1" methods="6" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="17" elements="31" coveredelements="21"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Exceptions/SerializeException.php">
-        <class name="Nuxtifyts\PhpDto\Exceptions\SerializeException" namespace="Nuxtifyts\PhpDto\Exceptions">
-          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
-        </class>
-        <line num="13" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="6"/>
-        <line num="18" type="stmt" count="6"/>
-        <metrics loc="21" ncloc="21" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
-      </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Exceptions/UnknownTypeException.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Exceptions/UnknownTypeException.php">
         <class name="Nuxtifyts\PhpDto\Exceptions\UnknownTypeException" namespace="Nuxtifyts\PhpDto\Exceptions">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="13" coveredelements="13"/>
         </class>
@@ -830,7 +870,7 @@
         <line num="26" type="stmt" count="1"/>
         <metrics loc="29" ncloc="29" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="13" coveredelements="13"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Exceptions/UnsupportedTypeException.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Exceptions/UnsupportedTypeException.php">
         <class name="Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException" namespace="Nuxtifyts\PhpDto\Exceptions">
           <metrics complexity="5" methods="4" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="3" elements="16" coveredelements="4"/>
         </class>
@@ -854,7 +894,7 @@
       </file>
     </package>
     <package name="Nuxtifyts\PhpDto\FallbackResolver">
-      <file name="/home/runner/work/php-dto/php-dto/src/FallbackResolver/FallbackConfig.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/FallbackResolver/FallbackConfig.php">
         <class name="Nuxtifyts\PhpDto\FallbackResolver\FallbackConfig" namespace="Nuxtifyts\PhpDto\FallbackResolver">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
@@ -863,11 +903,11 @@
         <metrics loc="19" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
     </package>
-    <file name="/home/runner/work/php-dto/php-dto/src/FallbackResolver/FallbackResolver.php">
+    <file name="/Users/faroukbraik/Dev/php-dto/src/FallbackResolver/FallbackResolver.php">
       <metrics loc="17" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <package name="Nuxtifyts\PhpDto\Normalizers">
-      <file name="/home/runner/work/php-dto/php-dto/src/Normalizers/ArrayAccessNormalizer.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Normalizers/ArrayAccessNormalizer.php">
         <class name="Nuxtifyts\PhpDto\Normalizers\ArrayAccessNormalizer" namespace="Nuxtifyts\PhpDto\Normalizers">
           <metrics complexity="10" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="22" coveredelements="22"/>
         </class>
@@ -895,7 +935,7 @@
         <line num="59" type="stmt" count="1"/>
         <metrics loc="63" ncloc="57" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="22" coveredelements="22"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Normalizers/ArrayNormalizer.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Normalizers/ArrayNormalizer.php">
         <class name="Nuxtifyts\PhpDto\Normalizers\ArrayNormalizer" namespace="Nuxtifyts\PhpDto\Normalizers">
           <metrics complexity="6" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="11" coveredelements="11"/>
         </class>
@@ -912,7 +952,7 @@
         <line num="29" type="stmt" count="1"/>
         <metrics loc="32" ncloc="32" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="11" coveredelements="11"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Normalizers/JsonStringNormalizer.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Normalizers/JsonStringNormalizer.php">
         <class name="Nuxtifyts\PhpDto\Normalizers\JsonStringNormalizer" namespace="Nuxtifyts\PhpDto\Normalizers">
           <metrics complexity="6" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="13" coveredelements="13"/>
         </class>
@@ -931,7 +971,7 @@
         <line num="32" type="stmt" count="2"/>
         <metrics loc="35" ncloc="35" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="13" coveredelements="13"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Normalizers/Normalizer.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Normalizers/Normalizer.php">
         <class name="Nuxtifyts\PhpDto\Normalizers\Normalizer" namespace="Nuxtifyts\PhpDto\Normalizers">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
@@ -939,7 +979,7 @@
         <line num="16" type="stmt" count="24"/>
         <metrics loc="23" ncloc="17" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Normalizers/StdClassNormalizer.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Normalizers/StdClassNormalizer.php">
         <class name="Nuxtifyts\PhpDto\Normalizers\StdClassNormalizer" namespace="Nuxtifyts\PhpDto\Normalizers">
           <metrics complexity="4" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="10" coveredelements="10"/>
         </class>
@@ -957,7 +997,7 @@
       </file>
     </package>
     <package name="Nuxtifyts\PhpDto\Pipelines\DeserializePipeline">
-      <file name="/home/runner/work/php-dto/php-dto/src/Pipelines/DeserializePipeline/DeserializePipeline.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Pipelines/DeserializePipeline/DeserializePipeline.php">
         <class name="Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipeline" namespace="Nuxtifyts\PhpDto\Pipelines\DeserializePipeline">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="11" coveredelements="11"/>
         </class>
@@ -974,7 +1014,7 @@
         <line num="34" type="stmt" count="1"/>
         <metrics loc="37" ncloc="30" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="11" coveredelements="11"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Pipelines/DeserializePipeline/DeserializePipelinePassable.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Pipelines/DeserializePipeline/DeserializePipelinePassable.php">
         <class name="Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\DeserializePipelinePassable" namespace="Nuxtifyts\PhpDto\Pipelines\DeserializePipeline">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
         </class>
@@ -986,7 +1026,7 @@
       </file>
     </package>
     <package name="Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes">
-      <file name="/home/runner/work/php-dto/php-dto/src/Pipelines/DeserializePipeline/Pipes/DecipherDataPipe.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Pipelines/DeserializePipeline/Pipes/DecipherDataPipe.php">
         <class name="Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes\DecipherDataPipe" namespace="Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes">
           <metrics complexity="5" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="14" coveredelements="14"/>
         </class>
@@ -1006,7 +1046,7 @@
         <line num="36" type="stmt" count="7"/>
         <metrics loc="39" ncloc="36" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="14" coveredelements="14"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Pipelines/DeserializePipeline/Pipes/RefineDataPipe.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Pipelines/DeserializePipeline/Pipes/RefineDataPipe.php">
         <class name="Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes\RefineDataPipe" namespace="Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes">
           <metrics complexity="5" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="11" elements="13" coveredelements="11"/>
         </class>
@@ -1025,7 +1065,7 @@
         <line num="36" type="stmt" count="31"/>
         <metrics loc="39" ncloc="36" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="11" elements="13" coveredelements="11"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Pipelines/DeserializePipeline/Pipes/ResolveDefaultDataPipe.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Pipelines/DeserializePipeline/Pipes/ResolveDefaultDataPipe.php">
         <class name="Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes\ResolveDefaultDataPipe" namespace="Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes">
           <metrics complexity="7" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="20" coveredelements="20"/>
         </class>
@@ -1051,7 +1091,7 @@
         <line num="48" type="stmt" count="9"/>
         <metrics loc="51" ncloc="47" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="20" coveredelements="20"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Pipelines/DeserializePipeline/Pipes/ResolveValuesFromAliasesPipe.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Pipelines/DeserializePipeline/Pipes/ResolveValuesFromAliasesPipe.php">
         <class name="Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes\ResolveValuesFromAliasesPipe" namespace="Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes">
           <metrics complexity="5" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="12" coveredelements="12"/>
         </class>
@@ -1071,7 +1111,7 @@
       </file>
     </package>
     <package name="Nuxtifyts\PhpDto\Serializers">
-      <file name="/home/runner/work/php-dto/php-dto/src/Serializers/ArraySerializer.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Serializers/ArraySerializer.php">
         <class name="Nuxtifyts\PhpDto\Serializers\ArraySerializer" namespace="Nuxtifyts\PhpDto\Serializers">
           <metrics complexity="20" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="22" elements="28" coveredelements="23"/>
         </class>
@@ -1079,33 +1119,33 @@
         <line num="16" type="stmt" count="14"/>
         <line num="17" type="stmt" count="14"/>
         <line num="18" type="stmt" count="14"/>
-        <line num="24" type="method" name="serializeItem" visibility="protected" complexity="10" crap="10.46" count="11"/>
-        <line num="26" type="stmt" count="11"/>
-        <line num="27" type="stmt" count="1"/>
-        <line num="30" type="stmt" count="10"/>
-        <line num="31" type="stmt" count="10"/>
+        <line num="26" type="method" name="serializeItem" visibility="protected" complexity="10" crap="10.46" count="11"/>
+        <line num="28" type="stmt" count="11"/>
+        <line num="29" type="stmt" count="1"/>
+        <line num="32" type="stmt" count="10"/>
         <line num="33" type="stmt" count="10"/>
         <line num="35" type="stmt" count="10"/>
-        <line num="36" type="stmt" count="10"/>
+        <line num="37" type="stmt" count="10"/>
         <line num="38" type="stmt" count="10"/>
-        <line num="39" type="stmt" count="10"/>
-        <line num="42" type="stmt" count="1"/>
-        <line num="45" type="stmt" count="0"/>
-        <line num="50" type="stmt" count="0"/>
-        <line num="56" type="method" name="deserializeItem" visibility="protected" complexity="9" crap="9.08" count="11"/>
-        <line num="58" type="stmt" count="11"/>
-        <line num="59" type="stmt" count="10"/>
-        <line num="61" type="stmt" count="10"/>
+        <line num="40" type="stmt" count="10"/>
+        <line num="41" type="stmt" count="10"/>
+        <line num="44" type="stmt" count="1"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="60" type="method" name="deserializeItem" visibility="protected" complexity="9" crap="9.08" count="11"/>
+        <line num="62" type="stmt" count="11"/>
         <line num="63" type="stmt" count="10"/>
         <line num="65" type="stmt" count="10"/>
-        <line num="67" type="stmt" count="1"/>
-        <line num="70" type="stmt" count="0"/>
-        <line num="75" type="stmt" count="1"/>
-        <line num="76" type="stmt" count="1"/>
-        <line num="77" type="stmt" count="1"/>
-        <metrics loc="80" ncloc="73" classes="1" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="22" elements="28" coveredelements="23"/>
+        <line num="67" type="stmt" count="10"/>
+        <line num="69" type="stmt" count="10"/>
+        <line num="71" type="stmt" count="1"/>
+        <line num="74" type="stmt" count="0"/>
+        <line num="79" type="stmt" count="1"/>
+        <line num="80" type="stmt" count="1"/>
+        <line num="81" type="stmt" count="1"/>
+        <metrics loc="84" ncloc="73" classes="1" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="22" elements="28" coveredelements="23"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Serializers/BackedEnumSerializer.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Serializers/BackedEnumSerializer.php">
         <class name="Nuxtifyts\PhpDto\Serializers\BackedEnumSerializer" namespace="Nuxtifyts\PhpDto\Serializers">
           <metrics complexity="19" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="28" elements="33" coveredelements="30"/>
         </class>
@@ -1144,7 +1184,7 @@
         <line num="89" type="stmt" count="2"/>
         <metrics loc="92" ncloc="83" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="28" elements="33" coveredelements="30"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Serializers/DataSerializer.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Serializers/DataSerializer.php">
         <class name="Nuxtifyts\PhpDto\Serializers\DataSerializer" namespace="Nuxtifyts\PhpDto\Serializers">
           <metrics complexity="17" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="28" elements="33" coveredelements="30"/>
         </class>
@@ -1183,7 +1223,7 @@
         <line num="88" type="stmt" count="5"/>
         <metrics loc="91" ncloc="80" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="28" elements="33" coveredelements="30"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Serializers/DateTimeSerializer.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Serializers/DateTimeSerializer.php">
         <class name="Nuxtifyts\PhpDto\Serializers\DateTimeSerializer" namespace="Nuxtifyts\PhpDto\Serializers">
           <metrics complexity="18" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="27" elements="32" coveredelements="29"/>
         </class>
@@ -1221,7 +1261,7 @@
         <line num="84" type="stmt" count="5"/>
         <metrics loc="87" ncloc="79" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="27" elements="32" coveredelements="29"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Serializers/ScalarTypeSerializer.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Serializers/ScalarTypeSerializer.php">
         <class name="Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer" namespace="Nuxtifyts\PhpDto\Serializers">
           <metrics complexity="13" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="33" coveredelements="33"/>
         </class>
@@ -1260,7 +1300,7 @@
         <line num="73" type="stmt" count="15"/>
         <metrics loc="76" ncloc="67" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="33" coveredelements="33"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Serializers/Serializer.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Serializers/Serializer.php">
         <class name="Nuxtifyts\PhpDto\Serializers\Serializer" namespace="Nuxtifyts\PhpDto\Serializers">
           <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="10" coveredelements="10"/>
         </class>
@@ -1277,21 +1317,49 @@
         <metrics loc="58" ncloc="39" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="10" coveredelements="10"/>
       </file>
     </package>
+    <package name="Nuxtifyts\PhpDto\Serializers\Concerns">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Serializers/Concerns/SerializesArrayOfItems.php">
+        <class name="Nuxtifyts\PhpDto\Serializers\Concerns\SerializesArrayOfItems" namespace="Nuxtifyts\PhpDto\Serializers\Concerns">
+          <metrics complexity="6" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="17" coveredelements="17"/>
+        </class>
+        <line num="20" type="method" name="serializeArrayOfItems" visibility="public" complexity="5" crap="5" count="13"/>
+        <line num="24" type="stmt" count="13"/>
+        <line num="26" type="stmt" count="13"/>
+        <line num="27" type="stmt" count="13"/>
+        <line num="28" type="stmt" count="13"/>
+        <line num="30" type="stmt" count="13"/>
+        <line num="31" type="stmt" count="13"/>
+        <line num="32" type="stmt" count="13"/>
+        <line num="33" type="stmt" count="13"/>
+        <line num="35" type="stmt" count="13"/>
+        <line num="36" type="stmt" count="13"/>
+        <line num="37" type="stmt" count="13"/>
+        <line num="47" type="method" name="deserializeArrayOfItems" visibility="public" complexity="1" crap="1" count="14"/>
+        <line num="51" type="stmt" count="14"/>
+        <line num="52" type="stmt" count="14"/>
+        <line num="53" type="stmt" count="14"/>
+        <line num="54" type="stmt" count="14"/>
+        <metrics loc="57" ncloc="42" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="17" coveredelements="17"/>
+      </file>
+    </package>
+    <file name="/Users/faroukbraik/Dev/php-dto/src/Serializers/Contracts/SerializesArrayOfItems.php">
+      <metrics loc="33" ncloc="21" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
     <package name="Nuxtifyts\PhpDto\Support">
-      <file name="/home/runner/work/php-dto/php-dto/src/Support/Passable.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Support/Passable.php">
         <class name="Nuxtifyts\PhpDto\Support\Passable" namespace="Nuxtifyts\PhpDto\Support">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Support/Pipe.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Support/Pipe.php">
         <class name="Nuxtifyts\PhpDto\Support\Pipe" namespace="Nuxtifyts\PhpDto\Support">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
         <line num="12" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="41"/>
         <metrics loc="23" ncloc="13" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Support/Pipeline.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Support/Pipeline.php">
         <class name="Nuxtifyts\PhpDto\Support\Pipeline" namespace="Nuxtifyts\PhpDto\Support">
           <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
         </class>
@@ -1308,7 +1376,7 @@
       </file>
     </package>
     <package name="Nuxtifyts\PhpDto\Support\Traits">
-      <file name="/home/runner/work/php-dto/php-dto/src/Support/Traits/HasNormalizers.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Support/Traits/HasNormalizers.php">
         <class name="Nuxtifyts\PhpDto\Support\Traits\HasNormalizers" namespace="Nuxtifyts\PhpDto\Support\Traits">
           <metrics complexity="5" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="16" coveredelements="16"/>
         </class>
@@ -1330,7 +1398,7 @@
         <line num="51" type="stmt" count="39"/>
         <metrics loc="54" ncloc="43" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="16" coveredelements="16"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Support/Traits/HasSerializers.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Support/Traits/HasSerializers.php">
         <class name="Nuxtifyts\PhpDto\Support\Traits\HasSerializers" namespace="Nuxtifyts\PhpDto\Support\Traits">
           <metrics complexity="7" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="28" coveredelements="28"/>
         </class>
@@ -1364,7 +1432,7 @@
         <line num="82" type="stmt" count="27"/>
         <metrics loc="90" ncloc="64" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="28" coveredelements="28"/>
       </file>
-      <file name="/home/runner/work/php-dto/php-dto/src/Support/Traits/HasTypes.php">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Support/Traits/HasTypes.php">
         <class name="Nuxtifyts\PhpDto\Support\Traits\HasTypes" namespace="Nuxtifyts\PhpDto\Support\Traits">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
         </class>
@@ -1374,6 +1442,6 @@
         <metrics loc="34" ncloc="29" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </file>
     </package>
-    <metrics files="61" loc="3332" ncloc="2804" classes="50" methods="125" coveredmethods="101" conditionals="0" coveredconditionals="0" statements="875" coveredstatements="814" elements="1000" coveredelements="915"/>
+    <metrics files="61" loc="3445" ncloc="2914" classes="50" methods="138" coveredmethods="108" conditionals="0" coveredconditionals="0" statements="928" coveredstatements="843" elements="1066" coveredelements="951"/>
   </project>
 </coverage>

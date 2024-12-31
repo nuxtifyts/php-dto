@@ -45,7 +45,7 @@ class DateTimeRefiner implements DataRefiner
             $typeContexts = $property->getFilteredTypeContexts(Type::DATETIME);
 
             if (empty($typeContexts)) {
-                throw InvalidRefiner::from($this, $property);
+                throw InvalidRefiner::emptyTypeContexts();
             }
 
             $refinedValue = false;
