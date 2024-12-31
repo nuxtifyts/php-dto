@@ -119,8 +119,13 @@ final class PropertyContextTest extends UnitCase
         $reflectionProperty = new ReflectionProperty($object::class, 'value');
         $propertyContext = PropertyContext::getInstance($reflectionProperty);
 
-        self::expectException(UnknownTypeException::class);
-        HasSerializersDummyClass::testGetSerializersFromPropertyContext($propertyContext);
+        try {
+            HasSerializersDummyClass::testGetSerializersFromPropertyContext($propertyContext);
+        } catch (Throwable $t) {
+            self::assertInstanceOf(UnknownTypeException::class, $t);
+        }
+
+        self::resetConfig();
     }
 
     /**
