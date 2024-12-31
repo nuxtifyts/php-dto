@@ -65,7 +65,6 @@ class ArraySerializer extends Serializer
                     foreach ($typeContext->subTypeSerializers() as $serializer) {
                         try {
                             if ($serializer instanceof SerializesArrayOfItems) {
-                                // @phpstan-ignore-next-line
                                 return $serializer->deserializeArrayOfItems($property, $item);
                             }
                         } catch (Exception) {

@@ -4,7 +4,7 @@ namespace Nuxtifyts\PhpDto\Concerns;
 
 use Nuxtifyts\PhpDto\Contexts\ClassContext;
 use Nuxtifyts\PhpDto\Exceptions\DataCreationException;
-use Nuxtifyts\PhpDto\Support\Traits\HasNormalizers;
+use Nuxtifyts\PhpDto\Normalizers\Concerns\HasNormalizers;
 use ReflectionClass;
 use Throwable;
 
@@ -36,7 +36,7 @@ trait CloneableData
                 ? $this->cloneInstanceWithConstructorCall($context, $value)
                 : $this->cloneInstanceWithoutConstructorCall($context, $value);
         } catch (Throwable $t) {
-            throw DataCreationException::unableToCloneInstanceWithNewData($t);
+            throw DataCreationException::unableToCloneInstanceWithNewData(static::class, $t);
         }
     }
 

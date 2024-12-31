@@ -70,7 +70,7 @@ class UserConfigDataFallbackResolver implements FallbackResolver
 }
 ```
 
->! When using `DefaultsTo` attribute, priority is given to the attribute instead of the parameter's default value.
+> When using `DefaultsTo` attribute, priority is given to the attribute instead of the parameter's default value.
 
 If ever needed to create a new instance of a DTO with complex default value, 
 using the constructor is no longer possible, instead, you can make use of the 

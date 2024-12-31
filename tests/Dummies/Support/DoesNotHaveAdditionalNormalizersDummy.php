@@ -2,8 +2,8 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Dummies\Support;
 
+use Nuxtifyts\PhpDto\Normalizers\Concerns\HasNormalizers;
 use Nuxtifyts\PhpDto\Normalizers\Normalizer;
-use Nuxtifyts\PhpDto\Support\Traits\HasNormalizers;
 
 final class DoesNotHaveAdditionalNormalizersDummy
 {

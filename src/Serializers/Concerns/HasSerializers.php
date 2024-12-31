@@ -1,17 +1,14 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Support\Traits;
+namespace Nuxtifyts\PhpDto\Serializers\Concerns;
 
+use Nuxtifyts\PhpDto\Configuration\DataConfiguration;
 use Nuxtifyts\PhpDto\Contexts\PropertyContext;
 use Nuxtifyts\PhpDto\Contexts\TypeContext;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
 use Nuxtifyts\PhpDto\Exceptions\UnknownTypeException;
-use Nuxtifyts\PhpDto\Serializers\BackedEnumSerializer;
-use Nuxtifyts\PhpDto\Serializers\DataSerializer;
-use Nuxtifyts\PhpDto\Serializers\DateTimeSerializer;
-use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
-use Nuxtifyts\PhpDto\Serializers\ArraySerializer;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
+use Nuxtifyts\PhpDto\Exceptions\DataConfigurationException;
 
 trait HasSerializers
 {
@@ -24,6 +21,7 @@ trait HasSerializers
      * @return list<Serializer>
      *
      * @throws UnknownTypeException
+     * @throws DataConfigurationException
      */
     protected function getSerializersFromPropertyContext(
         PropertyContext $propertyContext
@@ -35,7 +33,7 @@ trait HasSerializers
                     array_column($propertyContext->types, 'value'),
                     array_column($serializer::supportedTypes(), 'value')
                 )) ? new $serializer() : null,
-            self::serializersList()
+            DataConfiguration::getInstance()->serializers->baseSerializers
         ))) ?: throw UnknownTypeException::unknownType(...$propertyContext->types);
     }
 
@@ -43,6 +41,9 @@ trait HasSerializers
      * @param TypeContext<Type> $typeContext
      *
      * @return list<Serializer>
+     *
+     * @throws UnknownTypeException
+     * @throws DataConfigurationException
      */
     protected function getSerializersFromTypeContext(
         TypeContext $typeContext,
@@ -54,28 +55,15 @@ trait HasSerializers
                     array_column($typeContext->arrayElementTypes, 'value'),
                     array_column($serializer::supportedTypes(), 'value')
                 )) ? new $serializer() : null,
-            self::serializersList()
-        )));
-    }
-
-    /**
-     * @return list<class-string<Serializer>>
-     */
-    protected static function serializersList(): array
-    {
-        return [
-            ArraySerializer::class,
-            DataSerializer::class,
-            DateTimeSerializer::class,
-            BackedEnumSerializer::class,
-            ScalarTypeSerializer::class,
-        ];
+            DataConfiguration::getInstance()->serializers->baseSerializers
+        ))) ?: throw UnknownTypeException::unknownType(...$typeContext->arrayElementTypes);
     }
 
     /**
      * @return list<Serializer>
      *
      * @throws UnknownTypeException
+     * @throws DataConfigurationException
      */
     public function serializers(): array
     {

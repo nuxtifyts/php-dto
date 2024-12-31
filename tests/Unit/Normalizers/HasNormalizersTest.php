@@ -1,20 +1,20 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Tests\Unit\Support\Traits;
+namespace Nuxtifyts\PhpDto\Tests\Unit\Normalizers;
 
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Normalizers\ArrayAccessNormalizer;
 use Nuxtifyts\PhpDto\Normalizers\ArrayNormalizer;
 use Nuxtifyts\PhpDto\Normalizers\JsonStringNormalizer;
 use Nuxtifyts\PhpDto\Normalizers\StdClassNormalizer;
-use Nuxtifyts\PhpDto\Tests\Dummies\Support\DoesNotHaveAdditionalNormalizersDummy;
-use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
-use Nuxtifyts\PhpDto\Tests\Dummies\Support\HasNormalizersDummy;
 use Nuxtifyts\PhpDto\Tests\Dummies\Normalizers\DummyNormalizer;
+use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
+use Nuxtifyts\PhpDto\Tests\Dummies\Support\DoesNotHaveAdditionalNormalizersDummy;
+use Nuxtifyts\PhpDto\Tests\Dummies\Support\HasNormalizersDummy;
+use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
-use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
 
 #[CoversClass(Data::class)]
 #[UsesClass(HasNormalizersDummy::class)]
