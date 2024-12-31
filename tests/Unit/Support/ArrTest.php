@@ -20,7 +20,7 @@ final class ArrTest extends UnitCase
     #[Test]
     #[DataProvider('get_arr_provider')]
     #[DataProvider('is_array_of_class_strings_provider')]
-    public function test_arr_helper_functions(
+    public function arr_helper_functions(
         string $functionName,
         array $parameters,
         mixed $expected
