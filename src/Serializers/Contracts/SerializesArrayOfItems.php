@@ -9,7 +9,7 @@ use Nuxtifyts\PhpDto\Exceptions\SerializeException;
 interface SerializesArrayOfItems
 {
     /**
-     * @return array<string, ?array<array-key, mixed>>
+     * @return array<array-key, ?array<array-key, mixed>>
      *
      * @throws SerializeException
      */
@@ -19,7 +19,7 @@ interface SerializesArrayOfItems
     ): array;
 
     /**
-     * @param array<string, mixed> $data
+     * @param array<array-key, mixed> $data
      *
      * @return ?array<array-key, mixed>
      *

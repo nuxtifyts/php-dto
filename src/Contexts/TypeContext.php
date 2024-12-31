@@ -10,6 +10,8 @@ use Exception;
 use Nuxtifyts\PhpDto\Contracts\BaseData as BaseDataContract;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
+use Nuxtifyts\PhpDto\Exceptions\DataConfigurationException;
+use Nuxtifyts\PhpDto\Exceptions\UnknownTypeException;
 use Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException;
 use Nuxtifyts\PhpDto\Serializers\Concerns\HasSerializers;
 use Nuxtifyts\PhpDto\Serializers\Serializer;
@@ -212,6 +214,9 @@ class TypeContext
 
     /**
      * @return list<Serializer>
+     *
+     * @throws DataConfigurationException
+     * @throws UnknownTypeException
      */
     protected function resolveSerializers(): array
     {

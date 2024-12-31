@@ -15,6 +15,7 @@ use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\DataCiphers\CipherConfig;
 use Nuxtifyts\PhpDto\DataRefiners\DataRefiner;
 use Nuxtifyts\PhpDto\Enums\Property\Type;
+use Nuxtifyts\PhpDto\Exceptions\DataConfigurationException;
 use Nuxtifyts\PhpDto\Exceptions\DataCreationException;
 use Nuxtifyts\PhpDto\Exceptions\DeserializeException;
 use Nuxtifyts\PhpDto\Exceptions\SerializeException;
@@ -173,6 +174,7 @@ class PropertyContext
      * @return list<Serializer>
      *
      * @throws UnknownTypeException
+     * @throws DataConfigurationException
      */
     protected function resolveSerializers(): array
     {
@@ -184,6 +186,7 @@ class PropertyContext
      *
      * @throws DeserializeException
      * @throws UnknownTypeException
+     * @throws DataConfigurationException
      */
     public function deserializeFrom(array $value): mixed
     {

@@ -13,7 +13,7 @@ use Nuxtifyts\PhpDto\Serializers\Serializer;
 trait SerializesArrayOfItems
 {
     /**
-     * @return array<string, ?array<array-key, mixed>>
+     * @return array<array-key, ?array<array-key, mixed>>
      *
      * @throws SerializeException
      */
@@ -38,7 +38,7 @@ trait SerializesArrayOfItems
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param array<array-key, mixed> $data
      *
      * @return ?array<array-key, mixed>
      *
