@@ -10,8 +10,8 @@ class DataConfiguration implements Configuration
     protected static ?self $instance = null;
 
     protected function __construct(
-        protected(set) SerializersConfiguration $serializers,
         protected(set) NormalizersConfiguration $normalizers,
+        protected(set) SerializersConfiguration $serializers,
     ) {
     }
 
@@ -29,12 +29,12 @@ class DataConfiguration implements Configuration
         }
 
         return self::$instance = new self(
-            serializers: SerializersConfiguration::getInstance(
-                Arr::getArray($config ?? [], 'serializers'),
-                $forceCreate
-            ),
             normalizers: NormalizersConfiguration::getInstance(
                 Arr::getArray($config ?? [], 'normalizers'),
+                $forceCreate
+            ),
+            serializers: SerializersConfiguration::getInstance(
+                Arr::getArray($config ?? [], 'serializers'),
                 $forceCreate
             )
         );

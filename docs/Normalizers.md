@@ -7,9 +7,14 @@ data into (preferable) an `array`/`ArrayAccess`.
 By default, there are 4 normalizers:
 
 - **JsonStringNormalizer** will cast json string.
-- **StrClassNormalizer** will cast stdObject.
+- **StdClassNormalizer** will cast stdObject.
 - **ArrayAccessNormalizer** will cast ArrayAccess.
 - **ArrayNormalizer** will cast array.
+
+> **Note:** In order to adjust there default normalizers, for example, you don't need
+> to use the `StdClassNormalizer` and you want to simply remove it, you need 
+> to [configure](https://github.com/nuxtifyts/php-dto/blob/main/docs/DataConfiguration.md)
+> the `DataConfiguration` object.
 
 Custom normalizers:
 =

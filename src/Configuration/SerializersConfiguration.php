@@ -19,13 +19,7 @@ class SerializersConfiguration implements Configuration
      * @param array<array-key, class-string<Serializer>> $baseSerializers
      */
     protected function __construct(
-        protected(set) array $baseSerializers = [
-            ArraySerializer::class,
-            DataSerializer::class,
-            DateTimeSerializer::class,
-            BackedEnumSerializer::class,
-            ScalarTypeSerializer::class,
-        ],
+        protected(set) array $baseSerializers,
     ) {
     }
 

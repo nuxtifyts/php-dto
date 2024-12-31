@@ -18,12 +18,7 @@ class NormalizersConfiguration implements Configuration
      * @param array<array-key, class-string<Normalizer>> $baseNormalizers
      */
     protected function __construct(
-        protected(set) array $baseNormalizers = [
-            JsonStringNormalizer::class,
-            StdClassNormalizer::class,
-            ArrayAccessNormalizer::class,
-            ArrayNormalizer::class,
-        ]
+        protected(set) array $baseNormalizers
     ) {
     }
 

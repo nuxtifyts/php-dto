@@ -53,11 +53,11 @@ $todoWithDueDate = $todo->with(
 );
 ```
 
-> We are using the `empty` method 
+> **Note:** We are using the `empty` method 
 > from [Empty Data](https://github.com/nuxtifyts/php-dto/blob/main/docs/EmptyData.md)
 > here
 
-> `emptyTodo`, `todo` and `todoWithDueDate` are all different instances.
+> **Important:** `emptyTodo`, `todo` and `todoWithDueDate` are all different instances.
 
 Computed properties
 -
