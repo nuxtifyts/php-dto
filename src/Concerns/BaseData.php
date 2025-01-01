@@ -23,7 +23,7 @@ trait BaseData
     {
         try {
             /** @var ClassContext<static> $context */
-            $context = ClassContext::getInstance(new ReflectionClass(static::class));
+            $context = ClassContext::getInstance(static::class);
 
             $value = static::normalizeValue($args, static::class, $context->normalizers)
                 ?: static::normalizeValue($args[0] ?? [], static::class, $context->normalizers);
@@ -52,7 +52,7 @@ trait BaseData
     {
         try {
             /** @var ClassContext<static> $context */
-            $context = ClassContext::getInstance(new ReflectionClass(static::class));
+            $context = ClassContext::getInstance(static::class);
 
             $value = static::normalizeValue($value, static::class, $context->normalizers);
 
@@ -126,7 +126,7 @@ trait BaseData
     final public function jsonSerialize(): array
     {
         try {
-            $context = ClassContext::getInstance(new ReflectionClass($this));
+            $context = ClassContext::getInstance($this::class);
 
             $serializedData = [];
             foreach ($context->properties as $propertyContext) {

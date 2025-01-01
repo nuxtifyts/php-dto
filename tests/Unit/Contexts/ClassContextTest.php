@@ -11,7 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Nuxtifyts\PhpDto\Contexts\ClassContext;
 use PHPUnit\Framework\Attributes\UsesClass;
-use ReflectionClass;
 use Throwable;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 
@@ -29,8 +28,7 @@ final class ClassContextTest extends UnitCase
     #[Test]
     public function can_create_an_instance_from_reflection_class(): void
     {
-        $reflectionClass = new ReflectionClass(PersonData::class);
-        $classContext = ClassContext::getInstance($reflectionClass);
+        $classContext = ClassContext::getInstance(PersonData::class);
 
         self::assertInstanceOf(ClassContext::class, $classContext);
     }
@@ -41,9 +39,8 @@ final class ClassContextTest extends UnitCase
     #[Test]
     public function can_retrieve_same_instance_of_class(): void
     {
-        $reflectionClass = new ReflectionClass(PersonData::class);
-        $classContext = ClassContext::getInstance($reflectionClass);
-        $classContext2 = ClassContext::getInstance($reflectionClass);
+        $classContext = ClassContext::getInstance(PersonData::class);
+        $classContext2 = ClassContext::getInstance(PersonData::class);
 
         self::assertSame($classContext, $classContext2);
     }
@@ -54,8 +51,7 @@ final class ClassContextTest extends UnitCase
     #[Test]
     public function can_create_an_instance_from_the_reflection_class(): void
     {
-        $reflectionClass = new ReflectionClass(PersonData::class);
-        $classContext = ClassContext::getInstance($reflectionClass);
+        $classContext = ClassContext::getInstance(PersonData::class);
 
         self::assertInstanceOf(PersonData::class, $classContext->newInstanceWithoutConstructor());
     }
@@ -66,16 +62,14 @@ final class ClassContextTest extends UnitCase
     #[Test]
     public function will_sync_normalizers_from_attribute(): void
     {
-        $reflectionClass = new ReflectionClass(PersonData::class);
-        $classContext = ClassContext::getInstance($reflectionClass);
+        $classContext = ClassContext::getInstance(PersonData::class);
 
         self::assertEquals(
             [DummyNormalizer::class, HumanToPersonNormalizer::class],
             $classContext->normalizers
         );
 
-        $reflectionClass = new ReflectionClass(DummyWithNormalizerData::class);
-        $classContext = ClassContext::getInstance($reflectionClass);
+        $classContext = ClassContext::getInstance(DummyWithNormalizerData::class);
 
         self::assertEquals(
             [DummyNormalizer::class],

@@ -23,7 +23,7 @@ trait CloneableData
             }
 
             /** @var ClassContext<static> $context */
-            $context = ClassContext::getInstance(new ReflectionClass(static::class));
+            $context = ClassContext::getInstance(static::class);
 
             $value = static::normalizeValue($args, static::class, $context->normalizers)
                 ?: static::normalizeValue($args[0], static::class, $context->normalizers);

@@ -62,22 +62,33 @@ class ClassContext
     }
 
     /**
-     * @param ReflectionClass<T> $reflectionClass
+     * @param ReflectionClass<T>|class-string<T> $reflectionClass
      *
      * @throws UnsupportedTypeException
+     * @throws ReflectionException
      */
-    final public static function getInstance(ReflectionClass $reflectionClass): static
+    final public static function getInstance(string|ReflectionClass $reflectionClass): static
     {
+        $instance = self::$_instances[self::getKey($reflectionClass)] ?? null;
+
+        if ($instance) {
+            return $instance;
+        }
+
+        if (is_string($reflectionClass)) {
+            $reflectionClass = new ReflectionClass($reflectionClass);
+        }
+
         return self::$_instances[self::getKey($reflectionClass)]
-            ??= new static($reflectionClass);
+            = new static($reflectionClass);
     }
 
     /**
-     * @param ReflectionClass<T> $reflectionClass
+     * @param ReflectionClass<T>|class-string<T> $reflectionClass
      */
-    private static function getKey(ReflectionClass $reflectionClass): string
+    private static function getKey(string|ReflectionClass $reflectionClass): string
     {
-        return $reflectionClass->getName();
+        return is_string($reflectionClass) ? $reflectionClass : $reflectionClass->getName();
     }
 
     /**
