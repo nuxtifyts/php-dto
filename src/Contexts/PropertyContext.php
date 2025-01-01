@@ -9,6 +9,7 @@ use Nuxtifyts\PhpDto\Attributes\Property\Aliases;
 use Nuxtifyts\PhpDto\Attributes\Property\CipherTarget;
 use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 use Nuxtifyts\PhpDto\Attributes\Property\DefaultsTo;
+use Nuxtifyts\PhpDto\Attributes\Property\Hidden;
 use Nuxtifyts\PhpDto\Attributes\Property\WithRefiner;
 use Nuxtifyts\PhpDto\Contexts\Concerns\HasTypes;
 use Nuxtifyts\PhpDto\Data;
@@ -50,6 +51,8 @@ class PropertyContext
     private(set) array $aliases = [];
 
     private(set) bool $isComputed = false;
+
+    private(set) bool $isHidden = false;
 
     private(set) ?CipherConfig $cipherConfig = null;
 
@@ -104,6 +107,7 @@ class PropertyContext
     private function syncPropertyAttributes(): void
     {
         $this->isComputed = !empty($this->reflection->getAttributes(Computed::class));
+        $this->isHidden = !empty($this->reflection->getAttributes(Hidden::class));
 
         foreach ($this->reflection->getAttributes(WithRefiner::class) as $withRefinerAttribute) {
             /** @var ReflectionAttribute<WithRefiner> $withRefinerAttribute */

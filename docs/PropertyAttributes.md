@@ -3,6 +3,7 @@ Property Attributes
 
 In order to provide more functionality to your DTOs, you can use the following attributes:
 - [Computed](#Computed) - To define a property that is computed from other properties.
+- [Hidden](#Hidden) - To define a property that should not be serialized.
 - [Aliases](#Aliases) - To define aliases for a property.
 - [DefaultsTo](#DefaultsTo) - To define a default value for a property using a fallback resolver.
 - [CipherTarget](#CipherTarget) - To define a property that should be encrypted/decrypted.
@@ -32,6 +33,29 @@ final readonly class PersonData extends Data
 ```
 
 This will make the DTO aware of the `fullName` property, and it will not be serialized or deserialized.
+
+Hidden
+-
+
+Sometimes, we may need to specify that a property should not be serialized.
+
+This can be done using the `Hidden` attribute.
+
+```php
+use Nuxtifyts\PhpDto\Attributes\Property\Hidden;
+use Nuxtifyts\PhpDto\Data;
+
+final readonly class PersonData extends Data
+{
+    public function __construct(
+        public string $firstName,
+        #[Hidden]
+        public string $lastName
+    ) {}
+} 
+```
+
+When serializing the DTO, the `lastName` property will not be included in the output.
 
 Aliases
 -
