@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1735689811">
-  <project timestamp="1735689811">
+<coverage generated="1735690386">
+  <project timestamp="1735690386">
     <package name="Nuxtifyts\PhpDto\Attributes\Class">
       <file name="/Users/faroukbraik/Dev/php-dto/src/Attributes/Class/WithNormalizer.php">
         <class name="Nuxtifyts\PhpDto\Attributes\Class\WithNormalizer" namespace="Nuxtifyts\PhpDto\Attributes\Class">
           <metrics complexity="2" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
         </class>
-        <line num="20" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="2"/>
-        <line num="22" type="stmt" count="2"/>
-        <line num="24" type="stmt" count="2"/>
+        <line num="20" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="3"/>
+        <line num="22" type="stmt" count="3"/>
+        <line num="24" type="stmt" count="3"/>
         <line num="25" type="stmt" count="1"/>
-        <line num="28" type="stmt" count="1"/>
+        <line num="28" type="stmt" count="2"/>
         <metrics loc="31" ncloc="26" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
       </file>
     </package>
@@ -348,31 +348,31 @@
     <package name="Nuxtifyts\PhpDto\Contexts">
       <file name="/Users/faroukbraik/Dev/php-dto/src/Contexts/ClassContext.php">
         <class name="Nuxtifyts\PhpDto\Contexts\ClassContext" namespace="Nuxtifyts\PhpDto\Contexts">
-          <metrics complexity="12" methods="8" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="23" elements="35" coveredelements="30"/>
+          <metrics complexity="12" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="27" elements="35" coveredelements="35"/>
         </class>
-        <line num="44" type="method" name="__construct" visibility="private" complexity="1" crap="1" count="9"/>
-        <line num="47" type="stmt" count="9"/>
-        <line num="48" type="stmt" count="9"/>
-        <line num="49" type="stmt" count="9"/>
-        <line num="50" type="stmt" count="9"/>
-        <line num="51" type="stmt" count="9"/>
-        <line num="52" type="stmt" count="9"/>
+        <line num="44" type="method" name="__construct" visibility="private" complexity="1" crap="1" count="10"/>
+        <line num="47" type="stmt" count="10"/>
+        <line num="48" type="stmt" count="10"/>
+        <line num="49" type="stmt" count="10"/>
+        <line num="50" type="stmt" count="10"/>
+        <line num="51" type="stmt" count="10"/>
+        <line num="52" type="stmt" count="10"/>
         <line num="69" type="method" name="getInstance" visibility="public" complexity="1" crap="1" count="22"/>
         <line num="71" type="stmt" count="22"/>
         <line num="72" type="stmt" count="22"/>
         <line num="78" type="method" name="getKey" visibility="private" complexity="1" crap="1" count="22"/>
         <line num="80" type="stmt" count="22"/>
-        <line num="90" type="method" name="getPropertyContexts" visibility="private" complexity="2" crap="2" count="9"/>
-        <line num="92" type="stmt" count="9"/>
-        <line num="94" type="stmt" count="9"/>
+        <line num="90" type="method" name="getPropertyContexts" visibility="private" complexity="2" crap="2" count="10"/>
+        <line num="92" type="stmt" count="10"/>
+        <line num="94" type="stmt" count="10"/>
         <line num="95" type="stmt" count="9"/>
-        <line num="98" type="stmt" count="9"/>
-        <line num="101" type="method" name="syncClassAttributes" visibility="private" complexity="2" crap="4.05" count="9"/>
-        <line num="103" type="stmt" count="9"/>
-        <line num="105" type="stmt" count="0"/>
-        <line num="106" type="stmt" count="0"/>
-        <line num="107" type="stmt" count="0"/>
-        <line num="108" type="stmt" count="0"/>
+        <line num="98" type="stmt" count="10"/>
+        <line num="101" type="method" name="syncClassAttributes" visibility="private" complexity="2" crap="2" count="10"/>
+        <line num="103" type="stmt" count="10"/>
+        <line num="105" type="stmt" count="1"/>
+        <line num="106" type="stmt" count="1"/>
+        <line num="107" type="stmt" count="1"/>
+        <line num="108" type="stmt" count="1"/>
         <line num="117" type="method" name="newInstanceWithoutConstructor" visibility="public" complexity="1" crap="1" count="5"/>
         <line num="119" type="stmt" count="5"/>
         <line num="127" type="method" name="newInstanceWithConstructorCall" visibility="public" complexity="1" crap="1" count="14"/>
@@ -385,7 +385,7 @@
         <line num="148" type="stmt" count="1"/>
         <line num="151" type="stmt" count="9"/>
         <line num="154" type="stmt" count="9"/>
-        <metrics loc="157" ncloc="104" classes="1" methods="8" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="23" elements="35" coveredelements="30"/>
+        <metrics loc="157" ncloc="104" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="27" elements="35" coveredelements="35"/>
       </file>
       <file name="/Users/faroukbraik/Dev/php-dto/src/Contexts/PropertyContext.php">
         <class name="Nuxtifyts\PhpDto\Contexts\PropertyContext" namespace="Nuxtifyts\PhpDto\Contexts">
@@ -1550,6 +1550,6 @@
         <metrics loc="47" ncloc="30" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
       </file>
     </package>
-    <metrics files="68" loc="3734" ncloc="3144" classes="56" methods="149" coveredmethods="118" conditionals="0" coveredconditionals="0" statements="980" coveredstatements="891" elements="1129" coveredelements="1009"/>
+    <metrics files="68" loc="3734" ncloc="3144" classes="56" methods="149" coveredmethods="119" conditionals="0" coveredconditionals="0" statements="980" coveredstatements="895" elements="1129" coveredelements="1014"/>
   </project>
 </coverage>
