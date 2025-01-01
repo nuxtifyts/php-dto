@@ -77,7 +77,21 @@ final readonly class GoalTodoNormalizer extends Normalizer
 }
 ```
 
-Next step is to add this new normalizer to the todo class:
+Next step is to add this new normalizer to the todo class, either using 
+an attribute:
+
+```php
+use Nuxtifyts\PhpDto\Data;
+use Nuxtifyts\PhpDto\Attributes\Class\WithNormalizer;
+
+#[WithNormalizer(GoalTodoNormalizer::class)]
+final readonly class TodoData extends Data
+{
+    // ...
+}
+```
+
+Or using a method:
 
 ```php
 use Nuxtifyts\PhpDto\Data;

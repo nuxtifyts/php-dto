@@ -2,9 +2,12 @@
 
 namespace Nuxtifyts\PhpDto\Contexts;
 
+use Nuxtifyts\PhpDto\Attributes\Class\WithNormalizer;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Exceptions\DataCreationException;
 use Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException;
+use Nuxtifyts\PhpDto\Normalizers\Normalizer;
+use ReflectionAttribute;
 use ReflectionException;
 use ReflectionParameter;
 use ReflectionClass;
@@ -30,6 +33,9 @@ class ClassContext
     /** @var list<string> List of param names  */
     public readonly array $constructorParams;
 
+    /** @var array<array-key, class-string<Normalizer>> */
+    private(set) array $normalizers = [];
+
     /**
      * @param ReflectionClass<T> $reflection
      *
@@ -43,6 +49,7 @@ class ClassContext
             static fn (ReflectionParameter $param) => $param->getName(),
             $this->reflection->getConstructor()?->getParameters() ?? [],
         );
+        $this->syncClassAttributes();
     }
 
     public bool $hasComputedProperties {
@@ -55,22 +62,33 @@ class ClassContext
     }
 
     /**
-     * @param ReflectionClass<T> $reflectionClass
+     * @param ReflectionClass<T>|class-string<T> $reflectionClass
      *
      * @throws UnsupportedTypeException
+     * @throws ReflectionException
      */
-    final public static function getInstance(ReflectionClass $reflectionClass): static
+    final public static function getInstance(string|ReflectionClass $reflectionClass): static
     {
+        $instance = self::$_instances[self::getKey($reflectionClass)] ?? null;
+
+        if ($instance) {
+            return $instance;
+        }
+
+        if (is_string($reflectionClass)) {
+            $reflectionClass = new ReflectionClass($reflectionClass);
+        }
+
         return self::$_instances[self::getKey($reflectionClass)]
-            ??= new static($reflectionClass);
+            = new static($reflectionClass);
     }
 
     /**
-     * @param ReflectionClass<T> $reflectionClass
+     * @param ReflectionClass<T>|class-string<T> $reflectionClass
      */
-    private static function getKey(ReflectionClass $reflectionClass): string
+    private static function getKey(string|ReflectionClass $reflectionClass): string
     {
-        return $reflectionClass->getName();
+        return is_string($reflectionClass) ? $reflectionClass : $reflectionClass->getName();
     }
 
     /**
@@ -89,6 +107,17 @@ class ClassContext
         }
 
         return $properties;
+    }
+
+    private function syncClassAttributes(): void
+    {
+        foreach ($this->reflection->getAttributes(WithNormalizer::class) as $withNormalizerAttribute) {
+            /** @var ReflectionAttribute<WithNormalizer> $withNormalizerAttribute */
+            $this->normalizers = array_values([
+                ...$this->normalizers,
+                ...$withNormalizerAttribute->newInstance()->classStrings
+            ]);
+        }
     }
 
     /**

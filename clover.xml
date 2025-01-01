@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1735679405">
-  <project timestamp="1735679405">
+<coverage generated="1735691266">
+  <project timestamp="1735691266">
+    <package name="Nuxtifyts\PhpDto\Attributes\Class">
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Attributes/Class/WithNormalizer.php">
+        <class name="Nuxtifyts\PhpDto\Attributes\Class\WithNormalizer" namespace="Nuxtifyts\PhpDto\Attributes\Class">
+          <metrics complexity="2" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
+        </class>
+        <line num="20" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="3"/>
+        <line num="22" type="stmt" count="3"/>
+        <line num="24" type="stmt" count="3"/>
+        <line num="25" type="stmt" count="1"/>
+        <line num="28" type="stmt" count="2"/>
+        <metrics loc="31" ncloc="26" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
+      </file>
+    </package>
     <package name="Nuxtifyts\PhpDto\Attributes\Property">
       <file name="/Users/faroukbraik/Dev/php-dto/src/Attributes/Property/Aliases.php">
         <class name="Nuxtifyts\PhpDto\Attributes\Property\Aliases" namespace="Nuxtifyts\PhpDto\Attributes\Property">
@@ -151,11 +164,11 @@
           <metrics complexity="19" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="53" coveredstatements="53" elements="60" coveredelements="60"/>
         </class>
         <line num="22" type="method" name="create" visibility="public" complexity="4" crap="4" count="2"/>
-        <line num="25" type="stmt" count="2"/>
         <line num="26" type="stmt" count="2"/>
         <line num="28" type="stmt" count="2"/>
-        <line num="29" type="stmt" count="1"/>
-        <line num="33" type="stmt" count="1"/>
+        <line num="29" type="stmt" count="2"/>
+        <line num="31" type="stmt" count="2"/>
+        <line num="32" type="stmt" count="1"/>
         <line num="35" type="stmt" count="1"/>
         <line num="36" type="stmt" count="1"/>
         <line num="37" type="stmt" count="1"/>
@@ -166,10 +179,10 @@
         <line num="43" type="stmt" count="1"/>
         <line num="44" type="stmt" count="1"/>
         <line num="51" type="method" name="from" visibility="public" complexity="4" crap="4" count="29"/>
-        <line num="54" type="stmt" count="29"/>
-        <line num="56" type="stmt" count="29"/>
-        <line num="57" type="stmt" count="1"/>
-        <line num="61" type="stmt" count="28"/>
+        <line num="55" type="stmt" count="29"/>
+        <line num="57" type="stmt" count="29"/>
+        <line num="59" type="stmt" count="29"/>
+        <line num="60" type="stmt" count="1"/>
         <line num="63" type="stmt" count="28"/>
         <line num="64" type="stmt" count="28"/>
         <line num="65" type="stmt" count="28"/>
@@ -219,11 +232,11 @@
         <line num="18" type="method" name="with" visibility="public" complexity="6" crap="6" count="11"/>
         <line num="21" type="stmt" count="11"/>
         <line num="22" type="stmt" count="1"/>
-        <line num="25" type="stmt" count="10"/>
-        <line num="26" type="stmt" count="3"/>
+        <line num="26" type="stmt" count="10"/>
         <line num="28" type="stmt" count="10"/>
-        <line num="29" type="stmt" count="1"/>
-        <line num="33" type="stmt" count="9"/>
+        <line num="29" type="stmt" count="3"/>
+        <line num="31" type="stmt" count="10"/>
+        <line num="32" type="stmt" count="1"/>
         <line num="35" type="stmt" count="9"/>
         <line num="36" type="stmt" count="7"/>
         <line num="37" type="stmt" count="7"/>
@@ -288,84 +301,96 @@
       </file>
       <file name="/Users/faroukbraik/Dev/php-dto/src/Configuration/NormalizersConfiguration.php">
         <class name="Nuxtifyts\PhpDto\Configuration\NormalizersConfiguration" namespace="Nuxtifyts\PhpDto\Configuration">
-          <metrics complexity="6" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="13" elements="16" coveredelements="14"/>
+          <metrics complexity="6" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="16" coveredelements="16"/>
         </class>
-        <line num="20" type="method" name="__construct" visibility="protected" complexity="1" crap="1" count="2"/>
-        <line num="28" type="stmt" count="2"/>
-        <line num="35" type="method" name="getInstance" visibility="public" complexity="5" crap="5.01" count="3"/>
-        <line num="39" type="stmt" count="3"/>
-        <line num="40" type="stmt" count="0"/>
-        <line num="43" type="stmt" count="3"/>
-        <line num="44" type="stmt" count="3"/>
-        <line num="45" type="stmt" count="3"/>
-        <line num="46" type="stmt" count="3"/>
-        <line num="47" type="stmt" count="3"/>
-        <line num="51" type="stmt" count="3"/>
-        <line num="52" type="stmt" count="3"/>
-        <line num="54" type="stmt" count="1"/>
-        <line num="58" type="stmt" count="2"/>
-        <line num="59" type="stmt" count="2"/>
-        <line num="60" type="stmt" count="2"/>
-        <metrics loc="63" ncloc="54" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="13" elements="16" coveredelements="14"/>
+        <line num="20" type="method" name="__construct" visibility="protected" complexity="1" crap="1" count="3"/>
+        <line num="23" type="stmt" count="3"/>
+        <line num="30" type="method" name="getInstance" visibility="public" complexity="5" crap="5" count="4"/>
+        <line num="34" type="stmt" count="4"/>
+        <line num="35" type="stmt" count="1"/>
+        <line num="38" type="stmt" count="4"/>
+        <line num="39" type="stmt" count="4"/>
+        <line num="40" type="stmt" count="4"/>
+        <line num="41" type="stmt" count="4"/>
+        <line num="42" type="stmt" count="4"/>
+        <line num="46" type="stmt" count="4"/>
+        <line num="47" type="stmt" count="4"/>
+        <line num="49" type="stmt" count="1"/>
+        <line num="53" type="stmt" count="3"/>
+        <line num="54" type="stmt" count="3"/>
+        <line num="55" type="stmt" count="3"/>
+        <metrics loc="58" ncloc="49" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="16" coveredelements="16"/>
       </file>
       <file name="/Users/faroukbraik/Dev/php-dto/src/Configuration/SerializersConfiguration.php">
         <class name="Nuxtifyts\PhpDto\Configuration\SerializersConfiguration" namespace="Nuxtifyts\PhpDto\Configuration">
-          <metrics complexity="6" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="14" elements="17" coveredelements="15"/>
+          <metrics complexity="6" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="17" coveredelements="17"/>
         </class>
-        <line num="21" type="method" name="__construct" visibility="protected" complexity="1" crap="1" count="3"/>
-        <line num="30" type="stmt" count="3"/>
-        <line num="37" type="method" name="getInstance" visibility="public" complexity="5" crap="5.01" count="4"/>
-        <line num="41" type="stmt" count="4"/>
-        <line num="42" type="stmt" count="0"/>
-        <line num="45" type="stmt" count="4"/>
-        <line num="46" type="stmt" count="4"/>
-        <line num="47" type="stmt" count="4"/>
-        <line num="48" type="stmt" count="4"/>
-        <line num="49" type="stmt" count="4"/>
-        <line num="50" type="stmt" count="4"/>
-        <line num="54" type="stmt" count="4"/>
-        <line num="55" type="stmt" count="4"/>
-        <line num="57" type="stmt" count="1"/>
-        <line num="61" type="stmt" count="3"/>
-        <line num="62" type="stmt" count="3"/>
-        <line num="63" type="stmt" count="3"/>
-        <metrics loc="66" ncloc="57" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="14" elements="17" coveredelements="15"/>
+        <line num="21" type="method" name="__construct" visibility="protected" complexity="1" crap="1" count="2"/>
+        <line num="24" type="stmt" count="2"/>
+        <line num="31" type="method" name="getInstance" visibility="public" complexity="5" crap="5" count="3"/>
+        <line num="35" type="stmt" count="3"/>
+        <line num="36" type="stmt" count="1"/>
+        <line num="39" type="stmt" count="3"/>
+        <line num="40" type="stmt" count="3"/>
+        <line num="41" type="stmt" count="3"/>
+        <line num="42" type="stmt" count="3"/>
+        <line num="43" type="stmt" count="3"/>
+        <line num="44" type="stmt" count="3"/>
+        <line num="48" type="stmt" count="3"/>
+        <line num="49" type="stmt" count="3"/>
+        <line num="51" type="stmt" count="1"/>
+        <line num="55" type="stmt" count="2"/>
+        <line num="56" type="stmt" count="2"/>
+        <line num="57" type="stmt" count="2"/>
+        <metrics loc="60" ncloc="51" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="17" coveredelements="17"/>
       </file>
     </package>
     <package name="Nuxtifyts\PhpDto\Contexts">
       <file name="/Users/faroukbraik/Dev/php-dto/src/Contexts/ClassContext.php">
         <class name="Nuxtifyts\PhpDto\Contexts\ClassContext" namespace="Nuxtifyts\PhpDto\Contexts">
-          <metrics complexity="10" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="21" elements="28" coveredelements="28"/>
+          <metrics complexity="15" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="32" elements="40" coveredelements="40"/>
         </class>
-        <line num="38" type="method" name="__construct" visibility="private" complexity="1" crap="1" count="9"/>
-        <line num="41" type="stmt" count="9"/>
-        <line num="42" type="stmt" count="9"/>
-        <line num="43" type="stmt" count="9"/>
-        <line num="44" type="stmt" count="9"/>
-        <line num="45" type="stmt" count="9"/>
-        <line num="62" type="method" name="getInstance" visibility="public" complexity="1" crap="1" count="20"/>
-        <line num="64" type="stmt" count="20"/>
-        <line num="65" type="stmt" count="20"/>
-        <line num="71" type="method" name="getKey" visibility="private" complexity="1" crap="1" count="20"/>
-        <line num="73" type="stmt" count="20"/>
-        <line num="83" type="method" name="getPropertyContexts" visibility="private" complexity="2" crap="2" count="9"/>
-        <line num="85" type="stmt" count="9"/>
-        <line num="87" type="stmt" count="9"/>
-        <line num="88" type="stmt" count="9"/>
-        <line num="91" type="stmt" count="9"/>
-        <line num="99" type="method" name="newInstanceWithoutConstructor" visibility="public" complexity="1" crap="1" count="5"/>
-        <line num="101" type="stmt" count="5"/>
-        <line num="109" type="method" name="newInstanceWithConstructorCall" visibility="public" complexity="1" crap="1" count="13"/>
-        <line num="111" type="stmt" count="13"/>
-        <line num="121" type="method" name="emptyValue" visibility="public" complexity="3" crap="3" count="10"/>
-        <line num="124" type="stmt" count="10"/>
-        <line num="126" type="stmt" count="10"/>
-        <line num="127" type="stmt" count="10"/>
-        <line num="129" type="stmt" count="10"/>
-        <line num="130" type="stmt" count="1"/>
-        <line num="133" type="stmt" count="9"/>
-        <line num="136" type="stmt" count="9"/>
-        <metrics loc="139" ncloc="88" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="21" elements="28" coveredelements="28"/>
+        <line num="44" type="method" name="__construct" visibility="private" complexity="1" crap="1" count="10"/>
+        <line num="47" type="stmt" count="10"/>
+        <line num="48" type="stmt" count="10"/>
+        <line num="49" type="stmt" count="10"/>
+        <line num="50" type="stmt" count="10"/>
+        <line num="51" type="stmt" count="10"/>
+        <line num="52" type="stmt" count="10"/>
+        <line num="70" type="method" name="getInstance" visibility="public" complexity="3" crap="3" count="22"/>
+        <line num="72" type="stmt" count="22"/>
+        <line num="74" type="stmt" count="22"/>
+        <line num="75" type="stmt" count="16"/>
+        <line num="78" type="stmt" count="10"/>
+        <line num="79" type="stmt" count="10"/>
+        <line num="82" type="stmt" count="10"/>
+        <line num="83" type="stmt" count="10"/>
+        <line num="89" type="method" name="getKey" visibility="private" complexity="2" crap="2" count="22"/>
+        <line num="91" type="stmt" count="22"/>
+        <line num="101" type="method" name="getPropertyContexts" visibility="private" complexity="2" crap="2" count="10"/>
+        <line num="103" type="stmt" count="10"/>
+        <line num="105" type="stmt" count="10"/>
+        <line num="106" type="stmt" count="9"/>
+        <line num="109" type="stmt" count="10"/>
+        <line num="112" type="method" name="syncClassAttributes" visibility="private" complexity="2" crap="2" count="10"/>
+        <line num="114" type="stmt" count="10"/>
+        <line num="116" type="stmt" count="1"/>
+        <line num="117" type="stmt" count="1"/>
+        <line num="118" type="stmt" count="1"/>
+        <line num="119" type="stmt" count="1"/>
+        <line num="128" type="method" name="newInstanceWithoutConstructor" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="130" type="stmt" count="5"/>
+        <line num="138" type="method" name="newInstanceWithConstructorCall" visibility="public" complexity="1" crap="1" count="14"/>
+        <line num="140" type="stmt" count="14"/>
+        <line num="150" type="method" name="emptyValue" visibility="public" complexity="3" crap="3" count="10"/>
+        <line num="153" type="stmt" count="10"/>
+        <line num="155" type="stmt" count="10"/>
+        <line num="156" type="stmt" count="10"/>
+        <line num="158" type="stmt" count="10"/>
+        <line num="159" type="stmt" count="1"/>
+        <line num="162" type="stmt" count="9"/>
+        <line num="165" type="stmt" count="9"/>
+        <metrics loc="168" ncloc="114" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="32" elements="40" coveredelements="40"/>
       </file>
       <file name="/Users/faroukbraik/Dev/php-dto/src/Contexts/PropertyContext.php">
         <class name="Nuxtifyts\PhpDto\Contexts\PropertyContext" namespace="Nuxtifyts\PhpDto\Contexts">
@@ -1091,22 +1116,23 @@
     <package name="Nuxtifyts\PhpDto\Normalizers\Concerns">
       <file name="/Users/faroukbraik/Dev/php-dto/src/Normalizers/Concerns/HasNormalizers.php">
         <class name="Nuxtifyts\PhpDto\Normalizers\Concerns\HasNormalizers" namespace="Nuxtifyts\PhpDto\Normalizers\Concerns">
-          <metrics complexity="5" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="13" coveredelements="13"/>
+          <metrics complexity="5" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
         </class>
-        <line num="19" type="method" name="normalizeValue" visibility="protected" complexity="3" crap="3" count="43"/>
-        <line num="21" type="stmt" count="43"/>
-        <line num="22" type="stmt" count="43"/>
-        <line num="24" type="stmt" count="43"/>
-        <line num="25" type="stmt" count="39"/>
-        <line num="29" type="stmt" count="7"/>
-        <line num="37" type="method" name="allNormalizer" visibility="protected" complexity="1" crap="1" count="44"/>
-        <line num="39" type="stmt" count="44"/>
-        <line num="40" type="stmt" count="44"/>
-        <line num="41" type="stmt" count="44"/>
-        <line num="42" type="stmt" count="44"/>
-        <line num="48" type="method" name="normalizers" visibility="protected" complexity="1" crap="1" count="39"/>
-        <line num="50" type="stmt" count="39"/>
-        <metrics loc="53" ncloc="38" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="13" coveredelements="13"/>
+        <line num="22" type="method" name="normalizeValue" visibility="protected" complexity="3" crap="3" count="43"/>
+        <line num="27" type="stmt" count="43"/>
+        <line num="28" type="stmt" count="43"/>
+        <line num="30" type="stmt" count="43"/>
+        <line num="31" type="stmt" count="39"/>
+        <line num="35" type="stmt" count="7"/>
+        <line num="45" type="method" name="allNormalizer" visibility="protected" complexity="1" crap="1" count="44"/>
+        <line num="47" type="stmt" count="44"/>
+        <line num="48" type="stmt" count="44"/>
+        <line num="49" type="stmt" count="44"/>
+        <line num="50" type="stmt" count="44"/>
+        <line num="51" type="stmt" count="44"/>
+        <line num="57" type="method" name="normalizers" visibility="protected" complexity="1" crap="1" count="39"/>
+        <line num="59" type="stmt" count="39"/>
+        <metrics loc="62" ncloc="44" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
       </file>
     </package>
     <package name="Nuxtifyts\PhpDto\Pipelines\DeserializePipeline">
@@ -1529,6 +1555,6 @@
         <metrics loc="47" ncloc="30" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
       </file>
     </package>
-    <metrics files="67" loc="3687" ncloc="3107" classes="55" methods="147" coveredmethods="115" conditionals="0" coveredconditionals="0" statements="969" coveredstatements="882" elements="1116" coveredelements="997"/>
+    <metrics files="68" loc="3745" ncloc="3154" classes="56" methods="149" coveredmethods="119" conditionals="0" coveredconditionals="0" statements="985" coveredstatements="900" elements="1134" coveredelements="1019"/>
   </project>
 </coverage>

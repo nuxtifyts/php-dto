@@ -22,15 +22,15 @@ trait CloneableData
                 throw DataCreationException::invalidParamsPassed(static::class);
             }
 
-            $value = static::normalizeValue($args, static::class)
-                ?: static::normalizeValue($args[0], static::class);
+            /** @var ClassContext<static> $context */
+            $context = ClassContext::getInstance(static::class);
+
+            $value = static::normalizeValue($args, static::class, $context->normalizers)
+                ?: static::normalizeValue($args[0], static::class, $context->normalizers);
 
             if ($value === false) {
                 throw DataCreationException::invalidParamsPassed(static::class);
             }
-
-            /** @var ClassContext<static> $context */
-            $context = ClassContext::getInstance(new ReflectionClass(static::class));
 
             return $context->hasComputedProperties
                 ? $this->cloneInstanceWithConstructorCall($context, $value)

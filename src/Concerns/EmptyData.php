@@ -16,7 +16,7 @@ trait EmptyData
     {
         try {
             /** @var ClassContext<static> $classContext */
-            $classContext = ClassContext::getInstance(new ReflectionClass(static::class));
+            $classContext = ClassContext::getInstance(static::class);
 
             return $classContext->emptyValue();
         } catch (Throwable $t) {

@@ -22,15 +22,15 @@ trait BaseData
     final public static function create(mixed ...$args): static
     {
         try {
-            $value = static::normalizeValue($args, static::class)
-                ?: static::normalizeValue($args[0] ?? [], static::class);
+            /** @var ClassContext<static> $context */
+            $context = ClassContext::getInstance(static::class);
+
+            $value = static::normalizeValue($args, static::class, $context->normalizers)
+                ?: static::normalizeValue($args[0] ?? [], static::class, $context->normalizers);
 
             if ($value === false) {
                 throw DataCreationException::invalidParamsPassed(static::class);
             }
-
-            /** @var ClassContext<static> $context */
-            $context = ClassContext::getInstance(new ReflectionClass(static::class));
 
             $data = DeserializePipeline::createFromArray()
                 ->sendThenReturn(new DeserializePipelinePassable(
@@ -51,14 +51,14 @@ trait BaseData
     final public static function from(mixed $value): static
     {
         try {
-            $value = static::normalizeValue($value, static::class);
+            /** @var ClassContext<static> $context */
+            $context = ClassContext::getInstance(static::class);
+
+            $value = static::normalizeValue($value, static::class, $context->normalizers);
 
             if ($value === false) {
                 throw DeserializeException::invalidValue();
             }
-
-            /** @var ClassContext<static> $context */
-            $context = ClassContext::getInstance(new ReflectionClass(static::class));
 
             $data = DeserializePipeline::hydrateFromArray()
                 ->sendThenReturn(new DeserializePipelinePassable(
@@ -126,7 +126,7 @@ trait BaseData
     final public function jsonSerialize(): array
     {
         try {
-            $context = ClassContext::getInstance(new ReflectionClass($this));
+            $context = ClassContext::getInstance($this::class);
 
             $serializedData = [];
             foreach ($context->properties as $propertyContext) {

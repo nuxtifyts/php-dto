@@ -2,10 +2,15 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Dummies;
 
+use Nuxtifyts\PhpDto\Tests\Dummies\Normalizers\DummyNormalizer;
+use Nuxtifyts\PhpDto\Tests\Dummies\Normalizers\HumanToPersonNormalizer;
+use Nuxtifyts\PhpDto\Attributes\Class\WithNormalizer;
 use Nuxtifyts\PhpDto\Attributes\Property\Aliases;
 use Nuxtifyts\PhpDto\Attributes\Property\Computed;
 use Nuxtifyts\PhpDto\Data;
 
+#[WithNormalizer(DummyNormalizer::class)]
+#[WithNormalizer(HumanToPersonNormalizer::class)]
 final readonly class PersonData extends Data
 {
     #[Computed]
