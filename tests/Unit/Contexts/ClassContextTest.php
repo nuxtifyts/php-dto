@@ -2,16 +2,25 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Unit\Contexts;
 
+use Nuxtifyts\PhpDto\Tests\Dummies\DummyWithNormalizerData;
+use Nuxtifyts\PhpDto\Tests\Dummies\Normalizers\DummyNormalizer;
+use Nuxtifyts\PhpDto\Tests\Dummies\Normalizers\HumanToPersonNormalizer;
+use Nuxtifyts\PhpDto\Attributes\Class\WithNormalizer;
 use Nuxtifyts\PhpDto\Tests\Dummies\PersonData;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Nuxtifyts\PhpDto\Contexts\ClassContext;
+use PHPUnit\Framework\Attributes\UsesClass;
 use ReflectionClass;
 use Throwable;
-
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 
 #[CoversClass(ClassContext::class)]
+#[CoversClass(WithNormalizer::class)]
+#[UsesClass(HumanToPersonNormalizer::class)]
+#[UsesClass(DummyNormalizer::class)]
+#[UsesClass(PersonData::class)]
+#[UsesClass(DummyWithNormalizerData::class)]
 final class ClassContextTest extends UnitCase
 {
     /**
@@ -49,5 +58,28 @@ final class ClassContextTest extends UnitCase
         $classContext = ClassContext::getInstance($reflectionClass);
 
         self::assertInstanceOf(PersonData::class, $classContext->newInstanceWithoutConstructor());
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[Test]
+    public function will_sync_normalizers_from_attribute(): void
+    {
+        $reflectionClass = new ReflectionClass(PersonData::class);
+        $classContext = ClassContext::getInstance($reflectionClass);
+
+        self::assertEquals(
+            [DummyNormalizer::class, HumanToPersonNormalizer::class],
+            $classContext->normalizers
+        );
+
+        $reflectionClass = new ReflectionClass(DummyWithNormalizerData::class);
+        $classContext = ClassContext::getInstance($reflectionClass);
+
+        self::assertEquals(
+            [DummyNormalizer::class],
+            $classContext->normalizers
+        );
     }
 }

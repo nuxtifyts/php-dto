@@ -2,9 +2,12 @@
 
 namespace Nuxtifyts\PhpDto\Contexts;
 
+use Nuxtifyts\PhpDto\Attributes\Class\WithNormalizer;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Exceptions\DataCreationException;
 use Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException;
+use Nuxtifyts\PhpDto\Normalizers\Normalizer;
+use ReflectionAttribute;
 use ReflectionException;
 use ReflectionParameter;
 use ReflectionClass;
@@ -30,6 +33,9 @@ class ClassContext
     /** @var list<string> List of param names  */
     public readonly array $constructorParams;
 
+    /** @var array<array-key, class-string<Normalizer>> */
+    private(set) array $normalizers = [];
+
     /**
      * @param ReflectionClass<T> $reflection
      *
@@ -43,6 +49,7 @@ class ClassContext
             static fn (ReflectionParameter $param) => $param->getName(),
             $this->reflection->getConstructor()?->getParameters() ?? [],
         );
+        $this->syncClassAttributes();
     }
 
     public bool $hasComputedProperties {
@@ -89,6 +96,17 @@ class ClassContext
         }
 
         return $properties;
+    }
+
+    private function syncClassAttributes(): void
+    {
+        foreach ($this->reflection->getAttributes(WithNormalizer::class) as $withNormalizerAttribute) {
+            /** @var ReflectionAttribute<WithNormalizer> $withNormalizerAttribute */
+            $this->normalizers = array_values([
+                ...$this->normalizers,
+                ...$withNormalizerAttribute->newInstance()->classStrings
+            ]);
+        }
     }
 
     /**
