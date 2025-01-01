@@ -3,6 +3,7 @@
 namespace Nuxtifyts\PhpDto\Pipelines\DeserializePipeline;
 
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes\DecipherDataPipe;
+use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes\MapNamesPipe;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes\RefineDataPipe;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes\ResolveDefaultDataPipe;
 use Nuxtifyts\PhpDto\Pipelines\DeserializePipeline\Pipes\ResolveValuesFromAliasesPipe;
@@ -17,6 +18,7 @@ class DeserializePipeline extends Pipeline
     {
         return new DeserializePipeline(DeserializePipelinePassable::class)
             ->through(ResolveValuesFromAliasesPipe::class)
+            ->through(MapNamesPipe::class)
             ->through(RefineDataPipe::class)
             ->through(DecipherDataPipe::class)
             ->through(ResolveDefaultDataPipe::class);
@@ -30,6 +32,7 @@ class DeserializePipeline extends Pipeline
     {
         return new DeserializePipeline(DeserializePipelinePassable::class)
             ->through(ResolveValuesFromAliasesPipe::class)
+            ->through(MapNamesPipe::class)
             ->through(RefineDataPipe::class)
             ->through(ResolveDefaultDataPipe::class);
     }

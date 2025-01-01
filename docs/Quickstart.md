@@ -78,6 +78,7 @@ can be found here:
 - [Supported Types](https://github.com/nuxtifyts/php-dto/blob/main/docs/SupportedTypes.md)
 - [Normalizers](https://github.com/nuxtifyts/php-dto/blob/main/docs/Normalizers.md)
 - [Property Attributes](https://github.com/nuxtifyts/php-dto/blob/main/docs/PropertyAttributes.md)
+- [Name Mapper](https://github.com/nuxtifyts/php-dto/blob/main/docs/NameMapper.md)
 - [Data Refiners](https://github.com/nuxtifyts/php-dto/blob/main/docs/DataRefiners.md)
 - [Empty Data](https://github.com/nuxtifyts/php-dto/blob/main/docs/EmptyData.md)
 - [Cloneable Data](https://github.com/nuxtifyts/php-dto/blob/main/docs/CloneableData.md)

@@ -130,7 +130,7 @@ trait BaseData
 
             $serializedData = [];
             foreach ($context->properties as $propertyContext) {
-                if ($propertyContext->isComputed) {
+                if ($propertyContext->isComputed || $propertyContext->isHidden) {
                     continue;
                 }
 

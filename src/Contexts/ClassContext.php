@@ -2,7 +2,9 @@
 
 namespace Nuxtifyts\PhpDto\Contexts;
 
+use Nuxtifyts\PhpDto\Attributes\Class\MapName;
 use Nuxtifyts\PhpDto\Attributes\Class\WithNormalizer;
+use Nuxtifyts\PhpDto\Contexts\ClassContext\NameMapperConfig;
 use Nuxtifyts\PhpDto\Data;
 use Nuxtifyts\PhpDto\Exceptions\DataCreationException;
 use Nuxtifyts\PhpDto\Exceptions\UnsupportedTypeException;
@@ -35,6 +37,8 @@ class ClassContext
 
     /** @var array<array-key, class-string<Normalizer>> */
     private(set) array $normalizers = [];
+
+    private(set) ?NameMapperConfig $nameMapperConfig = null;
 
     /**
      * @param ReflectionClass<T> $reflection
@@ -117,6 +121,16 @@ class ClassContext
                 ...$this->normalizers,
                 ...$withNormalizerAttribute->newInstance()->classStrings
             ]);
+        }
+
+        if ($nameMapperAttribute = $this->reflection->getAttributes(MapName::class)[0] ?? null) {
+            /** @var ReflectionAttribute<MapName> $nameMapperAttribute */
+            $instance = $nameMapperAttribute->newInstance();
+
+            $this->nameMapperConfig = new NameMapperConfig(
+                from: $instance->from,
+                to: $instance->to
+            );
         }
     }
 
