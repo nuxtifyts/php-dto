@@ -57,12 +57,14 @@ class ClassContext
     }
 
     public bool $hasComputedProperties {
-        get => count(
-            array_filter(
-                $this->properties,
-                static fn (PropertyContext $property) => $property->isComputed
-            )
-        ) > 0;
+        get {
+            return count(
+                array_filter(
+                    $this->properties,
+                    static fn (PropertyContext $property) => $property->isComputed
+                )
+            ) > 0;
+        }
     }
 
     /**

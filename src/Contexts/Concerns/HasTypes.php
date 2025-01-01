@@ -16,10 +16,12 @@ trait HasTypes
 
     /** @var list<Type> */
     public array $types {
-        get => array_map(
-            static fn (TypeContext $typeContext): Type => $typeContext->type,
-            $this->typeContexts
-        );
+        get {
+            return array_map(
+                static fn (TypeContext $typeContext): Type => $typeContext->type,
+                $this->typeContexts
+            );
+        }
     }
 
     /**

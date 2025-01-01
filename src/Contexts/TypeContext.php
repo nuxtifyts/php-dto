@@ -43,10 +43,12 @@ class TypeContext
 
     /** @var list<Type> $arrayElementTypes */
     public array $arrayElementTypes {
-        get => array_map(
-            static fn (TypeContext $context) => $context->type,
-            $this->subTypeContexts ?? []
-        );
+        get {
+            return  array_map(
+                static fn (TypeContext $context) => $context->type,
+                $this->subTypeContexts ?? []
+            );
+        }
     }
 
     /**

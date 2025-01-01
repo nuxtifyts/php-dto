@@ -72,22 +72,31 @@ class PropertyContext
     }
 
     public string $propertyName {
-        get => $this->reflection->getName();
+        get {
+            return $this->reflection->getName();
+        }
     }
 
     public string $className {
-        get => $this->reflection->getDeclaringClass()->getName();
+        get {
+            return $this->reflection->getDeclaringClass()->getName();
+        }
     }
 
     /** @var list<TypeContext<Type>> $arrayTypeContexts */
     public array $arrayTypeContexts {
-        get => array_reduce(
-            $this->typeContexts ?? [],
-            static fn (array $typeContexts, TypeContext $context) => $context->type === Type::ARRAY
-                    ? [...$typeContexts, ...$context->subTypeContexts]
-                    : [],
-            []
-        );
+        get {
+            /** @var list<TypeContext<Type>> $typeContexts */
+            $typeContexts = [];
+
+            foreach ($this->typeContexts ?? [] as $typeContext) {
+                if ($typeContext->type === Type::ARRAY && $typeContext->subTypeContexts) {
+                    $typeContexts = [...$typeContexts, ...$typeContext->subTypeContexts];
+                }
+            }
+
+            return $typeContexts;
+        }
     }
 
     /**
