@@ -80,6 +80,11 @@ final readonly class PersonData extends Data
 
 This will make it possible to hydrate properties from multiple array keys.
 
+> **Note:** Sometimes, we may want to apply the `Aliases` attribute to the whole class,
+> in case we want to transform letter cases of all the keys in data array.
+> In such cases, we can use the [MapName](https://github.com/nuxtifyts/php-dto/blob/main/docs/NameMapper.md)
+> attribute.
+
 CipherTarget
 -
 
