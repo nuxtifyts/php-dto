@@ -139,7 +139,8 @@ class ClassContext
     /**
      * @throws ReflectionException
      *
-     * @return T
+     * @return Data
+     * @phpstan-return T
      */
     public function newInstanceWithoutConstructor(): mixed
     {
@@ -149,7 +150,8 @@ class ClassContext
     /**
      * @throws ReflectionException
      *
-     * @return T
+     * @return Data
+     * @phpstan-return T
      */
     public function newInstanceWithConstructorCall(mixed ...$args): mixed
     {
