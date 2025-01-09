@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1736375439">
-  <project timestamp="1736375439">
+<coverage generated="1736423484">
+  <project timestamp="1736423484">
     <package name="Nuxtifyts\PhpDto\Attributes\Class">
       <file name="/Users/faroukbraik/Dev/php-dto/src/Attributes/Class/MapName.php">
         <class name="Nuxtifyts\PhpDto\Attributes\Class\MapName" namespace="Nuxtifyts\PhpDto\Attributes\Class">
@@ -1727,6 +1727,18 @@
         <line num="85" type="stmt" count="1"/>
         <metrics loc="89" ncloc="79" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="33" elements="36" coveredelements="36"/>
       </file>
+      <file name="/Users/faroukbraik/Dev/php-dto/src/Validation/Rules/DateRule.php">
+        <class name="Nuxtifyts\PhpDto\Validation\Rules\DateRule" namespace="Nuxtifyts\PhpDto\Validation\Rules">
+          <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="6" coveredelements="6"/>
+        </class>
+        <line num="13" type="method" name="evaluate" visibility="public" complexity="2" crap="2" count="4"/>
+        <line num="15" type="stmt" count="4"/>
+        <line num="21" type="method" name="make" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="23" type="stmt" count="5"/>
+        <line num="26" type="method" name="validationMessage" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="28" type="stmt" count="1"/>
+        <metrics loc="31" ncloc="28" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="6" coveredelements="6"/>
+      </file>
       <file name="/Users/faroukbraik/Dev/php-dto/src/Validation/Rules/NullableRule.php">
         <class name="Nuxtifyts\PhpDto\Validation\Rules\NullableRule" namespace="Nuxtifyts\PhpDto\Validation\Rules">
           <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="6" coveredelements="6"/>
@@ -1763,6 +1775,6 @@
         <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="83" loc="4250" ncloc="3605" classes="65" methods="176" coveredmethods="145" conditionals="0" coveredconditionals="0" statements="1079" coveredstatements="993" elements="1255" coveredelements="1138"/>
+    <metrics files="84" loc="4281" ncloc="3633" classes="66" methods="179" coveredmethods="148" conditionals="0" coveredconditionals="0" statements="1082" coveredstatements="996" elements="1261" coveredelements="1144"/>
   </project>
 </coverage>

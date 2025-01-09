@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 #[CoversClass(NullableRule::class)]
-final class NullableRuleTest extends ValidationRuleUnitCase
+final class NullableRuleTest extends ValidationRuleTestCase
 {
     /** 
      *  @throws Throwable

@@ -16,7 +16,7 @@ use Throwable;
 #[CoversClass(ValidationRuleException::class)]
 #[UsesClass(YesNoBackedEnum::class)]
 #[UsesClass(YesNoEnum::class)]
-final class BackedEnumRuleTest extends ValidationRuleUnitCase
+final class BackedEnumRuleTest extends ValidationRuleTestCase
 {
     /** 
      *  @throws Throwable

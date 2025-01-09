@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
-abstract class ValidationRuleUnitCase extends UnitCase
+abstract class ValidationRuleTestCase extends UnitCase
 {
     abstract function validate_validation_message(): void;
 
