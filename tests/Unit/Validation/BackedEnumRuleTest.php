@@ -4,6 +4,7 @@ namespace Nuxtifyts\PhpDto\Tests\Unit\Validation;
 
 use Nuxtifyts\PhpDto\Validation\Rules\BackedEnumRule;
 use Nuxtifyts\PhpDto\Exceptions\ValidationRuleException;
+use Nuxtifyts\PhpDto\Validation\Rules\ValidationRule;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoEnum;
 use PHPUnit\Framework\Attributes\CoversClass;

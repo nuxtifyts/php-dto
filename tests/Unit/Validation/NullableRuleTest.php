@@ -3,6 +3,8 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\Validation;
 
 use Nuxtifyts\PhpDto\Validation\Rules\NullableRule;
+use Nuxtifyts\PhpDto\Exceptions\ValidationRuleException;
+use Nuxtifyts\PhpDto\Validation\Rules\ValidationRule;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Throwable;

@@ -3,12 +3,14 @@
 namespace Nuxtifyts\PhpDto\Tests\Unit\Validation;
 
 use Nuxtifyts\PhpDto\Validation\Rules\RequiredRule;
+use Nuxtifyts\PhpDto\Exceptions\ValidationRuleException;
+use Nuxtifyts\PhpDto\Validation\Rules\ValidationRule;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 #[CoversClass(RequiredRule::class)]
-final class RequireRuleTest extends ValidationRuleUnitCase
+final class RequiredRuleTest extends ValidationRuleUnitCase
 {
     /** 
      *  @throws Throwable
