@@ -2,12 +2,15 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Unit\Validation;
 
-use Nuxtifyts\PhpDto\Validation\Rules\DateRule;
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Test;
 use Throwable;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\CoversClass;
+use Nuxtifyts\PhpDto\Validation\Rules\DateRule;
+use Nuxtifyts\PhpDto\Exceptions\ValidationRuleException;
+use Nuxtifyts\PhpDto\Validation\Rules\ValidationRule;
 
 #[CoversClass(DateRule::class)]
+#[CoversClass(ValidationRuleException::class)]
 final class DateRuleTest extends ValidationRuleTestCase
 {
     /** 
@@ -24,8 +27,8 @@ final class DateRuleTest extends ValidationRuleTestCase
         );
     }
 
-    /** 
-     *  @return array<string, array{
+    /**
+     * @return array<string, array{
      *     validationRuleClassString: class-string<ValidationRule>,
      *     makeParams: ?array<string, mixed>,
      *     expectedMakeException: ?class-string<ValidationRuleException>,
@@ -63,6 +66,27 @@ final class DateRuleTest extends ValidationRuleTestCase
                 'expectedMakeException' => null,
                 'valueToBeEvaluated' => '2021-01-01 00:00:00',
                 'expectedResult' => true
+            ],
+            'Will evaluate false when a custom datetime string is provided but no formats are set' => [
+                'validationRuleClassString' => DateRule::class,
+                'makeParams' => null,
+                'expectedMakeException' => null,
+                'valueToBeEvaluated' => '2021/01-01 00/00/00',
+                'expectedResult' => false
+            ],
+            'Will evaluate true when a custom datetime string is provided and a format is set' => [
+                'validationRuleClassString' => DateRule::class,
+                'makeParams' => ['formats' => ['Y/m-d H/m/s']],
+                'expectedMakeException' => null,
+                'valueToBeEvaluated' => '2021/01-01 00/00/00',
+                'expectedResult' => true
+            ],
+            'Will throw an exception when an invalid non string format is passed' => [
+                'validationRuleClassString' => DateRule::class,
+                'makeParams' => ['formats' => ['Y/m-d H/m/s', 123]],
+                'expectedMakeException' => ValidationRuleException::class,
+                'valueToBeEvaluated' => '2021/01-01 00/00/00',
+                'expectedResult' => false
             ],
         ];
     }
