@@ -1,7 +1,9 @@
 vendor/
 .idea/
 coverage.xml
+clover.xml
 package.xml
 coverage-html/
 .phpunit/
 /.php-cs-fixer.cache
+tests/.DS_Store
