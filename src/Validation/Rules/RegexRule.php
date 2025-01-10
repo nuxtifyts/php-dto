@@ -6,12 +6,12 @@ use Nuxtifyts\PhpDto\Exceptions\ValidationRuleException;
 
 class RegexRule implements ValidationRule
 {
-    public string $pattern;
+    protected string $pattern;
 
     /** @var 0 | 256 | 512 | 768 */
-    public int $flags = 0;
+    protected int $flags = 0;
 
-    public int $offset = 0;
+    protected int $offset = 0;
 
     public string $name {
         get {
