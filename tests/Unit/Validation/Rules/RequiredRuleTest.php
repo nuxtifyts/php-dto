@@ -1,9 +1,9 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Tests\Unit\Validation;
+namespace Nuxtifyts\PhpDto\Tests\Unit\Validation\Rules;
 
-use Nuxtifyts\PhpDto\Validation\Rules\RequiredRule;
 use Nuxtifyts\PhpDto\Exceptions\ValidationRuleException;
+use Nuxtifyts\PhpDto\Validation\Rules\RequiredRule;
 use Nuxtifyts\PhpDto\Validation\Rules\ValidationRule;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;

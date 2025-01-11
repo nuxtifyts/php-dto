@@ -1,12 +1,12 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Tests\Unit\Validation;
+namespace Nuxtifyts\PhpDto\Tests\Unit\Validation\Rules;
 
-use Nuxtifyts\PhpDto\Validation\Rules\BackedEnumRule;
 use Nuxtifyts\PhpDto\Exceptions\ValidationRuleException;
-use Nuxtifyts\PhpDto\Validation\Rules\ValidationRule;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
 use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoEnum;
+use Nuxtifyts\PhpDto\Validation\Rules\BackedEnumRule;
+use Nuxtifyts\PhpDto\Validation\Rules\ValidationRule;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;

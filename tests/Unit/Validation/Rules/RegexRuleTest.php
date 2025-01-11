@@ -1,13 +1,13 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Tests\Unit\Validation;
+namespace Nuxtifyts\PhpDto\Tests\Unit\Validation\Rules;
 
-use Throwable;
-use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\Attributes\CoversClass;
+use Nuxtifyts\PhpDto\Exceptions\ValidationRuleException;
 use Nuxtifyts\PhpDto\Validation\Rules\RegexRule;
 use Nuxtifyts\PhpDto\Validation\Rules\ValidationRule;
-use Nuxtifyts\PhpDto\Exceptions\ValidationRuleException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
+use Throwable;
 
 #[CoversClass(RegexRule::class)]
 #[CoversClass(ValidationRuleException::class)]

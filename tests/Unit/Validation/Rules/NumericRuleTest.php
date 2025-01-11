@@ -1,12 +1,12 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Tests\Unit\Validation;
+namespace Nuxtifyts\PhpDto\Tests\Unit\Validation\Rules;
 
 use Nuxtifyts\PhpDto\Enums\Property\Type;
-use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\Attributes\CoversClass;
-use Nuxtifyts\PhpDto\Validation\Rules\NumericRule;
 use Nuxtifyts\PhpDto\Exceptions\ValidationRuleException;
+use Nuxtifyts\PhpDto\Validation\Rules\NumericRule;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
 use Throwable;
 

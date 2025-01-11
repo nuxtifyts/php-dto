@@ -1,10 +1,10 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Tests\Unit\Validation;
+namespace Nuxtifyts\PhpDto\Tests\Unit\Validation\Rules;
 
+use Nuxtifyts\PhpDto\Exceptions\ValidationRuleException;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
 use Nuxtifyts\PhpDto\Validation\Rules\ValidationRule;
-use Nuxtifyts\PhpDto\Exceptions\ValidationRuleException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Throwable;

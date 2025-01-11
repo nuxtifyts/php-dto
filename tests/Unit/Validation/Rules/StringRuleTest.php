@@ -1,13 +1,12 @@
 <?php
 
-namespace Nuxtifyts\PhpDto\Tests\Unit\Validation;
+namespace Nuxtifyts\PhpDto\Tests\Unit\Validation\Rules;
 
-use Throwable;
-use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\Attributes\CoversClass;
-use Nuxtifyts\PhpDto\Validation\Rules\StringRule;
 use Nuxtifyts\PhpDto\Exceptions\ValidationRuleException;
-use Nuxtifyts\PhpDto\Tests\Unit\Validation\ValidationRuleTestCase;
+use Nuxtifyts\PhpDto\Validation\Rules\StringRule;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
+use Throwable;
 
 #[CoversClass(StringRule::class)]
 #[CoversClass(ValidationRuleException::class)]
@@ -19,11 +18,9 @@ final class StringRuleTest extends ValidationRuleTestCase
     #[Test]
     public function validate_validation_message(): void
     {
-        $rule = StringRule::make();
-
         self::assertEquals(
             'The :attribute field must be a valid string.',
-            $rule->validationMessage()
+            StringRule::make()->validationMessage()
         );
     }
 
