@@ -21,10 +21,10 @@ class RegexRule implements ValidationRule
 
     public function evaluate(mixed $value): bool
     {
-        return is_string($value) 
+        return (is_string($value) || is_numeric($value)) 
             && preg_match(
                 pattern: $this->pattern, 
-                subject: $value,
+                subject: (string) $value,
                 flags: $this->flags,
                 offset: $this->offset
             );

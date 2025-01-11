@@ -11,6 +11,15 @@ class StringRule extends RegexRule
 {
     use Concerns\MinMaxValues;
 
+    protected const TYPE_STRING = 'string';
+    protected const TYPE_ALPHA = 'alpha';
+
+    /** @var list<string> */
+    protected const TYPES = [
+        self::TYPE_STRING,
+        self::TYPE_ALPHA,
+    ];
+
     public string $name {
         get {
             return 'string';
@@ -27,12 +36,24 @@ class StringRule extends RegexRule
     {
         $instance = new self();
 
+        $strType = Arr::getString($parameters ?? [], 'type', self::TYPE_STRING);
+
+        if (!in_array($strType, self::TYPES)) {
+            throw ValidationRuleException::invalidParameters();
+        }
+
+        /** @var 'string' | 'alpha' $strType */
+        $strPattern = match ($strType) {
+            self::TYPE_STRING => '[a-zA-Z]',
+            self::TYPE_ALPHA => '[a-zA-Z0-9]'
+        };
+
         [$minLen, $maxLen] = self::getMinMaxValues($parameters, 'minLen', 'maxLen');
 
-        $lengthPattern = is_null($minLen) ? '.{0,' : '.{' . $minLen . ',';
+        $lengthPattern = is_null($minLen) ? '{0,' : '{' . $minLen . ',';
         $lengthPattern .= is_null($maxLen) ? '}' : $maxLen . '}';
 
-        $instance->pattern = '/^' . $lengthPattern . '$/u';
+        $instance->pattern = '/^' . $strPattern . $lengthPattern . '$/';
 
         return $instance;
     }

@@ -43,7 +43,7 @@ final class StringRuleTest extends ValidationRuleTestCase
                 'validationRuleClassString' => StringRule::class,
                 'makeParams' => null,
                 'expectedMakeException' => null,
-                'valueToBeEvaluated' => 123,
+                'valueToBeEvaluated' => 'test1234',
                 'expectedResult' => false
             ],
             'Will evaluate true when a string value is provided' => [
@@ -105,6 +105,20 @@ final class StringRuleTest extends ValidationRuleTestCase
             'Will throw an exception if maxLen is less than minLen' => [
                 'validationRuleClassString' => StringRule::class,
                 'makeParams' => ['minLen' => 5, 'maxLen' => 3],
+                'expectedMakeException' => ValidationRuleException::class,
+                'valueToBeEvaluated' => 'test',
+                'expectedResult' => false
+            ],
+            'Will evaluate alpha numeric strings as true when a param is passed' => [
+                'validationRuleClassString' => StringRule::class,
+                'makeParams' => ['type' => 'alpha'],
+                'expectedMakeException' => null,
+                'valueToBeEvaluated' => 'test123',
+                'expectedResult' => true
+            ],
+            'Will throw a validation exception when an invalid type is passed' => [
+                'validationRuleClassString' => StringRule::class,
+                'makeParams' => ['type' => 'invalid'],
                 'expectedMakeException' => ValidationRuleException::class,
                 'valueToBeEvaluated' => 'test',
                 'expectedResult' => false
