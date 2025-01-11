@@ -11,8 +11,8 @@ class StringRule extends RegexRule
 {
     use Concerns\MinMaxValues;
 
-    protected const TYPE_STRING = 'string';
-    protected const TYPE_ALPHA = 'alpha';
+    protected const string TYPE_STRING = 'string';
+    protected const string TYPE_ALPHA = 'alpha';
 
     /** @var list<string> */
     protected const TYPES = [
