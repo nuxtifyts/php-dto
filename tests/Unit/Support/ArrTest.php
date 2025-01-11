@@ -296,7 +296,37 @@ final class ArrTest extends UnitCase
                     'enumClass' => YesNoBackedEnum::class,
                 ],
                 YesNoBackedEnum::YES
-            ]
+            ],
+            'get backed enum, invalid value' => [
+                'getBackedEnum',
+                [
+                    'array' => ['key' => 'invalid'],
+                    'key' => 'key',
+                    'enumClass' => YesNoBackedEnum::class,
+                    'default' => YesNoBackedEnum::NO,
+                ],
+                YesNoBackedEnum::NO
+            ],
+            'get backed enum, valid backed enum value' => [
+                'getBackedEnum',
+                [
+                    'array' => ['key' => YesNoBackedEnum::YES],
+                    'key' => 'key',
+                    'enumClass' => YesNoBackedEnum::class,
+                    'default' => YesNoBackedEnum::NO,
+                ],
+                YesNoBackedEnum::YES
+            ],
+            'get backed enum, valid string value' => [
+                'getBackedEnum',
+                [
+                    'array' => ['key' => 'yes'],
+                    'key' => 'key',
+                    'enumClass' => YesNoBackedEnum::class,
+                    'default' => YesNoBackedEnum::NO,
+                ],
+                YesNoBackedEnum::YES
+            ],
         ];
     }
 

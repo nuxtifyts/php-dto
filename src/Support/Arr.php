@@ -126,6 +126,24 @@ final readonly class Arr
             );        
     }
 
+    /** 
+     * @template T of BackedEnum 
+     * 
+     * @param array<array-key, mixed> $array
+     * @param class-string<T> $enumClass
+     * @param T $default
+     * 
+     * @return T
+     */
+    public static function getBackedEnum(
+        array $array, 
+        string $key, 
+        string $enumClass, 
+        BackedEnum $default
+    ): BackedEnum {
+        return self::getBackedEnumOrNull($array, $key, $enumClass, $default) ?? $default;
+    }
+
     /**
      * @param array<array-key, mixed> $array
      * @param class-string<object> $classString
