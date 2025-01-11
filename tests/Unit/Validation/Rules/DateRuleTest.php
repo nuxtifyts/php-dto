@@ -19,11 +19,14 @@ final class DateRuleTest extends ValidationRuleTestCase
     #[Test]
     public function validate_validation_message(): void
     {
-        $rule = DateRule::make();
+        self::assertEquals(
+            'The :attribute field must be a valid date.',
+            DateRule::make()->validationMessage()
+        );
 
         self::assertEquals(
-            'The :attribute must be a valid date.',
-            $rule->validationMessage()
+            'The :attribute field must be a valid date in one of the following formats: Y/m-d H/m/s',
+            DateRule::make(['formats' => ['Y/m-d H/m/s']])->validationMessage()
         );
     }
 

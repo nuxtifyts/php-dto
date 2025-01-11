@@ -55,7 +55,7 @@ class DateRule implements ValidationRule
     public function validationMessage(): string
     {
         return empty($this->formats) 
-            ? 'The :attribute must be a valid date.'
-            : 'The :attribute must be a valid date in one of the following formats: ' . implode(', ', $this->formats);
+            ? 'The :attribute field must be a valid date.'
+            : 'The :attribute field must be a valid date in one of the following formats: ' . implode(', ', $this->formats);
     }
 }
