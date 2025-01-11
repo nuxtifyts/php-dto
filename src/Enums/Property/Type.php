@@ -20,4 +20,10 @@ enum Type: string
         self::BOOLEAN,
         self::STRING,
     ];
+
+    /** @var list<Type> */
+    public const array NUMERIC_TYPES = [
+        self::FLOAT,
+        self::INT,
+    ];
 }
