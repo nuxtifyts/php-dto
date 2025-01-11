@@ -9,6 +9,8 @@ use Nuxtifyts\PhpDto\Validation\Rules\RegexRule;
 
 class StringRule extends RegexRule
 {
+    use Concerns\MinMaxValues;
+
     public string $name {
         get {
             return 'string';
@@ -25,27 +27,10 @@ class StringRule extends RegexRule
     {
         $instance = new self();
 
-        if (
-            (!is_null($minLen = Arr::getIntegerOrNull($parameters ?? [], 'minLen'))
-                && $minLen < 0)
-            || (!is_null($maxLen = Arr::getIntegerOrNull($parameters ?? [], 'maxLen'))
-                && $maxLen < $minLen)
-        ) {
-            throw ValidationRuleException::invalidParameters();
-        }
+        [$minLen, $maxLen] = self::getMinMaxValues($parameters, 'minLen', 'maxLen');
 
-        $lengthPattern = '';
-        if ($minLen !== null) {
-            $lengthPattern .= '.{' . $minLen . ',';
-        } else {
-            $lengthPattern .= '.{0,';
-        }
-
-        if ($maxLen !== null) {
-            $lengthPattern .= $maxLen . '}';
-        } else {
-            $lengthPattern .= '}';
-        }
+        $lengthPattern = is_null($minLen) ? '.{0,' : '.{' . $minLen . ',';
+        $lengthPattern .= is_null($maxLen) ? '}' : $maxLen . '}';
 
         $instance->pattern = '/^' . $lengthPattern . '$/u';
 
