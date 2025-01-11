@@ -2,6 +2,9 @@
 
 namespace Nuxtifyts\PhpDto\Support;
 
+use BackedEnum;
+use InvalidArgumentException;
+
 final readonly class Arr
 {
     /**
@@ -87,6 +90,40 @@ final readonly class Arr
     public static function getBoolean(array $array, string $key, bool $default = false): bool
     {
         return self::getBooleanOrNull($array, $key) ?? $default;
+    }
+
+    /** 
+     * @template T of BackedEnum 
+     * 
+     * @param array<array-key, mixed> $array
+     * @param class-string<T> $enumClass
+     * @param ?T $default
+     * 
+     * @return ?T
+     */
+    public static function getBackedEnumOrNull(
+        array $array, 
+        string $key, 
+        string $enumClass, 
+        ?BackedEnum $default = null
+    ): ?BackedEnum {
+        $value = $array[$key] ?? null;
+
+        if ($value instanceof $enumClass) {
+            return $value;
+        } else if (
+            (is_string($value) || is_integer($value))
+            && $resolvedValue = $enumClass::tryFrom($value)
+        ) {
+            return $resolvedValue;
+        }
+
+        return is_null($default)
+            ? null
+            : ($default instanceof $enumClass
+                ? $default
+                : throw new InvalidArgumentException('Default value must be an instance of ' . $enumClass)
+            );        
     }
 
     /**

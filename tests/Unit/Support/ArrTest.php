@@ -2,16 +2,22 @@
 
 namespace Nuxtifyts\PhpDto\Tests\Unit\Support;
 
-use Nuxtifyts\PhpDto\Serializers\BackedEnumSerializer;
-use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
-use Nuxtifyts\PhpDto\Serializers\Serializer;
+use InvalidArgumentException;
 use Nuxtifyts\PhpDto\Support\Arr;
+use PHPUnit\Framework\Attributes\Test;
 use Nuxtifyts\PhpDto\Tests\Unit\UnitCase;
+use PHPUnit\Framework\Attributes\UsesClass;
+use Nuxtifyts\PhpDto\Serializers\Serializer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
+use Nuxtifyts\PhpDto\Serializers\BackedEnumSerializer;
+use Nuxtifyts\PhpDto\Serializers\ScalarTypeSerializer;
+use Nuxtifyts\PhpDto\Tests\Dummies\Enums\YesNoBackedEnum;
+use Nuxtifyts\PhpDto\Tests\Dummies\Enums\ColorsBackedEnum;
 
 #[CoversClass(Arr::class)]
+#[UsesClass(YesNoBackedEnum::class)]
+#[UsesClass(ColorsBackedEnum::class)]
 final class ArrTest extends UnitCase
 {
     /**
@@ -254,7 +260,57 @@ final class ArrTest extends UnitCase
                 ],
                 null,
             ],
+            'get backed enum or null, invalid value' => [
+                'getBackedEnumOrNull',
+                [
+                    'array' => ['key' => 'invalid'],
+                    'key' => 'key',
+                    'enumClass' => YesNoBackedEnum::class,
+                ],
+                null
+            ],
+            'get backed enum or null, invalid value default provided' => [
+                'getBackedEnumOrNull',
+                [
+                    'array' => ['key' => 'invalid'],
+                    'key' => 'key',
+                    'enumClass' => YesNoBackedEnum::class,
+                    'default' => YesNoBackedEnum::NO,
+                ],
+                YesNoBackedEnum::NO
+            ],
+            'get backed enum or null, valid backed enum value' => [
+                'getBackedEnumOrNull',
+                [
+                    'array' => ['key' => YesNoBackedEnum::YES],
+                    'key' => 'key',
+                    'enumClass' => YesNoBackedEnum::class,
+                ],
+                YesNoBackedEnum::YES
+            ],
+            'get backed enum or null, valid string value' => [
+                'getBackedEnumOrNull',
+                [
+                    'array' => ['key' => 'yes'],
+                    'key' => 'key',
+                    'enumClass' => YesNoBackedEnum::class,
+                ],
+                YesNoBackedEnum::YES
+            ]
         ];
+    }
+
+    #[Test]
+    public function get_backed_enum_or_null_will_throw_an_exception_if_default_value_is_invalid(): void
+    {
+        self::expectException(InvalidArgumentException::class);
+
+        Arr::getBackedEnumOrNull(
+            ['key' => 'invalid'],
+            'key',
+            YesNoBackedEnum::class,
+            ColorsBackedEnum::RED
+        );
     }
 
     /**
