@@ -5,7 +5,6 @@ namespace Nuxtifyts\PhpDto\Validation\Rules;
 use Nuxtifyts\PhpDto\Exceptions\ValidationRuleException;
 use Nuxtifyts\PhpDto\Support\Arr;
 use Override;
-use Nuxtifyts\PhpDto\Validation\Rules\RegexRule;
 
 class StringRule extends RegexRule
 {
@@ -15,7 +14,7 @@ class StringRule extends RegexRule
     protected const string TYPE_ALPHA = 'alpha';
 
     /** @var list<string> */
-    protected const TYPES = [
+    protected const array TYPES = [
         self::TYPE_STRING,
         self::TYPE_ALPHA,
     ];
