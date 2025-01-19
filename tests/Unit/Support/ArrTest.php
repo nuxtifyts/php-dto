@@ -26,6 +26,7 @@ final class ArrTest extends UnitCase
     #[Test]
     #[DataProvider('get_arr_provider')]
     #[DataProvider('is_array_of_class_strings_provider')]
+    #[DataProvider('flatten_provider')]
     public function arr_helper_functions(
         string $functionName,
         array $parameters,
@@ -372,6 +373,126 @@ final class ArrTest extends UnitCase
                 ],
                 false,
             ],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public static function flatten_provider(): array
+    {
+        return [
+            'flatten, empty array' => [
+                'flatten',
+                [
+                    'array' => [],
+                ],
+                []
+            ],
+            'flatten array, one depth' => [
+                'flatten',
+                [
+                    'array' => [
+                        'a' => [
+                            'a1' => 1.1,
+                            'a2' => 1.2
+                        ],
+                        'b' => 2,
+                    ],
+                ],
+                [
+                    'a1' => 1.1,
+                    'a2' => 1.2,
+                    'b' => 2
+                ]
+            ],
+            'flatten array, multiple depths' => [
+                'flatten',
+                [
+                    'array' => [
+                        'a' => [
+                            'a1' => [
+                                'a1.1' => 1.1,
+                                'a1.2' => 1.2
+                            ],
+                            'a2' => 2
+                        ],
+                        'b' => 3,
+                    ],
+                ],
+                [
+                    'a1.1' => 1.1,
+                    'a1.2' => 1.2,
+                    'a2' => 2,
+                    'b' => 3
+                ]
+            ],
+            'flatten array, and resets array keys' => [
+                'flatten',
+                [
+                    'array' => [
+                        'a' => [
+                            'a1' => 1.1,
+                            'a2' => 1.2
+                        ],
+                        'b' => 2,
+                    ],
+                    'depth' => 1.0,
+                    'preserveKeys' => false,
+                ],
+                [
+                    1.1,
+                    1.2,
+                    2
+                ]
+            ],
+            'flatten array, and resets array keys, multiple depths' => [
+                'flatten',
+                [
+                    'array' => [
+                        'a' => [
+                            'a1' => [
+                                'a1.1' => 1.1,
+                                'a1.2' => 1.2
+                            ],
+                            'a2' => 2
+                        ],
+                        'b' => 3,
+                    ],
+                    'preserveKeys' => false,
+                ],
+                [
+                    1.1,
+                    1.2,
+                    2,
+                    3
+                ]
+            ],
+            'flatten array, one depth, not enough' => [
+                'flatten',
+                [
+                    'array' => [
+                        'a' => [
+                            'a1' => [
+                                'a1.1' => 1.1,
+                                'a1.2' => 1.2
+                            ],
+                            'a2' => 2
+                        ],
+                        'b' => 3,
+                    ],
+                    'depth' => 1,
+                    'preserveKeys' => false,
+                ],
+                [
+                    [
+                        'a1.1' => 1.1,
+                        'a1.2' => 1.2
+                    ],
+                    2,
+                    3
+                ]
+            ]
         ];
     }
 }
