@@ -12,7 +12,7 @@ class NullableRule implements ValidationRule
 
     public function evaluate(mixed $value): bool
     {
-        return true;
+        return is_null($value);
     }
 
     /** 
@@ -25,6 +25,6 @@ class NullableRule implements ValidationRule
 
     public function validationMessage(): string
     {
-        return '';
+        return 'The :attribute must be nullable.';
     }
 }

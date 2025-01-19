@@ -19,7 +19,7 @@ final class NullableRuleTest extends ValidationRuleTestCase
     public function validate_validation_message(): void
     {
         self::assertEquals(
-            '',
+            'The :attribute must be nullable.',
             NullableRule::make()->validationMessage()
         );
     }
@@ -43,12 +43,12 @@ final class NullableRuleTest extends ValidationRuleTestCase
                 'valueToBeEvaluated' => null,
                 'expectedResult' => true,
             ],
-            'Will return true if the value exists' => [
+            'Will return false if the value is different then null' => [
                 'validationRuleClassString' => NullableRule::class,
                 'makeParams' => null,
                 'expectedMakeException' => null,
                 'valueToBeEvaluated' => 'Something',
-                'expectedResult' => true,
+                'expectedResult' => false,
             ]
         ];
     }
