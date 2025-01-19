@@ -8,14 +8,19 @@ use Nuxtifyts\PhpDto\Validation\Contracts\RuleGroup;
 
 abstract class LogicalRule implements RuleGroup, RuleEvaluator
 {
-    /** @var ?Collection<array-key, RuleEvaluator> */
-    protected ?Collection $_rules = null;
+    /** @var Collection<array-key, RuleEvaluator> */
+    protected Collection $_rules;
 
     /** @var Collection<array-key, RuleEvaluator> */
     public Collection $rules {
         get {
-            return $this->_rules ??= new Collection();
+            return $this->_rules;
         }
+    }
+
+    public function __construct()
+    {
+        $this->_rules = new Collection();
     }
 
     public function addRule(RuleEvaluator $rule): static
