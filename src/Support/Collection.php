@@ -68,7 +68,7 @@ class Collection
     /**
      * @return ($preserveKeys is true ? Collection<array-key, mixed> : Collection<int, mixed>)
      */
-    public function collapse(bool $preserveKeys = true): self
+    public function collapse(bool $preserveKeys = false): self
     {
         return $this->flatten(1, $preserveKeys);
     }

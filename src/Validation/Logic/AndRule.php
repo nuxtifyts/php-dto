@@ -18,7 +18,7 @@ class AndRule extends LogicalRule
         return [
             'and' => $this->rules
                 ->map(self::resolveValidationMessages(...))
-                ->collapse()
+                ->collapse(preserveKeys: true)
                 ->all()
         ];
     }
