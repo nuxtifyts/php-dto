@@ -43,7 +43,7 @@ class StringRule extends RegexRule
 
         /** @var 'string' | 'alpha' $strType */
         $strPattern = match ($strType) {
-            self::TYPE_STRING => '[a-zA-Z]',
+            self::TYPE_STRING => '.',
             self::TYPE_ALPHA => '[a-zA-Z0-9]'
         };
 

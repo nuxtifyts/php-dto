@@ -21,7 +21,7 @@ use Throwable;
 #[UsesClass(OrRule::class)]
 #[UsesClass(AndRule::class)]
 #[UsesClass(OrRule::class)]
-final class SingularLogicalRuleTest extends LogicalRuleTestCase
+final class SingularRuleTest extends LogicalRuleTestCase
 {
     /**
      * @return array<string, array{

@@ -40,7 +40,7 @@ final class StringRuleTest extends ValidationRuleTestCase
                 'validationRuleClassString' => StringRule::class,
                 'makeParams' => null,
                 'expectedMakeException' => null,
-                'valueToBeEvaluated' => 'test1234',
+                'valueToBeEvaluated' => null,
                 'expectedResult' => false
             ],
             'Will evaluate true when a string value is provided' => [
