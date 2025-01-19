@@ -33,7 +33,7 @@ abstract class LogicalRule implements RuleGroup, RuleEvaluator
     /**
      * @return array<string, mixed>
      */
-    abstract public function validationMessages(): array;
+    abstract public function validationMessageTree(): array;
 
     /**
      * @return ?array<string, mixed>
@@ -41,7 +41,7 @@ abstract class LogicalRule implements RuleGroup, RuleEvaluator
     protected static function resolveValidationMessages(?RuleEvaluator $rule): ?array
     {
         return match (true) {
-            $rule instanceof LogicalRule => $rule->validationMessages(),
+            $rule instanceof LogicalRule => $rule->validationMessageTree(),
             $rule instanceof ValidationRule => [
                 $rule->name => $rule->validationMessage()
             ],

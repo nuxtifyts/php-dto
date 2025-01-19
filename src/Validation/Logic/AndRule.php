@@ -13,7 +13,7 @@ class AndRule extends LogicalRule
         );
     }
 
-    public function validationMessages(): array
+    public function validationMessageTree(): array
     {
         return [
             'and' => $this->rules

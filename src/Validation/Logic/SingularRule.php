@@ -27,7 +27,7 @@ class SingularRule extends LogicalRule
         return (bool) $this->rules->first()?->evaluate($value);
     }
 
-    public function validationMessages(): array
+    public function validationMessageTree(): array
     {
         return [
             'singular' => self::resolveValidationMessages($this->rules->first())

@@ -13,7 +13,7 @@ class OrRule extends LogicalRule
         );
     }
 
-    public function validationMessages(): array
+    public function validationMessageTree(): array
     {
         return [
             'or' => $this->rules
