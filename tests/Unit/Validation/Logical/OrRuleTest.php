@@ -51,8 +51,8 @@ final class OrRuleTest extends LogicalRuleTestCase
             'Will be able to use validation rules 2' => [
                 'logicalRuleClassString' => OrRule::class,
                 'ruleEvaluators' => [
-                    $stringRule,
-                    $numericRule
+                    $stringRule = StringRule::make(),
+                    $numericRule = NumericRule::make()
                 ],
                 'expectedCreateException' => null,
                 'valueToBeEvaluated' => 1234,
@@ -67,7 +67,7 @@ final class OrRuleTest extends LogicalRuleTestCase
             'Will be able to use validation rule 3' => [
                 'logicalRuleClassString' => OrRule::class,
                 'ruleEvaluators' => [
-                    $numericRule
+                    $numericRule = NumericRule::make()
                 ],
                 'expectedCreateException' => null,
                 'valueToBeEvaluated' => 1234.45,
