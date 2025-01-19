@@ -3,12 +3,11 @@
 namespace Nuxtifyts\PhpDto\Validation\Rules;
 
 use Nuxtifyts\PhpDto\Exceptions\ValidationRuleException;
+use Nuxtifyts\PhpDto\Validation\Contracts\RuleEvaluator;
 
-interface ValidationRule
+interface ValidationRule extends RuleEvaluator
 {
     public string $name { get; }
-
-    public function evaluate(mixed $value): bool;
 
     /** 
      * @param ?array<string, mixed> $parameters
