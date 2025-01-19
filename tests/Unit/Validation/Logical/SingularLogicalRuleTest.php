@@ -37,6 +37,32 @@ final class SingularLogicalRuleTest extends LogicalRuleTestCase
      */
     public static function data_provider(): array
     {
+        /** @var list<RuleEvaluator> $ruleEvaluators */
+        $ruleEvaluators = [
+            $orRule = new OrRule()
+                ->addRule(
+                    $andRule = new AndRule()
+                        ->addRule($requiredRule = RequiredRule::make())
+                        ->addRule($emailRule = EmailRule::make())
+                )
+                ->addRule(
+                    $nullableRule = NullableRule::make()
+                )
+        ];
+
+        /** @var array<string, mixed> $validationTree */
+        $validationTree = [
+            'singular' => [
+                'or' => [
+                    'and' => [
+                        'required' => $requiredRule->validationMessage(),
+                        'email' => $emailRule->validationMessage()
+                    ],
+                    'nullable' => $nullableRule->validationMessage()
+                ]
+            ]
+        ];
+
         return [
             'Will throw an exception when trying to add more than one rule' => [
                 'logicalRuleClassString' => SingularRule::class,
@@ -65,31 +91,11 @@ final class SingularLogicalRuleTest extends LogicalRuleTestCase
             ],
             'Will be able to resolve complex validations using OrRule and AndRule' => [
                 'logicalRuleClassString' => SingularRule::class,
-                'ruleEvaluators' => $ruleEvaluators = [
-                    $orRule = new OrRule()
-                        ->addRule(
-                        $andRule = new AndRule()
-                                ->addRule($requiredRule = RequiredRule::make())
-                                ->addRule($emailRule = EmailRule::make())
-                        )
-                        ->addRule(
-                            $nullableRule = NullableRule::make()
-                        )
-                ],
+                'ruleEvaluators' => $ruleEvaluators,
                 'expectedCreateException' => null,
                 'valueToBeEvaluated' => 'johndoe@example.test',
                 'expectedResult' => true,
-                'expectedValidationMessageTree' => $validationTree = [
-                    'singular' => [
-                        'or' => [
-                            'and' => [
-                                'required' => $requiredRule->validationMessage(),
-                                'email' => $emailRule->validationMessage()
-                            ],
-                            'nullable' => $nullableRule->validationMessage()
-                        ]
-                    ]
-                ]
+                'expectedValidationMessageTree' => $validationTree
             ],
             'Will be able to resolve complex validations using OrRule and AndRule 2' => [
                 'logicalRuleClassString' => SingularRule::class,
