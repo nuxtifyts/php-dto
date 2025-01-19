@@ -12,4 +12,13 @@ class AndRule extends LogicalRule
             static fn (RuleEvaluator $rule) => $rule->evaluate($value)
         );
     }
+
+    public function validationMessages(): array
+    {
+        return [
+            'and' => $this->rules
+                ->map(self::resolveValidationMessages(...))
+                ->all()
+        ];
+    }
 }

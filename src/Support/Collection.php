@@ -54,6 +54,17 @@ class Collection
             : array_find($this->items, $callable);
     }
 
+    /**
+     * @template TNewValue of mixed
+     * @param callable(TValue $item): TNewValue $callable
+     *
+     * @return self<TKey, TNewValue>
+     */
+    public function map(callable $callable): self
+    {
+        return new self(array_map($callable, $this->items));
+    }
+
     public function isNotEmpty(): bool
     {
         return !empty($this->items);
@@ -78,5 +89,13 @@ class Collection
     public function some(callable $callable): bool
     {
         return array_any($this->items, $callable);
+    }
+
+    /**
+     * @return array<TKey, TValue>
+     */
+    public function all(): array
+    {
+        return $this->items;
     }
 }

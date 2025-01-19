@@ -5,6 +5,7 @@ namespace Nuxtifyts\PhpDto\Validation\Logic;
 use Nuxtifyts\PhpDto\Support\Collection;
 use Nuxtifyts\PhpDto\Validation\Contracts\RuleEvaluator;
 use Nuxtifyts\PhpDto\Validation\Contracts\RuleGroup;
+use Nuxtifyts\PhpDto\Validation\Rules\ValidationRule;
 
 abstract class LogicalRule implements RuleGroup, RuleEvaluator
 {
@@ -27,5 +28,24 @@ abstract class LogicalRule implements RuleGroup, RuleEvaluator
     {
         $this->rules->push($rule);
         return $this;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    abstract public function validationMessages(): array;
+
+    /**
+     * @return ?array<string, mixed>
+     */
+    protected static function resolveValidationMessages(?RuleEvaluator $rule): ?array
+    {
+        return match (true) {
+            $rule instanceof LogicalRule => $rule->validationMessages(),
+            $rule instanceof ValidationRule => [
+                $rule->name => $rule->validationMessage()
+            ],
+            default => null
+        };
     }
 }
