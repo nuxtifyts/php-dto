@@ -25,6 +25,6 @@ class NullableRule implements ValidationRule
 
     public function validationMessage(): string
     {
-        return 'The :attribute must be nullable.';
+        return 'The :attribute field must be nullable.';
     }
 }

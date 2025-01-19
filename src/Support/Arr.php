@@ -156,4 +156,40 @@ final readonly class Arr
                 && is_subclass_of($value, $classString)
         );
     }
+
+    /**
+     * @param array<array-key, mixed> $array
+     *
+     * @return ($preserveKeys is true ? array<array-key, mixed> : list<mixed>)
+     */
+    public static function flatten(array $array, float $depth = INF, bool $preserveKeys = true): array
+    {
+        $result = [];
+
+        foreach ($array as $key => $item) {
+            $item = $item instanceof Collection ? $item->all() : $item;
+
+            if (! is_array($item)) {
+                if ($preserveKeys) {
+                    $result[$key] = $item;
+                } else {
+                    $result[] = $item;
+                }
+            } else {
+                $values = $depth === 1.0
+                    ? $item
+                    : self::flatten($item, $depth - 1, $preserveKeys);
+
+                foreach ($values as $subKey => $value) {
+                    if ($preserveKeys) {
+                        $result[$subKey] = $value;
+                    } else {
+                        $result[] = $value;
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
 }

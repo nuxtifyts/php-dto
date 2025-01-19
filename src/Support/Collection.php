@@ -65,6 +65,22 @@ class Collection
         return new self(array_map($callable, $this->items));
     }
 
+    /**
+     * @return ($preserveKeys is true ? Collection<array-key, mixed> : Collection<int, mixed>)
+     */
+    public function collapse(bool $preserveKeys = true): self
+    {
+        return $this->flatten(1, $preserveKeys);
+    }
+
+    /**
+     * @return ($preserveKeys is true ? Collection<array-key, mixed> : Collection<int, mixed>)
+     */
+    public function flatten(float $depth = INF, bool $preserveKeys = true): self
+    {
+        return new self(Arr::flatten($this->items, $depth, $preserveKeys));
+    }
+
     public function isNotEmpty(): bool
     {
         return !empty($this->items);

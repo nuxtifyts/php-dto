@@ -18,6 +18,7 @@ class OrRule extends LogicalRule
         return [
             'or' => $this->rules
                 ->map(self::resolveValidationMessages(...))
+                ->collapse()
                 ->all()
         ];
     }
