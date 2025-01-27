@@ -2,6 +2,7 @@ vendor/
 .idea/
 coverage.xml
 package.xml
+clover.xml
 coverage-html/
 .phpunit/
 /.php-cs-fixer.cache
