@@ -5,16 +5,23 @@ namespace Nuxtifyts\PhpDto\Tests\Unit;
 use Nuxtifyts\PhpDto\Configuration\DataConfiguration;
 use Nuxtifyts\PhpDto\Configuration\NormalizersConfiguration;
 use Nuxtifyts\PhpDto\Configuration\SerializersConfiguration;
+use Nuxtifyts\PhpDto\Configuration\ValidationConfiguration;
 use Nuxtifyts\PhpDto\Exceptions\DataConfigurationException;
 use Nuxtifyts\PhpDto\Normalizers\ArrayNormalizer;
+use Nuxtifyts\PhpDto\Support\Validation\ValidationRulesReferer;
+use Nuxtifyts\PhpDto\Support\Validation\Validator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\UsesClass;
 use Throwable;
 
 #[CoversClass(NormalizersConfiguration::class)]
 #[CoversClass(SerializersConfiguration::class)]
+#[CoversClass(ValidationConfiguration::class)]
 #[CoversClass(DataConfiguration::class)]
 #[CoversClass(DataConfigurationException::class)]
+#[UsesClass(Validator::class)]
+#[UsesClass(ValidationRulesReferer::class)]
 final class DataConfigurationTest extends UnitCase
 {
     /**
@@ -97,5 +104,46 @@ final class DataConfigurationTest extends UnitCase
                 ],
             ],
         ], forceCreate: true);
+    }
+
+    /**
+     *  @throws Throwable
+     */
+    #[Test]
+    public function will_throw_an_exception_if_invalid_validator_is_provided(): void
+    {
+        self::expectException(DataConfigurationException::class);
+
+        DataConfiguration::getInstance([
+            'validation' => [
+                'validator' => 'invalidValidator',
+            ]
+        ], forceCreate: true);
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[Test]
+    public function will_throw_an_exception_if_invalid_rule_referer_is_provided(): void
+    {
+        self::expectException(DataConfigurationException::class);
+
+        DataConfiguration::getInstance([
+            'validation' => [
+                'ruleReferer' => 'invalidRuleReferer'
+            ]
+        ], forceCreate: true);
+    }
+
+    /**
+     *  @throws Throwable
+     */
+    public function will_provide_validation_configuration(): void
+    {
+        $config = DataConfiguration::getInstance(forceCreate: true);
+
+        self::assertTrue($config->validation->validatorClass === Validator::class);
+        self::assertTrue($config->validation->validationRulesRefererClass === ValidationRulesReferer::class);
     }
 }

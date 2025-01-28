@@ -12,6 +12,7 @@ class DataConfiguration implements Configuration
     protected function __construct(
         protected(set) NormalizersConfiguration $normalizers,
         protected(set) SerializersConfiguration $serializers,
+        protected(set) ValidationConfiguration $validation,
     ) {
     }
 
@@ -35,6 +36,10 @@ class DataConfiguration implements Configuration
             ),
             serializers: SerializersConfiguration::getInstance(
                 Arr::getArray($config ?? [], 'serializers'),
+                $forceCreate
+            ),
+            validation: ValidationConfiguration::getInstance(
+                Arr::getArray($config ?? [], 'validation'),
                 $forceCreate
             )
         );
