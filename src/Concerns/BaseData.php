@@ -38,7 +38,7 @@ trait BaseData
                 ))
                 ->data;
 
-            return static::instanceWithConstructorCallFrom($context, $data);
+            return $context->constructFromArray($data);
         } catch (Throwable $e) {
             throw DataCreationException::unableToCreateInstance(static::class, $e);
         }
@@ -67,7 +67,7 @@ trait BaseData
                 ->data;
 
             return $context->hasComputedProperties
-                ? static::instanceWithConstructorCallFrom($context, $data)
+                ? $context->constructFromArray($data)
                 : static::instanceWithoutConstructorFrom($context, $data);
         } catch (Throwable $e) {
             throw DeserializeException::generic($e);
@@ -91,30 +91,6 @@ trait BaseData
         }
 
         return $instance;
-    }
-
-    /**
-     * @param ClassContext<static> $context
-     * @param array<string, mixed> $value
-     *
-     * @throws Throwable
-     */
-    protected static function instanceWithConstructorCallFrom(ClassContext $context, array $value): static
-    {
-        /** @var array<string, mixed> $args */
-        $args = [];
-
-        foreach ($context->constructorParams as $paramName) {
-            $propertyContext = $context->properties[$paramName] ?? null;
-
-            if (!$propertyContext) {
-                throw DeserializeException::invalidParamsPassed();
-            }
-
-            $args[$paramName] = $propertyContext->deserializeFrom($value);
-        }
-
-        return $context->newInstanceWithConstructorCall(...$args);
     }
 
     /**

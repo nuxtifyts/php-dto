@@ -12,6 +12,7 @@ class DataCreationException extends Exception
     protected const int UNABLE_TO_CREATE_EMPTY_INSTANCE = 2;
     protected const int UNABLE_TO_CLONE_INSTANCE_WITH_NEW_DATA = 3;
     protected const int INVALID_PARAMS_PASSED = 4;
+    protected const int UNABLE_TO_CREATE_LAZY_INSTANCE = 5;
 
     public static function unableToCreateInstance(
         string $class,
@@ -61,6 +62,17 @@ class DataCreationException extends Exception
         return new self(
             message: "Invalid params passed to create method of class {$class}",
             code: self::INVALID_PARAMS_PASSED,
+            previous: $previous
+        );
+    }
+
+    public static function unableToCreateLazyInstance(
+        string $class,
+        ?Throwable $previous = null
+    ): self {
+        return new self(
+            message: "Unable to create lazy instance of class {$class}",
+            code: self::UNABLE_TO_CREATE_LAZY_INSTANCE,
             previous: $previous
         );
     }

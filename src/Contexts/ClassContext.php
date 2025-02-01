@@ -2,6 +2,7 @@
 
 namespace Nuxtifyts\PhpDto\Contexts;
 
+use Exception;
 use Nuxtifyts\PhpDto\Attributes\Class\MapName;
 use Nuxtifyts\PhpDto\Attributes\Class\WithNormalizer;
 use Nuxtifyts\PhpDto\Contexts\ClassContext\NameMapperConfig;
@@ -154,6 +155,44 @@ class ClassContext
     public function newInstanceWithConstructorCall(mixed ...$args): mixed
     {
         return $this->reflection->newInstance(...$args);
+    }
+
+    /**
+     * @desc Creates an instance from an array of values using the constructor
+     *
+     * @param array<string, mixed> $value
+     *
+     * @return T
+     *
+     * @throws Exception
+     */
+    public function constructFromArray(array $value): mixed
+    {
+        /** @var array<string, mixed> $args */
+        $args = [];
+
+        foreach ($this->constructorParams as $paramName) {
+            $propertyContext = $this->properties[$paramName] ?? null;
+
+            if (!$propertyContext) {
+                throw new Exception('invalid_params_passed');
+            }
+
+            $args[$paramName] = $propertyContext->deserializeFrom($value);
+        }
+
+        return $this->newInstanceWithConstructorCall(...$args);
+    }
+
+    /**
+     * @param callable(T $object): T $lazyProxyCallable
+     *
+     * @return T
+     */
+    public function newLazyProxy(callable $lazyProxyCallable): mixed
+    {
+        /** @phpstan-ignore-next-line  */
+        return $this->reflection->newLazyProxy($lazyProxyCallable);
     }
 
     /**
