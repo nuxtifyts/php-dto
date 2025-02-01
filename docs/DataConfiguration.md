@@ -39,10 +39,5 @@ DataConfiguration::getInstance([
             ScalarTypeSerializer::class,
         ]
     ],
-    
-    'validation' => [
-        'ruleReferer' => ValidationRulesReferer::class,
-        'validator' => Validator::class,
-    ] 
 ])
 ```
