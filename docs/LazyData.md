@@ -74,7 +74,7 @@ This will enable lazy data for all the "essential" functions that `Data` provide
 [create](https://github.com/nuxtifyts/php-dto/blob/main/docs/DefaultValues.md), 
 [from](https://github.com/nuxtifyts/php-dto/blob/main/docs/Quickstart.md), 
 [empty](https://github.com/nuxtifyts/php-dto/blob/main/docs/EmptyData.md)
-and [clone](https://github.com/nuxtifyts/php-dto/blob/main/docs/CloneableData.md).
+and [with](https://github.com/nuxtifyts/php-dto/blob/main/docs/CloneableData.md).
 
 
 
