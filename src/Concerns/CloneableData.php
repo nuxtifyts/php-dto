@@ -32,9 +32,13 @@ trait CloneableData
                 throw DataCreationException::invalidParamsPassed(static::class);
             }
 
-            return $context->hasComputedProperties
+            $cloneDataClosure = fn (): static => $context->hasComputedProperties
                 ? $this->cloneInstanceWithConstructorCall($context, $value)
                 : $this->cloneInstanceWithoutConstructorCall($context, $value);
+
+            return $context->isLazy
+                ? $context->newLazyProxy($cloneDataClosure)
+                : $cloneDataClosure();
         } catch (Throwable $t) {
             throw DataCreationException::unableToCloneInstanceWithNewData(static::class, $t);
         }

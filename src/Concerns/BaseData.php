@@ -31,14 +31,20 @@ trait BaseData
                 throw DataCreationException::invalidParamsPassed(static::class);
             }
 
-            $data = DeserializePipeline::createFromArray()
-                ->sendThenReturn(new DeserializePipelinePassable(
-                    classContext: $context,
-                    data: $value
-                ))
-                ->data;
+            $dataCreationClosure = static function () use ($context, $value): static {
+                $data = DeserializePipeline::createFromArray()
+                    ->sendThenReturn(new DeserializePipelinePassable(
+                        classContext: $context,
+                        data: $value
+                    ))
+                    ->data;
 
-            return static::instanceWithConstructorCallFrom($context, $data);
+                return $context->constructFromArray($data);
+            };
+
+            return $context->isLazy
+                ? $context->newLazyProxy($dataCreationClosure)
+                : $dataCreationClosure();
         } catch (Throwable $e) {
             throw DataCreationException::unableToCreateInstance(static::class, $e);
         }
@@ -59,16 +65,22 @@ trait BaseData
                 throw DeserializeException::invalidValue();
             }
 
-            $data = DeserializePipeline::hydrateFromArray()
-                ->sendThenReturn(new DeserializePipelinePassable(
-                    classContext: $context,
-                    data: $value
-                ))
-                ->data;
+            $dataCreationClosure = static function () use ($context, $value): static {
+                $data = DeserializePipeline::hydrateFromArray()
+                    ->sendThenReturn(new DeserializePipelinePassable(
+                        classContext: $context,
+                        data: $value
+                    ))
+                    ->data;
 
-            return $context->hasComputedProperties
-                ? static::instanceWithConstructorCallFrom($context, $data)
-                : static::instanceWithoutConstructorFrom($context, $data);
+                return $context->hasComputedProperties
+                    ? $context->constructFromArray($data)
+                    : static::instanceWithoutConstructorFrom($context, $data);
+            };
+
+            return $context->isLazy
+                ? $context->newLazyProxy($dataCreationClosure)
+                : $dataCreationClosure();
         } catch (Throwable $e) {
             throw DeserializeException::generic($e);
         }
@@ -91,30 +103,6 @@ trait BaseData
         }
 
         return $instance;
-    }
-
-    /**
-     * @param ClassContext<static> $context
-     * @param array<string, mixed> $value
-     *
-     * @throws Throwable
-     */
-    protected static function instanceWithConstructorCallFrom(ClassContext $context, array $value): static
-    {
-        /** @var array<string, mixed> $args */
-        $args = [];
-
-        foreach ($context->constructorParams as $paramName) {
-            $propertyContext = $context->properties[$paramName] ?? null;
-
-            if (!$propertyContext) {
-                throw DeserializeException::invalidParamsPassed();
-            }
-
-            $args[$paramName] = $propertyContext->deserializeFrom($value);
-        }
-
-        return $context->newInstanceWithConstructorCall(...$args);
     }
 
     /**

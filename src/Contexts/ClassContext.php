@@ -2,6 +2,8 @@
 
 namespace Nuxtifyts\PhpDto\Contexts;
 
+use Exception;
+use Nuxtifyts\PhpDto\Attributes\Class\Lazy;
 use Nuxtifyts\PhpDto\Attributes\Class\MapName;
 use Nuxtifyts\PhpDto\Attributes\Class\WithNormalizer;
 use Nuxtifyts\PhpDto\Contexts\ClassContext\NameMapperConfig;
@@ -39,6 +41,8 @@ class ClassContext
     private(set) array $normalizers = [];
 
     private(set) ?NameMapperConfig $nameMapperConfig = null;
+
+    private(set) bool $isLazy = false;
 
     /**
      * @param ReflectionClass<T> $reflection
@@ -134,6 +138,8 @@ class ClassContext
                 to: $instance->to
             );
         }
+
+        $this->isLazy = !empty($this->reflection->getAttributes(Lazy::class));
     }
 
     /**
@@ -157,13 +163,15 @@ class ClassContext
     }
 
     /**
+     * @desc Creates an instance from an array of values using the constructor
+     *
+     * @param array<string, mixed> $value
+     *
      * @return T
      *
-     * @throws ReflectionException
-     * @throws UnsupportedTypeException
-     * @throws DataCreationException
+     * @throws Exception
      */
-    public function emptyValue(): mixed
+    public function constructFromArray(array $value): mixed
     {
         /** @var array<string, mixed> $args */
         $args = [];
@@ -172,12 +180,54 @@ class ClassContext
             $propertyContext = $this->properties[$paramName] ?? null;
 
             if (!$propertyContext) {
-                throw DataCreationException::invalidProperty();
+                throw new Exception('invalid_params_passed');
             }
 
-            $args[$paramName] = $propertyContext->emptyValue();
+            $args[$paramName] = $propertyContext->deserializeFrom($value);
         }
 
         return $this->newInstanceWithConstructorCall(...$args);
+    }
+
+    /**
+     * @param callable(T $object): T $lazyProxyCallable
+     *
+     * @return T
+     */
+    public function newLazyProxy(callable $lazyProxyCallable): mixed
+    {
+        /** @phpstan-ignore-next-line  */
+        return $this->reflection->newLazyProxy($lazyProxyCallable);
+    }
+
+    /**
+     * @return T
+     *
+     * @throws ReflectionException
+     * @throws UnsupportedTypeException
+     * @throws DataCreationException
+     */
+    public function emptyValue(): mixed
+    {
+        $emptyValueCreationClosure = function () {
+            /** @var array<string, mixed> $args */
+            $args = [];
+
+            foreach ($this->constructorParams as $paramName) {
+                $propertyContext = $this->properties[$paramName] ?? null;
+
+                if (!$propertyContext) {
+                    throw DataCreationException::invalidProperty();
+                }
+
+                $args[$paramName] = $propertyContext->emptyValue();
+            }
+
+            return $this->newInstanceWithConstructorCall(...$args);
+        };
+
+        return $this->isLazy
+            ? $this->newLazyProxy($emptyValueCreationClosure)
+            : $emptyValueCreationClosure();
     }
 }
