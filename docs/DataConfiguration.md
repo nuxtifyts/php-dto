@@ -38,6 +38,6 @@ DataConfiguration::getInstance([
             BackedEnumSerializer::class,
             ScalarTypeSerializer::class,
         ]
-    ]
+    ],
 ])
 ```

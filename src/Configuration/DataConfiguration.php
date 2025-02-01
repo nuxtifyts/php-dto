@@ -36,7 +36,7 @@ class DataConfiguration implements Configuration
             serializers: SerializersConfiguration::getInstance(
                 Arr::getArray($config ?? [], 'serializers'),
                 $forceCreate
-            )
+            ),
         );
     }
 }
