@@ -8,6 +8,11 @@ use Nuxtifyts\PhpDto\Contexts\ClassContext;
 
 final readonly class ValidationRulesReferer implements RuleReferer
 {
+    public static function createInstance(mixed ...$args): self
+    {
+        return new self();
+    }
+
     /**
      * @template T of Data
      *

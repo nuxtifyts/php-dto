@@ -11,19 +11,14 @@ interface ValidateableData
      *
      * @throws DataValidationException
      */
-    public static function validate(array $data): void;
+    public static function validate(mixed $data): void;
 
     /**
-     *  @param array<string, mixed> $data
-     *
      *  @throws DataValidationException
      */
-    public static function validateAndCreate(array $data): static;
+    public static function validateAndCreate(mixed $data): static;
 
-    /**
-     * @return true|array<string, array<string>>
-     */
-    public function isValid(): true|array;
+    public function isValid(): bool;
 
     /**
      * @param ?array<array-key, mixed> $data

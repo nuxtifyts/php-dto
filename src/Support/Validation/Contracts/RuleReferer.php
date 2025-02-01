@@ -7,6 +7,8 @@ use Nuxtifyts\PhpDto\Data;
 
 interface RuleReferer
 {
+    public static function createInstance(): self;
+
     /**
      * @template T of Data
      *
