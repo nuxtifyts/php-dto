@@ -59,7 +59,8 @@ class UserConfigDataFallbackResolver implements FallbackResolver
     /** 
      * @param array<string, mixed> $rawData 
      */
-    public static function resolve(array $rawData, PropertyContext $property) : mixed{
+    public static function resolve(array $rawData, PropertyContext $property) : mixed
+    {
         $email = $rawData['email'] ?? null;
         
         return match(true) {

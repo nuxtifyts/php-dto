@@ -59,6 +59,23 @@ $todoWithDueDate = $todo->with(
 
 > **Important:** `emptyTodo`, `todo` and `todoWithDueDate` are all different instances.
 
+> **Important:** This using of `with` is not recommended as it will create 
+> a new instance of the `Data` object for each call.
+> ```php
+> // Don't
+> $todo = $emptyTodo
+>       ->with(title: 'Learn PHP DTO')
+>       ->with(content: 'Learn how to use PHP DTO')
+>       ->with(status: Status::IN_PROGRESS);
+> 
+> // Do instead.
+> $todo = $emptyTodo->with(
+>       title: 'Learn PHP DTO',
+>       content: 'Learn how to use PHP DTO',
+>       status: Status::IN_PROGRESS
+> );
+> ```
+
 Computed properties
 -
 
