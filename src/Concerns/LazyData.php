@@ -30,7 +30,7 @@ trait LazyData
             }
 
             return $context->newLazyProxy(
-                static function (mixed $object) use($context, $value): static {
+                static function () use($context, $value): static {
                     $data = DeserializePipeline::createFromArray()
                         ->sendThenReturn(new DeserializePipelinePassable(
                             classContext: $context,
@@ -44,5 +44,24 @@ trait LazyData
         } catch (Throwable $e) {
             throw DataCreationException::unableToCreateLazyInstance(static::class, $e);
         }
+    }
+
+    /**
+     * @param callable(static $data): static $callable
+     *
+     * @throws DataCreationException
+     */
+    public static function createLazyUsing(callable $callable): static
+    {
+        try {
+            /** @var ClassContext<static> $context */
+            $context = ClassContext::getInstance(static::class);
+
+            return $context->newLazyProxy($callable);
+            // @codeCoverageIgnoreStart
+        } catch (Throwable $e) {
+            throw DataCreationException::unableToCreateLazyInstance(static::class, $e);
+        }
+        // @codeCoverageIgnoreEnd
     }
 }
