@@ -39,6 +39,23 @@ final class LazyDataTest extends UnitCase
      * @throws Throwable
      */
     #[Test]
+    public function will_create_lazy_instance_using_callback(): void
+    {
+        $person = PersonData::createLazyUsing(
+            static fn () => PersonData::create(
+                firstName: 'John',
+                lastName: 'Doe'
+            )
+        );
+
+        self::assertInstanceOf(PersonData::class, $person);
+        self::assertEquals('John Doe', $person->fullName);
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[Test]
     public function will_throw_data_creation_exception_if_params_are_invalid(): void
     {
         self::expectException(DataCreationException::class);
