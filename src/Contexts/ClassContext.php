@@ -3,6 +3,7 @@
 namespace Nuxtifyts\PhpDto\Contexts;
 
 use Exception;
+use Nuxtifyts\PhpDto\Attributes\Class\Lazy;
 use Nuxtifyts\PhpDto\Attributes\Class\MapName;
 use Nuxtifyts\PhpDto\Attributes\Class\WithNormalizer;
 use Nuxtifyts\PhpDto\Contexts\ClassContext\NameMapperConfig;
@@ -40,6 +41,8 @@ class ClassContext
     private(set) array $normalizers = [];
 
     private(set) ?NameMapperConfig $nameMapperConfig = null;
+
+    private(set) bool $isLazy = false;
 
     /**
      * @param ReflectionClass<T> $reflection
@@ -135,6 +138,8 @@ class ClassContext
                 to: $instance->to
             );
         }
+
+        $this->isLazy = !empty($this->reflection->getAttributes(Lazy::class));
     }
 
     /**
@@ -204,19 +209,25 @@ class ClassContext
      */
     public function emptyValue(): mixed
     {
-        /** @var array<string, mixed> $args */
-        $args = [];
+        $emptyValueCreationClosure = function () {
+            /** @var array<string, mixed> $args */
+            $args = [];
 
-        foreach ($this->constructorParams as $paramName) {
-            $propertyContext = $this->properties[$paramName] ?? null;
+            foreach ($this->constructorParams as $paramName) {
+                $propertyContext = $this->properties[$paramName] ?? null;
 
-            if (!$propertyContext) {
-                throw DataCreationException::invalidProperty();
+                if (!$propertyContext) {
+                    throw DataCreationException::invalidProperty();
+                }
+
+                $args[$paramName] = $propertyContext->emptyValue();
             }
 
-            $args[$paramName] = $propertyContext->emptyValue();
-        }
+            return $this->newInstanceWithConstructorCall(...$args);
+        };
 
-        return $this->newInstanceWithConstructorCall(...$args);
+        return $this->isLazy
+            ? $this->newLazyProxy($emptyValueCreationClosure)
+            : $emptyValueCreationClosure();
     }
 }
