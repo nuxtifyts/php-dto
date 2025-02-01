@@ -82,4 +82,5 @@ can be found here:
 - [Data Refiners](https://github.com/nuxtifyts/php-dto/blob/main/docs/DataRefiners.md)
 - [Empty Data](https://github.com/nuxtifyts/php-dto/blob/main/docs/EmptyData.md)
 - [Cloneable Data](https://github.com/nuxtifyts/php-dto/blob/main/docs/CloneableData.md)
+- [Lazy Data](https://github.com/nuxtifyts/php-dto/blob/main/docs/LazyData.md)
 - [Data Configuration](https://github.com/nuxtifyts/php-dto/blob/main/docs/DataConfiguration.md)
