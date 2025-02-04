@@ -59,7 +59,7 @@ $todoWithDueDate = $todo->with(
 
 > **Important:** `emptyTodo`, `todo` and `todoWithDueDate` are all different instances.
 
-> **Important:** This using of `with` is not recommended as it will create 
+> **Important:** This usage of `with` is not recommended as it will create 
 > a new instance of the `Data` object for each call.
 > ```php
 > // Don't
